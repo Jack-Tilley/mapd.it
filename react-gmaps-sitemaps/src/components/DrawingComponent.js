@@ -32,7 +32,6 @@ const DrawingComponent = () => {
   };
 
   const onPolylineComplete = (polyline) => {
-    // console.log(polyline.getPath().getArray().toString())
     let roughPath = polyline.getPath().getArray().toString().split(",");
     let path = [];
     for (let i = 0; i < roughPath.length; i += 2) {
@@ -44,7 +43,6 @@ const DrawingComponent = () => {
   };
 
   const onMarkerComplete = (marker) => {
-    console.log(marker);
     marker.title = activeNode.label;
     marker.label = activeNode.label;
     // marker.icon = icon // need to figure out how to get custom icon
@@ -67,9 +65,8 @@ const DrawingComponent = () => {
     newActiveNode.nodeReference = nodeReference;
     newActiveNode.icon = icon;
     setActiveNode(newActiveNode);
-    // console.log(newActiveNode)
-    // setNodes(nodes)
-    // console.log(nodes)
+
+    // ADD API UPDATES HERE
   };
 
   const renderDrawingComponent = () => (

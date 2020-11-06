@@ -11,7 +11,6 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import IconContainer from "./IconContainer";
 
 import { MapContext } from "./MapContext";
-import { Brush } from "@material-ui/icons";
 
 const AddNodeModal = ({
   modalOpen,
@@ -53,8 +52,6 @@ const AddNodeModal = ({
 
   const handleButtonClick = (btnIcon) => {
     setIcon(btnIcon);
-    //   console.log(icon)
-    //   console.log(btnIcon)
   };
 
   return (

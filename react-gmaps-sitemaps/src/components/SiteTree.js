@@ -49,6 +49,7 @@ const SiteTree = () => {
 
   const onClick = (e) => {
     console.log(e);
+
     if (e.value === "+") {
       setEvent(e);
       setActiveNode(null);
