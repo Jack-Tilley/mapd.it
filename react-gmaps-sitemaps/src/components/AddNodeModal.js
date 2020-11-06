@@ -1,27 +1,50 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, { useState, useContext, useEffect } from "react";
 
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
-import IconContainer from './IconContainer'
+import IconContainer from "./IconContainer";
 
-import {MapContext} from './MapContext'
-import { Brush } from '@material-ui/icons';
+import { MapContext } from "./MapContext";
+import { Brush } from "@material-ui/icons";
 
-const AddNodeModal = ({modalOpen, setModalOpen, value, setValue, nodeType, setNodeType, addItem, event, setEvent}) => {
-  const [ myMap, setMyMap, center, setCenter, isLoaded, draw, setDraw, nodes, setNodes, activeNode, setActiveNode, icon, setIcon] = useContext(MapContext)
-  
+const AddNodeModal = ({
+  modalOpen,
+  setModalOpen,
+  value,
+  setValue,
+  nodeType,
+  setNodeType,
+  addItem,
+  event,
+  setEvent,
+}) => {
+  const [
+    myMap,
+    setMyMap,
+    center,
+    setCenter,
+    isLoaded,
+    draw,
+    setDraw,
+    nodes,
+    setNodes,
+    activeNode,
+    setActiveNode,
+    icon,
+    setIcon,
+  ] = useContext(MapContext);
 
   const handleSubmit = () => {
-    setDraw(true)
-    addItem(event)
+    setDraw(true);
+    addItem(event);
     setModalOpen(false);
-    setEvent('')
+    setEvent("");
   };
 
   const handleClose = () => {
@@ -29,21 +52,22 @@ const AddNodeModal = ({modalOpen, setModalOpen, value, setValue, nodeType, setNo
   };
 
   const handleButtonClick = (btnIcon) => {
-      setIcon(btnIcon)
+    setIcon(btnIcon);
     //   console.log(icon)
     //   console.log(btnIcon)
-
-  }
+  };
 
   return (
     <div>
-      <Dialog open={modalOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Dialog
+        open={modalOpen}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+      >
         <DialogTitle id="form-dialog-title">Add New Node</DialogTitle>
         <DialogContent>
-          <IconContainer handleButtonClick={handleButtonClick}/>
-          <DialogContentText>
-            Add a new Node here
-          </DialogContentText>
+          <IconContainer handleButtonClick={handleButtonClick} />
+          <DialogContentText>Add a new Node here</DialogContentText>
           <TextField
             autoFocus
             value={value}
@@ -51,7 +75,7 @@ const AddNodeModal = ({modalOpen, setModalOpen, value, setValue, nodeType, setNo
             id="name"
             label="Node Name"
             type="text"
-            onChange={e => setValue(e.target.value)}
+            onChange={(e) => setValue(e.target.value)}
             fullWidth
           />
         </DialogContent>
@@ -66,6 +90,6 @@ const AddNodeModal = ({modalOpen, setModalOpen, value, setValue, nodeType, setNo
       </Dialog>
     </div>
   );
-}
+};
 
-export default AddNodeModal
+export default AddNodeModal;
