@@ -50,8 +50,7 @@ const SiteTree = () => {
   const onClick = (e) => {
     console.log(e);
 
-    if (e.value.slice(-1) === "+") {
-      console.log("+CLICKED");
+    if (e.value.slice(-1) === "+" && !draw) {
       setEvent(e);
       setActiveNode(null);
       handleClickOpen();
@@ -75,7 +74,6 @@ const SiteTree = () => {
       // icon: <FontAwesomeIcon icon={faHome} />,
     };
     setActiveNode(newNode);
-    console.log("TARGETPARENT", target.parent);
     if (target.parent.children !== undefined) {
       setNodes(
         nodes.map((item) =>
