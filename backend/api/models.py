@@ -15,5 +15,8 @@ class Node(MPTTModel):
     nodeType = models.CharField(max_length=20, blank=True, null=True)
     nodeReference = JSONField(blank=True, null=True)
 
+    def __str__(self):
+        return self.label
+
     class MPTTMETA:
         order_insertion_by = ['label']
