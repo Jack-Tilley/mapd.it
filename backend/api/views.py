@@ -6,4 +6,4 @@ from .models import Node
 
 class NodeView(viewsets.ModelViewSet):
     serializer_class = NodeSerializer
-    queryset = Node.objects.all()
+    queryset = Node.objects.filter(parent=None)

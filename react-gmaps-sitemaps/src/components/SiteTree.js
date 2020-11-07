@@ -50,7 +50,8 @@ const SiteTree = () => {
   const onClick = (e) => {
     console.log(e);
 
-    if (e.value === "+") {
+    if (e.value.slice(-1) === "+") {
+      console.log("+CLICKED");
       setEvent(e);
       setActiveNode(null);
       handleClickOpen();
@@ -68,18 +69,30 @@ const SiteTree = () => {
       label: value,
       latLngArr: [],
       apiPath: "",
+      parent_id: target.parent.id,
       nodeType: nodeType,
       icon: icon,
       // icon: <FontAwesomeIcon icon={faHome} />,
     };
     setActiveNode(newNode);
-    setNodes(
-      nodes.map((item) =>
-        item.children === target.parent.children
-          ? { ...item, children: target.parent.children.concat(newNode) }
-          : item
-      )
-    );
+    console.log("TARGETPARENT", target.parent);
+    if (target.parent.children !== undefined) {
+      setNodes(
+        nodes.map((item) =>
+          item.children === target.parent.children
+            ? {
+                ...item,
+                children: target.parent.children.concat(newNode),
+              }
+            : item
+        )
+      );
+    } else {
+      newNode.parent = null;
+      let newNodes = [...nodes];
+      newNodes.push(newNode);
+      setNodes(newNodes);
+    }
   };
 
   return (

@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { MapContext } from "./MapContext";
 import { DrawingManager } from "@react-google-maps/api";
+import axios from "axios";
+import { parse, stringify } from "flatted";
 
 const DrawingComponent = () => {
   const [
@@ -58,13 +60,34 @@ const DrawingComponent = () => {
     console.log("Drawing component unmounted");
   };
 
-  const handleActiveNodeChange = (position, nodeType, nodeReference, icon) => {
+  const handleActiveNodeChange = async (
+    position,
+    nodeType,
+    nodeReference,
+    icon
+  ) => {
     let newActiveNode = activeNode;
     newActiveNode.latLngArr = position;
     newActiveNode.nodeType = nodeType;
-    newActiveNode.nodeReference = nodeReference;
+    // newActiveNode.nodeReference = nodeReference;
     newActiveNode.icon = icon;
-    setActiveNode(newActiveNode);
+    // newActiveNode.parent_id = activeNode.parent_id;
+    await setActiveNode(newActiveNode);
+    console.log(newActiveNode);
+    console.log("activeNodePARENT", activeNode.parent_id);
+    axios
+      .post("http://localhost:8000/api/nodes/", {
+        label: newActiveNode.label,
+        nodeType: newActiveNode.nodeType,
+        nodeReference: stringify(newActiveNode.nodeReference),
+        value: newActiveNode.value,
+        parent: newActiveNode.parent_id,
+        apiPath: newActiveNode.apiPath,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
 
     // ADD API UPDATES HERE
   };
