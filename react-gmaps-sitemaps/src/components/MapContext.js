@@ -110,7 +110,6 @@ export const MapProvider = (props) => {
             icon: <Add />,
             disabled: true,
           });
-          console.log(res.data[i]);
         }
         res.data.unshift(addNode);
         setNodes(res.data);
