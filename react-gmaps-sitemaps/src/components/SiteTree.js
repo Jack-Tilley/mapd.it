@@ -25,10 +25,8 @@ const SiteTree = () => {
     setActiveNode,
     icon,
     setIcon,
-    markers,
-    setMarkers,
-    polylines,
-    setPolylines,
+    shapes,
+    setShapes,
   ] = useContext(MapContext);
   const [checked, setChecked] = useState([]);
   const [expanded, setExpanded] = useState([]);
@@ -42,10 +40,10 @@ const SiteTree = () => {
     console.log(targetNode);
     if (targetNode.checked === true) {
       console.log("CHECKED");
-      setMarkers([...markers, targetNode]);
+      setShapes([...shapes, targetNode]);
     } else {
       console.log("UNCHECKED");
-      setMarkers(markers.filter((marker) => marker.value !== targetNode.value));
+      setShapes(shapes.filter((shape) => shape.value !== targetNode.value));
     }
   };
 

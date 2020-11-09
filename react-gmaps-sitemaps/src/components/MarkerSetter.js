@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { MapContext } from "./MapContext";
 
-import { Marker } from "@react-google-maps/api";
+import { Marker, Polyline } from "@react-google-maps/api";
 
 const MarkerSetter = () => {
   const [
@@ -18,15 +18,13 @@ const MarkerSetter = () => {
     setActiveNode,
     icon,
     setIcon,
-    markers,
-    setMarkers,
-    polylines,
-    setPolylines,
+    shapes,
+    setShapes,
   ] = useContext(MapContext);
 
   useEffect(() => {
-    console.log(markers);
-  }, [markers, polylines]);
+    console.log(shapes);
+  }, [shapes]);
 
   const findNode = (nodeValue) => {
     for (let i = 0; i < nodes.length; i++) {
@@ -44,28 +42,42 @@ const MarkerSetter = () => {
     return null;
   };
 
-  let x;
-
   return (
     <>
-      {markers.map((marker) => (
-        <>
-          <Marker
-            position={{
-              lat: parseFloat(
-                findNode(marker.value).latLngArr[0].substring(1, 17)
-              ),
-              lng: parseFloat(
-                findNode(marker.value).latLngArr[0].substring(20, 37)
-              ),
-            }}
-            key={marker.value}
-          />
-        </>
-      ))}
-      {/* {console.log("YY", findNode("yy").latLngArr[0].substring(1, 17))}
-      {console.log("YY", findNode("yy").latLngArr[0].substring(20, 37))} */}
+      {shapes.map((shape) => {
+        let node = findNode(shape.value);
+        if (node.nodeType === "marker") {
+          return (
+            <Marker
+              position={{
+                lat: parseFloat(node.latLngArr[0].substring(1, 17)),
+                lng: parseFloat(node.latLngArr[0].substring(20, 37)),
+              }}
+              key={shape.value}
+            />
+          );
+        } else if (node.nodeType === "polyline") {
+          return (
+            <Polyline
+              path={[
+                { lat: 40, lng: -75 },
+                { lat: 39.9, lng: -74.9 },
+                { lat: 39.9, lng: -75.1 },
+                { lat: 40, lng: -75 },
+              ]}
+              key={shape.value}
+            />
+          );
+        } else {
+          return <></>;
+        }
+      })}
     </>
   );
 };
 export default MarkerSetter;
+
+{
+  /* {console.log("YY", findNode("yy").latLngArr[0].substring(1, 17))}
+      {console.log("YY", findNode("yy").latLngArr[0].substring(20, 37))} */
+}

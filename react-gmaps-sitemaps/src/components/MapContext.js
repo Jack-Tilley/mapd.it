@@ -30,8 +30,7 @@ export const MapProvider = (props) => {
   const [activeNode, setActiveNode] = useState(null);
   const [draw, setDraw] = useState(false);
   const [icon, setIcon] = useState(null);
-  const [markers, setMarkers] = useState([]);
-  const [polylines, setPolylines] = useState([]);
+  const [shapes, setShapes] = useState([]);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
@@ -75,10 +74,8 @@ export const MapProvider = (props) => {
         setActiveNode,
         icon,
         setIcon,
-        markers,
-        setMarkers,
-        polylines,
-        setPolylines,
+        shapes,
+        setShapes,
       ]}
     >
       {props.children}
