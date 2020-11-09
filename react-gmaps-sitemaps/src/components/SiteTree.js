@@ -25,8 +25,10 @@ const SiteTree = () => {
     setActiveNode,
     icon,
     setIcon,
+    shapes,
+    setShapes,
   ] = useContext(MapContext);
-  const [checked, setChecked] = useState(["Mods"]);
+  const [checked, setChecked] = useState([]);
   const [expanded, setExpanded] = useState([]);
   const [value, setValue] = useState("");
   const [nodeType, setNodeType] = useState("");
@@ -34,12 +36,15 @@ const SiteTree = () => {
   const [event, setEvent] = useState();
 
   const onCheck = (checked, targetNode) => {
-    // let x = parse(stringify(targetNode))
-    // console.log(x)
-    // console.log(targetNode["nodeReference"])
-    // targetNode.nodeReference.visible = false
     setChecked(checked);
-    // console.log(checked)
+    console.log(targetNode);
+    if (targetNode.checked === true) {
+      console.log("CHECKED");
+      setShapes([...shapes, targetNode]);
+    } else {
+      console.log("UNCHECKED");
+      setShapes(shapes.filter((shape) => shape.value !== targetNode.value));
+    }
   };
 
   const onExpand = (expanded) => {

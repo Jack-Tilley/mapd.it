@@ -1,7 +1,8 @@
 import React, { useState, useContext } from "react";
 import { MapContext } from "./MapContext";
-import { GoogleMap } from "@react-google-maps/api";
+import { GoogleMap, Marker } from "@react-google-maps/api";
 import DrawingComponent from "./DrawingComponent";
+import MarkerSetter from "./MarkerSetter";
 
 const options = {
   disableDefaultUI: true,
@@ -19,6 +20,14 @@ const Map = () => {
     setDraw,
     nodes,
     setNodes,
+    activeNode,
+    setActiveNode,
+    icon,
+    setIcon,
+    markers,
+    setMarkers,
+    polylines,
+    setPolylines,
   ] = useContext(MapContext);
 
   const renderMap = () => (
@@ -34,6 +43,7 @@ const Map = () => {
         options={options}
       >
         <DrawingComponent />
+        <MarkerSetter />
       </GoogleMap>
     </>
   );

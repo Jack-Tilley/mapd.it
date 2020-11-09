@@ -13,4 +13,4 @@ class NodeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Node
         fields = ('id', 'label', 'value', 'parent',
-                  'apiPath', 'nodeType', 'nodeReference', 'children')
+                  'apiPath', 'nodeType', 'nodeReference', 'latLngArr', 'children')

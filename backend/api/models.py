@@ -1,8 +1,11 @@
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
 from django.db.models import JSONField
+from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
+
+# classic node model
 
 
 class Node(MPTTModel):
@@ -13,6 +16,7 @@ class Node(MPTTModel):
                             null=True, blank=True, related_name='children')
     apiPath = models.CharField(max_length=200, blank=True, null=True)
     nodeType = models.CharField(max_length=20, blank=True, null=True)
+    latLngArr = ArrayField(models.CharField(max_length=50), blank=True)
     nodeReference = JSONField(blank=True, null=True)
 
     # def __str__(self):

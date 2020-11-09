@@ -19,6 +19,10 @@ const DrawingComponent = () => {
     setActiveNode,
     icon,
     setIcon,
+    markers,
+    setMarkers,
+    polylines,
+    setPolylines,
   ] = useContext(MapContext);
 
   const options = {
@@ -73,8 +77,6 @@ const DrawingComponent = () => {
     newActiveNode.icon = icon;
     // newActiveNode.parent_id = activeNode.parent_id;
     await setActiveNode(newActiveNode);
-    console.log(newActiveNode);
-    console.log("activeNodePARENT", activeNode.parent_id);
     axios
       .post("http://localhost:8000/api/nodes/", {
         label: newActiveNode.label,
@@ -83,6 +85,7 @@ const DrawingComponent = () => {
         value: newActiveNode.value,
         parent: newActiveNode.parent_id,
         apiPath: newActiveNode.apiPath,
+        latLngArr: newActiveNode.latLngArr,
       })
       .then((res) => {
         console.log(res);
