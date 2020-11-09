@@ -28,14 +28,43 @@ const MarkerSetter = () => {
     console.log(markers);
   }, [markers, polylines]);
 
+  const findNode = (nodeValue) => {
+    for (let i = 0; i < nodes.length; i++) {
+      if (nodes[i].value === nodeValue) {
+        return nodes[i];
+      }
+      if (nodes[i].children !== undefined) {
+        for (let j = 0; j < nodes[i].children.length; j++) {
+          if (nodes[i].children && nodes[i].children[j].value === nodeValue) {
+            return nodes[i].children[j];
+          }
+        }
+      }
+    }
+    return null;
+  };
+
+  let x;
+
   return (
     <>
-      {console.log(markers)}
       {markers.map((marker) => (
         <>
-          <Marker position={{ lat: 40, lng: -75 }} key={marker.value} />
+          <Marker
+            position={{
+              lat: parseFloat(
+                findNode(marker.value).latLngArr[0].substring(1, 17)
+              ),
+              lng: parseFloat(
+                findNode(marker.value).latLngArr[0].substring(20, 37)
+              ),
+            }}
+            key={marker.value}
+          />
         </>
       ))}
+      {/* {console.log("YY", findNode("yy").latLngArr[0].substring(1, 17))}
+      {console.log("YY", findNode("yy").latLngArr[0].substring(20, 37))} */}
     </>
   );
 };
