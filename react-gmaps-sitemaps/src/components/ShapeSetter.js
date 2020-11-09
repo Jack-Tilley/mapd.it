@@ -3,7 +3,7 @@ import { MapContext } from "./MapContext";
 
 import { Marker, Polyline } from "@react-google-maps/api";
 
-const MarkerSetter = () => {
+const ShapeSetter = () => {
   const [
     myMap,
     setMyMap,
@@ -75,7 +75,7 @@ const MarkerSetter = () => {
     </>
   );
 };
-export default MarkerSetter;
+export default ShapeSetter;
 
 {
   /* {console.log("YY", findNode("yy").latLngArr[0].substring(1, 17))}
