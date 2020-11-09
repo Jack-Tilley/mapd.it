@@ -33,8 +33,7 @@ const MarkerSetter = () => {
       {console.log(markers)}
       {markers.map((marker) => (
         <>
-          {console.log("LATLNG", marker.latLngArr)}
-          <Marker position={{ lat: marker.latLngArr }} key={marker.value} />
+          <Marker position={{ lat: 40, lng: -75 }} key={marker.value} />
         </>
       ))}
     </>

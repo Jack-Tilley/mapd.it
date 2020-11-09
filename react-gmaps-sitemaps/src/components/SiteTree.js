@@ -45,6 +45,7 @@ const SiteTree = () => {
       setMarkers([...markers, targetNode]);
     } else {
       console.log("UNCHECKED");
+      setMarkers(markers.filter((marker) => marker.value !== targetNode.value));
     }
   };
 
