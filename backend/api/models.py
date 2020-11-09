@@ -5,6 +5,8 @@ from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
 
+# classic node model
+
 
 class Node(MPTTModel):
     label = models.CharField(max_length=50, null=True, blank=True)
