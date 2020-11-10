@@ -47,7 +47,7 @@ export const MapProvider = (props) => {
             value: res.data[i].value + "/+",
             label: "+",
             apiPath: res.data[i].value + "/+",
-            latLngArr: ["40"],
+            latLngArr: [["40", "-70"]],
             nodeType: "ADD",
             icon: <Add />,
             disabled: true,
