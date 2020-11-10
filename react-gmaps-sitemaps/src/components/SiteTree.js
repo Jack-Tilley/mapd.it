@@ -27,8 +27,9 @@ const SiteTree = () => {
     setIcon,
     shapes,
     setShapes,
+    checked,
+    setChecked,
   ] = useContext(MapContext);
-  const [checked, setChecked] = useState([]);
   const [expanded, setExpanded] = useState([]);
   const [value, setValue] = useState("");
   const [nodeType, setNodeType] = useState("");

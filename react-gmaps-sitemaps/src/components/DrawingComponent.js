@@ -19,10 +19,10 @@ const DrawingComponent = () => {
     setActiveNode,
     icon,
     setIcon,
-    markers,
-    setMarkers,
-    polylines,
-    setPolylines,
+    shapes,
+    setShapes,
+    checked,
+    setChecked,
   ] = useContext(MapContext);
 
   const options = {
@@ -43,8 +43,8 @@ const DrawingComponent = () => {
     for (let i = 0; i < roughPath.length; i += 2) {
       path.push(roughPath[i] + "," + roughPath[i + 1]);
     }
-
     handleActiveNodeChange(path, "polyline", polyline, icon);
+    polyline.visible = false;
     setDraw(false); // we do this instead of !draw because we want drawing component to leave when a new one is added
   };
 
@@ -56,6 +56,7 @@ const DrawingComponent = () => {
       "(" + marker.position.lat() + ", " + marker.position.lng() + ")",
     ];
     handleActiveNodeChange(position, "marker", marker, icon);
+    marker.visible = false;
     setDraw(false); // we do this instead of !draw because we want drawing component to leave when a new one is added
   };
 
@@ -77,6 +78,8 @@ const DrawingComponent = () => {
     newActiveNode.icon = icon;
     // newActiveNode.parent_id = activeNode.parent_id;
     await setActiveNode(newActiveNode);
+    setShapes([...shapes, newActiveNode]);
+    setChecked([...checked, newActiveNode.value]);
     axios
       .post("http://localhost:8000/api/nodes/", {
         label: newActiveNode.label,
