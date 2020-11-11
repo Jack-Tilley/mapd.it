@@ -1,14 +1,14 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 body {
@@ -34,6 +34,8 @@ div.treeContainer {
   z-index: 10;
   margin: 0;
   padding: 0;
+  max-height: 240px;
+  overflow: auto;
 }
 CBTree {
   position: absolute;
@@ -44,7 +46,7 @@ CBTree {
   margin: 0;
   padding: 0;
 }
-div.itemAdditionContainer{
+div.itemAdditionContainer {
   position: fixed;
   top: 3rem;
   left: 1rem;
@@ -54,7 +56,7 @@ div.itemAdditionContainer{
   padding: 0;
 }
 
-DrawingManager{
+DrawingManager {
   position: absolute;
   top: 1rem;
   left: 15rem;
@@ -64,13 +66,13 @@ DrawingManager{
   padding: 0;
 }
 
-form{
+form {
   z-index: 13;
 }
-.TextField{
+.TextField {
   z-index: 15;
 }
-.Button{
+.Button {
   z-index: 16;
 }
 
