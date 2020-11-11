@@ -3,7 +3,7 @@ import { MapContext } from "./MapContext";
 
 import { Marker, Polyline } from "@react-google-maps/api";
 
-const MarkerSetter = () => {
+const ShapeSetter = () => {
   const [
     myMap,
     setMyMap,
@@ -50,24 +50,21 @@ const MarkerSetter = () => {
           return (
             <Marker
               position={{
-                lat: parseFloat(node.latLngArr[0].substring(1, 17)),
-                lng: parseFloat(node.latLngArr[0].substring(20, 37)),
+                lat: parseFloat(node.latLngArr[0]),
+                lng: parseFloat(node.latLngArr[1]),
               }}
               key={shape.value}
             />
           );
         } else if (node.nodeType === "polyline") {
-          return (
-            <Polyline
-              path={[
-                { lat: 40, lng: -75 },
-                { lat: 39.9, lng: -74.9 },
-                { lat: 39.9, lng: -75.1 },
-                { lat: 40, lng: -75 },
-              ]}
-              key={shape.value}
-            />
-          );
+          let path = [];
+          for (let i = 0; i < node.latLngArr.length; i += 2) {
+            path.push({
+              lat: parseFloat(node.latLngArr[i]),
+              lng: parseFloat(node.latLngArr[i + 1]),
+            });
+          }
+          return <Polyline path={path} key={shape.value} />;
         } else {
           return <></>;
         }
@@ -75,7 +72,7 @@ const MarkerSetter = () => {
     </>
   );
 };
-export default MarkerSetter;
+export default ShapeSetter;
 
 {
   /* {console.log("YY", findNode("yy").latLngArr[0].substring(1, 17))}

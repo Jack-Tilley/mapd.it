@@ -31,6 +31,7 @@ export const MapProvider = (props) => {
   const [draw, setDraw] = useState(false);
   const [icon, setIcon] = useState(null);
   const [shapes, setShapes] = useState([]);
+  const [checked, setChecked] = useState([]);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
@@ -42,15 +43,17 @@ export const MapProvider = (props) => {
       .then((res) => {
         console.log(res.data);
         for (let i = 0; i < res.data.length; i++) {
-          res.data[i].children.unshift({
-            value: res.data[i].value + "/+",
-            label: "+",
-            apiPath: res.data[i].value + "/+",
-            latLngArr: ["40"],
-            nodeType: "ADD",
-            icon: <Add />,
-            disabled: true,
-          });
+          if (res.data[i].isDir) {
+            res.data[i].children.unshift({
+              value: res.data[i].value + "/+",
+              label: "+",
+              apiPath: res.data[i].value + "/+",
+              latLngArr: [["40", "-70"]],
+              nodeType: "ADD",
+              icon: <Add />,
+              disabled: true,
+            });
+          }
         }
         res.data.unshift(addNode);
         setNodes(res.data);
@@ -76,6 +79,8 @@ export const MapProvider = (props) => {
         setIcon,
         shapes,
         setShapes,
+        checked,
+        setChecked,
       ]}
     >
       {props.children}

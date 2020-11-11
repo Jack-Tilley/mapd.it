@@ -39,9 +39,9 @@ const AddNodeModal = ({
     setIcon,
   ] = useContext(MapContext);
 
-  const handleSubmit = () => {
+  const handleSubmit = (isDir) => {
     setDraw(true);
-    addItem(event);
+    addItem(event, isDir);
     setModalOpen(false);
     setEvent("");
   };
@@ -80,8 +80,11 @@ const AddNodeModal = ({
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleSubmit} color="primary">
-            Go
+          <Button onClick={() => handleSubmit(true)} color="primary">
+            Dir
+          </Button>
+          <Button onClick={() => handleSubmit(false)} color="primary">
+            Leaf
           </Button>
         </DialogActions>
       </Dialog>

@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { MapContext } from "./MapContext";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import DrawingComponent from "./DrawingComponent";
-import MarkerSetter from "./MarkerSetter";
+import ShapeSetter from "./ShapeSetter";
 
 const options = {
   disableDefaultUI: true,
@@ -43,7 +43,7 @@ const Map = () => {
         options={options}
       >
         <DrawingComponent />
-        <MarkerSetter />
+        <ShapeSetter />
       </GoogleMap>
     </>
   );

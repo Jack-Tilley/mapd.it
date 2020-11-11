@@ -19,15 +19,15 @@ const DrawingComponent = () => {
     setActiveNode,
     icon,
     setIcon,
-    markers,
-    setMarkers,
-    polylines,
-    setPolylines,
+    shapes,
+    setShapes,
+    checked,
+    setChecked,
   ] = useContext(MapContext);
 
   const options = {
     polylineOptions: {
-      strokeWeight: 10,
+      // strokeWeight: 0.01,
       // editable : true,
     },
     markerOptions: {
@@ -41,10 +41,10 @@ const DrawingComponent = () => {
     let roughPath = polyline.getPath().getArray().toString().split(",");
     let path = [];
     for (let i = 0; i < roughPath.length; i += 2) {
-      path.push(roughPath[i] + "," + roughPath[i + 1]);
+      path.push(roughPath[i].slice(1), roughPath[i + 1].slice(0, -1));
     }
-
     handleActiveNodeChange(path, "polyline", polyline, icon);
+    console.log(polyline);
     setDraw(false); // we do this instead of !draw because we want drawing component to leave when a new one is added
   };
 
@@ -52,9 +52,8 @@ const DrawingComponent = () => {
     marker.title = activeNode.label;
     marker.label = activeNode.label;
     // marker.icon = icon // need to figure out how to get custom icon
-    let position = [
-      "(" + marker.position.lat() + ", " + marker.position.lng() + ")",
-    ];
+    let position = [marker.position.lat(), marker.position.lng()];
+    console.log("POSITION", position);
     handleActiveNodeChange(position, "marker", marker, icon);
     setDraw(false); // we do this instead of !draw because we want drawing component to leave when a new one is added
   };
@@ -73,10 +72,13 @@ const DrawingComponent = () => {
     let newActiveNode = activeNode;
     newActiveNode.latLngArr = position;
     newActiveNode.nodeType = nodeType;
-    // newActiveNode.nodeReference = nodeReference;
+    nodeReference.visible = false;
+    // newActiveNode.nodeReference.visible = false;
     newActiveNode.icon = icon;
     // newActiveNode.parent_id = activeNode.parent_id;
     await setActiveNode(newActiveNode);
+    setShapes([...shapes, newActiveNode]);
+    setChecked([...checked, newActiveNode.value]);
     axios
       .post("http://localhost:8000/api/nodes/", {
         label: newActiveNode.label,
@@ -86,6 +88,7 @@ const DrawingComponent = () => {
         parent: newActiveNode.parent_id,
         apiPath: newActiveNode.apiPath,
         latLngArr: newActiveNode.latLngArr,
+        isDir: newActiveNode.isDir,
       })
       .then((res) => {
         console.log(res);
