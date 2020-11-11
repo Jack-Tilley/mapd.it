@@ -67,7 +67,7 @@ const SiteTree = () => {
     setModalOpen(true);
   };
 
-  const addItem = (target) => {
+  const addItem = (target, isDir) => {
     // updateDM()
     let newNode = {
       value: value,
@@ -77,6 +77,7 @@ const SiteTree = () => {
       parent_id: target.parent.id,
       nodeType: nodeType,
       icon: icon,
+      isDir: isDir,
       // icon: <FontAwesomeIcon icon={faHome} />,
     };
     setActiveNode(newNode);
@@ -105,6 +106,7 @@ const SiteTree = () => {
         checked={checked}
         expanded={expanded}
         iconsClass="fa5"
+        noCascade
         nodes={nodes}
         onCheck={onCheck}
         onExpand={onExpand}

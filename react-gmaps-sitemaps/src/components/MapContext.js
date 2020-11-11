@@ -43,15 +43,17 @@ export const MapProvider = (props) => {
       .then((res) => {
         console.log(res.data);
         for (let i = 0; i < res.data.length; i++) {
-          res.data[i].children.unshift({
-            value: res.data[i].value + "/+",
-            label: "+",
-            apiPath: res.data[i].value + "/+",
-            latLngArr: [["40", "-70"]],
-            nodeType: "ADD",
-            icon: <Add />,
-            disabled: true,
-          });
+          if (res.data[i].isDir) {
+            res.data[i].children.unshift({
+              value: res.data[i].value + "/+",
+              label: "+",
+              apiPath: res.data[i].value + "/+",
+              latLngArr: [["40", "-70"]],
+              nodeType: "ADD",
+              icon: <Add />,
+              disabled: true,
+            });
+          }
         }
         res.data.unshift(addNode);
         setNodes(res.data);

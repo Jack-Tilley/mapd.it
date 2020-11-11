@@ -88,6 +88,7 @@ const DrawingComponent = () => {
         parent: newActiveNode.parent_id,
         apiPath: newActiveNode.apiPath,
         latLngArr: newActiveNode.latLngArr,
+        isDir: newActiveNode.isDir,
       })
       .then((res) => {
         console.log(res);
