@@ -19,7 +19,7 @@ let addNode = {
   disabled: true,
 };
 
-const libraries = ["drawing"];
+const libraries = ["drawing", "places"];
 
 export const MapContext = createContext();
 

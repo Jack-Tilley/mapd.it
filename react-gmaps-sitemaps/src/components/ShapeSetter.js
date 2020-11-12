@@ -3,7 +3,7 @@ import { MapContext } from "./MapContext";
 
 import { Marker, Polyline } from "@react-google-maps/api";
 
-const ShapeSetter = ({ gm }) => {
+const ShapeSetter = () => {
   const [
     myMap,
     setMyMap,

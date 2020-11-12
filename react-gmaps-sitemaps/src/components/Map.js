@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { MapContext } from "./MapContext";
-import { GoogleMap, Marker } from "@react-google-maps/api";
+import { GoogleMap, Marker, Autocomplete } from "@react-google-maps/api";
 import DrawingComponent from "./DrawingComponent";
 import ShapeSetter from "./ShapeSetter";
 
@@ -29,6 +29,7 @@ const Map = () => {
     polylines,
     setPolylines,
   ] = useContext(MapContext);
+  const [autocomplete, setAutocomplete] = useState(null);
 
   const renderMap = () => (
     <>
@@ -42,8 +43,39 @@ const Map = () => {
         onLoad={(map) => setMyMap(map)}
         options={options}
       >
+        <Autocomplete
+          onLoad={(autoc) => setAutocomplete(autoc)}
+          onPlaceChanged={() => {
+            if (autocomplete !== null) {
+              setCenter({
+                lat: autocomplete.getPlace().geometry.location.lat(),
+                lng: autocomplete.getPlace().geometry.location.lng(),
+              });
+            }
+          }}
+        >
+          <input
+            type="text"
+            placeholder="Find Something!"
+            style={{
+              boxSizing: `border-box`,
+              border: `1px solid transparent`,
+              width: `240px`,
+              height: `32px`,
+              padding: `0 12px`,
+              borderRadius: `3px`,
+              boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+              fontSize: `14px`,
+              outline: `none`,
+              textOverflow: `ellipses`,
+              position: "absolute",
+              left: "50%",
+              marginLeft: "-120px",
+            }}
+          />
+        </Autocomplete>
         <DrawingComponent />
-        <ShapeSetter gm={new window.google.maps.Size(30, 30)} />
+        <ShapeSetter />
       </GoogleMap>
     </>
   );
