@@ -3,7 +3,7 @@ import { MapContext } from "./MapContext";
 
 import { Marker, Polyline } from "@react-google-maps/api";
 
-const ShapeSetter = () => {
+const ShapeSetter = ({ gm }) => {
   const [
     myMap,
     setMyMap,
@@ -46,6 +46,7 @@ const ShapeSetter = () => {
     <>
       {shapes.map((shape) => {
         let node = findNode(shape.value);
+        console.log("NODEICON", node.icon);
         if (node.nodeType === "marker") {
           return (
             <Marker
@@ -54,6 +55,16 @@ const ShapeSetter = () => {
                 lng: parseFloat(node.latLngArr[1]),
               }}
               key={shape.value}
+              // label={shape.label}
+              icon={{
+                url: "/newIcons/" + node.icon + ".svg",
+                scaledSize: new window.google.maps.Size(30, 30),
+                origin: new window.google.maps.Point(0, 0),
+                anchor: new window.google.maps.Point(15, 15),
+              }}
+              onClick={() => {
+                console.log(shape.label);
+              }}
             />
           );
         } else if (node.nodeType === "polyline") {
@@ -64,7 +75,13 @@ const ShapeSetter = () => {
               lng: parseFloat(node.latLngArr[i + 1]),
             });
           }
-          return <Polyline path={path} key={shape.value} />;
+          return (
+            <Polyline
+              path={path}
+              key={shape.value}
+              onClick={() => console.log("hello")}
+            />
+          );
         } else {
           return <></>;
         }

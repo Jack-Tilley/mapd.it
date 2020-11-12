@@ -1,4 +1,5 @@
 import React from "react";
+import IconList from "./IconList";
 
 import {
   AccessAlarm,
@@ -12,116 +13,10 @@ import {
 import IconButton from "@material-ui/core/IconButton";
 
 const IconContainer = ({ handleButtonClick }) => {
+  const getAllIcons = () => {};
   return (
     <>
-      <IconButton
-        aria-label="alarm"
-        onClick={() => handleButtonClick(<AccessAlarm />)}
-      >
-        <AccessAlarm />
-      </IconButton>
-      <IconButton
-        aria-label="album"
-        onClick={() => handleButtonClick(<Album />)}
-      >
-        <Album />
-      </IconButton>
-      <IconButton
-        aria-label="brush"
-        onClick={() => handleButtonClick(<Brush />)}
-      >
-        <Brush />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
-      <IconButton aria-label="business">
-        <BusinessCenter />
-      </IconButton>
+      <IconList handleButtonClick={handleButtonClick} />
     </>
   );
 };

@@ -33,7 +33,6 @@ const DrawingComponent = () => {
     markerOptions: {
       title: "Hello",
       label: "hi",
-      icon: icon,
     },
   };
 
@@ -51,6 +50,7 @@ const DrawingComponent = () => {
   const onMarkerComplete = (marker) => {
     marker.title = activeNode.label;
     marker.label = activeNode.label;
+    marker.icon = icon;
     // marker.icon = icon // need to figure out how to get custom icon
     let position = [marker.position.lat(), marker.position.lng()];
     console.log("POSITION", position);
@@ -89,6 +89,7 @@ const DrawingComponent = () => {
         apiPath: newActiveNode.apiPath,
         latLngArr: newActiveNode.latLngArr,
         isDir: newActiveNode.isDir,
+        icon: newActiveNode.icon,
       })
       .then((res) => {
         console.log(res);
