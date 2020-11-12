@@ -50,7 +50,7 @@ const DrawingComponent = () => {
   const onMarkerComplete = (marker) => {
     marker.title = activeNode.label;
     marker.label = activeNode.label;
-    marker.icon = icon;
+    marker.icon = <i className="material-icons">{icon}</i>;
     // marker.icon = icon // need to figure out how to get custom icon
     let position = [marker.position.lat(), marker.position.lng()];
     console.log("POSITION", position);
@@ -72,9 +72,9 @@ const DrawingComponent = () => {
     let newActiveNode = activeNode;
     newActiveNode.latLngArr = position;
     newActiveNode.nodeType = nodeType;
+    newActiveNode.iconValue = icon;
     nodeReference.visible = false;
     // newActiveNode.nodeReference.visible = false;
-    newActiveNode.icon = icon;
     // newActiveNode.parent_id = activeNode.parent_id;
     await setActiveNode(newActiveNode);
     setShapes([...shapes, newActiveNode]);
@@ -89,7 +89,7 @@ const DrawingComponent = () => {
         apiPath: newActiveNode.apiPath,
         latLngArr: newActiveNode.latLngArr,
         isDir: newActiveNode.isDir,
-        icon: newActiveNode.icon,
+        iconValue: icon,
       })
       .then((res) => {
         console.log(res);

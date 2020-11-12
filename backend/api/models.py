@@ -21,6 +21,7 @@ class Node(MPTTModel):
     nodeReference = JSONField(blank=True, null=True)
     isDir = models.BooleanField(default=False)
     icon = models.CharField(max_length=30, blank=True, null=True)
+    iconValue = models.CharField(max_length=30, blank=True, null=True)
 
     # def __str__(self):
     #     return self.label

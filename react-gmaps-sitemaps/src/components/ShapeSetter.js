@@ -46,7 +46,7 @@ const ShapeSetter = ({ gm }) => {
     <>
       {shapes.map((shape) => {
         let node = findNode(shape.value);
-        console.log("NODEICON", node.icon);
+        console.log("NODEICON", node.iconValue);
         if (node.nodeType === "marker") {
           return (
             <Marker
@@ -57,7 +57,7 @@ const ShapeSetter = ({ gm }) => {
               key={shape.value}
               // label={shape.label}
               icon={{
-                url: "/newIcons/" + node.icon + ".svg",
+                url: "/newIcons/" + node.iconValue + ".svg",
                 scaledSize: new window.google.maps.Size(30, 30),
                 origin: new window.google.maps.Point(0, 0),
                 anchor: new window.google.maps.Point(15, 15),
