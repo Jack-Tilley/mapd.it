@@ -36,11 +36,23 @@ export const MapProvider = (props) => {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
+  const changeIcons = (nodes) => {
+    for (let i = 0; i < nodes.length; i++) {
+      nodes[i].icon = <i className="material-icons">{nodes[i].iconValue}</i>;
+      for (let j = 0; j < nodes[i].children.length; j++) {
+        nodes[i].children[j].icon = (
+          <i className="material-icons">{nodes[i].children[j].iconValue}</i>
+        );
+      }
+    }
+  };
+  // return nodes;
 
   useEffect(() => {
     axios
       .get("http://localhost:8000/api/nodes/")
       .then((res) => {
+        changeIcons(res.data);
         console.log(res.data);
         for (let i = 0; i < res.data.length; i++) {
           if (res.data[i].isDir) {
@@ -56,6 +68,7 @@ export const MapProvider = (props) => {
           }
         }
         res.data.unshift(addNode);
+
         setNodes(res.data);
       })
       .catch((err) => console.log(err));

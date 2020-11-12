@@ -76,7 +76,7 @@ const SiteTree = () => {
       apiPath: "",
       parent_id: target.parent.id,
       nodeType: nodeType,
-      icon: icon,
+      icon: <i className="material-icons">{icon}</i>,
       isDir: isDir,
       // icon: <FontAwesomeIcon icon={faHome} />,
     };

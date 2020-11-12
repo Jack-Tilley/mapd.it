@@ -43,7 +43,7 @@ const Map = () => {
         options={options}
       >
         <DrawingComponent />
-        <ShapeSetter />
+        <ShapeSetter gm={new window.google.maps.Size(30, 30)} />
       </GoogleMap>
     </>
   );
