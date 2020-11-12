@@ -56,8 +56,10 @@ const Map = () => {
         >
           <input
             type="text"
-            placeholder="Find Something!"
+            placeholder="Find Someplace!"
             style={{
+              top: "0rem",
+              left: "50%",
               boxSizing: `border-box`,
               border: `1px solid transparent`,
               width: `240px`,
@@ -69,7 +71,6 @@ const Map = () => {
               outline: `none`,
               textOverflow: `ellipses`,
               position: "absolute",
-              left: "50%",
               marginLeft: "-120px",
             }}
           />
