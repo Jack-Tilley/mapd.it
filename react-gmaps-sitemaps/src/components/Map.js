@@ -1,8 +1,10 @@
 import React, { useState, useContext } from "react";
 import { MapContext } from "./MapContext";
-import { GoogleMap, Marker, Autocomplete } from "@react-google-maps/api";
+import { GoogleMap } from "@react-google-maps/api";
 import DrawingComponent from "./DrawingComponent";
 import ShapeSetter from "./ShapeSetter";
+import AutocompleteBox from "./AutocompleteBox";
+import Directions from "./Directions";
 
 const options = {
   disableDefaultUI: true,
@@ -29,7 +31,6 @@ const Map = () => {
     polylines,
     setPolylines,
   ] = useContext(MapContext);
-  const [autocomplete, setAutocomplete] = useState(null);
 
   const renderMap = () => (
     <>
@@ -43,40 +44,10 @@ const Map = () => {
         onLoad={(map) => setMyMap(map)}
         options={options}
       >
-        <Autocomplete
-          onLoad={(autoc) => setAutocomplete(autoc)}
-          onPlaceChanged={() => {
-            if (autocomplete !== null) {
-              setCenter({
-                lat: autocomplete.getPlace().geometry.location.lat(),
-                lng: autocomplete.getPlace().geometry.location.lng(),
-              });
-            }
-          }}
-        >
-          <input
-            type="text"
-            placeholder="Find Someplace!"
-            style={{
-              top: "0rem",
-              left: "50%",
-              boxSizing: `border-box`,
-              border: `1px solid transparent`,
-              width: `240px`,
-              height: `32px`,
-              padding: `0 12px`,
-              borderRadius: `3px`,
-              boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-              fontSize: `14px`,
-              outline: `none`,
-              textOverflow: `ellipses`,
-              position: "absolute",
-              marginLeft: "-120px",
-            }}
-          />
-        </Autocomplete>
+        <AutocompleteBox center={center} setCenter={setCenter} />
         <DrawingComponent />
         <ShapeSetter />
+        {/* <Directions /> */}
       </GoogleMap>
     </>
   );
