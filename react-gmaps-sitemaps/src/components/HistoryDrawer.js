@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -10,6 +11,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+
+import axios from "axios";
 
 const useStyles = makeStyles({
   list: {
@@ -23,6 +26,27 @@ const useStyles = makeStyles({
 export default function HistoryDrawer() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [history, setHistory] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/history/")
+      .then((res) => {
+        console.log(res.data);
+        for (let i = 0; i < res.data.length; i++) {
+          for (let j = 0; j < res.data[i].history.length; j++) {
+            let tmp = {
+              label: res.data[i].history[j].label,
+              modified: res.data[i].history[j].modified,
+            };
+            let newHistory = history;
+            newHistory.push(tmp);
+            setHistory(newHistory);
+          }
+        }
+      })
+      .catch((err) => console.log(err));
+  }, [history]);
 
   const toggleDrawer = () => (event) => {
     if (
@@ -42,12 +66,15 @@ export default function HistoryDrawer() {
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
+        {history.map((node) => (
+          <ListItem button key={node.modified}>
             <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              <InboxIcon /> :
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText
+              primary={node.label}
+              secondary={"modified at: " + node.modified}
+            />
           </ListItem>
         ))}
       </List>
@@ -55,7 +82,7 @@ export default function HistoryDrawer() {
   );
 
   return (
-    <div>
+    <div style={{ right: "1em", top: "5em" }}>
       <Button onClick={toggleDrawer(true)}>Show History</Button>
       <Drawer anchor={"right"} open={open} onClose={toggleDrawer(false)}>
         {list()}
