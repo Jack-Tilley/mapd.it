@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Node
 import json
+from django.core.serializers.json import DjangoJSONEncoder
 
 
 class NodeSerializer(serializers.ModelSerializer):
@@ -13,4 +14,15 @@ class NodeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Node
         fields = ('id', 'label', 'value', 'parent',
-                  'apiPath', 'nodeType', 'nodeReference', 'latLngArr', 'isDir', 'icon', "iconValue", 'children')
+                  'apiPath', 'nodeType', 'nodeReference', 'latLngArr', 'isDir', 'icon', "iconValue", "created", "modified", 'children')
+
+
+class HistorySerializer(serializers.ModelSerializer):
+    history = serializers.SerializerMethodField()
+
+    def get_history(self, obj):
+        return obj.history.all().values()
+
+    class Meta:
+        model = Node
+        fields = ['history']

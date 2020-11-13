@@ -1,5 +1,6 @@
 import React from "react";
 import IconButton from "@material-ui/core/IconButton";
+import Divider from "@material-ui/core/Divider";
 
 const IconList = ({ handleButtonClick }) => {
   let icons = [
@@ -929,6 +930,7 @@ const IconList = ({ handleButtonClick }) => {
     <IconButton onClick={() => handleButtonClick(svg)} key={svg}>
       <i className="material-icons">{svg}</i>
     </IconButton>
+    // use Divider to seperate rows
   ));
 };
 export default IconList;
