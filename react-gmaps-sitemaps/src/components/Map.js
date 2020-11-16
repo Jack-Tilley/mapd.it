@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { MapContext } from "./MapContext";
-import { GoogleMap } from "@react-google-maps/api";
+import { GoogleMap, InfoWindow } from "@react-google-maps/api";
 import DrawingComponent from "./DrawingComponent";
 import ShapeSetter from "./ShapeSetter";
 import AutocompleteBox from "./AutocompleteBox";
@@ -26,10 +26,12 @@ const Map = () => {
     setActiveNode,
     icon,
     setIcon,
-    markers,
-    setMarkers,
-    polylines,
-    setPolylines,
+    shapes,
+    setShapes,
+    checked,
+    setChecked,
+    selected,
+    setSelected,
   ] = useContext(MapContext);
 
   const renderMap = () => (
@@ -48,6 +50,23 @@ const Map = () => {
         <DrawingComponent />
         <ShapeSetter />
         {/* <Directions /> */}
+        {selected ? (
+          <InfoWindow
+            position={{
+              lat: parseFloat(selected.latLngArr[0]),
+              lng: parseFloat(selected.latLngArr[1]),
+            }}
+            onCloseClick={() => {
+              setSelected(null);
+            }}
+          >
+            <div>
+              <h4>{selected.label}</h4>
+              <p>{selected.latLngArr}</p>
+            </div>
+          </InfoWindow>
+        ) : null}
+        }
       </GoogleMap>
     </>
   );
