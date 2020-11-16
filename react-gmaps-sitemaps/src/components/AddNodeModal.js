@@ -8,7 +8,11 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
+import Grid from "@material-ui/core/Grid";
+import Divider from "@material-ui/core/Divider";
+
 import IconContainer from "./IconContainer";
+import ColorContainer from "./ColorContainer";
 
 import { MapContext } from "./MapContext";
 
@@ -37,6 +41,14 @@ const AddNodeModal = ({
     setActiveNode,
     icon,
     setIcon,
+    shapes,
+    setShapes,
+    checked,
+    setChecked,
+    selected,
+    setSelected,
+    color,
+    setColor,
   ] = useContext(MapContext);
 
   const handleSubmit = (isDir) => {
@@ -54,6 +66,10 @@ const AddNodeModal = ({
     setIcon(btnIcon);
   };
 
+  const handleColorChange = (event) => {
+    setColor(event.target.value);
+  };
+
   return (
     <div>
       <Dialog
@@ -62,13 +78,25 @@ const AddNodeModal = ({
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">Add New Node</DialogTitle>
-        <DialogContent>
-          <IconContainer handleButtonClick={handleButtonClick} />
-          <DialogContentText>Add a new Node here</DialogContentText>
+        <DialogContent id="buttons">
+          <Grid container spacing={3}>
+            <Grid item xs={9}>
+              <IconContainer handleButtonClick={handleButtonClick} />
+            </Grid>
+            <Grid item xs={3}>
+              <ColorContainer
+                handleColorChange={handleColorChange}
+                color={color}
+              />
+            </Grid>
+          </Grid>
+        </DialogContent>
+        <DialogContent id="text">
           <TextField
             autoFocus
             value={value}
             margin="dense"
+            placeholder="Give your item a title"
             id="name"
             label="Node Name"
             type="text"

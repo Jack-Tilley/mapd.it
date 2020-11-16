@@ -24,7 +24,11 @@ const ShapeSetter = () => {
     setChecked,
     selected,
     setSelected,
+    color,
+    setColor,
   ] = useContext(MapContext);
+
+  const [path, setPath] = useState(null);
 
   useEffect(() => {
     console.log(shapes);
@@ -66,6 +70,7 @@ const ShapeSetter = () => {
     <>
       {shapes.map((shape) => {
         let node = findNode(shape.value);
+        // console.log("PATH", path);
         console.log("NODEICON", node.iconValue);
         if (node.nodeType === "marker") {
           console.log(node);
@@ -114,3 +119,10 @@ export default ShapeSetter;
   /* {console.log("YY", findNode("yy").latLngArr[0].substring(1, 17))}
       {console.log("YY", findNode("yy").latLngArr[0].substring(20, 37))} */
 }
+// let mi = new window.google.maps.MarkerImage(
+//   "/newIcons/" + node.iconValue + ".svg",
+//   null,
+//   null,
+//   null,
+//   new window.google.maps.Size(64, 64)
+// );

@@ -108,3 +108,25 @@ form {
   width: 30px;
   cursor: pointer;
 }
+
+i.icon-red {
+  color: red;
+}
+i.icon-blue {
+  color: blue;
+}
+i.icon-green {
+  color: green;
+}
+i.icon-yellow {
+  color: yellow;
+}
+i.icon-orange {
+  color: orange;
+}
+i.icon-purple {
+  color: purple;
+}
+i.icon-black {
+  color: black;
+}

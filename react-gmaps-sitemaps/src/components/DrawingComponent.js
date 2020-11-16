@@ -23,6 +23,10 @@ const DrawingComponent = () => {
     setShapes,
     checked,
     setChecked,
+    selected,
+    setSelected,
+    color,
+    setColor,
   ] = useContext(MapContext);
 
   const options = {
@@ -50,7 +54,8 @@ const DrawingComponent = () => {
   const onMarkerComplete = (marker) => {
     marker.title = activeNode.label;
     marker.label = activeNode.label;
-    marker.icon = <i className="material-icons">{icon}</i>;
+    marker.icon = <i className={`material-icons icon-${color}`}>{icon}</i>;
+    console.log("marker", marker);
     // marker.icon = icon // need to figure out how to get custom icon
     let position = [marker.position.lat(), marker.position.lng()];
     console.log("POSITION", position);

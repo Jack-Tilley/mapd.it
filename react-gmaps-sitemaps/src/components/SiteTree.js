@@ -29,6 +29,10 @@ const SiteTree = () => {
     setShapes,
     checked,
     setChecked,
+    selected,
+    setSelected,
+    color,
+    setColor,
   ] = useContext(MapContext);
   const [expanded, setExpanded] = useState([]);
   const [value, setValue] = useState("");
@@ -76,7 +80,7 @@ const SiteTree = () => {
       apiPath: "",
       parent_id: target.parent.id,
       nodeType: nodeType,
-      icon: <i className="material-icons">{icon}</i>,
+      icon: <i className={`material-icons icon-${color}`}>{icon}</i>,
       isDir: isDir,
       // icon: <FontAwesomeIcon icon={faHome} />,
     };
