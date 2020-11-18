@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { MapContext } from "./MapContext";
 import { InfoWindow } from "@react-google-maps/api";
 import EditNodeModal from "./EditNodeModal";
+import { AirlineSeatReclineNormalRounded } from "@material-ui/icons";
 
 const InfoContainer = () => {
   const [
@@ -24,12 +25,19 @@ const InfoContainer = () => {
     setChecked,
     selected,
     setSelected,
+    color,
+    setColor,
+    findNode,
+    removeNode,
   ] = useContext(MapContext);
 
   const [editOpen, setEditOpen] = useState(false);
   const [value, setValue] = useState("");
 
   const handleEditClick = () => {
+    setColor(selected.color);
+    setIcon(selected.iconValue);
+    setValue(selected.label);
     console.log("selected", selected);
     setEditOpen(true);
   };

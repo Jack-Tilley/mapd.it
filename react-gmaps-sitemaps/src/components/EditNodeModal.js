@@ -49,6 +49,28 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
     if (needsLocationChange) {
       setDraw(true);
     } else {
+      axios
+        .put(`http://localhost:8000/api/allNodes/${selected.id}/`, {
+          value: value,
+          label: value,
+          color: color,
+          iconValue: icon,
+        })
+        .then((res) => {
+          console.log(res);
+          //   setEditOpen(false);
+          //   let newNodes = removeNode(selected.value);
+          //   console.log("NEWNODES", newNodes);
+          //   // this should be updated to not loop through each node multiple times
+          //   setShapes(shapes.filter((node) => node.value !== selected.value));
+          //   setChecked(checked.filter((check) => check !== selected.value));
+          //   setNodes(newNodes);
+          //   setSelected(null);
+          //setShapes, setChecked, set others, set activeNode, setNodes()
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       // axios.put to api/node/<nodeid>
       // then update references to that node
     }
