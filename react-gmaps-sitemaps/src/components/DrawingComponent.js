@@ -95,6 +95,7 @@ const DrawingComponent = () => {
         latLngArr: newActiveNode.latLngArr,
         isDir: newActiveNode.isDir,
         iconValue: icon,
+        color: color,
       })
       .then((res) => {
         console.log(res);

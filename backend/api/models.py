@@ -20,6 +20,8 @@ class Node(MPTTModel):
     isDir = models.BooleanField(default=False)
     icon = models.CharField(max_length=30, blank=True, null=True)
     iconValue = models.CharField(max_length=30, blank=True, null=True)
+    color = models.CharField(max_length=16, blank=True,
+                             null=True, default="black")
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 

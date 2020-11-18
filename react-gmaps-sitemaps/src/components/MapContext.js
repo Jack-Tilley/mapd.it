@@ -40,10 +40,16 @@ export const MapProvider = (props) => {
   });
   const changeIcons = (nodes) => {
     for (let i = 0; i < nodes.length; i++) {
-      nodes[i].icon = <i className="material-icons">{nodes[i].iconValue}</i>;
+      nodes[i].icon = (
+        <i className={`material-icons icon-${nodes[i].color}`}>
+          {nodes[i].iconValue}
+        </i>
+      );
       for (let j = 0; j < nodes[i].children.length; j++) {
         nodes[i].children[j].icon = (
-          <i className="material-icons">{nodes[i].children[j].iconValue}</i>
+          <i className={`material-icons icon-${nodes[i].children[j].color}`}>
+            {nodes[i].children[j].iconValue}
+          </i>
         );
       }
     }
