@@ -84,7 +84,6 @@ const SiteTree = () => {
       icon: <i className={`material-icons icon-${color}`}>{icon}</i>,
       color: color,
       isDir: isDir,
-      // icon: <FontAwesomeIcon icon={faHome} />,
     };
     setActiveNode(newNode);
     setValue("");

@@ -47,6 +47,7 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
 
   const handleSubmit = (needsLocationChange) => {
     if (needsLocationChange) {
+      setActiveNode(selected);
       setDraw(true);
     } else {
       axios
@@ -58,15 +59,6 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
         })
         .then((res) => {
           console.log(res);
-          //   setEditOpen(false);
-          //   let newNodes = removeNode(selected.value);
-          //   console.log("NEWNODES", newNodes);
-          //   // this should be updated to not loop through each node multiple times
-          //   setShapes(shapes.filter((node) => node.value !== selected.value));
-          //   setChecked(checked.filter((check) => check !== selected.value));
-          //   setNodes(newNodes);
-          //   setSelected(null);
-          //setShapes, setChecked, set others, set activeNode, setNodes()
         })
         .catch((err) => {
           console.log(err);
@@ -75,6 +67,7 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
       // then update references to that node
     }
     setEditOpen(false);
+    setSelected(null);
     console.log(selected);
 
     // setDraw(true);
