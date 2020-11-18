@@ -84,8 +84,6 @@ const DrawingComponent = () => {
     nodeReference.visible = false;
     // newActiveNode.nodeReference.visible = false;
     // newActiveNode.parent_id = activeNode.parent_id;
-    await setActiveNode(newActiveNode);
-    setShapes([...shapes, newActiveNode]);
     setChecked([...checked, newActiveNode.value]);
     axios
       .post("http://localhost:8000/api/nodes/", {
@@ -101,11 +99,12 @@ const DrawingComponent = () => {
         color: color,
       })
       .then((res) => {
-        console.log(res);
+        newActiveNode.id = res.data.id;
+        setActiveNode(newActiveNode);
+        setShapes([...shapes, newActiveNode]);
+        console.log("RESPOST", res);
       })
       .catch((err) => console.log(err));
-
-    // ADD API UPDATES HERE
   };
 
   const renderDrawingComponent = () => (

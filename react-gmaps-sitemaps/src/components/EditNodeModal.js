@@ -41,6 +41,8 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
     setSelected,
     color,
     setColor,
+    findNode,
+    removeNode,
   ] = useContext(MapContext);
 
   const handleSubmit = (needsLocationChange) => {
@@ -72,19 +74,24 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
   };
 
   const handleDelete = () => {
-    console.log(selected.id);
     // warning confirmation then...
-    // axios.delete to api/node/<nodeid>
-    // let x = axios.delete(`http://localhost:8000/api/nodes/${selected.id}`);
     axios
-      .delete(`http://localhost:8000/api/nodes/${selected.id}`)
+      .delete(`http://localhost:8000/api/allNodes/${selected.id}`)
       .then((res) => {
-        console.log(res);
+        setEditOpen(false);
+        let newNodes = removeNode(selected.value);
+        console.log("NEWNODES", newNodes);
+        setShapes(shapes.filter((node) => node.value !== selected.value));
+        setSelected(null);
+        // setShapes([]);
+        // setChecked([]);
+        // setIcon("search");
+        setNodes(newNodes);
+        //setShapes, setChecked, set others, set activeNode, setNodes()
       })
       .catch((err) => {
         console.log(err);
       });
-    setEditOpen(false);
   };
 
   return (

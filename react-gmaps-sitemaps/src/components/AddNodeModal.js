@@ -49,6 +49,8 @@ const AddNodeModal = ({
     setSelected,
     color,
     setColor,
+    findNode,
+    removeNode,
   ] = useContext(MapContext);
 
   const handleSubmit = (isDir) => {

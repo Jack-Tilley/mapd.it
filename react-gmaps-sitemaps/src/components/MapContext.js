@@ -54,7 +54,40 @@ export const MapProvider = (props) => {
       }
     }
   };
-  // return nodes;
+
+  const findNode = (nodeValue) => {
+    for (let i = 0; i < nodes.length; i++) {
+      if (nodes[i].value === nodeValue) {
+        return nodes[i];
+      }
+      if (nodes[i].children !== undefined) {
+        for (let j = 0; j < nodes[i].children.length; j++) {
+          if (nodes[i].children && nodes[i].children[j].value === nodeValue) {
+            return nodes[i].children[j];
+          }
+        }
+      }
+    }
+    return null;
+  };
+
+  const removeNode = (nodeValue) => {
+    for (let i = 0; i < nodes.length; i++) {
+      if (nodes[i].value === nodeValue) {
+        nodes.pop(i);
+        return nodes;
+      }
+      if (nodes[i].children !== undefined) {
+        for (let j = 0; j < nodes[i].children.length; j++) {
+          if (nodes[i].children && nodes[i].children[j].value === nodeValue) {
+            nodes[i].children.pop(j);
+            return nodes;
+          }
+        }
+      }
+    }
+    return null;
+  };
 
   useEffect(() => {
     axios
@@ -106,6 +139,8 @@ export const MapProvider = (props) => {
         setSelected,
         color,
         setColor,
+        findNode,
+        removeNode,
       ]}
     >
       {props.children}
