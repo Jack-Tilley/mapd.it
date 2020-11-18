@@ -23,10 +23,15 @@ const DrawingComponent = () => {
     setShapes,
     checked,
     setChecked,
+    selected,
+    setSelected,
+    color,
+    setColor,
   ] = useContext(MapContext);
 
   const options = {
     polylineOptions: {
+      strokeColor: color,
       // strokeWeight: 0.01,
       // editable : true,
     },
@@ -44,13 +49,16 @@ const DrawingComponent = () => {
     }
     handleActiveNodeChange(path, "polyline", polyline, icon);
     console.log(polyline);
+
+    polyline.setMap(null); // makes polyline invisible
     setDraw(false); // we do this instead of !draw because we want drawing component to leave when a new one is added
   };
 
   const onMarkerComplete = (marker) => {
     marker.title = activeNode.label;
     marker.label = activeNode.label;
-    marker.icon = <i className="material-icons">{icon}</i>;
+    marker.icon = <i className={`material-icons icon-${color}`}>{icon}</i>;
+    console.log("marker", marker);
     // marker.icon = icon // need to figure out how to get custom icon
     let position = [marker.position.lat(), marker.position.lng()];
     console.log("POSITION", position);
@@ -90,6 +98,7 @@ const DrawingComponent = () => {
         latLngArr: newActiveNode.latLngArr,
         isDir: newActiveNode.isDir,
         iconValue: icon,
+        color: color,
       })
       .then((res) => {
         console.log(res);

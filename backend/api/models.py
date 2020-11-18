@@ -2,12 +2,10 @@ from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
 from django.db.models import JSONField
 from django.contrib.postgres.fields import ArrayField
+from simple_history import register
 
-# Create your models here.
 
 # classic node model
-
-
 class Node(MPTTModel):
     label = models.CharField(max_length=50, null=True, blank=True)
     value = models.CharField(
@@ -22,9 +20,16 @@ class Node(MPTTModel):
     isDir = models.BooleanField(default=False)
     icon = models.CharField(max_length=30, blank=True, null=True)
     iconValue = models.CharField(max_length=30, blank=True, null=True)
+    color = models.CharField(max_length=16, blank=True,
+                             null=True, default="black")
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     # def __str__(self):
     #     return self.label
 
     class MPTTMETA:
         order_insertion_by = ['label']
+
+
+register(Node)

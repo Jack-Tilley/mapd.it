@@ -41,10 +41,12 @@ INSTALLED_APPS = [
     'mptt',
     'corsheaders',
     'rest_framework',
+    'simple_history'
 ]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

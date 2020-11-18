@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import { MapContext } from "./MapContext";
 
-import { Marker, Polyline } from "@react-google-maps/api";
+import { Marker, Polyline, InfoWindow } from "@react-google-maps/api";
 
-const ShapeSetter = ({ gm }) => {
+const ShapeSetter = () => {
   const [
     myMap,
     setMyMap,
@@ -20,7 +20,15 @@ const ShapeSetter = ({ gm }) => {
     setIcon,
     shapes,
     setShapes,
+    checked,
+    setChecked,
+    selected,
+    setSelected,
+    color,
+    setColor,
   ] = useContext(MapContext);
+
+  const [path, setPath] = useState(null);
 
   useEffect(() => {
     console.log(shapes);
@@ -42,12 +50,30 @@ const ShapeSetter = ({ gm }) => {
     return null;
   };
 
+  const onLoad = (infoWindow) => {
+    console.log("infoWindow: ", infoWindow);
+  };
+
+  const showInfo = (node) => {
+    console.log(node);
+    return (
+      <InfoWindow
+        position={{ lat: node.latLngArr[0], lng: node.latLngArr[1] }}
+        onLoad={onLoad}
+      >
+        <div>Hello</div>
+      </InfoWindow>
+    );
+  };
+
   return (
     <>
       {shapes.map((shape) => {
         let node = findNode(shape.value);
+        // console.log("PATH", path);
         console.log("NODEICON", node.iconValue);
         if (node.nodeType === "marker") {
+          console.log(node);
           return (
             <Marker
               position={{
@@ -62,9 +88,7 @@ const ShapeSetter = ({ gm }) => {
                 origin: new window.google.maps.Point(0, 0),
                 anchor: new window.google.maps.Point(15, 15),
               }}
-              onClick={() => {
-                console.log(shape.label);
-              }}
+              onClick={() => setSelected(node)}
             />
           );
         } else if (node.nodeType === "polyline") {
@@ -79,7 +103,8 @@ const ShapeSetter = ({ gm }) => {
             <Polyline
               path={path}
               key={shape.value}
-              onClick={() => console.log("hello")}
+              onClick={() => setSelected(node)}
+              options={{ strokeColor: node.color }}
             />
           );
         } else {
@@ -95,3 +120,10 @@ export default ShapeSetter;
   /* {console.log("YY", findNode("yy").latLngArr[0].substring(1, 17))}
       {console.log("YY", findNode("yy").latLngArr[0].substring(20, 37))} */
 }
+// let mi = new window.google.maps.MarkerImage(
+//   "/newIcons/" + node.iconValue + ".svg",
+//   null,
+//   null,
+//   null,
+//   new window.google.maps.Size(64, 64)
+// );

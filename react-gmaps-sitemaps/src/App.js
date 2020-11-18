@@ -2,9 +2,7 @@ import "./App.css";
 import { MapProvider } from "./components/MapContext";
 import Map from "./components/Map";
 import SiteTree from "./components/SiteTree";
-import DrawingComponent from "./components/DrawingComponent";
-import OverlayNameBox from "./components/OverlayNameBox";
-import ApiTest from "./components/ApiTest";
+import HistoryDrawer from "./components/HistoryDrawer";
 
 function App() {
   return (
@@ -16,7 +14,7 @@ function App() {
           {/* <OverlayNameBox/> */}
         </div>
       </MapProvider>
-      <ApiTest />
+      <HistoryDrawer />
     </div>
   );
 }

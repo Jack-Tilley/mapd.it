@@ -19,7 +19,7 @@ let addNode = {
   disabled: true,
 };
 
-const libraries = ["drawing"];
+const libraries = ["drawing", "places", "directions"];
 
 export const MapContext = createContext();
 
@@ -32,16 +32,24 @@ export const MapProvider = (props) => {
   const [icon, setIcon] = useState(null);
   const [shapes, setShapes] = useState([]);
   const [checked, setChecked] = useState([]);
+  const [selected, setSelected] = useState(null);
+  const [color, setColor] = useState(null);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
   const changeIcons = (nodes) => {
     for (let i = 0; i < nodes.length; i++) {
-      nodes[i].icon = <i className="material-icons">{nodes[i].iconValue}</i>;
+      nodes[i].icon = (
+        <i className={`material-icons icon-${nodes[i].color}`}>
+          {nodes[i].iconValue}
+        </i>
+      );
       for (let j = 0; j < nodes[i].children.length; j++) {
         nodes[i].children[j].icon = (
-          <i className="material-icons">{nodes[i].children[j].iconValue}</i>
+          <i className={`material-icons icon-${nodes[i].children[j].color}`}>
+            {nodes[i].children[j].iconValue}
+          </i>
         );
       }
     }
@@ -94,6 +102,10 @@ export const MapProvider = (props) => {
         setShapes,
         checked,
         setChecked,
+        selected,
+        setSelected,
+        color,
+        setColor,
       ]}
     >
       {props.children}

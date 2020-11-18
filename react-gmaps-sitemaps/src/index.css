@@ -35,6 +35,10 @@ div.treeContainer {
   margin: 0;
   padding: 0;
   max-height: 240px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
   overflow: auto;
 }
 CBTree {
@@ -103,4 +107,26 @@ form {
 .locate img {
   width: 30px;
   cursor: pointer;
+}
+
+i.icon-red {
+  color: red;
+}
+i.icon-blue {
+  color: blue;
+}
+i.icon-green {
+  color: green;
+}
+i.icon-yellow {
+  color: yellow;
+}
+i.icon-orange {
+  color: orange;
+}
+i.icon-purple {
+  color: purple;
+}
+i.icon-black {
+  color: black;
 }

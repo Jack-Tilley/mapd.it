@@ -1,8 +1,10 @@
 import React, { useState, useContext } from "react";
 import { MapContext } from "./MapContext";
-import { GoogleMap, Marker } from "@react-google-maps/api";
+import { GoogleMap, InfoWindow } from "@react-google-maps/api";
 import DrawingComponent from "./DrawingComponent";
 import ShapeSetter from "./ShapeSetter";
+import AutocompleteBox from "./AutocompleteBox";
+import Directions from "./Directions";
 
 const options = {
   disableDefaultUI: true,
@@ -24,10 +26,12 @@ const Map = () => {
     setActiveNode,
     icon,
     setIcon,
-    markers,
-    setMarkers,
-    polylines,
-    setPolylines,
+    shapes,
+    setShapes,
+    checked,
+    setChecked,
+    selected,
+    setSelected,
   ] = useContext(MapContext);
 
   const renderMap = () => (
@@ -42,8 +46,27 @@ const Map = () => {
         onLoad={(map) => setMyMap(map)}
         options={options}
       >
+        <AutocompleteBox center={center} setCenter={setCenter} />
         <DrawingComponent />
-        <ShapeSetter gm={new window.google.maps.Size(30, 30)} />
+        <ShapeSetter />
+        {/* <Directions /> */}
+        {selected ? (
+          <InfoWindow
+            position={{
+              lat: parseFloat(selected.latLngArr[0]),
+              lng: parseFloat(selected.latLngArr[1]),
+            }}
+            onCloseClick={() => {
+              setSelected(null);
+            }}
+          >
+            <div>
+              <h4>{selected.label}</h4>
+              <p>{selected.latLngArr}</p>
+            </div>
+          </InfoWindow>
+        ) : null}
+        }
       </GoogleMap>
     </>
   );
