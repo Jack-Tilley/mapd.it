@@ -74,6 +74,7 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
   };
 
   const handleDelete = () => {
+    console.log("selected", selected);
     // warning confirmation then...
     axios
       .delete(`http://localhost:8000/api/allNodes/${selected.id}`)
@@ -84,8 +85,8 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
         // this should be updated to not loop through each node multiple times
         setShapes(shapes.filter((node) => node.value !== selected.value));
         setChecked(checked.filter((check) => check !== selected.value));
-        setSelected(null);
         setNodes(newNodes);
+        setSelected(null);
         //setShapes, setChecked, set others, set activeNode, setNodes()
       })
       .catch((err) => {

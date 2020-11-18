@@ -72,22 +72,46 @@ export const MapProvider = (props) => {
   };
 
   const removeNode = (nodeValue) => {
-    for (let i = 0; i < nodes.length; i++) {
-      if (nodes[i].value === nodeValue) {
-        nodes.pop(i);
-        return nodes;
-      }
-      if (nodes[i].children !== undefined) {
-        for (let j = 0; j < nodes[i].children.length; j++) {
-          if (nodes[i].children && nodes[i].children[j].value === nodeValue) {
-            nodes[i].children.pop(j);
-            return nodes;
-          }
-        }
+    let newNodes = [...nodes];
+    for (let i = 0; i < newNodes.length; i++) {
+      if (newNodes[i].children !== undefined) {
+        newNodes[i].children = newNodes[i].children.filter(
+          (child) => child.value !== nodeValue
+        );
       }
     }
-    return null;
+    return newNodes.filter((node) => node.value !== nodeValue);
   };
+  //   let indexi;
+  //   let indexj;
+  //   let newNodes = [...nodes];
+  //   console.log("we started with this", newNodes);
+  //   for (let i = 0; i < newNodes.length; i++) {
+  //     if (newNodes[i].value === nodeValue) {
+  //       let indexi = i;
+  //       console.log("popping i", newNodes[i].value);
+  //       console.log("pop", newNodes.pop(indexi), indexi);
+  //       console.log("we got rid of something", newNodes);
+  //       return newNodes;
+  //     }
+  //     if (newNodes[i].children !== undefined) {
+  //       for (let j = 0; j < newNodes[i].children.length; j++) {
+  //         if (
+  //           newNodes[i].children &&
+  //           newNodes[i].children[j].value === nodeValue
+  //         ) {
+  //           indexi = i;
+  //           indexj = j;
+  //           console.log("popping j", newNodes[i].children[j].value, j);
+  //           console.log("pop", newNodes[indexi].children.pop(indexj), indexj);
+  //           console.log("we got rid of something", newNodes);
+  //           return newNodes;
+  //         }
+  //       }
+  //     }
+  //   }
+  //   return null;
+  // };
 
   useEffect(() => {
     axios

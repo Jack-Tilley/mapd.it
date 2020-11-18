@@ -29,13 +29,13 @@ const ShapeSetter = () => {
     findNode,
   ] = useContext(MapContext);
 
-  useEffect(() => {
-    console.log("shapes", shapes);
-  }, [shapes]);
+  // useEffect(() => {
+  //   console.log("shapes", shapes);
+  // }, [shapes]);
 
   return (
     <>
-      {shapes.map((shape, index) => {
+      {shapes.map((shape) => {
         let node = findNode(shape.value);
         console.log("NODE", node);
         // if a node has been deleted or is missing

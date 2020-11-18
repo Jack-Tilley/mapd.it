@@ -30,6 +30,7 @@ const InfoContainer = () => {
   const [value, setValue] = useState("");
 
   const handleEditClick = () => {
+    console.log("selected", selected);
     setEditOpen(true);
   };
 
