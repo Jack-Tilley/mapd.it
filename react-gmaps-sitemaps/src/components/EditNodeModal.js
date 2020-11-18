@@ -81,11 +81,10 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
         setEditOpen(false);
         let newNodes = removeNode(selected.value);
         console.log("NEWNODES", newNodes);
+        // this should be updated to not loop through each node multiple times
         setShapes(shapes.filter((node) => node.value !== selected.value));
+        setChecked(checked.filter((check) => check !== selected.value));
         setSelected(null);
-        // setShapes([]);
-        // setChecked([]);
-        // setIcon("search");
         setNodes(newNodes);
         //setShapes, setChecked, set others, set activeNode, setNodes()
       })

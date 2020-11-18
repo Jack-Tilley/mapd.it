@@ -51,6 +51,7 @@ const DrawingComponent = () => {
     console.log(polyline);
 
     polyline.setMap(null); // makes polyline invisible
+    setColor();
     setDraw(false); // we do this instead of !draw because we want drawing component to leave when a new one is added
   };
 
@@ -102,7 +103,8 @@ const DrawingComponent = () => {
         newActiveNode.id = res.data.id;
         setActiveNode(newActiveNode);
         setShapes([...shapes, newActiveNode]);
-        console.log("RESPOST", res);
+        setIcon("search");
+        setColor(null);
       })
       .catch((err) => console.log(err));
   };
