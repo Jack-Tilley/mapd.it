@@ -31,6 +31,7 @@ const DrawingComponent = () => {
 
   const options = {
     polylineOptions: {
+      strokeColor: color,
       // strokeWeight: 0.01,
       // editable : true,
     },
@@ -48,6 +49,8 @@ const DrawingComponent = () => {
     }
     handleActiveNodeChange(path, "polyline", polyline, icon);
     console.log(polyline);
+
+    polyline.setMap(null); // makes polyline invisible
     setDraw(false); // we do this instead of !draw because we want drawing component to leave when a new one is added
   };
 

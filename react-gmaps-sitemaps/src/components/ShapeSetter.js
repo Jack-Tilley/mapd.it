@@ -104,6 +104,7 @@ const ShapeSetter = () => {
               path={path}
               key={shape.value}
               onClick={() => setSelected(node)}
+              options={{ strokeColor: node.color }}
             />
           );
         } else {
