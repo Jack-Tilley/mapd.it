@@ -6,7 +6,7 @@ from .models import Node
 
 class NodeView(viewsets.ModelViewSet):
     serializer_class = NodeSerializer
-    queryset = Node.objects.filter(parent=None)
+    # queryset = Node.objects.filter(parent=None)
 
 
 class HistoryView(viewsets.ModelViewSet):

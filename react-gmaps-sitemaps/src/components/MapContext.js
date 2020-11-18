@@ -29,7 +29,7 @@ export const MapProvider = (props) => {
   const [nodes, setNodes] = useState([]);
   const [activeNode, setActiveNode] = useState(null);
   const [draw, setDraw] = useState(false);
-  const [icon, setIcon] = useState(null);
+  const [icon, setIcon] = useState("search");
   const [shapes, setShapes] = useState([]);
   const [checked, setChecked] = useState([]);
   const [selected, setSelected] = useState(null);

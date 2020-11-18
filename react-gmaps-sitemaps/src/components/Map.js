@@ -5,6 +5,7 @@ import DrawingComponent from "./DrawingComponent";
 import ShapeSetter from "./ShapeSetter";
 import AutocompleteBox from "./AutocompleteBox";
 import Directions from "./Directions";
+import InfoContainer from "./InfoContainer";
 
 const options = {
   disableDefaultUI: true,
@@ -50,23 +51,7 @@ const Map = () => {
         <DrawingComponent />
         <ShapeSetter />
         {/* <Directions /> */}
-        {selected ? (
-          <InfoWindow
-            position={{
-              lat: parseFloat(selected.latLngArr[0]),
-              lng: parseFloat(selected.latLngArr[1]),
-            }}
-            onCloseClick={() => {
-              setSelected(null);
-            }}
-          >
-            <div>
-              <h4>{selected.label}</h4>
-              <p>{selected.latLngArr}</p>
-            </div>
-          </InfoWindow>
-        ) : null}
-        }
+        <InfoContainer />
       </GoogleMap>
     </>
   );

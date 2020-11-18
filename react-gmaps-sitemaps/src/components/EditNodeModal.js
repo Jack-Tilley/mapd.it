@@ -1,5 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 
+import axios from "axios";
+
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -16,17 +18,7 @@ import ColorContainer from "./ColorContainer";
 
 import { MapContext } from "./MapContext";
 
-const AddNodeModal = ({
-  modalOpen,
-  setModalOpen,
-  value,
-  setValue,
-  nodeType,
-  setNodeType,
-  addItem,
-  event,
-  setEvent,
-}) => {
+const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
   const [
     myMap,
     setMyMap,
@@ -51,15 +43,24 @@ const AddNodeModal = ({
     setColor,
   ] = useContext(MapContext);
 
-  const handleSubmit = (isDir) => {
-    setDraw(true);
-    addItem(event, isDir);
-    setModalOpen(false);
-    setEvent("");
+  const handleSubmit = (needsLocationChange) => {
+    if (needsLocationChange) {
+      setDraw(true);
+    } else {
+      // axios.put to api/node/<nodeid>
+      // then update references to that node
+    }
+    setEditOpen(false);
+    console.log(selected);
+
+    // setDraw(true);
+    // addItem(event, isDir);
+    // setModalOpen(false);
+    // setEvent("");
   };
 
   const handleClose = () => {
-    setModalOpen(false);
+    setEditOpen(false);
   };
 
   const handleButtonClick = (btnIcon) => {
@@ -70,14 +71,30 @@ const AddNodeModal = ({
     setColor(event.target.value);
   };
 
+  const handleDelete = () => {
+    console.log(selected.id);
+    // warning confirmation then...
+    // axios.delete to api/node/<nodeid>
+    // let x = axios.delete(`http://localhost:8000/api/nodes/${selected.id}`);
+    axios
+      .delete(`http://localhost:8000/api/nodes/${selected.id}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    setEditOpen(false);
+  };
+
   return (
     <div>
       <Dialog
-        open={modalOpen}
+        open={editOpen}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Add New Node</DialogTitle>
+        <DialogTitle id="form-dialog-title">Edit Existing Node</DialogTitle>
         <DialogContent id="buttons">
           <Grid container spacing={3}>
             <Grid item xs={9}>
@@ -105,14 +122,17 @@ const AddNodeModal = ({
           />
         </DialogContent>
         <DialogActions>
+          <Button onClick={handleDelete} color="secondary">
+            DELETE
+          </Button>
           <Button onClick={handleClose} color="default">
             Cancel
           </Button>
           <Button onClick={() => handleSubmit(true)} color="primary">
-            Dir
+            Update Location
           </Button>
           <Button onClick={() => handleSubmit(false)} color="primary">
-            Leaf
+            Keep Location
           </Button>
         </DialogActions>
       </Dialog>
@@ -120,4 +140,4 @@ const AddNodeModal = ({
   );
 };
 
-export default AddNodeModal;
+export default EditNodeModal;
