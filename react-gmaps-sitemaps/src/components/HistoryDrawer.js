@@ -12,6 +12,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 
+import { Paper } from "@material-ui/core";
+
 import axios from "axios";
 
 const useStyles = makeStyles({
@@ -82,8 +84,10 @@ export default function HistoryDrawer() {
   );
 
   return (
-    <div style={{ right: "1em", top: "5em" }}>
-      <Button onClick={toggleDrawer(true)}>Show History</Button>
+    <div style={{ right: "1em", top: "5em", maxWidth: 100 }}>
+      <Paper>
+        <Button onClick={toggleDrawer(true)}>Show History</Button>
+      </Paper>
       <Drawer anchor={"right"} open={open} onClose={toggleDrawer(false)}>
         {list()}
       </Drawer>
