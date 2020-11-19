@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { MapContext } from "./MapContext";
 import { GoogleMap, InfoWindow, useGoogleMap } from "@react-google-maps/api";
-import DrawingComponent from "./DrawingComponent";
 import DrawRework from "./DrawRework";
 import ShapeSetter from "./ShapeSetter";
 import AutocompleteBox from "./AutocompleteBox";

@@ -7,7 +7,6 @@ import "react-checkbox-tree/lib/react-checkbox-tree.css";
 
 // import { parse, stringify } from "flatted";
 
-import AddNodeModal from "./AddNodeModal";
 import AddRework from "./AddRework";
 import { MapContext } from "./MapContext";
 import { Paper } from "@material-ui/core";
