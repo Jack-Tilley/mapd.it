@@ -8,6 +8,7 @@ import "react-checkbox-tree/lib/react-checkbox-tree.css";
 // import { parse, stringify } from "flatted";
 
 import AddNodeModal from "./AddNodeModal";
+import AddRework from "./AddRework";
 import { MapContext } from "./MapContext";
 import { Paper } from "@material-ui/core";
 
@@ -34,10 +35,13 @@ const SiteTree = () => {
     setSelected,
     color,
     setColor,
+    findNode,
+    removeNode,
+    nodeType,
+    setNodeType,
   ] = useContext(MapContext);
   const [expanded, setExpanded] = useState([]);
   const [value, setValue] = useState("");
-  const [nodeType, setNodeType] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [event, setEvent] = useState();
 
@@ -73,7 +77,7 @@ const SiteTree = () => {
     setModalOpen(true);
   };
 
-  const addItem = (target, isDir) => {
+  const addItem = (target, isDir, type) => {
     // updateDM()
     let newNode = {
       value: value,
@@ -81,7 +85,7 @@ const SiteTree = () => {
       latLngArr: [],
       apiPath: "",
       parent_id: target.parent.id,
-      nodeType: nodeType,
+      nodeType: type,
       icon: <i className={`material-icons icon-${color}`}>{icon}</i>,
       color: color,
       isDir: isDir,
@@ -119,13 +123,13 @@ const SiteTree = () => {
         onExpand={onExpand}
         onClick={onClick}
       ></CheckboxTree>
-      <AddNodeModal
+      <AddRework
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
         value={value}
         setValue={setValue}
-        nodeType={nodeType}
-        setNodeType={setNodeType}
+        // nodeType={nodeType}
+        // setNodeType={setNodeType}
         addItem={addItem}
         event={event}
         setEvent={setEvent}

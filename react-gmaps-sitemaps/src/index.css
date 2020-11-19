@@ -81,3 +81,7 @@ i.icon-black {
 i.icon-grey {
   color: gray;
 }
+i.icon-cancel {
+  color: red;
+  width: 50px;
+}
