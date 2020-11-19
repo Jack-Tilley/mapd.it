@@ -8,7 +8,9 @@ import Directions from "./Directions";
 import InfoContainer from "./InfoContainer";
 import SettingsModal from "./SettingsModal";
 
-const Map = () => {
+import { Paper } from "@material-ui/core";
+
+const Map = ({ darkMode, setDarkMode }) => {
   const [
     myMap,
     setMyMap,
@@ -34,8 +36,8 @@ const Map = () => {
   const [settingsOpen, setSettingsOpen] = useState(false);
 
   const options = {
-    // disableDefaultUI: true,
-    zoomControl: true,
+    disableDefaultUI: true,
+    // zoomControl: true,
   };
 
   const renderMap = () => (
@@ -50,7 +52,7 @@ const Map = () => {
         onLoad={(map) => setMyMap(map)}
         options={options}
       >
-        <AutocompleteBox center={center} setCenter={setCenter} />
+        {/* <AutocompleteBox center={center} setCenter={setCenter} /> */}
         <DrawingComponent />
         <ShapeSetter />
         {/* <Directions /> */}
@@ -58,6 +60,8 @@ const Map = () => {
         <SettingsModal
           settingsOpen={settingsOpen}
           setSettingsOpen={setSettingsOpen}
+          darkMode={darkMode}
+          setDarkMode={setDarkMode}
         />
       </GoogleMap>
     </>

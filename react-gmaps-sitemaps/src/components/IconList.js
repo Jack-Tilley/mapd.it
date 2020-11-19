@@ -1,6 +1,5 @@
 import React from "react";
 import IconButton from "@material-ui/core/IconButton";
-import Divider from "@material-ui/core/Divider";
 
 const IconList = ({ handleButtonClick }) => {
   let icons = [

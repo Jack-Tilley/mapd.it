@@ -21,9 +21,12 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
+import { Paper } from "@material-ui/core";
+
 import InputLabel from "@material-ui/core/InputLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
 import Select from "@material-ui/core/Select";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -34,6 +37,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
+import Switch from "@material-ui/core/Switch";
 
 import IconContainer from "./IconContainer";
 import ColorContainer from "./ColorContainer";
@@ -41,35 +45,41 @@ import ColorContainer from "./ColorContainer";
 import { MapContext } from "./MapContext";
 import { BorderAll } from "@material-ui/icons";
 
-const SettingsModal = ({ settingsOpen, setSettingsOpen }) => {
+const SettingsModal = ({
+  settingsOpen,
+  setSettingsOpen,
+  darkMode,
+  setDarkMode,
+}) => {
   const map = useGoogleMap();
-  const [
-    myMap,
-    setMyMap,
-    center,
-    setCenter,
-    isLoaded,
-    draw,
-    setDraw,
-    nodes,
-    setNodes,
-    activeNode,
-    setActiveNode,
-    icon,
-    setIcon,
-    shapes,
-    setShapes,
-    checked,
-    setChecked,
-    selected,
-    setSelected,
-    color,
-    setColor,
-    findNode,
-    removeNode,
-  ] = useContext(MapContext);
+  //   const [
+  //     myMap,
+  //     setMyMap,
+  //     center,
+  //     setCenter,
+  //     isLoaded,
+  //     draw,
+  //     setDraw,
+  //     nodes,
+  //     setNodes,
+  //     activeNode,
+  //     setActiveNode,
+  //     icon,
+  //     setIcon,
+  //     shapes,
+  //     setShapes,
+  //     checked,
+  //     setChecked,
+  //     selected,
+  //     setSelected,
+  //     color,
+  //     setColor,
+  //     findNode,
+  //     removeNode,
+  //   ] = useContext(MapContext);
 
   const [mapStyle, setMapStyle] = useState("");
+  const [a, setA] = useState(false);
 
   const handleClose = () => {
     setSettingsOpen(false);
@@ -104,19 +114,17 @@ const SettingsModal = ({ settingsOpen, setSettingsOpen }) => {
 
   return (
     <div>
-      <IconButton
-        onClick={() => setSettingsOpen(true)}
-        size="small"
+      <Paper
         style={{
           position: "absolute",
           bottom: "1.5em",
           left: "1em",
-          border: "1px solid black",
-          background: "white",
         }}
       >
-        <i className="material-icons icon-grey">{"settings"}</i>
-      </IconButton>
+        <IconButton onClick={() => setSettingsOpen(true)} size="small">
+          <i className="material-icons icon-grey">{"settings"}</i>
+        </IconButton>
+      </Paper>
       <Dialog
         fullWidth={true}
         maxWidth={"xs"}
@@ -148,6 +156,17 @@ const SettingsModal = ({ settingsOpen, setSettingsOpen }) => {
               <MenuItem value={"night"}>Night</MenuItem>
               <MenuItem value={"blackout"}>Blackout</MenuItem>
             </Select>
+            <FormHelperText>Map Style</FormHelperText>
+          </FormControl>
+        </DialogContent>
+        <DialogContent>
+          <FormControl>
+            <Switch
+              checked={darkMode}
+              value={darkMode}
+              onClick={() => setDarkMode(!darkMode)}
+            />
+            <FormHelperText>Dark Mode</FormHelperText>
           </FormControl>
         </DialogContent>
       </Dialog>

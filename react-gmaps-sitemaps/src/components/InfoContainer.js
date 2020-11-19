@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import { MapContext } from "./MapContext";
-import { InfoWindow } from "@react-google-maps/api";
+import { InfoWindow, InfoBox } from "@react-google-maps/api";
 import EditNodeModal from "./EditNodeModal";
 import { AirlineSeatReclineNormalRounded } from "@material-ui/icons";
+import { Paper } from "@material-ui/core";
 
 const InfoContainer = () => {
   const [
@@ -52,7 +53,7 @@ const InfoContainer = () => {
         setSelected(null);
       }}
     >
-      <div>
+      <Paper>
         <h4>{selected.label}</h4>
         <p>{selected.latLngArr}</p>
         <button onClick={handleEditClick}>EDIT</button>
@@ -62,7 +63,7 @@ const InfoContainer = () => {
           value={value}
           setValue={setValue}
         />
-      </div>
+      </Paper>
     </InfoWindow>
   ) : null;
 };

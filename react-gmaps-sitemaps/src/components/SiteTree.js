@@ -2,13 +2,14 @@ import React, { useState, useEffect, useContext } from "react";
 import CheckboxTree from "react-checkbox-tree";
 import "react-checkbox-tree/lib/react-checkbox-tree.css";
 
-import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faHome } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { parse, stringify } from "flatted";
+// import { parse, stringify } from "flatted";
 
 import AddNodeModal from "./AddNodeModal";
 import { MapContext } from "./MapContext";
+import { Paper } from "@material-ui/core";
 
 const SiteTree = () => {
   const [
@@ -107,7 +108,7 @@ const SiteTree = () => {
   };
 
   return (
-    <>
+    <Paper>
       <CheckboxTree
         checked={checked}
         expanded={expanded}
@@ -129,7 +130,7 @@ const SiteTree = () => {
         event={event}
         setEvent={setEvent}
       />
-    </>
+    </Paper>
   );
 };
 

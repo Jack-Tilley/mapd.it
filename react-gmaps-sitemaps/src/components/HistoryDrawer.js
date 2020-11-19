@@ -9,14 +9,18 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import ListSubheader from "@material-ui/core/ListSubheader";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import IconButton from "@material-ui/core/IconButton";
+
+import { Paper } from "@material-ui/core";
 
 import axios from "axios";
 
 const useStyles = makeStyles({
   list: {
-    width: 250,
+    width: 220,
   },
   fullList: {
     width: "auto",
@@ -46,7 +50,7 @@ export default function HistoryDrawer() {
         }
       })
       .catch((err) => console.log(err));
-  }, [history]);
+  }, []);
 
   const toggleDrawer = () => (event) => {
     if (
@@ -65,7 +69,9 @@ export default function HistoryDrawer() {
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
-      <List>
+      <List
+        subheader={<ListSubheader disableSticky={true}>History</ListSubheader>}
+      >
         {history.map((node) => (
           <ListItem button key={node.modified}>
             <ListItemIcon>
@@ -82,8 +88,12 @@ export default function HistoryDrawer() {
   );
 
   return (
-    <div style={{ right: "1em", top: "5em" }}>
-      <Button onClick={toggleDrawer(true)}>Show History</Button>
+    <div style={{ position: "absolute", right: "1em", top: "1em" }}>
+      <Paper>
+        <IconButton onClick={toggleDrawer(true)} size="small">
+          <i className="material-icons icon-grey">{"history"}</i>
+        </IconButton>
+      </Paper>
       <Drawer anchor={"right"} open={open} onClose={toggleDrawer(false)}>
         {list()}
       </Drawer>
