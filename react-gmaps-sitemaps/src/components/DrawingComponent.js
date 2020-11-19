@@ -39,6 +39,10 @@ const DrawingComponent = () => {
       title: "Hello",
       label: "hi",
     },
+    drawingControlOptions: {
+      position: 1,
+      drawingModes: ["marker", "polyline"],
+    },
   };
 
   const onPolylineComplete = (polyline) => {
@@ -110,14 +114,14 @@ const DrawingComponent = () => {
   };
 
   const renderDrawingComponent = () => (
-    <>
+    <div classame="drawingC" style={{ paddingLeft: "40px" }}>
       <DrawingManager
         onOverlayComplete={onOverlayComplete}
         onPolylineComplete={onPolylineComplete}
         onMarkerComplete={onMarkerComplete}
         options={{ options }}
       ></DrawingManager>
-    </>
+    </div>
   );
   return draw ? renderDrawingComponent() : null;
 };

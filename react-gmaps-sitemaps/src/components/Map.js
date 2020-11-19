@@ -37,7 +37,7 @@ const Map = ({ darkMode, setDarkMode }) => {
 
   const options = {
     disableDefaultUI: true,
-    zoomControl: true,
+    // zoomControl: true,
   };
 
   const renderMap = () => (
@@ -52,7 +52,7 @@ const Map = ({ darkMode, setDarkMode }) => {
         onLoad={(map) => setMyMap(map)}
         options={options}
       >
-        <AutocompleteBox center={center} setCenter={setCenter} />
+        {/* <AutocompleteBox center={center} setCenter={setCenter} /> */}
         <DrawingComponent />
         <ShapeSetter />
         {/* <Directions /> */}

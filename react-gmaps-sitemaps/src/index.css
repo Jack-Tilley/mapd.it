@@ -28,46 +28,23 @@ code {
 
 div.treeContainer {
   position: absolute;
-  top: 6rem;
+  top: 1rem;
   left: 1rem;
-  background-color: white;
-  z-index: 10;
+  /* background-color: white; */
   margin: 0;
   padding: 0;
   max-height: 240px;
-  box-sizing: border-box;
-  border: 1px solid transparent;
+  max-width: 200px;
+  min-width: 200px;
+  /* box-sizing: border-box; */
+  /* border: 1px solid transparent; */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
+  border-radius: 1px;
   overflow: auto;
 }
-CBTree {
-  position: absolute;
-  top: 2rem;
-  left: 1rem;
-  /* color: #281414; */
-  z-index: 10;
-  margin: 0;
-  padding: 0;
-}
-div.itemAdditionContainer {
-  position: fixed;
-  top: 3rem;
-  left: 1rem;
-  /* background-color: white; */
-  z-index: 11;
-  margin: 0;
-  padding: 0;
-}
-
-DrawingManager {
-  position: absolute;
-  top: 1rem;
-  left: 15rem;
-  /* background-color: white; */
-  z-index: 11;
-  margin: 0;
-  padding: 0;
+div.gmnoprint {
+  padding-left: 19.5em;
+  padding-top: 1em;
 }
 
 form {
@@ -78,35 +55,6 @@ form {
 }
 .Button {
   z-index: 16;
-}
-
-.search {
-  position: absolute;
-  top: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 400px;
-  z-index: 10;
-}
-
-.search input {
-  padding: 0.5rem;
-  font-size: 1.5rem;
-  width: 100%;
-}
-
-.locate {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  z-index: 10;
-}
-.locate img {
-  width: 30px;
-  cursor: pointer;
 }
 
 i.icon-red {
