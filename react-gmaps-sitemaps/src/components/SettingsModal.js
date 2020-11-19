@@ -21,6 +21,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
+import { Paper } from "@material-ui/core";
+
 import InputLabel from "@material-ui/core/InputLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
@@ -112,19 +114,17 @@ const SettingsModal = ({
 
   return (
     <div>
-      <IconButton
-        onClick={() => setSettingsOpen(true)}
-        size="small"
+      <Paper
         style={{
           position: "absolute",
           bottom: "1.5em",
           left: "1em",
-          border: "1px solid black",
-          background: "white",
         }}
       >
-        <i className="material-icons icon-grey">{"settings"}</i>
-      </IconButton>
+        <IconButton onClick={() => setSettingsOpen(true)} size="small">
+          <i className="material-icons icon-grey">{"settings"}</i>
+        </IconButton>
+      </Paper>
       <Dialog
         fullWidth={true}
         maxWidth={"xs"}
