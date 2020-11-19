@@ -1,22 +1,12 @@
 import React, { useState, useContext } from "react";
 import { MapContext } from "./MapContext";
-import { GoogleMap, InfoWindow } from "@react-google-maps/api";
+import { GoogleMap, InfoWindow, useGoogleMap } from "@react-google-maps/api";
 import DrawingComponent from "./DrawingComponent";
 import ShapeSetter from "./ShapeSetter";
 import AutocompleteBox from "./AutocompleteBox";
 import Directions from "./Directions";
 import InfoContainer from "./InfoContainer";
 import SettingsModal from "./SettingsModal";
-
-import vibrant from "./mapStyles/vibrant";
-import greyscale from "./mapStyles/greyscale";
-import night from "./mapStyles/night";
-import hopper from "./mapStyles/hopper";
-import flatpale from "./mapStyles/flatpale";
-import blackout from "./mapStyles/blackout";
-import unsaturated from "./mapStyles/unsaturated";
-import bluegray from "./mapStyles/bluegray";
-import paledawn from "./mapStyles/paledawn";
 
 const Map = () => {
   const [
@@ -47,7 +37,6 @@ const Map = () => {
   const options = {
     disableDefaultUI: true,
     zoomControl: true,
-    styles: { mapStyle },
   };
 
   const renderMap = () => (

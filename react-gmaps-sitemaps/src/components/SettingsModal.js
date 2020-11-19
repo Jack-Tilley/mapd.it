@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import { useGoogleMap } from "@react-google-maps/api";
 
 import axios from "axios";
 
@@ -40,6 +41,7 @@ import { MapContext } from "./MapContext";
 import { BorderAll } from "@material-ui/icons";
 
 const SettingsModal = ({ settingsOpen, setSettingsOpen }) => {
+  const map = useGoogleMap();
   const [
     myMap,
     setMyMap,
@@ -66,8 +68,37 @@ const SettingsModal = ({ settingsOpen, setSettingsOpen }) => {
     removeNode,
   ] = useContext(MapContext);
 
+  const [mapStyle, setMapStyle] = useState("");
+
   const handleClose = () => {
     setSettingsOpen(false);
+  };
+
+  const changeOptions = (e) => {
+    e.preventDefault();
+    let value = e.target.value;
+    setMapStyle(value);
+    if (value === "bluegray") {
+      map.setOptions({ styles: bluegray });
+    } else if (value === "greyscale") {
+      map.setOptions({ styles: greyscale });
+    } else if (value === "unsaturated") {
+      map.setOptions({ styles: unsaturated });
+    } else if (value === "flatpale") {
+      map.setOptions({ styles: flatpale });
+    } else if (value === "hopper") {
+      map.setOptions({ styles: hopper });
+    } else if (value === "night") {
+      map.setOptions({ styles: night });
+    } else if (value === "paledawn") {
+      map.setOptions({ styles: paledawn });
+    } else if (value === "vibrant") {
+      map.setOptions({ styles: vibrant });
+    } else if (value === "blackout") {
+      map.setOptions({ styles: blackout });
+    } else {
+      map.setOptions({ styles: null });
+    }
   };
 
   //   const handleButtonClick = (btnIcon) => {
@@ -105,15 +136,19 @@ const SettingsModal = ({ settingsOpen, setSettingsOpen }) => {
         <DialogContent id="buttons">
           <FormControl>
             <InputLabel htmlFor="map-style-native-helper">Map Style</InputLabel>
-            <NativeSelect
-              value={mapStyle}
-              onChange={(e) => setMapStyle(e.target.value)}
-            >
-              <option value={bluegray}>BlueGray</option>
-              <option value={greyscale}>Greyscale</option>
-              <option value={unsaturated}>Unsaturated</option>
+            <NativeSelect value={mapStyle} onChange={(e) => changeOptions(e)}>
+              <option aria-label="Default" value="" />
+              <option value={"null"}>Default</option>
+              <option value={"bluegray"}>BlueGray</option>
+              <option value={"greyscale"}>Greyscale</option>
+              <option value={"unsaturated"}>Unsaturated</option>
+              <option value={"paledawn"}>Paledawn</option>
+              <option value={"hopper"}>Hopper</option>
+              <option value={"vibrant"}>Vibrant</option>
+              <option value={"flatpale"}>FlatPale</option>
+              <option value={"night"}>Night</option>
+              <option value={"blackout"}>Blackout</option>
             </NativeSelect>
-            <FormHelperText>Map Style</FormHelperText>
           </FormControl>
         </DialogContent>
       </Dialog>
