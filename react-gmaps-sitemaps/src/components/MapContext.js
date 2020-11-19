@@ -33,7 +33,7 @@ export const MapProvider = (props) => {
   const [shapes, setShapes] = useState([]);
   const [checked, setChecked] = useState([]);
   const [selected, setSelected] = useState(null);
-  const [color, setColor] = useState(null);
+  const [color, setColor] = useState("black");
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,

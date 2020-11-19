@@ -10,6 +10,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
+import InputAdornment from "@material-ui/core/InputAdornment";
+
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
 
@@ -132,6 +134,13 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
         </DialogContent>
         <DialogContent id="text">
           <TextField
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <i className={`material-icons icon-${color}`}>{icon}</i>
+                </InputAdornment>
+              ),
+            }}
             autoFocus
             value={value}
             margin="dense"
