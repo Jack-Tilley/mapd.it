@@ -26,6 +26,7 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import NativeSelect from "@material-ui/core/NativeSelect";
+import MenuItem from "@material-ui/core/MenuItem";
 
 import IconButton from "@material-ui/core/IconButton";
 
@@ -101,14 +102,6 @@ const SettingsModal = ({ settingsOpen, setSettingsOpen }) => {
     }
   };
 
-  //   const handleButtonClick = (btnIcon) => {
-  //     setIcon(btnIcon);
-  //   };
-
-  //   const handleColorChange = (event) => {
-  //     setColor(event.target.value);
-  //   };
-
   return (
     <div>
       <IconButton
@@ -135,20 +128,26 @@ const SettingsModal = ({ settingsOpen, setSettingsOpen }) => {
         <Divider />
         <DialogContent id="buttons">
           <FormControl>
-            <InputLabel htmlFor="map-style-native-helper">Map Style</InputLabel>
-            <NativeSelect value={mapStyle} onChange={(e) => changeOptions(e)}>
-              <option aria-label="Default" value="" />
-              <option value={"null"}>Default</option>
-              <option value={"bluegray"}>BlueGray</option>
-              <option value={"greyscale"}>Greyscale</option>
-              <option value={"unsaturated"}>Unsaturated</option>
-              <option value={"paledawn"}>Paledawn</option>
-              <option value={"hopper"}>Hopper</option>
-              <option value={"vibrant"}>Vibrant</option>
-              <option value={"flatpale"}>FlatPale</option>
-              <option value={"night"}>Night</option>
-              <option value={"blackout"}>Blackout</option>
-            </NativeSelect>
+            <Select
+              labelId="Map Style"
+              displayEmpty
+              id="mapstyle"
+              value={mapStyle}
+              onChange={(e) => changeOptions(e)}
+            >
+              <MenuItem value="">
+                <em>Default</em>
+              </MenuItem>
+              <MenuItem value={"bluegray"}>BlueGray</MenuItem>
+              <MenuItem value={"greyscale"}>Greyscale</MenuItem>
+              <MenuItem value={"unsaturated"}>Unsaturated</MenuItem>
+              <MenuItem value={"paledawn"}>Paledawn</MenuItem>
+              <MenuItem value={"hopper"}>Hopper</MenuItem>
+              <MenuItem value={"vibrant"}>Vibrant</MenuItem>
+              <MenuItem value={"flatpale"}>FlatPale</MenuItem>
+              <MenuItem value={"night"}>Night</MenuItem>
+              <MenuItem value={"blackout"}>Blackout</MenuItem>
+            </Select>
           </FormControl>
         </DialogContent>
       </Dialog>

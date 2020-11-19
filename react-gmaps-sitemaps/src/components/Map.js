@@ -32,10 +32,9 @@ const Map = () => {
   ] = useContext(MapContext);
 
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [mapStyle, setMapStyle] = useState("");
 
   const options = {
-    disableDefaultUI: true,
+    // disableDefaultUI: true,
     zoomControl: true,
   };
 
