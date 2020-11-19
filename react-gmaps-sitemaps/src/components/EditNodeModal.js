@@ -1,5 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 
+import axios from "axios";
+
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -18,17 +20,7 @@ import ColorContainer from "./ColorContainer";
 
 import { MapContext } from "./MapContext";
 
-const AddNodeModal = ({
-  modalOpen,
-  setModalOpen,
-  value,
-  setValue,
-  nodeType,
-  setNodeType,
-  addItem,
-  event,
-  setEvent,
-}) => {
+const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
   const [
     myMap,
     setMyMap,
@@ -55,15 +47,39 @@ const AddNodeModal = ({
     removeNode,
   ] = useContext(MapContext);
 
-  const handleSubmit = (isDir) => {
-    setDraw(true);
-    addItem(event, isDir);
-    setModalOpen(false);
-    setEvent("");
+  const handleSubmit = (needsLocationChange) => {
+    if (needsLocationChange) {
+      setActiveNode(selected);
+      setDraw(true);
+    } else {
+      axios
+        .put(`http://localhost:8000/api/allNodes/${selected.id}/`, {
+          value: value,
+          label: value,
+          color: color,
+          iconValue: icon,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      // axios.put to api/node/<nodeid>
+      // then update references to that node
+    }
+    setEditOpen(false);
+    setSelected(null);
+    console.log(selected);
+
+    // setDraw(true);
+    // addItem(event, isDir);
+    // setModalOpen(false);
+    // setEvent("");
   };
 
   const handleClose = () => {
-    setModalOpen(false);
+    setEditOpen(false);
   };
 
   const handleButtonClick = (btnIcon) => {
@@ -74,14 +90,35 @@ const AddNodeModal = ({
     setColor(event.target.value);
   };
 
+  const handleDelete = () => {
+    console.log("selected", selected);
+    // warning confirmation then...
+    axios
+      .delete(`http://localhost:8000/api/allNodes/${selected.id}`)
+      .then((res) => {
+        setEditOpen(false);
+        let newNodes = removeNode(selected.value);
+        console.log("NEWNODES", newNodes);
+        // this should be updated to not loop through each node multiple times
+        setShapes(shapes.filter((node) => node.value !== selected.value));
+        setChecked(checked.filter((check) => check !== selected.value));
+        setNodes(newNodes);
+        setSelected(null);
+        //setShapes, setChecked, set others, set activeNode, setNodes()
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div>
       <Dialog
-        open={modalOpen}
+        open={editOpen}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Add New Node</DialogTitle>
+        <DialogTitle id="form-dialog-title">Edit Existing Node</DialogTitle>
         <DialogContent id="buttons">
           <Grid container spacing={3}>
             <Grid item xs={9}>
@@ -116,14 +153,17 @@ const AddNodeModal = ({
           />
         </DialogContent>
         <DialogActions>
+          <Button onClick={handleDelete} color="secondary">
+            DELETE
+          </Button>
           <Button onClick={handleClose} color="default">
             Cancel
           </Button>
           <Button onClick={() => handleSubmit(true)} color="primary">
-            Dir
+            Update Location
           </Button>
           <Button onClick={() => handleSubmit(false)} color="primary">
-            Leaf
+            Keep Location
           </Button>
         </DialogActions>
       </Dialog>
@@ -131,4 +171,4 @@ const AddNodeModal = ({
   );
 };
 
-export default AddNodeModal;
+export default EditNodeModal;

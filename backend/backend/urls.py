@@ -22,6 +22,7 @@ from api import views
 router = routers.DefaultRouter()
 router.register(r'nodes', views.NodeView, 'nodes')
 router.register(r'history', views.HistoryView, 'history')
+router.register(r'allNodes', views.AllNodesView, 'allNodes')
 
 
 urlpatterns = [

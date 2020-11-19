@@ -26,54 +26,23 @@ const ShapeSetter = () => {
     setSelected,
     color,
     setColor,
+    findNode,
   ] = useContext(MapContext);
 
-  const [path, setPath] = useState(null);
-
-  useEffect(() => {
-    console.log(shapes);
-  }, [shapes]);
-
-  const findNode = (nodeValue) => {
-    for (let i = 0; i < nodes.length; i++) {
-      if (nodes[i].value === nodeValue) {
-        return nodes[i];
-      }
-      if (nodes[i].children !== undefined) {
-        for (let j = 0; j < nodes[i].children.length; j++) {
-          if (nodes[i].children && nodes[i].children[j].value === nodeValue) {
-            return nodes[i].children[j];
-          }
-        }
-      }
-    }
-    return null;
-  };
-
-  const onLoad = (infoWindow) => {
-    console.log("infoWindow: ", infoWindow);
-  };
-
-  const showInfo = (node) => {
-    console.log(node);
-    return (
-      <InfoWindow
-        position={{ lat: node.latLngArr[0], lng: node.latLngArr[1] }}
-        onLoad={onLoad}
-      >
-        <div>Hello</div>
-      </InfoWindow>
-    );
-  };
+  // useEffect(() => {
+  //   console.log("shapes", shapes);
+  // }, [shapes]);
 
   return (
     <>
       {shapes.map((shape) => {
         let node = findNode(shape.value);
-        // console.log("PATH", path);
-        console.log("NODEICON", node.iconValue);
+        console.log("NODE", node);
+        // if a node has been deleted or is missing
+        if (node === null) {
+          return <></>;
+        }
         if (node.nodeType === "marker") {
-          console.log(node);
           return (
             <Marker
               position={{

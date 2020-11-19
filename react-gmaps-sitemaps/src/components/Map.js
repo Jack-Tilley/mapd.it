@@ -1,15 +1,12 @@
 import React, { useState, useContext } from "react";
 import { MapContext } from "./MapContext";
-import { GoogleMap, InfoWindow } from "@react-google-maps/api";
+import { GoogleMap, InfoWindow, useGoogleMap } from "@react-google-maps/api";
 import DrawingComponent from "./DrawingComponent";
 import ShapeSetter from "./ShapeSetter";
 import AutocompleteBox from "./AutocompleteBox";
 import Directions from "./Directions";
-
-const options = {
-  disableDefaultUI: true,
-  zoomControl: true,
-};
+import InfoContainer from "./InfoContainer";
+import SettingsModal from "./SettingsModal";
 
 const Map = () => {
   const [
@@ -34,6 +31,13 @@ const Map = () => {
     setSelected,
   ] = useContext(MapContext);
 
+  const [settingsOpen, setSettingsOpen] = useState(false);
+
+  const options = {
+    // disableDefaultUI: true,
+    zoomControl: true,
+  };
+
   const renderMap = () => (
     <>
       <GoogleMap
@@ -50,23 +54,11 @@ const Map = () => {
         <DrawingComponent />
         <ShapeSetter />
         {/* <Directions /> */}
-        {selected ? (
-          <InfoWindow
-            position={{
-              lat: parseFloat(selected.latLngArr[0]),
-              lng: parseFloat(selected.latLngArr[1]),
-            }}
-            onCloseClick={() => {
-              setSelected(null);
-            }}
-          >
-            <div>
-              <h4>{selected.label}</h4>
-              <p>{selected.latLngArr}</p>
-            </div>
-          </InfoWindow>
-        ) : null}
-        }
+        <InfoContainer />
+        <SettingsModal
+          settingsOpen={settingsOpen}
+          setSettingsOpen={setSettingsOpen}
+        />
       </GoogleMap>
     </>
   );

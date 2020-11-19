@@ -51,6 +51,7 @@ const DrawingComponent = () => {
     console.log(polyline);
 
     polyline.setMap(null); // makes polyline invisible
+    setColor();
     setDraw(false); // we do this instead of !draw because we want drawing component to leave when a new one is added
   };
 
@@ -84,8 +85,6 @@ const DrawingComponent = () => {
     nodeReference.visible = false;
     // newActiveNode.nodeReference.visible = false;
     // newActiveNode.parent_id = activeNode.parent_id;
-    await setActiveNode(newActiveNode);
-    setShapes([...shapes, newActiveNode]);
     setChecked([...checked, newActiveNode.value]);
     axios
       .post("http://localhost:8000/api/nodes/", {
@@ -101,11 +100,13 @@ const DrawingComponent = () => {
         color: color,
       })
       .then((res) => {
-        console.log(res);
+        newActiveNode.id = res.data.id;
+        setActiveNode(newActiveNode);
+        setShapes([...shapes, newActiveNode]);
+        setIcon("search");
+        setColor(null);
       })
       .catch((err) => console.log(err));
-
-    // ADD API UPDATES HERE
   };
 
   const renderDrawingComponent = () => (

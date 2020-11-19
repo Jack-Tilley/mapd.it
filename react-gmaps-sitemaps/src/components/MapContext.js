@@ -29,11 +29,11 @@ export const MapProvider = (props) => {
   const [nodes, setNodes] = useState([]);
   const [activeNode, setActiveNode] = useState(null);
   const [draw, setDraw] = useState(false);
-  const [icon, setIcon] = useState(null);
+  const [icon, setIcon] = useState("search");
   const [shapes, setShapes] = useState([]);
   const [checked, setChecked] = useState([]);
   const [selected, setSelected] = useState(null);
-  const [color, setColor] = useState(null);
+  const [color, setColor] = useState("black");
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
@@ -54,7 +54,64 @@ export const MapProvider = (props) => {
       }
     }
   };
-  // return nodes;
+
+  const findNode = (nodeValue) => {
+    for (let i = 0; i < nodes.length; i++) {
+      if (nodes[i].value === nodeValue) {
+        return nodes[i];
+      }
+      if (nodes[i].children !== undefined) {
+        for (let j = 0; j < nodes[i].children.length; j++) {
+          if (nodes[i].children && nodes[i].children[j].value === nodeValue) {
+            return nodes[i].children[j];
+          }
+        }
+      }
+    }
+    return null;
+  };
+
+  const removeNode = (nodeValue) => {
+    let newNodes = [...nodes];
+    for (let i = 0; i < newNodes.length; i++) {
+      if (newNodes[i].children !== undefined) {
+        newNodes[i].children = newNodes[i].children.filter(
+          (child) => child.value !== nodeValue
+        );
+      }
+    }
+    return newNodes.filter((node) => node.value !== nodeValue);
+  };
+  //   let indexi;
+  //   let indexj;
+  //   let newNodes = [...nodes];
+  //   console.log("we started with this", newNodes);
+  //   for (let i = 0; i < newNodes.length; i++) {
+  //     if (newNodes[i].value === nodeValue) {
+  //       let indexi = i;
+  //       console.log("popping i", newNodes[i].value);
+  //       console.log("pop", newNodes.pop(indexi), indexi);
+  //       console.log("we got rid of something", newNodes);
+  //       return newNodes;
+  //     }
+  //     if (newNodes[i].children !== undefined) {
+  //       for (let j = 0; j < newNodes[i].children.length; j++) {
+  //         if (
+  //           newNodes[i].children &&
+  //           newNodes[i].children[j].value === nodeValue
+  //         ) {
+  //           indexi = i;
+  //           indexj = j;
+  //           console.log("popping j", newNodes[i].children[j].value, j);
+  //           console.log("pop", newNodes[indexi].children.pop(indexj), indexj);
+  //           console.log("we got rid of something", newNodes);
+  //           return newNodes;
+  //         }
+  //       }
+  //     }
+  //   }
+  //   return null;
+  // };
 
   useEffect(() => {
     axios
@@ -106,6 +163,8 @@ export const MapProvider = (props) => {
         setSelected,
         color,
         setColor,
+        findNode,
+        removeNode,
       ]}
     >
       {props.children}

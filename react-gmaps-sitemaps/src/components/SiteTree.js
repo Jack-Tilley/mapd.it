@@ -41,6 +41,7 @@ const SiteTree = () => {
   const [event, setEvent] = useState();
 
   const onCheck = (checked, targetNode) => {
+    console.log("checkedlist", checked);
     setChecked(checked);
     console.log(targetNode);
     if (targetNode.checked === true) {
@@ -83,9 +84,9 @@ const SiteTree = () => {
       icon: <i className={`material-icons icon-${color}`}>{icon}</i>,
       color: color,
       isDir: isDir,
-      // icon: <FontAwesomeIcon icon={faHome} />,
     };
     setActiveNode(newNode);
+    setValue("");
     if (target.parent.children !== undefined) {
       setNodes(
         nodes.map((item) =>

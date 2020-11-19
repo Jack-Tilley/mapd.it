@@ -9,6 +9,12 @@ class NodeView(viewsets.ModelViewSet):
     queryset = Node.objects.filter(parent=None)
 
 
+class AllNodesView(viewsets.ModelViewSet):
+    # this view should probably be the same as NodeView at somepoint
+    serializer_class = NodeSerializer
+    queryset = Node.objects.all()
+
+
 class HistoryView(viewsets.ModelViewSet):
     serializer_class = HistorySerializer
     queryset = Node.objects.all()
