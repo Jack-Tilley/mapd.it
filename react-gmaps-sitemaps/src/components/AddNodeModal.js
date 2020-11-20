@@ -18,7 +18,7 @@ import ColorContainer from "./ColorContainer";
 
 import { MapContext } from "./MapContext";
 
-const AddRework = ({
+const AddNodeModal = ({
   modalOpen,
   setModalOpen,
   value,
@@ -55,6 +55,8 @@ const AddRework = ({
     removeNode,
     nodeType,
     setNodeType,
+    disabled,
+    setDisabled,
   ] = useContext(MapContext);
 
   const handleSubmit = (isDir, type) => {
@@ -146,4 +148,4 @@ const AddRework = ({
   );
 };
 
-export default AddRework;
+export default AddNodeModal;

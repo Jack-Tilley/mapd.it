@@ -5,9 +5,7 @@ import "react-checkbox-tree/lib/react-checkbox-tree.css";
 // import { faHome } from "@fortawesome/free-solid-svg-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-// import { parse, stringify } from "flatted";
-
-import AddRework from "./AddRework";
+import AddNodeModal from "./AddNodeModal";
 import { MapContext } from "./MapContext";
 import { Paper } from "@material-ui/core";
 
@@ -38,6 +36,8 @@ const SiteTree = () => {
     removeNode,
     nodeType,
     setNodeType,
+    disabled,
+    setDisabled,
   ] = useContext(MapContext);
   const [expanded, setExpanded] = useState([]);
   const [value, setValue] = useState("");
@@ -69,6 +69,12 @@ const SiteTree = () => {
       setEvent(e);
       setActiveNode(null);
       handleClickOpen();
+    } else if (!draw) {
+      let node = findNode(e.value);
+      setCenter({
+        lat: parseFloat(node.latLngArr[0]),
+        lng: parseFloat(node.latLngArr[1]),
+      });
     }
   };
 
@@ -122,13 +128,11 @@ const SiteTree = () => {
         onExpand={onExpand}
         onClick={onClick}
       ></CheckboxTree>
-      <AddRework
+      <AddNodeModal
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
         value={value}
         setValue={setValue}
-        // nodeType={nodeType}
-        // setNodeType={setNodeType}
         addItem={addItem}
         event={event}
         setEvent={setEvent}

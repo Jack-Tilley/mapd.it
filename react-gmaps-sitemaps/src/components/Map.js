@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { MapContext } from "./MapContext";
 import { GoogleMap, InfoWindow, useGoogleMap } from "@react-google-maps/api";
-import DrawRework from "./DrawRework";
+import DrawingComponent from "./DrawingComponent";
 import ShapeSetter from "./ShapeSetter";
 import AutocompleteBox from "./AutocompleteBox";
 import Directions from "./Directions";
@@ -53,7 +53,7 @@ const Map = ({ darkMode, setDarkMode }) => {
         options={options}
       >
         {/* <AutocompleteBox center={center} setCenter={setCenter} /> */}
-        <DrawRework />
+        <DrawingComponent />
         <ShapeSetter />
         {/* <Directions /> */}
         <InfoContainer />

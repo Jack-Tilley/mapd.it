@@ -1,6 +1,7 @@
 import React, { useState, useCallback, createContext, useEffect } from "react";
 import { useLoadScript } from "@react-google-maps/api";
 import axios from "axios";
+import { parse, stringify } from "flatted";
 
 import "react-checkbox-tree/lib/react-checkbox-tree.css";
 
@@ -30,15 +31,33 @@ export const MapProvider = (props) => {
   const [activeNode, setActiveNode] = useState(null);
   const [draw, setDraw] = useState(false);
   const [icon, setIcon] = useState("search");
-  const [shapes, setShapes] = useState([]);
-  const [checked, setChecked] = useState([]);
+  const [shapes, setShapes] = useState(
+    JSON.parse(localStorage.getItem("shapes")) || []
+  );
+  const [checked, setChecked] = useState(
+    JSON.parse(localStorage.getItem("checked")) || []
+  );
   const [selected, setSelected] = useState(null);
   const [color, setColor] = useState("black");
   const [nodeType, setNodeType] = useState(null);
+  const [disabled, setDisabled] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [editValue, setEditValue] = useState("");
+
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
+
+  useEffect(() => {
+    console.log("checked added to localStorage", checked);
+    localStorage.setItem("checked", JSON.stringify(checked));
+  }, [checked]);
+  useEffect(() => {
+    console.log("shapes added to localStorage", shapes);
+    localStorage.setItem("shapes", JSON.stringify(shapes));
+  }, [shapes]);
+
   const changeIcons = (nodes) => {
     for (let i = 0; i < nodes.length; i++) {
       nodes[i].icon = (
@@ -83,36 +102,6 @@ export const MapProvider = (props) => {
     }
     return newNodes.filter((node) => node.value !== nodeValue);
   };
-  //   let indexi;
-  //   let indexj;
-  //   let newNodes = [...nodes];
-  //   console.log("we started with this", newNodes);
-  //   for (let i = 0; i < newNodes.length; i++) {
-  //     if (newNodes[i].value === nodeValue) {
-  //       let indexi = i;
-  //       console.log("popping i", newNodes[i].value);
-  //       console.log("pop", newNodes.pop(indexi), indexi);
-  //       console.log("we got rid of something", newNodes);
-  //       return newNodes;
-  //     }
-  //     if (newNodes[i].children !== undefined) {
-  //       for (let j = 0; j < newNodes[i].children.length; j++) {
-  //         if (
-  //           newNodes[i].children &&
-  //           newNodes[i].children[j].value === nodeValue
-  //         ) {
-  //           indexi = i;
-  //           indexj = j;
-  //           console.log("popping j", newNodes[i].children[j].value, j);
-  //           console.log("pop", newNodes[indexi].children.pop(indexj), indexj);
-  //           console.log("we got rid of something", newNodes);
-  //           return newNodes;
-  //         }
-  //       }
-  //     }
-  //   }
-  //   return null;
-  // };
 
   useEffect(() => {
     axios
@@ -168,6 +157,12 @@ export const MapProvider = (props) => {
         removeNode,
         nodeType,
         setNodeType,
+        disabled,
+        setDisabled,
+        editing,
+        setEditing,
+        editValue,
+        setEditValue,
       ]}
     >
       {props.children}

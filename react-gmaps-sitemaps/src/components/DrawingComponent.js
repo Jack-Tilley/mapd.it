@@ -6,7 +6,7 @@ import { parse, stringify } from "flatted";
 import IconButton from "@material-ui/core/IconButton";
 import { Paper } from "@material-ui/core";
 
-const DrawRework = () => {
+const DrawingComponent = () => {
   const [
     myMap,
     setMyMap,
@@ -33,6 +33,12 @@ const DrawRework = () => {
     removeNode,
     nodeType,
     setNodeType,
+    disabled,
+    setDisabled,
+    editing,
+    setEditing,
+    editValue,
+    setEditValue,
   ] = useContext(MapContext);
 
   const options = {
@@ -51,8 +57,11 @@ const DrawRework = () => {
     },
   };
   const handleCancel = () => {
+    setEditing(false);
     setDraw(false);
-    setNodes(removeNode(activeNode.value));
+    if (!editing) {
+      setNodes(removeNode(activeNode.value));
+    }
     setColor("black");
     setIcon("search");
     setNodeType(null);
@@ -89,46 +98,71 @@ const DrawRework = () => {
     console.log("Drawing component unmounted");
   };
 
-  const handleActiveNodeChange = async (
-    position,
-    nodeType,
-    nodeReference,
-    icon
-  ) => {
-    let newActiveNode = activeNode;
-    newActiveNode.latLngArr = position;
-    newActiveNode.nodeType = nodeType;
-    newActiveNode.iconValue = icon;
+  const handleActiveNodeChange = (position, nodeType, nodeReference, icon) => {
     nodeReference.visible = false;
-    // newActiveNode.nodeReference.visible = false;
-    // newActiveNode.parent_id = activeNode.parent_id;
-    setChecked([...checked, newActiveNode.value]);
-    axios
-      .post("http://localhost:8000/api/nodes/", {
-        label: newActiveNode.label,
-        nodeType: newActiveNode.nodeType,
-        nodeReference: stringify(newActiveNode.nodeReference),
-        value: newActiveNode.value,
-        parent: newActiveNode.parent_id,
-        apiPath: newActiveNode.apiPath,
-        latLngArr: newActiveNode.latLngArr,
-        isDir: newActiveNode.isDir,
-        iconValue: icon,
-        color: color,
-      })
-      .then((res) => {
-        newActiveNode.id = res.data.id;
-        setActiveNode(newActiveNode);
-        setShapes([...shapes, newActiveNode]);
-        setIcon("search");
-        setColor("black");
-        setNodeType(null);
-      })
-      .catch((err) => console.log(err));
+    if (editing) {
+      axios
+        .put(`http://localhost:8000/api/allNodes/${selected.id}/`, {
+          value: editValue,
+          label: editValue,
+          color: color,
+          iconValue: icon,
+          latLngArr: position,
+        })
+        .then((res) => {
+          // let newSelected = selected
+          // newSelected.value = editValue
+          // newSelected.label = editValue
+          setEditing(false);
+          setChecked(
+            checked.filter((node) => node !== selected.value),
+            editValue
+          );
+          setShapes(shapes.filter((node) => node.value !== selected.value));
+          // setChecked([...checked, newActiveNode.value]);
+          // setShapes([...shapes, newActiveNode]);
+          setIcon("search");
+          setColor("black");
+          setNodeType(null);
+          setEditValue("");
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      let newActiveNode = activeNode;
+      newActiveNode.latLngArr = position;
+      newActiveNode.nodeType = nodeType;
+      newActiveNode.iconValue = icon;
+      axios
+        .post("http://localhost:8000/api/nodes/", {
+          label: newActiveNode.label,
+          nodeType: newActiveNode.nodeType,
+          nodeReference: stringify(newActiveNode.nodeReference),
+          value: newActiveNode.value,
+          parent: newActiveNode.parent_id,
+          apiPath: newActiveNode.apiPath,
+          latLngArr: newActiveNode.latLngArr,
+          isDir: newActiveNode.isDir,
+          iconValue: icon,
+          color: color,
+        })
+        .then((res) => {
+          newActiveNode.id = res.data.id;
+          setActiveNode(newActiveNode);
+          setChecked([...checked, newActiveNode.value]);
+          setShapes([...shapes, newActiveNode]);
+          setIcon("search");
+          setColor("black");
+          setNodeType(null);
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   const renderDrawingComponent = () => (
-    <div classame="drawingC" style={{ paddingLeft: "40px" }}>
+    <>
       <DrawingManager
         onOverlayComplete={onOverlayComplete}
         onPolylineComplete={onPolylineComplete}
@@ -156,8 +190,8 @@ const DrawRework = () => {
           <i className="large material-icons icon-cancel">{"cancel"}</i>
         </IconButton>
       </Paper>
-    </div>
+    </>
   );
   return draw ? renderDrawingComponent() : null;
 };
-export default DrawRework;
+export default DrawingComponent;

@@ -45,11 +45,22 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
     setColor,
     findNode,
     removeNode,
+    nodeType,
+    setNodeType,
+    disabled,
+    setDisabled,
+    editing,
+    setEditing,
+    editValue,
+    setEditValue,
   ] = useContext(MapContext);
 
   const handleSubmit = (needsLocationChange) => {
     if (needsLocationChange) {
-      setActiveNode(selected);
+      setEditValue(value);
+      console.log("selected5", selected);
+      setNodeType(selected.nodeType);
+      setEditing(true);
       setDraw(true);
     } else {
       axios
@@ -69,8 +80,8 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
       // then update references to that node
     }
     setEditOpen(false);
-    setSelected(null);
-    console.log(selected);
+    // setSelected(null);
+    console.log("selected", selected);
 
     // setDraw(true);
     // addItem(event, isDir);
