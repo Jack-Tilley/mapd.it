@@ -109,7 +109,7 @@ const SiteTree = () => {
           apiPath: newNode.value + "/+",
           latLngArr: ["0", "0"],
           nodeType: "ADD",
-          // icon: <Add />,
+          icon: <i className={`material-icons icon-${"blue"}`}>{"add"}</i>,
           disabled: true,
         },
       ];

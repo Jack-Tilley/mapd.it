@@ -16,7 +16,7 @@ let addNode = {
   apiPath: "HI/there",
   latLngArr: ["0", "0"],
   nodeType: "ADD",
-  icon: <Add />,
+  icon: <i className={`material-icons icon-${"blue"}`}>{"add"}</i>,
   disabled: true,
 };
 
@@ -118,7 +118,7 @@ export const MapProvider = (props) => {
         apiPath: newNode.value + "/+",
         latLngArr: ["0", "0"],
         nodeType: "ADD",
-        icon: <Add />,
+        icon: <i className={`material-icons icon-${"blue"}`}>{"add"}</i>,
         disabled: true,
       });
     }
@@ -131,38 +131,11 @@ export const MapProvider = (props) => {
     console.log("NODES AT THIS POINT", newNodes);
     for (let i = 0; i < newNodes.length; i++) {
       if (newNodes[i].id === nodeId) {
-        // newNodes[i] = updatedNode;
         newNodes[i] = changeNodeIcons(updatedNode);
-        // newNodes[i] = changeNodeIcons(updatedNode);
-        // newNodes[i].icon = (
-        //   <i className={`material-icons icon-${updatedNode.color}`}>
-        //     {updatedNode.iconValue}
-        //   </i>
-        // );
         console.log("newNodes[i]", newNodes[i]);
         return newNodes;
       }
     }
-    //   if (nodes[i].children !== undefined) {
-    //     for (let j = 0; j < newNodes[i].children.length; j++) {
-    //       if (newNodes[i].children && newNodes[i].children[j].id === nodeId) {
-    //         let newNode = newNodes[i];
-    //         let children = newNodes[i].children;
-    //         children[j] = updatedNode;
-    //         children[j].icon = (
-    //           <i className={`material-icons icon-${children[j].color}`}>
-    //             {children[j].iconValue}
-    //           </i>
-    //         );
-    //         newNode.children = children;
-    //         newNodes[i] = newNode;
-
-    //         return newNodes;
-    //       }
-    //     }
-    //   }
-    // }
-    // return newNodes;
   };
 
   const removeNode = (nodeValue) => {
@@ -205,7 +178,7 @@ export const MapProvider = (props) => {
               apiPath: res.data[i].value + "/+",
               latLngArr: ["0", "0"],
               nodeType: "ADD",
-              icon: <Add />,
+              icon: <i className={`material-icons icon-${"blue"}`}>{"add"}</i>,
               disabled: true,
             });
           }
