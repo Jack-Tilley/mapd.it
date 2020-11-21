@@ -89,12 +89,31 @@ const SiteTree = () => {
       label: value,
       latLngArr: [],
       apiPath: "",
+      parent: target.parent,
       parent_id: target.parent.id,
       nodeType: type,
       icon: <i className={`material-icons icon-${color}`}>{icon}</i>,
       color: color,
       isDir: isDir,
     };
+    if (
+      isDir &&
+      (newNode.parent === null ||
+        newNode.parent === undefined ||
+        Object.keys(newNode.parent).length === 0)
+    ) {
+      newNode.children = [
+        {
+          value: newNode.value + "/+",
+          label: "+",
+          apiPath: newNode.value + "/+",
+          latLngArr: ["0", "0"],
+          nodeType: "ADD",
+          // icon: <Add />,
+          disabled: true,
+        },
+      ];
+    }
     setActiveNode(newNode);
     setValue("");
     if (target.parent.children !== undefined) {
