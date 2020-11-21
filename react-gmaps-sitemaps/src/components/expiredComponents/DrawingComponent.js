@@ -3,10 +3,8 @@ import { MapContext } from "./MapContext";
 import { DrawingManager } from "@react-google-maps/api";
 import axios from "axios";
 import { parse, stringify } from "flatted";
-import IconButton from "@material-ui/core/IconButton";
-import { Paper } from "@material-ui/core";
 
-const DrawRework = () => {
+const DrawingComponent = () => {
   const [
     myMap,
     setMyMap,
@@ -29,10 +27,6 @@ const DrawRework = () => {
     setSelected,
     color,
     setColor,
-    findNode,
-    removeNode,
-    nodeType,
-    setNodeType,
   ] = useContext(MapContext);
 
   const options = {
@@ -46,17 +40,9 @@ const DrawRework = () => {
       label: "hi",
     },
     drawingControlOptions: {
-      position: -1, // sets drawing manager not on page
-      //   drawingModes: null,
+      position: 1,
+      drawingModes: ["marker", "polyline"],
     },
-  };
-  const handleCancel = () => {
-    setDraw(false);
-    setNodes(removeNode(activeNode.value));
-    setColor("black");
-    setIcon("search");
-    setNodeType(null);
-    setActiveNode(null);
   };
 
   const onPolylineComplete = (polyline) => {
@@ -69,6 +55,7 @@ const DrawRework = () => {
     console.log(polyline);
 
     polyline.setMap(null); // makes polyline invisible
+    setColor();
     setDraw(false); // we do this instead of !draw because we want drawing component to leave when a new one is added
   };
 
@@ -121,8 +108,7 @@ const DrawRework = () => {
         setActiveNode(newActiveNode);
         setShapes([...shapes, newActiveNode]);
         setIcon("search");
-        setColor("black");
-        setNodeType(null);
+        setColor(null);
       })
       .catch((err) => console.log(err));
   };
@@ -134,30 +120,9 @@ const DrawRework = () => {
         onPolylineComplete={onPolylineComplete}
         onMarkerComplete={onMarkerComplete}
         options={{ options }}
-        drawingMode={nodeType}
       ></DrawingManager>
-      <Paper
-        style={{
-          position: "absolute",
-          bottom: "1em",
-          margin: "auto",
-          padding: 0,
-          textAlign: "center",
-          left: "50%",
-          //   alignContent: "center",
-          //   justifyContent: "center",
-        }}
-      >
-        <IconButton
-          size="small"
-          onClick={() => handleCancel()}
-          key={"cancelDraw"}
-        >
-          <i className="large material-icons icon-cancel">{"cancel"}</i>
-        </IconButton>
-      </Paper>
     </div>
   );
   return draw ? renderDrawingComponent() : null;
 };
-export default DrawRework;
+export default DrawingComponent;

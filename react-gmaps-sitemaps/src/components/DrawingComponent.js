@@ -3,6 +3,8 @@ import { MapContext } from "./MapContext";
 import { DrawingManager } from "@react-google-maps/api";
 import axios from "axios";
 import { parse, stringify } from "flatted";
+import IconButton from "@material-ui/core/IconButton";
+import { Paper } from "@material-ui/core";
 
 const DrawingComponent = () => {
   const [
@@ -27,6 +29,19 @@ const DrawingComponent = () => {
     setSelected,
     color,
     setColor,
+    findNode,
+    removeNode,
+    nodeType,
+    setNodeType,
+    disabled,
+    setDisabled,
+    editing,
+    setEditing,
+    editValue,
+    setEditValue,
+    replaceNode,
+    editCleanup,
+    changeIcons,
   ] = useContext(MapContext);
 
   const options = {
@@ -40,9 +55,20 @@ const DrawingComponent = () => {
       label: "hi",
     },
     drawingControlOptions: {
-      position: 1,
-      drawingModes: ["marker", "polyline"],
+      position: -1, // sets drawing manager not on page
+      //   drawingModes: null,
     },
+  };
+  const handleCancel = () => {
+    setEditing(false);
+    setDraw(false);
+    if (!editing) {
+      setNodes(removeNode(activeNode.value));
+    }
+    setColor("black");
+    setIcon("search");
+    setNodeType(null);
+    setActiveNode(null);
   };
 
   const onPolylineComplete = (polyline) => {
@@ -55,13 +81,18 @@ const DrawingComponent = () => {
     console.log(polyline);
 
     polyline.setMap(null); // makes polyline invisible
-    setColor();
     setDraw(false); // we do this instead of !draw because we want drawing component to leave when a new one is added
   };
 
   const onMarkerComplete = (marker) => {
-    marker.title = activeNode.label;
-    marker.label = activeNode.label;
+    if (editing) {
+      marker.title = editValue;
+      marker.label = editValue;
+    } else {
+      marker.title = activeNode.label;
+      marker.label = activeNode.label;
+    }
+    console.log("marker");
     marker.icon = <i className={`material-icons icon-${color}`}>{icon}</i>;
     console.log("marker", marker);
     // marker.icon = icon // need to figure out how to get custom icon
@@ -76,52 +107,103 @@ const DrawingComponent = () => {
     console.log("Drawing component unmounted");
   };
 
-  const handleActiveNodeChange = async (
-    position,
-    nodeType,
-    nodeReference,
-    icon
-  ) => {
-    let newActiveNode = activeNode;
-    newActiveNode.latLngArr = position;
-    newActiveNode.nodeType = nodeType;
-    newActiveNode.iconValue = icon;
+  const handleActiveNodeChange = (position, nodeType, nodeReference, icon) => {
     nodeReference.visible = false;
-    // newActiveNode.nodeReference.visible = false;
-    // newActiveNode.parent_id = activeNode.parent_id;
-    setChecked([...checked, newActiveNode.value]);
-    axios
-      .post("http://localhost:8000/api/nodes/", {
-        label: newActiveNode.label,
-        nodeType: newActiveNode.nodeType,
-        nodeReference: stringify(newActiveNode.nodeReference),
-        value: newActiveNode.value,
-        parent: newActiveNode.parent_id,
-        apiPath: newActiveNode.apiPath,
-        latLngArr: newActiveNode.latLngArr,
-        isDir: newActiveNode.isDir,
-        iconValue: icon,
-        color: color,
-      })
-      .then((res) => {
-        newActiveNode.id = res.data.id;
-        setActiveNode(newActiveNode);
-        setShapes([...shapes, newActiveNode]);
-        setIcon("search");
-        setColor(null);
-      })
-      .catch((err) => console.log(err));
+    if (editing) {
+      axios
+        .put(`http://localhost:8000/api/allNodes/${selected.id}/`, {
+          value: editValue,
+          label: editValue,
+          color: color,
+          iconValue: icon,
+          latLngArr: position,
+        })
+        .then((res) => {
+          console.log("result", res.data);
+          // REPLACE NODE IN HERE WITH THE RESULT
+          setEditing(false);
+          console.log("parent", res.data.parent);
+          if (res.data.parent === null) {
+            console.log("THIS IS A LONE NODE");
+            let newNodes = replaceNode(selected.id, res.data);
+            setNodes(newNodes);
+          } else {
+            axios
+              .get(`http://localhost:8000/api/nodes/${res.data.parent}`)
+              .then((result) => {
+                let newNodes = replaceNode(res.data.parent, result.data);
+                setNodes(newNodes);
+              })
+              .catch((err) => console.log(err));
+          }
+          console.log("SELECTEDVALUE", selected.value);
+          // cleanup
+          editCleanup(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      let newActiveNode = activeNode;
+      newActiveNode.latLngArr = position;
+      newActiveNode.nodeType = nodeType;
+      newActiveNode.iconValue = icon;
+      axios
+        .post("http://localhost:8000/api/nodes/", {
+          label: newActiveNode.label,
+          nodeType: newActiveNode.nodeType,
+          nodeReference: stringify(newActiveNode.nodeReference),
+          value: newActiveNode.value,
+          parent: newActiveNode.parent_id,
+          apiPath: newActiveNode.apiPath,
+          latLngArr: newActiveNode.latLngArr,
+          isDir: newActiveNode.isDir,
+          iconValue: icon,
+          color: color,
+        })
+        .then((res) => {
+          newActiveNode.id = res.data.id;
+          setActiveNode(newActiveNode);
+          setChecked([...checked, newActiveNode.value]);
+          setShapes([...shapes, newActiveNode]);
+          setIcon("search");
+          setColor("black");
+          setNodeType(null);
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   const renderDrawingComponent = () => (
-    <div classame="drawingC" style={{ paddingLeft: "40px" }}>
+    <>
       <DrawingManager
         onOverlayComplete={onOverlayComplete}
         onPolylineComplete={onPolylineComplete}
         onMarkerComplete={onMarkerComplete}
         options={{ options }}
+        drawingMode={nodeType}
       ></DrawingManager>
-    </div>
+      <Paper
+        style={{
+          position: "absolute",
+          bottom: "1em",
+          margin: "auto",
+          padding: 0,
+          textAlign: "center",
+          left: "50%",
+          //   alignContent: "center",
+          //   justifyContent: "center",
+        }}
+      >
+        <IconButton
+          size="small"
+          onClick={() => handleCancel()}
+          key={"cancelDraw"}
+        >
+          <i className="large material-icons icon-cancel">{"cancel"}</i>
+        </IconButton>
+      </Paper>
+    </>
   );
   return draw ? renderDrawingComponent() : null;
 };

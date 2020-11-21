@@ -5,10 +5,7 @@ import "react-checkbox-tree/lib/react-checkbox-tree.css";
 // import { faHome } from "@fortawesome/free-solid-svg-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-// import { parse, stringify } from "flatted";
-
 import AddNodeModal from "./AddNodeModal";
-import AddRework from "./AddRework";
 import { MapContext } from "./MapContext";
 import { Paper } from "@material-ui/core";
 
@@ -39,6 +36,8 @@ const SiteTree = () => {
     removeNode,
     nodeType,
     setNodeType,
+    disabled,
+    setDisabled,
   ] = useContext(MapContext);
   const [expanded, setExpanded] = useState([]);
   const [value, setValue] = useState("");
@@ -70,6 +69,12 @@ const SiteTree = () => {
       setEvent(e);
       setActiveNode(null);
       handleClickOpen();
+    } else if (!draw) {
+      let node = findNode(e.value);
+      setCenter({
+        lat: parseFloat(node.latLngArr[0]),
+        lng: parseFloat(node.latLngArr[1]),
+      });
     }
   };
 
@@ -84,12 +89,31 @@ const SiteTree = () => {
       label: value,
       latLngArr: [],
       apiPath: "",
+      parent: target.parent,
       parent_id: target.parent.id,
       nodeType: type,
       icon: <i className={`material-icons icon-${color}`}>{icon}</i>,
       color: color,
       isDir: isDir,
     };
+    if (
+      isDir &&
+      (newNode.parent === null ||
+        newNode.parent === undefined ||
+        Object.keys(newNode.parent).length === 0)
+    ) {
+      newNode.children = [
+        {
+          value: newNode.value + "/+",
+          label: "+",
+          apiPath: newNode.value + "/+",
+          latLngArr: ["0", "0"],
+          nodeType: "ADD",
+          // icon: <Add />,
+          disabled: true,
+        },
+      ];
+    }
     setActiveNode(newNode);
     setValue("");
     if (target.parent.children !== undefined) {
@@ -123,13 +147,11 @@ const SiteTree = () => {
         onExpand={onExpand}
         onClick={onClick}
       ></CheckboxTree>
-      <AddRework
+      <AddNodeModal
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
         value={value}
         setValue={setValue}
-        // nodeType={nodeType}
-        // setNodeType={setNodeType}
         addItem={addItem}
         event={event}
         setEvent={setEvent}

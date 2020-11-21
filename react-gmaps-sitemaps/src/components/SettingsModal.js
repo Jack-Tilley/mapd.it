@@ -78,38 +78,46 @@ const SettingsModal = ({
   //     removeNode,
   //   ] = useContext(MapContext);
 
-  const [mapStyle, setMapStyle] = useState("");
-  const [a, setA] = useState(false);
+  const [mapStyle, setMapStyle] = useState(
+    localStorage.getItem("mapStyle") || ""
+  );
+
+  useEffect(() => {
+    localStorage.setItem("darkMode", darkMode);
+  }, [darkMode]);
+
+  useEffect(() => {
+    console.log("map or mapStyle has updated");
+    if (mapStyle === "bluegray") {
+      map.setOptions({ styles: bluegray });
+    } else if (mapStyle === "greyscale") {
+      map.setOptions({ styles: greyscale });
+    } else if (mapStyle === "unsaturated") {
+      map.setOptions({ styles: unsaturated });
+    } else if (mapStyle === "flatpale") {
+      map.setOptions({ styles: flatpale });
+    } else if (mapStyle === "hopper") {
+      map.setOptions({ styles: hopper });
+    } else if (mapStyle === "night") {
+      map.setOptions({ styles: night });
+    } else if (mapStyle === "paledawn") {
+      map.setOptions({ styles: paledawn });
+    } else if (mapStyle === "vibrant") {
+      map.setOptions({ styles: vibrant });
+    } else if (mapStyle === "blackout") {
+      map.setOptions({ styles: blackout });
+    } else {
+      map.setOptions({ styles: null });
+    }
+    localStorage.setItem("mapStyle", mapStyle);
+  }, [mapStyle, map]);
 
   const handleClose = () => {
     setSettingsOpen(false);
   };
 
-  const changeOptions = (e) => {
-    e.preventDefault();
-    let value = e.target.value;
+  const changeOptions = (value) => {
     setMapStyle(value);
-    if (value === "bluegray") {
-      map.setOptions({ styles: bluegray });
-    } else if (value === "greyscale") {
-      map.setOptions({ styles: greyscale });
-    } else if (value === "unsaturated") {
-      map.setOptions({ styles: unsaturated });
-    } else if (value === "flatpale") {
-      map.setOptions({ styles: flatpale });
-    } else if (value === "hopper") {
-      map.setOptions({ styles: hopper });
-    } else if (value === "night") {
-      map.setOptions({ styles: night });
-    } else if (value === "paledawn") {
-      map.setOptions({ styles: paledawn });
-    } else if (value === "vibrant") {
-      map.setOptions({ styles: vibrant });
-    } else if (value === "blackout") {
-      map.setOptions({ styles: blackout });
-    } else {
-      map.setOptions({ styles: null });
-    }
   };
 
   return (
@@ -141,7 +149,7 @@ const SettingsModal = ({
               displayEmpty
               id="mapstyle"
               value={mapStyle}
-              onChange={(e) => changeOptions(e)}
+              onChange={(e) => changeOptions(e.target.value)}
             >
               <MenuItem value="">
                 <em>Default</em>

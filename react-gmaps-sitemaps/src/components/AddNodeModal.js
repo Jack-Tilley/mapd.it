@@ -23,8 +23,8 @@ const AddNodeModal = ({
   setModalOpen,
   value,
   setValue,
-  nodeType,
-  setNodeType,
+  //   nodeType,
+  //   setNodeType,
   addItem,
   event,
   setEvent,
@@ -53,11 +53,16 @@ const AddNodeModal = ({
     setColor,
     findNode,
     removeNode,
+    nodeType,
+    setNodeType,
+    disabled,
+    setDisabled,
   ] = useContext(MapContext);
 
-  const handleSubmit = (isDir) => {
+  const handleSubmit = (isDir, type) => {
+    setNodeType(type);
     setDraw(true);
-    addItem(event, isDir);
+    addItem(event, isDir, type);
     setModalOpen(false);
     setEvent("");
   };
@@ -119,11 +124,23 @@ const AddNodeModal = ({
           <Button onClick={handleClose} color="default">
             Cancel
           </Button>
-          <Button onClick={() => handleSubmit(true)} color="primary">
-            Dir
+          <Button onClick={() => handleSubmit(true, "marker")} color="primary">
+            DirMarker
           </Button>
-          <Button onClick={() => handleSubmit(false)} color="primary">
-            Leaf
+          <Button onClick={() => handleSubmit(false, "marker")} color="primary">
+            LeafMarker
+          </Button>
+          <Button
+            onClick={() => handleSubmit(true, "polyline")}
+            color="primary"
+          >
+            DirPoly
+          </Button>
+          <Button
+            onClick={() => handleSubmit(false, "polyline")}
+            color="primary"
+          >
+            LeafPoly
           </Button>
         </DialogActions>
       </Dialog>

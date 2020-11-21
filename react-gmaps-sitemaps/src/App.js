@@ -3,13 +3,16 @@ import { MapProvider } from "./components/MapContext";
 import Map from "./components/Map";
 import SiteTree from "./components/SiteTree";
 import HistoryDrawer from "./components/HistoryDrawer";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(
+    "true" === localStorage.getItem("darkMode") || false
+  );
+
   const theme = createMuiTheme({
     palette: {
       type: darkMode ? "dark" : "light",

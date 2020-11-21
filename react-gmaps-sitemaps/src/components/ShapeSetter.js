@@ -36,11 +36,12 @@ const ShapeSetter = () => {
   return (
     <>
       {shapes.map((shape) => {
+        // !!!this is crazy inefficient: O(n^2), n = total nodes!!!
         let node = findNode(shape.value);
-        console.log("NODE", node);
+        // console.log("NODE", node);
         // if a node has been deleted or is missing
         if (node === null) {
-          return <></>;
+          return null;
         }
         if (node.nodeType === "marker") {
           return (
@@ -77,7 +78,7 @@ const ShapeSetter = () => {
             />
           );
         } else {
-          return <></>;
+          return null;
         }
       })}
     </>

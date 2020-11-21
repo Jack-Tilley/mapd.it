@@ -45,11 +45,25 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
     setColor,
     findNode,
     removeNode,
+    nodeType,
+    setNodeType,
+    disabled,
+    setDisabled,
+    editing,
+    setEditing,
+    editValue,
+    setEditValue,
+    replaceNode,
+    editCleanup,
+    changeIcons,
   ] = useContext(MapContext);
 
   const handleSubmit = (needsLocationChange) => {
     if (needsLocationChange) {
-      setActiveNode(selected);
+      setEditValue(value);
+      console.log("selected5", selected);
+      setNodeType(selected.nodeType);
+      setEditing(true);
       setDraw(true);
     } else {
       axios
@@ -60,7 +74,20 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
           iconValue: icon,
         })
         .then((res) => {
-          console.log(res);
+          if (res.data.parent === null) {
+            console.log("THIS IS A LONE NODE");
+            let newNodes = replaceNode(selected.id, res.data);
+            setNodes(newNodes);
+          } else {
+            axios
+              .get(`http://localhost:8000/api/nodes/${res.data.parent}`)
+              .then((result) => {
+                let newNodes = replaceNode(res.data.parent, result.data);
+                setNodes(newNodes);
+              })
+              .catch((err) => console.log(err));
+          }
+          editCleanup(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -69,13 +96,7 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
       // then update references to that node
     }
     setEditOpen(false);
-    setSelected(null);
-    console.log(selected);
-
-    // setDraw(true);
-    // addItem(event, isDir);
-    // setModalOpen(false);
-    // setEvent("");
+    console.log("selected", selected);
   };
 
   const handleClose = () => {

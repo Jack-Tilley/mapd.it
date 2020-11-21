@@ -18,13 +18,13 @@ import ColorContainer from "./ColorContainer";
 
 import { MapContext } from "./MapContext";
 
-const AddRework = ({
+const AddNodeModal = ({
   modalOpen,
   setModalOpen,
   value,
   setValue,
-  //   nodeType,
-  //   setNodeType,
+  nodeType,
+  setNodeType,
   addItem,
   event,
   setEvent,
@@ -53,14 +53,11 @@ const AddRework = ({
     setColor,
     findNode,
     removeNode,
-    nodeType,
-    setNodeType,
   ] = useContext(MapContext);
 
-  const handleSubmit = (isDir, type) => {
-    setNodeType(type);
+  const handleSubmit = (isDir) => {
     setDraw(true);
-    addItem(event, isDir, type);
+    addItem(event, isDir);
     setModalOpen(false);
     setEvent("");
   };
@@ -122,23 +119,11 @@ const AddRework = ({
           <Button onClick={handleClose} color="default">
             Cancel
           </Button>
-          <Button onClick={() => handleSubmit(true, "marker")} color="primary">
-            DirMarker
+          <Button onClick={() => handleSubmit(true)} color="primary">
+            Dir
           </Button>
-          <Button onClick={() => handleSubmit(false, "marker")} color="primary">
-            LeafMarker
-          </Button>
-          <Button
-            onClick={() => handleSubmit(true, "polyline")}
-            color="primary"
-          >
-            DirPoly
-          </Button>
-          <Button
-            onClick={() => handleSubmit(false, "polyline")}
-            color="primary"
-          >
-            LeafPoly
+          <Button onClick={() => handleSubmit(false)} color="primary">
+            Leaf
           </Button>
         </DialogActions>
       </Dialog>
@@ -146,4 +131,4 @@ const AddRework = ({
   );
 };
 
-export default AddRework;
+export default AddNodeModal;
