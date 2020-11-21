@@ -91,6 +91,63 @@ export const MapProvider = (props) => {
     return null;
   };
 
+  // const replaceNode = (nodeValue, updatedNode) => {
+  //   let newNodes = [...nodes];
+  //   console.log("NODES AT THIS POINT", newNodes);
+  //   for (let i = 0; i < newNodes.length; i++) {
+  //     if (newNodes[i].value === nodeValue) {
+  //       newNodes[i] = updatedNode;
+  //       console.log("newNodes[i]", newNodes[i]);
+  //       return setNodes(newNodes);
+  //     }
+  //     if (nodes[i].children !== undefined) {
+  //       for (let j = 0; j < newNodes[i].children.length; j++) {
+  //         if (
+  //           newNodes[i].children &&
+  //           newNodes[i].children[j].value === nodeValue
+  //         ) {
+  //           let newNode = newNodes[i];
+  //           let children = newNodes[i].children;
+  //           children[j] = updatedNode;
+  //           newNode.children = children;
+  //           newNodes[i] = newNode;
+
+  //           return setNodes(newNodes);
+  //         }
+  //       }
+  //     }
+  //   }
+  //   return setNodes(newNodes);
+  // };
+  const replaceNode = (nodeValue, updatedNode) => {
+    let newNodes = [...nodes];
+    console.log("NODES AT THIS POINT", newNodes);
+    for (let i = 0; i < newNodes.length; i++) {
+      if (newNodes[i].id === nodeValue) {
+        newNodes[i] = updatedNode;
+        console.log("newNodes[i]", newNodes[i]);
+        return setNodes(newNodes);
+      }
+      if (nodes[i].children !== undefined) {
+        for (let j = 0; j < newNodes[i].children.length; j++) {
+          if (
+            newNodes[i].children &&
+            newNodes[i].children[j].id === nodeValue
+          ) {
+            let newNode = newNodes[i];
+            let children = newNodes[i].children;
+            children[j] = updatedNode;
+            newNode.children = children;
+            newNodes[i] = newNode;
+
+            return setNodes(newNodes);
+          }
+        }
+      }
+    }
+    return setNodes(newNodes);
+  };
+
   const removeNode = (nodeValue) => {
     let newNodes = [...nodes];
     for (let i = 0; i < newNodes.length; i++) {
@@ -123,6 +180,7 @@ export const MapProvider = (props) => {
           }
         }
         res.data.unshift(addNode);
+        console.log("initial Nodes", res.data);
 
         setNodes(res.data);
       })
@@ -163,6 +221,7 @@ export const MapProvider = (props) => {
         setEditing,
         editValue,
         setEditValue,
+        replaceNode,
       ]}
     >
       {props.children}

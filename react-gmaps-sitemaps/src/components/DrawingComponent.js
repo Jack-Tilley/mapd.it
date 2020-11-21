@@ -39,6 +39,7 @@ const DrawingComponent = () => {
     setEditing,
     editValue,
     setEditValue,
+    replaceNode,
   ] = useContext(MapContext);
 
   const options = {
@@ -82,8 +83,14 @@ const DrawingComponent = () => {
   };
 
   const onMarkerComplete = (marker) => {
-    marker.title = activeNode.label;
-    marker.label = activeNode.label;
+    if (editing) {
+      marker.title = editValue;
+      marker.label = editValue;
+    } else {
+      marker.title = activeNode.label;
+      marker.label = activeNode.label;
+    }
+    console.log("marker");
     marker.icon = <i className={`material-icons icon-${color}`}>{icon}</i>;
     console.log("marker", marker);
     // marker.icon = icon // need to figure out how to get custom icon
@@ -110,17 +117,33 @@ const DrawingComponent = () => {
           latLngArr: position,
         })
         .then((res) => {
-          // let newSelected = selected
-          // newSelected.value = editValue
-          // newSelected.label = editValue
+          console.log("result", res.data);
+          // REPLACE NODE IN HERE WITH THE RESULT
           setEditing(false);
-          setChecked(
-            checked.filter((node) => node !== selected.value),
-            editValue
+          console.log("parent", res.data.parent);
+          if (res.data.parent === null) {
+            console.log("THIS IS A LONE NODE");
+            replaceNode(selected.id, res.data);
+          } else {
+            axios
+              .get(`http://localhost:8000/api/allNodes/${res.data.parent}`)
+              .then((result) => {
+                replaceNode(res.data.parent, result.data);
+              })
+              .catch((err) => console.log(err));
+          }
+          console.log("SELECTEDVALUE", selected.value);
+
+          // cleanup
+          let newChecked = checked.filter((node) => node !== selected.value);
+          newChecked.push(res.data.value);
+          setChecked(newChecked);
+          let newShapes = shapes.filter(
+            (node) => node.value !== selected.value
           );
-          setShapes(shapes.filter((node) => node.value !== selected.value));
-          // setChecked([...checked, newActiveNode.value]);
-          // setShapes([...shapes, newActiveNode]);
+          newShapes.push(res.data);
+          setShapes(newShapes);
+          setSelected(null);
           setIcon("search");
           setColor("black");
           setNodeType(null);
