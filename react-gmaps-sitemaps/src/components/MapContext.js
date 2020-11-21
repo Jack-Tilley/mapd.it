@@ -122,7 +122,6 @@ export const MapProvider = (props) => {
         disabled: true,
       });
     }
-
     return newNode;
   };
 
