@@ -40,6 +40,8 @@ const DrawingComponent = () => {
     editValue,
     setEditValue,
     replaceNode,
+    editCleanup,
+    changeIcons,
   ] = useContext(MapContext);
 
   const options = {
@@ -123,32 +125,20 @@ const DrawingComponent = () => {
           console.log("parent", res.data.parent);
           if (res.data.parent === null) {
             console.log("THIS IS A LONE NODE");
-            replaceNode(selected.id, res.data);
+            let newNodes = replaceNode(selected.id, res.data);
+            setNodes(newNodes);
           } else {
             axios
-              .get(`http://localhost:8000/api/allNodes/${res.data.parent}`)
+              .get(`http://localhost:8000/api/nodes/${res.data.parent}`)
               .then((result) => {
-                replaceNode(res.data.parent, result.data);
+                let newNodes = replaceNode(res.data.parent, result.data);
+                setNodes(newNodes);
               })
               .catch((err) => console.log(err));
           }
           console.log("SELECTEDVALUE", selected.value);
-
           // cleanup
-          let newChecked = checked.filter((node) => node !== selected.value);
-          newChecked.push(res.data.value);
-          setChecked(newChecked);
-          let newShapes = shapes.filter(
-            (node) => node.value !== selected.value
-          );
-          newShapes.push(res.data);
-          setShapes(newShapes);
-          setSelected(null);
-          setIcon("search");
-          setColor("black");
-          setNodeType(null);
-          setEditValue("");
-          console.log(res);
+          editCleanup(res.data);
         })
         .catch((err) => {
           console.log(err);

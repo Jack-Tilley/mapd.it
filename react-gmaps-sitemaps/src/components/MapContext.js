@@ -14,7 +14,7 @@ let addNode = {
   label: "+",
   parent: null,
   apiPath: "HI/there",
-  latLngArr: ["40"],
+  latLngArr: ["0", "0"],
   nodeType: "ADD",
   icon: <Add />,
   disabled: true,
@@ -58,6 +58,11 @@ export const MapProvider = (props) => {
     localStorage.setItem("shapes", JSON.stringify(shapes));
   }, [shapes]);
 
+  const updateAddButton = (parentVal, parentPath) => {
+    addNode.value = parentVal + addNode.value;
+    addNode.apiPath = parentPath.value + "/+";
+    return addNode;
+  };
   const changeIcons = (nodes) => {
     for (let i = 0; i < nodes.length; i++) {
       nodes[i].icon = (
@@ -91,61 +96,73 @@ export const MapProvider = (props) => {
     return null;
   };
 
-  // const replaceNode = (nodeValue, updatedNode) => {
-  //   let newNodes = [...nodes];
-  //   console.log("NODES AT THIS POINT", newNodes);
-  //   for (let i = 0; i < newNodes.length; i++) {
-  //     if (newNodes[i].value === nodeValue) {
-  //       newNodes[i] = updatedNode;
-  //       console.log("newNodes[i]", newNodes[i]);
-  //       return setNodes(newNodes);
-  //     }
-  //     if (nodes[i].children !== undefined) {
-  //       for (let j = 0; j < newNodes[i].children.length; j++) {
-  //         if (
-  //           newNodes[i].children &&
-  //           newNodes[i].children[j].value === nodeValue
-  //         ) {
-  //           let newNode = newNodes[i];
-  //           let children = newNodes[i].children;
-  //           children[j] = updatedNode;
-  //           newNode.children = children;
-  //           newNodes[i] = newNode;
+  const changeNodeIcons = (node) => {
+    console.log("NODEINPROGRESS", node);
+    let newNode = node;
+    newNode.icon = (
+      <i className={`material-icons icon-${node.color}`}>{node.iconValue}</i>
+    );
+    if (newNode.isDir && newNode.parent === null) {
+      for (let i = 0; i < newNode.children.length; i++) {
+        let child = newNode.children[i];
+        child.icon = (
+          <i className={`material-icons icon-${child.color}`}>
+            {child.iconValue}
+          </i>
+        );
+        newNode.children[i] = child;
+      }
+      newNode.children.unshift({
+        value: newNode.value + "/+",
+        label: "+",
+        apiPath: newNode.value + "/+",
+        latLngArr: ["0", "0"],
+        nodeType: "ADD",
+        icon: <Add />,
+        disabled: true,
+      });
+    }
 
-  //           return setNodes(newNodes);
-  //         }
-  //       }
-  //     }
-  //   }
-  //   return setNodes(newNodes);
-  // };
-  const replaceNode = (nodeValue, updatedNode) => {
+    return newNode;
+  };
+
+  const replaceNode = (nodeId, updatedNode) => {
     let newNodes = [...nodes];
     console.log("NODES AT THIS POINT", newNodes);
     for (let i = 0; i < newNodes.length; i++) {
-      if (newNodes[i].id === nodeValue) {
-        newNodes[i] = updatedNode;
+      if (newNodes[i].id === nodeId) {
+        // newNodes[i] = updatedNode;
+        newNodes[i] = changeNodeIcons(updatedNode);
+        // newNodes[i] = changeNodeIcons(updatedNode);
+        // newNodes[i].icon = (
+        //   <i className={`material-icons icon-${updatedNode.color}`}>
+        //     {updatedNode.iconValue}
+        //   </i>
+        // );
         console.log("newNodes[i]", newNodes[i]);
-        return setNodes(newNodes);
-      }
-      if (nodes[i].children !== undefined) {
-        for (let j = 0; j < newNodes[i].children.length; j++) {
-          if (
-            newNodes[i].children &&
-            newNodes[i].children[j].id === nodeValue
-          ) {
-            let newNode = newNodes[i];
-            let children = newNodes[i].children;
-            children[j] = updatedNode;
-            newNode.children = children;
-            newNodes[i] = newNode;
-
-            return setNodes(newNodes);
-          }
-        }
+        return newNodes;
       }
     }
-    return setNodes(newNodes);
+    //   if (nodes[i].children !== undefined) {
+    //     for (let j = 0; j < newNodes[i].children.length; j++) {
+    //       if (newNodes[i].children && newNodes[i].children[j].id === nodeId) {
+    //         let newNode = newNodes[i];
+    //         let children = newNodes[i].children;
+    //         children[j] = updatedNode;
+    //         children[j].icon = (
+    //           <i className={`material-icons icon-${children[j].color}`}>
+    //             {children[j].iconValue}
+    //           </i>
+    //         );
+    //         newNode.children = children;
+    //         newNodes[i] = newNode;
+
+    //         return newNodes;
+    //       }
+    //     }
+    //   }
+    // }
+    // return newNodes;
   };
 
   const removeNode = (nodeValue) => {
@@ -160,6 +177,20 @@ export const MapProvider = (props) => {
     return newNodes.filter((node) => node.value !== nodeValue);
   };
 
+  const editCleanup = (data) => {
+    let newChecked = checked.filter((node) => node !== selected.value);
+    newChecked.push(data.value);
+    setChecked(newChecked);
+    let newShapes = shapes.filter((node) => node.value !== selected.value);
+    newShapes.push(data);
+    setShapes(newShapes);
+    setSelected(null);
+    setIcon("search");
+    setColor("black");
+    setNodeType(null);
+    setEditValue("");
+  };
+
   useEffect(() => {
     axios
       .get("http://localhost:8000/api/nodes/")
@@ -172,7 +203,7 @@ export const MapProvider = (props) => {
               value: res.data[i].value + "/+",
               label: "+",
               apiPath: res.data[i].value + "/+",
-              latLngArr: [["40", "-70"]],
+              latLngArr: ["0", "0"],
               nodeType: "ADD",
               icon: <Add />,
               disabled: true,
@@ -222,6 +253,8 @@ export const MapProvider = (props) => {
         editValue,
         setEditValue,
         replaceNode,
+        editCleanup,
+        changeIcons,
       ]}
     >
       {props.children}
