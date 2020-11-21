@@ -15,6 +15,7 @@ import Divider from "@material-ui/core/Divider";
 
 import IconContainer from "./IconContainer";
 import ColorContainer from "./ColorContainer";
+import DirContainer from "./DirContainer";
 
 import { MapContext } from "./MapContext";
 
@@ -23,8 +24,6 @@ const AddNodeModal = ({
   setModalOpen,
   value,
   setValue,
-  //   nodeType,
-  //   setNodeType,
   addItem,
   event,
   setEvent,
@@ -59,12 +58,15 @@ const AddNodeModal = ({
     setDisabled,
   ] = useContext(MapContext);
 
-  const handleSubmit = (isDir, type) => {
+  const [isDir, setIsDir] = useState(true);
+
+  const handleSubmit = (type) => {
     setNodeType(type);
     setDraw(true);
     addItem(event, isDir, type);
     setModalOpen(false);
     setEvent("");
+    setIsDir(true);
   };
 
   const handleClose = () => {
@@ -79,6 +81,11 @@ const AddNodeModal = ({
     setColor(event.target.value);
   };
 
+  const handleDirChange = (event) => {
+    console.log("event", event.target.value);
+    setIsDir(event.target.value);
+  };
+
   return (
     <div>
       <Dialog
@@ -88,15 +95,18 @@ const AddNodeModal = ({
       >
         <DialogTitle id="form-dialog-title">Add New Node</DialogTitle>
         <DialogContent id="buttons">
-          <Grid container spacing={3}>
-            <Grid item xs={9}>
+          <Grid container spacing={1}>
+            <Grid item xs={8}>
               <IconContainer handleButtonClick={handleButtonClick} />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={2}>
               <ColorContainer
                 handleColorChange={handleColorChange}
                 color={color}
               />
+            </Grid>
+            <Grid item xs={1}>
+              <DirContainer handleDirChange={handleDirChange} isDir={isDir} />
             </Grid>
           </Grid>
         </DialogContent>
@@ -124,23 +134,11 @@ const AddNodeModal = ({
           <Button onClick={handleClose} color="default">
             Cancel
           </Button>
-          <Button onClick={() => handleSubmit(true, "marker")} color="primary">
-            DirMarker
+          <Button onClick={() => handleSubmit("marker")} color="primary">
+            Marker
           </Button>
-          <Button onClick={() => handleSubmit(false, "marker")} color="primary">
-            LeafMarker
-          </Button>
-          <Button
-            onClick={() => handleSubmit(true, "polyline")}
-            color="primary"
-          >
-            DirPoly
-          </Button>
-          <Button
-            onClick={() => handleSubmit(false, "polyline")}
-            color="primary"
-          >
-            LeafPoly
+          <Button onClick={() => handleSubmit("polyline")} color="primary">
+            Polyline
           </Button>
         </DialogActions>
       </Dialog>
