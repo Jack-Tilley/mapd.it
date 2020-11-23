@@ -61,7 +61,6 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
   const handleSubmit = (needsLocationChange) => {
     if (needsLocationChange) {
       setEditValue(value);
-      console.log("selected5", selected);
       setNodeType(selected.nodeType);
       setEditing(true);
       setDraw(true);
@@ -75,7 +74,7 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
         })
         .then((res) => {
           if (res.data.parent === null) {
-            console.log("THIS IS A LONE NODE");
+            // console.log("THIS IS A LONE NODE");
             let newNodes = replaceNode(selected.id, res.data);
             setNodes(newNodes);
           } else {
@@ -96,7 +95,7 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
       // then update references to that node
     }
     setEditOpen(false);
-    console.log("selected", selected);
+    // console.log("selected", selected);
   };
 
   const handleClose = () => {
@@ -112,14 +111,13 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
   };
 
   const handleDelete = () => {
-    console.log("selected", selected);
+    // console.log("selected", selected);
     // warning confirmation then...
     axios
       .delete(`http://localhost:8000/api/allNodes/${selected.id}`)
       .then((res) => {
         setEditOpen(false);
         let newNodes = removeNode(selected.value);
-        console.log("NEWNODES", newNodes);
         // this should be updated to not loop through each node multiple times
         setShapes(shapes.filter((node) => node.value !== selected.value));
         setChecked(checked.filter((check) => check !== selected.value));
