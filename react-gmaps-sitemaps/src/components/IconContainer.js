@@ -10,12 +10,10 @@ import FormLabel from "@material-ui/core/FormLabel";
 const IconContainer = ({ handleButtonClick, handleColorChange, color }) => {
   const getAllIcons = () => {};
   return (
-    <>
-      <IconList
-        handleButtonClick={handleButtonClick}
-        style={{ overflow: "auto" }}
-      />
-    </>
+    <div style={{ overflow: "auto", maxHeight: "200px", paddingBottom: "1em" }}>
+      <FormLabel>Icons</FormLabel>
+      <IconList handleButtonClick={handleButtonClick} />
+    </div>
   );
 };
 export default IconContainer;

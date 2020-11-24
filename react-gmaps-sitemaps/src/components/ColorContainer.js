@@ -82,8 +82,9 @@ const ColorContainer = ({ handleColorChange, color }) => {
       <FormControl component="fieldset">
         <FormLabel component="legend">Colors</FormLabel>
         <RadioGroup
-          aria-label="gender"
-          name="gender1"
+          row
+          aria-label="colors"
+          name="colors"
           value={color}
           onChange={handleColorChange}
         >

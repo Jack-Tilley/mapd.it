@@ -16,6 +16,7 @@ const DirContainer = ({ handleDirChange, isDir }) => {
           name="gender1"
           value={isDir}
           onChange={handleDirChange}
+          row
         >
           <FormControlLabel value="true" control={<Radio />} />
           <FormControlLabel value="false" control={<Radio />} />

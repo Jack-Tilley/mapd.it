@@ -1,7 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 
-import axios from "axios";
-
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -22,10 +20,19 @@ import Divider from "@material-ui/core/Divider";
 
 import IconContainer from "./IconContainer";
 import ColorContainer from "./ColorContainer";
+import DirContainer from "./DirContainer";
 
 import { MapContext } from "./MapContext";
 
-const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
+const ModalDesignRework = ({
+  modalOpen,
+  setModalOpen,
+  value,
+  setValue,
+  addItem,
+  event,
+  setEvent,
+}) => {
   const [
     myMap,
     setMyMap,
@@ -69,49 +76,19 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
     setLabel,
   ] = useContext(MapContext);
 
-  const handleSubmit = (needsLocationChange) => {
-    if (needsLocationChange) {
-      setEditValue(value);
-      setNodeType(selected.nodeType);
-      setEditing(true);
-      setDraw(true);
-    } else {
-      axios
-        .put(`http://localhost:8000/api/allNodes/${selected.id}/`, {
-          value: value,
-          label: value,
-          color: color,
-          iconValue: icon,
-          description: description,
-        })
-        .then((res) => {
-          if (res.data.parent === null) {
-            // console.log("THIS IS A LONE NODE");
-            let newNodes = replaceNode(selected.id, res.data);
-            setNodes(newNodes);
-          } else {
-            axios
-              .get(`http://localhost:8000/api/nodes/${res.data.parent}`)
-              .then((result) => {
-                let newNodes = replaceNode(res.data.parent, result.data);
-                setNodes(newNodes);
-              })
-              .catch((err) => console.log(err));
-          }
-          editCleanup(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      // axios.put to api/node/<nodeid>
-      // then update references to that node
-    }
-    setEditOpen(false);
-    // console.log("selected", selected);
+  const [isDir, setIsDir] = useState(true);
+
+  const handleSubmit = (type) => {
+    setNodeType(type);
+    setDraw(true);
+    addItem(event, isDir, type);
+    setModalOpen(false);
+    setEvent("");
+    setIsDir(true);
   };
 
   const handleClose = () => {
-    setEditOpen(false);
+    setModalOpen(false);
   };
 
   const handleButtonClick = (btnIcon) => {
@@ -122,34 +99,27 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
     setColor(event.target.value);
   };
 
-  const handleDelete = () => {
-    // console.log("selected", selected);
-    // warning confirmation then...
-    axios
-      .delete(`http://localhost:8000/api/allNodes/${selected.id}`)
-      .then((res) => {
-        setEditOpen(false);
-        let newNodes = removeNode(selected.value);
-        // this should be updated to not loop through each node multiple times
-        setShapes(shapes.filter((node) => node.value !== selected.value));
-        setChecked(checked.filter((check) => check !== selected.value));
-        setNodes(newNodes);
-        setSelected(null);
-        //setShapes, setChecked, set others, set activeNode, setNodes()
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const handleDirChange = (event) => {
+    console.log("event", event.target.value);
+    setIsDir(event.target.value);
+  };
+
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value);
+  };
+  const handleCommentChange = (event) => {
+    setComment(event.target.value);
   };
 
   return (
     <div>
       <Dialog
-        open={editOpen}
+        open={modalOpen}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
+        scroll="paper"
       >
-        <DialogTitle id="form-dialog-title">Edit Existing Node</DialogTitle>
+        <DialogTitle id="form-dialog-title">Add New Node</DialogTitle>
         <DialogContent scroll="paper" dividers={true}>
           <Grid container spacing={1}>
             <Grid item xs={6}>
@@ -175,6 +145,7 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
                 id="multiline-flexible"
                 margin="dense"
                 label="Description..."
+                placeholder="Description goes here..."
                 multiline
                 rows={6}
                 value={description}
@@ -199,6 +170,12 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
                     <FormHelperText>Label</FormHelperText>
                   </FormControl>
                 </Grid>
+                <Grid item xs={6}>
+                  <DirContainer
+                    handleDirChange={handleDirChange}
+                    isDir={isDir}
+                  />
+                </Grid>
               </Grid>
             </Grid>
             <Grid item xs={1} style={{ paddingRight: 0 }}>
@@ -217,17 +194,14 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleDelete} color="secondary">
-            DELETE
-          </Button>
           <Button onClick={handleClose} color="default">
             Cancel
           </Button>
-          <Button onClick={() => handleSubmit(true)} color="primary">
-            Update Location
+          <Button onClick={() => handleSubmit("marker")} color="primary">
+            Marker
           </Button>
-          <Button onClick={() => handleSubmit(false)} color="primary">
-            Keep Location
+          <Button onClick={() => handleSubmit("polyline")} color="primary">
+            Polyline
           </Button>
         </DialogActions>
       </Dialog>
@@ -235,4 +209,43 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
   );
 };
 
-export default EditNodeModal;
+export default ModalDesignRework;
+
+{
+  /* <DialogContent id="buttons">
+          <Grid container spacing={1}>
+            <Grid item xs={8}>
+              <IconContainer handleButtonClick={handleButtonClick} />
+            </Grid>
+            <Grid item xs={2}>
+              <ColorContainer
+                handleColorChange={handleColorChange}
+                color={color}
+              />
+            </Grid>
+            <Grid item xs={1}>
+              <DirContainer handleDirChange={handleDirChange} isDir={isDir} />
+            </Grid>
+          </Grid>
+        </DialogContent>
+        <DialogContent id="text">
+          <TextField
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <i className={`material-icons icon-${color}`}>{icon}</i>
+                </InputAdornment>
+              ),
+            }}
+            autoFocus
+            value={value}
+            margin="dense"
+            placeholder="Give your item a title"
+            id="name"
+            label="Node Name"
+            type="text"
+            onChange={(e) => setValue(e.target.value)}
+            fullWidth
+          />
+        </DialogContent> */
+}

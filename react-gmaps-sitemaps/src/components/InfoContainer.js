@@ -30,6 +30,23 @@ const InfoContainer = () => {
     setColor,
     findNode,
     removeNode,
+    nodeType,
+    setNodeType,
+    disabled,
+    setDisabled,
+    editing,
+    setEditing,
+    editValue,
+    setEditValue,
+    replaceNode,
+    editCleanup,
+    changeIcons,
+    description,
+    setDescription,
+    comment,
+    setComment,
+    label,
+    setLabel,
   ] = useContext(MapContext);
 
   const [editOpen, setEditOpen] = useState(false);
@@ -39,6 +56,7 @@ const InfoContainer = () => {
     setColor(selected.color);
     setIcon(selected.iconValue);
     setValue(selected.label);
+    setDescription(selected.description);
     console.log("selected", selected);
     setEditOpen(true);
   };
@@ -55,7 +73,7 @@ const InfoContainer = () => {
     >
       <Paper>
         <h4>{selected.label}</h4>
-        <p>{selected.latLngArr}</p>
+        <p>{selected.description}</p>
         <button onClick={handleEditClick}>EDIT</button>
         <EditNodeModal
           editOpen={editOpen}
