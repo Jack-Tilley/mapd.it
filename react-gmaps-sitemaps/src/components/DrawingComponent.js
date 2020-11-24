@@ -42,6 +42,12 @@ const DrawingComponent = () => {
     replaceNode,
     editCleanup,
     changeIcons,
+    description,
+    setDescription,
+    comment,
+    setComment,
+    label,
+    setLabel,
   ] = useContext(MapContext);
 
   const options = {
@@ -69,6 +75,7 @@ const DrawingComponent = () => {
     setIcon("search");
     setNodeType(null);
     setActiveNode(null);
+    setDescription("");
   };
 
   const onPolylineComplete = (polyline) => {
@@ -117,6 +124,7 @@ const DrawingComponent = () => {
           color: color,
           iconValue: icon,
           latLngArr: position,
+          description: description,
         })
         .then((res) => {
           console.log("result", res.data);
@@ -160,6 +168,7 @@ const DrawingComponent = () => {
           isDir: newActiveNode.isDir,
           iconValue: icon,
           color: color,
+          description: description,
         })
         .then((res) => {
           newActiveNode.id = res.data.id;
@@ -168,6 +177,7 @@ const DrawingComponent = () => {
           setShapes([...shapes, newActiveNode]);
           setIcon("search");
           setColor("black");
+          setDescription("");
           setNodeType(null);
         })
         .catch((err) => console.log(err));

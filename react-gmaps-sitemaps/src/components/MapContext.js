@@ -43,6 +43,9 @@ export const MapProvider = (props) => {
   const [disabled, setDisabled] = useState(false);
   const [editing, setEditing] = useState(false);
   const [editValue, setEditValue] = useState("");
+  const [description, setDescription] = useState("");
+  const [comment, setComment] = useState("");
+  const [label, setLabel] = useState("");
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -127,11 +130,9 @@ export const MapProvider = (props) => {
 
   const replaceNode = (nodeId, updatedNode) => {
     let newNodes = [...nodes];
-    console.log("NODES AT THIS POINT", newNodes);
     for (let i = 0; i < newNodes.length; i++) {
       if (newNodes[i].id === nodeId) {
         newNodes[i] = changeNodeIcons(updatedNode);
-        console.log("newNodes[i]", newNodes[i]);
         return newNodes;
       }
     }
@@ -159,6 +160,7 @@ export const MapProvider = (props) => {
     setSelected(null);
     setIcon("search");
     setColor("black");
+    setDescription("");
     setNodeType(null);
     setEditValue("");
   };
@@ -168,7 +170,6 @@ export const MapProvider = (props) => {
       .get("http://localhost:8000/api/nodes/")
       .then((res) => {
         changeIcons(res.data);
-        console.log(res.data);
         for (let i = 0; i < res.data.length; i++) {
           if (res.data[i].isDir) {
             res.data[i].children.unshift({
@@ -183,7 +184,6 @@ export const MapProvider = (props) => {
           }
         }
         res.data.unshift(addNode);
-        console.log("initial Nodes", res.data);
 
         setNodes(res.data);
       })
@@ -227,6 +227,12 @@ export const MapProvider = (props) => {
         replaceNode,
         editCleanup,
         changeIcons,
+        description,
+        setDescription,
+        comment,
+        setComment,
+        label,
+        setLabel,
       ]}
     >
       {props.children}

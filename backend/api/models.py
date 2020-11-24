@@ -24,6 +24,8 @@ class Node(MPTTModel):
                              null=True, default="black")
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    description = models.CharField(
+        max_length=240, null=True, blank=True)
 
     # def __str__(self):
     #     return self.label

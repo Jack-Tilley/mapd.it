@@ -8,6 +8,7 @@ import "react-checkbox-tree/lib/react-checkbox-tree.css";
 import AddNodeModal from "./AddNodeModal";
 import { MapContext } from "./MapContext";
 import { Paper } from "@material-ui/core";
+import ModalDesignRework from "./ModalDesignRework";
 
 const SiteTree = () => {
   const [
@@ -38,6 +39,19 @@ const SiteTree = () => {
     setNodeType,
     disabled,
     setDisabled,
+    editing,
+    setEditing,
+    editValue,
+    setEditValue,
+    replaceNode,
+    editCleanup,
+    changeIcons,
+    description,
+    setDescription,
+    comment,
+    setComment,
+    label,
+    setLabel,
   ] = useContext(MapContext);
   const [expanded, setExpanded] = useState([]);
   const [value, setValue] = useState("");
@@ -95,6 +109,7 @@ const SiteTree = () => {
       icon: <i className={`material-icons icon-${color}`}>{icon}</i>,
       color: color,
       isDir: isDir,
+      description: description,
     };
     if (
       isDir &&
@@ -147,7 +162,7 @@ const SiteTree = () => {
         onExpand={onExpand}
         onClick={onClick}
       ></CheckboxTree>
-      <AddNodeModal
+      <ModalDesignRework
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
         value={value}
