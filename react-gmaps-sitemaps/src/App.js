@@ -3,7 +3,16 @@ import { MapProvider } from "./components/MapContext";
 import Map from "./components/Map";
 import SiteTree from "./components/SiteTree";
 import HistoryDrawer from "./components/HistoryDrawer";
+import Login from "./components/accounts/Login";
+import Register from "./components/accounts/Register";
+import PrivateRoute from "./components/common/PrivateRoute";
 import React, { useState, useEffect } from "react";
+import {
+  HashRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
@@ -23,10 +32,24 @@ function App() {
       <Paper>
         <div style={{ height: "500px" }}>
           <MapProvider>
-            <Map darkMode={darkMode} setDarkMode={setDarkMode} />
-            <div className="treeContainer">
-              <SiteTree />
-            </div>
+            <Router>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/"
+                  component={() => (
+                    <>
+                      <Map darkMode={darkMode} setDarkMode={setDarkMode} />
+                      <div className="treeContainer">
+                        <SiteTree />
+                      </div>
+                    </>
+                  )}
+                />
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/login" component={Login} />
+              </Switch>
+            </Router>
           </MapProvider>
           <HistoryDrawer />
         </div>

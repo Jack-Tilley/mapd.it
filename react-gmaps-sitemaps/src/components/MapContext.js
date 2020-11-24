@@ -2,6 +2,7 @@ import React, { useState, useCallback, createContext, useEffect } from "react";
 import { useLoadScript } from "@react-google-maps/api";
 import axios from "axios";
 import { parse, stringify } from "flatted";
+import { useHistory } from "react-router-dom";
 
 import "react-checkbox-tree/lib/react-checkbox-tree.css";
 
@@ -46,6 +47,13 @@ export const MapProvider = (props) => {
   const [description, setDescription] = useState("");
   const [comment, setComment] = useState("");
   const [label, setLabel] = useState("");
+  const [auth, setAuth] = useState({
+    token: localStorage.getItem("token"),
+    isAuthenticated: null,
+    isLoading: false,
+    user: null,
+  });
+  const history = useHistory();
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -233,6 +241,8 @@ export const MapProvider = (props) => {
         setComment,
         label,
         setLabel,
+        auth,
+        setAuth,
       ]}
     >
       {props.children}

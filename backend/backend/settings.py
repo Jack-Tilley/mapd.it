@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'mptt',
     'corsheaders',
     'rest_framework',
+    'knox',
     'simple_history'
 ]
 
@@ -73,6 +74,12 @@ TEMPLATES = [
         },
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'knox.auth.TokenAuthentication',
+    ]
+}
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
