@@ -43,6 +43,7 @@ function App() {
                       <div className="treeContainer">
                         <SiteTree />
                       </div>
+                      <HistoryDrawer />
                     </>
                   )}
                 />
@@ -51,7 +52,6 @@ function App() {
               </Switch>
             </Router>
           </MapProvider>
-          <HistoryDrawer />
         </div>
       </Paper>
     </ThemeProvider>

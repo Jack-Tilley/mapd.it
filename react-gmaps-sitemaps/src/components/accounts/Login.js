@@ -54,7 +54,6 @@ const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(history);
     axios
       .post("http://localhost:8000/api/login/", {
         username: username,
@@ -71,7 +70,9 @@ const Login = () => {
         return history.push("/");
       })
 
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log("Error logging in", err);
+      });
   };
 
   return (

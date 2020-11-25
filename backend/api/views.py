@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .serializers import NodeSerializer, HistorySerializer
-from .models import Node
+from .serializers import NodeSerializer, HistorySerializer, TeamSerializer
+from .models import Node, Team
 from rest_framework import generics, permissions
 from rest_framework.response import Response
 from knox.models import AuthToken
@@ -23,6 +23,12 @@ class AllNodesView(viewsets.ModelViewSet):
     # this view should probably be the same as NodeView at somepoint
     serializer_class = NodeSerializer
     queryset = Node.objects.all()
+
+
+class TeamsView(viewsets.ModelViewSet):
+    # this view should probably be the same as NodeView at somepoint
+    serializer_class = TeamSerializer
+    queryset = Team.objects.all()
 
 
 class HistoryView(viewsets.ModelViewSet):
@@ -52,5 +58,9 @@ class LoginAPI(KnoxLoginView):
         serializer = AuthTokenSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
+        user_id = user.id
         login(request, user)
-        return super(LoginAPI, self).post(request, format=None)
+        res = super(LoginAPI, self).post(request, format=None)
+        res.data['user_id'] = user_id
+        return Response(res.data)
+        # return super(LoginAPI, self).post(request, format=None)

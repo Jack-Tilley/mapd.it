@@ -3,9 +3,18 @@ from mptt.models import MPTTModel, TreeForeignKey
 from django.db.models import JSONField
 from django.contrib.postgres.fields import ArrayField
 from simple_history import register
+from django.contrib.auth.models import User
 
+
+class Team(models.Model):
+    name = models.CharField(max_length=64, unique=True)
+    description = models.TextField(max_length=1024)
+    # owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    users = models.ManyToManyField(User, null=True, blank=True)
 
 # classic node model
+
+
 class Node(MPTTModel):
     label = models.CharField(max_length=50, null=True, blank=True)
     value = models.CharField(
@@ -26,6 +35,8 @@ class Node(MPTTModel):
     modified = models.DateTimeField(auto_now=True)
     description = models.CharField(
         max_length=240, null=True, blank=True)
+    # team = models.ForeignKey(
+    #     Team, null=True, blank=True, on_delete=models.CASCADE)
 
     # def __str__(self):
     #     return self.label

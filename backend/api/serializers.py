@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Node
+from .models import Node, Team
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 from django.contrib.auth.models import User
@@ -35,6 +35,12 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'email')
+
+
+class TeamSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Team
+        fields = ('id', 'name', 'description', 'owner', 'users')
 
 # Register Serializer
 
