@@ -15,7 +15,7 @@ class NodeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Node
         fields = ('id', 'label', 'value', 'parent',
-                  'apiPath', 'nodeType', 'nodeReference', 'latLngArr', 'isDir', 'icon', "iconValue", 'color', "created", "description", "modified", 'children',)
+                  'apiPath', 'nodeType', 'nodeReference', 'latLngArr', 'isDir', 'icon', "iconValue", 'color', "created", "description", "modified", 'children', 'team')
 
 
 class HistorySerializer(serializers.ModelSerializer):
@@ -38,9 +38,14 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class TeamSerializer(serializers.ModelSerializer):
+    nodevals = serializers.SerializerMethodField()
+
+    def get_nodevals(self, obj):
+        return obj.nodes.all().values()
+
     class Meta:
         model = Team
-        fields = ('id', 'name', 'description', 'owner', 'users')
+        fields = ('id', 'name', 'description', 'users', 'nodevals')
 
 # Register Serializer
 

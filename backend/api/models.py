@@ -6,13 +6,13 @@ from simple_history import register
 from django.contrib.auth.models import User
 
 
+# classic node model
 class Team(models.Model):
     name = models.CharField(max_length=64, unique=True)
     description = models.TextField(max_length=1024)
     # owner = models.ForeignKey(User, on_delete=models.CASCADE)
     users = models.ManyToManyField(User, null=True, blank=True)
-
-# classic node model
+    nodes = models.ManyToManyField('Node', blank=True, related_name='Node')
 
 
 class Node(MPTTModel):
@@ -35,8 +35,8 @@ class Node(MPTTModel):
     modified = models.DateTimeField(auto_now=True)
     description = models.CharField(
         max_length=240, null=True, blank=True)
-    # team = models.ForeignKey(
-    #     Team, null=True, blank=True, on_delete=models.CASCADE)
+    team = models.ForeignKey(
+        Team, null=True, blank=True, on_delete=models.CASCADE, related_name="Team")
 
     # def __str__(self):
     #     return self.label
