@@ -25,6 +25,7 @@ router.register(r'nodes', views.NodeView, 'nodes')
 router.register(r'history', views.HistoryView, 'history')
 router.register(r'allNodes', views.AllNodesView, 'allNodes')
 router.register(r'teams', views.TeamsView, 'teams')
+router.register(r'profiles', views.ProfilesView, 'profiles')
 
 
 urlpatterns = [

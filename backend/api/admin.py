@@ -1,6 +1,6 @@
 from django.contrib import admin
 from simple_history.admin import SimpleHistoryAdmin
-from .models import Node, Team
+from .models import Node, Team, Profile
 
 
 class NodeAdmin(SimpleHistoryAdmin):
@@ -19,4 +19,5 @@ class NodeAdmin(SimpleHistoryAdmin):
 
 admin.site.register(Node, NodeAdmin)
 admin.site.register(Team)
+admin.site.register(Profile)
 # admin.site.register(NodeHistory, NodeHistoryAdmin)

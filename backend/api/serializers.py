@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Node, Team
+from .models import Node, Team, Profile
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 from django.contrib.auth.models import User
@@ -31,12 +31,6 @@ class HistorySerializer(serializers.ModelSerializer):
 # User Serializer
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'email')
-
-
 class TeamSerializer(serializers.ModelSerializer):
     nodevals = serializers.SerializerMethodField()
 
@@ -45,7 +39,20 @@ class TeamSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Team
-        fields = ('id', 'name', 'description', 'users', 'nodevals')
+        fields = ('id', 'name', 'description', 'nodevals')
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    # teams = serializers.SerializerMethodField()
+    teams = TeamSerializer(many=True, read_only=True)
+
+    # def get_teams(self, obj):
+    #     return obj.teams.all().values()
+
+    class Meta:
+        model = Profile
+        fields = ('id', 'username', 'email', 'teams')
+
 
 # Register Serializer
 

@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .serializers import NodeSerializer, HistorySerializer, TeamSerializer
-from .models import Node, Team
+from .serializers import NodeSerializer, HistorySerializer, TeamSerializer, ProfileSerializer
+from .models import Node, Team, Profile
 from rest_framework import generics, permissions
 from rest_framework.response import Response
 from knox.models import AuthToken
-from .serializers import UserSerializer, RegisterSerializer
+from .serializers import RegisterSerializer
+from django.contrib.auth.models import User
 
 from django.contrib.auth import login
 
@@ -31,6 +32,12 @@ class TeamsView(viewsets.ModelViewSet):
     queryset = Team.objects.all()
 
 
+class ProfilesView(viewsets.ModelViewSet):
+    # this view should probably be the same as NodeView at somepoint
+    serializer_class = ProfileSerializer
+    queryset = Profile.objects.all()
+
+
 class HistoryView(viewsets.ModelViewSet):
     serializer_class = HistorySerializer
     queryset = Node.objects.all()
@@ -46,7 +53,7 @@ class RegisterAPI(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         return Response({
-            "user": UserSerializer(user, context=self.get_serializer_context()).data,
+            "user": ProfileSerializer(user, context=self.get_serializer_context()).data,
             "token": AuthToken.objects.create(user)[1]
         })
 
@@ -62,5 +69,6 @@ class LoginAPI(KnoxLoginView):
         login(request, user)
         res = super(LoginAPI, self).post(request, format=None)
         res.data['user_id'] = user_id
+
         return Response(res.data)
         # return super(LoginAPI, self).post(request, format=None)
