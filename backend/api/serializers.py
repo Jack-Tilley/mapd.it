@@ -42,8 +42,14 @@ class TeamSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'description', 'nodevals')
 
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email')
+
+
 class ProfileSerializer(serializers.ModelSerializer):
-    # teams = serializers.SerializerMethodField()
+    # users = UserSerializer(many=True, read_only=True)
     teams = TeamSerializer(many=True, read_only=True)
 
     # def get_teams(self, obj):
@@ -51,7 +57,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('id', 'username', 'email', 'teams')
+        fields = ('id', 'teams')
 
 
 # Register Serializer
