@@ -15,7 +15,7 @@ class NodeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Node
         fields = ('id', 'label', 'value', 'parent',
-                  'apiPath', 'nodeType', 'nodeReference', 'latLngArr', 'isDir', 'icon', "iconValue", 'color', "created", "description", "modified", 'children', 'team')
+                  'apiPath', 'nodeType', 'nodeReference', 'latLngArr', 'isDir', 'icon', "iconValue", 'color', "created", "description", "modified", 'children')
 
 
 class HistorySerializer(serializers.ModelSerializer):
@@ -32,14 +32,15 @@ class HistorySerializer(serializers.ModelSerializer):
 
 
 class TeamSerializer(serializers.ModelSerializer):
-    nodevals = serializers.SerializerMethodField()
+    # nodevals = serializers.SerializerMethodField()
+    nodes = NodeSerializer(many=True, read_only=True)
 
-    def get_nodevals(self, obj):
-        return obj.nodes.all().values()
+    # def get_nodevals(self, obj):
+    #     return obj.nodes.all().values()
 
     class Meta:
         model = Team
-        fields = ('id', 'name', 'description', 'nodevals')
+        fields = ('id', 'name', 'description', 'nodes')
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -49,15 +50,12 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    # users = UserSerializer(many=True, read_only=True)
+    user = UserSerializer(many=False, read_only=True)
     teams = TeamSerializer(many=True, read_only=True)
-
-    # def get_teams(self, obj):
-    #     return obj.teams.all().values()
 
     class Meta:
         model = Profile
-        fields = ('id', 'teams')
+        fields = ('id', 'user', 'teams')
 
 
 # Register Serializer

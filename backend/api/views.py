@@ -65,6 +65,9 @@ class LoginAPI(KnoxLoginView):
         serializer = AuthTokenSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
+        print('00000000')
+        print(user.id)
+        print('000000000')
         user_id = user.id
         login(request, user)
         res = super(LoginAPI, self).post(request, format=None)
