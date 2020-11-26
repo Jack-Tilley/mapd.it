@@ -47,6 +47,8 @@ const Login = () => {
     setLabel,
     auth,
     setAuth,
+    profileId,
+    setProfileId,
   ] = useContext(MapContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -61,6 +63,7 @@ const Login = () => {
       })
       .then((res) => {
         console.log(res.data);
+        setProfileId(res.data.profile_id);
         localStorage.setItem("token", res.data.token);
         setAuth({
           token: res.data.token,

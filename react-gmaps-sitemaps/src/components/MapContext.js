@@ -53,6 +53,7 @@ export const MapProvider = (props) => {
     isLoading: false,
     user: null,
   });
+  const [profileId, setProfileId] = useState(null);
   const history = useHistory();
 
   const { isLoaded } = useLoadScript({
@@ -175,15 +176,23 @@ export const MapProvider = (props) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/nodes/")
+      .get(`http://localhost:8000/api/profiles/${profileId}`)
       .then((res) => {
-        changeIcons(res.data);
-        for (let i = 0; i < res.data.length; i++) {
-          if (res.data[i].isDir) {
-            res.data[i].children.unshift({
-              value: res.data[i].value + "/+",
+        let teams = res.data.teams;
+        let profileNodes = [];
+        console.log("DATA", res.data);
+        for (let team of teams) {
+          profileNodes.push(team.nodes);
+        }
+        let newNodes = profileNodes[0];
+        console.log(newNodes);
+        changeIcons(newNodes);
+        for (let i = 0; i < newNodes.length; i++) {
+          if (newNodes[i].isDir) {
+            newNodes[i].children.unshift({
+              value: newNodes[i].value + "/+",
               label: "+",
-              apiPath: res.data[i].value + "/+",
+              apiPath: newNodes[i].value + "/+",
               latLngArr: ["0", "0"],
               nodeType: "ADD",
               icon: <i className={`material-icons icon-${"blue"}`}>{"add"}</i>,
@@ -191,12 +200,12 @@ export const MapProvider = (props) => {
             });
           }
         }
-        res.data.unshift(addNode);
+        newNodes.unshift(addNode);
 
-        setNodes(res.data);
+        setNodes(newNodes);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [profileId]);
 
   return (
     <MapContext.Provider
@@ -243,6 +252,8 @@ export const MapProvider = (props) => {
         setLabel,
         auth,
         setAuth,
+        profileId,
+        setProfileId,
       ]}
     >
       {props.children}
