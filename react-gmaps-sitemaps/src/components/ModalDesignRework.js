@@ -21,6 +21,7 @@ import Divider from "@material-ui/core/Divider";
 import IconContainer from "./IconContainer";
 import ColorContainer from "./ColorContainer";
 import DirContainer from "./DirContainer";
+import TeamContainer from "./TeamContainer";
 
 import { MapContext } from "./MapContext";
 

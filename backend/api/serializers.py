@@ -33,7 +33,7 @@ class HistorySerializer(serializers.ModelSerializer):
 
 class TeamSerializer(serializers.ModelSerializer):
     # nodevals = serializers.SerializerMethodField()
-    nodes = NodeSerializer(many=True, read_only=True)
+    nodes = NodeSerializer(many=True, read_only=False)
 
     # def get_nodevals(self, obj):
     #     return obj.nodes.all().values()

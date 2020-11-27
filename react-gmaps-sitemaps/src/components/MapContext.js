@@ -32,12 +32,14 @@ export const MapProvider = (props) => {
   const [activeNode, setActiveNode] = useState(null);
   const [draw, setDraw] = useState(false);
   const [icon, setIcon] = useState("search");
-  const [shapes, setShapes] = useState(
-    JSON.parse(localStorage.getItem("shapes")) || []
-  );
-  const [checked, setChecked] = useState(
-    JSON.parse(localStorage.getItem("checked")) || []
-  );
+  const [shapes, setShapes] = useState([]);
+  const [checked, setChecked] = useState([]);
+  // const [shapes, setShapes] = useState(
+  //   JSON.parse(localStorage.getItem("shapes")) || []
+  // );
+  // const [checked, setChecked] = useState(
+  //   JSON.parse(localStorage.getItem("checked")) || []
+  // );
   const [selected, setSelected] = useState(null);
   const [color, setColor] = useState("black");
   const [nodeType, setNodeType] = useState(null);
@@ -61,14 +63,14 @@ export const MapProvider = (props) => {
     libraries,
   });
 
-  useEffect(() => {
-    console.log("checked added to localStorage", checked);
-    localStorage.setItem("checked", JSON.stringify(checked));
-  }, [checked]);
-  useEffect(() => {
-    console.log("shapes added to localStorage", shapes);
-    localStorage.setItem("shapes", JSON.stringify(shapes));
-  }, [shapes]);
+  // useEffect(() => {
+  //   console.log("checked added to localStorage", checked);
+  //   localStorage.setItem("checked", JSON.stringify(checked));
+  // }, [checked]);
+  // useEffect(() => {
+  //   console.log("shapes added to localStorage", shapes);
+  //   localStorage.setItem("shapes", JSON.stringify(shapes));
+  // }, [shapes]);
 
   const updateAddButton = (parentVal, parentPath) => {
     addNode.value = parentVal + addNode.value;
@@ -182,10 +184,15 @@ export const MapProvider = (props) => {
         let profileNodes = [];
         console.log("DATA", res.data);
         for (let team of teams) {
-          profileNodes.push(team.nodes);
+          for (let node of team.nodes) {
+            profileNodes.push(node);
+          }
         }
-        let newNodes = profileNodes[0];
-        console.log(newNodes);
+        // this removes duplicate nodes, is basically a set for objects
+        let newNodes = [...new Set(profileNodes.map(JSON.stringify))].map(
+          JSON.parse
+        );
+        console.log("newNodes", newNodes);
         changeIcons(newNodes);
         for (let i = 0; i < newNodes.length; i++) {
           if (newNodes[i].isDir) {

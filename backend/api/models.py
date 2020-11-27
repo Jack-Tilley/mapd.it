@@ -31,6 +31,7 @@ class Team(models.Model):
     # users = models.ManyToManyField('Users', null=True, blank=True)
     nodes = models.ManyToManyField('Node', blank=True, related_name='nodes')
 
+
 # classic node model
 
 
@@ -42,7 +43,8 @@ class Node(MPTTModel):
                             null=True, blank=True, related_name='children')
     apiPath = models.CharField(max_length=200, blank=True, null=True)
     nodeType = models.CharField(max_length=20, blank=True, null=True)
-    latLngArr = ArrayField(models.CharField(max_length=40), blank=True)
+    latLngArr = ArrayField(models.CharField(
+        max_length=40), blank=True, null=True)
     # unused should be removed
     nodeReference = JSONField(blank=True, null=True)
     isDir = models.BooleanField(default=False)
@@ -62,6 +64,12 @@ class Node(MPTTModel):
 
     class MPTTMETA:
         order_insertion_by = ['label']
+
+
+# @receiver(post_save, sender=Node)
+# def save_team_nodes(sender, instance, **kwargs):
+#     instance.teams.nodes.add(instance)
+#     instance.teams.add()
 
 
 register(Node)

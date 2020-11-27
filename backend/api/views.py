@@ -13,6 +13,7 @@ from django.contrib.auth import login
 from rest_framework import permissions
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.views import LoginView as KnoxLoginView
+from rest_framework.decorators import action
 
 
 class NodeView(viewsets.ModelViewSet):
@@ -30,6 +31,31 @@ class TeamsView(viewsets.ModelViewSet):
     # this view should probably be the same as NodeView at somepoint
     serializer_class = TeamSerializer
     queryset = Team.objects.all()
+
+    @action(detail=True, methods=['get'], serializer_class=NodeSerializer)
+    def nodes(self, request, pk=None):
+        """
+        Returns a list of all the nodes that the given
+        team owns.
+        """
+        print(request.data)
+        team = self.get_object()
+        nodes = team.nodes.all()
+        return Response(nodes.values())
+
+    @action(detail=True, methods=['post'])
+    def update_nodes(self, request, pk=None):
+        """
+        Returns a list of all the nodes that the given
+        team owns.
+        """
+        print(request.data)
+        node = Node.objects.get(id=request.data['id'])
+        team = self.get_object()
+        team.nodes.add(node)
+        team.save()
+        nodes = team.nodes.all()
+        return Response(nodes.values())
 
 
 class ProfilesView(viewsets.ModelViewSet):
