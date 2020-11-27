@@ -48,6 +48,14 @@ const DrawingComponent = () => {
     setComment,
     label,
     setLabel,
+    auth,
+    setAuth,
+    profileId,
+    setProfileId,
+    teams,
+    setTeams,
+    selectedTeams,
+    setSelectedTeams,
   ] = useContext(MapContext);
 
   const options = {
@@ -171,8 +179,27 @@ const DrawingComponent = () => {
           description: description,
         })
         .then((res) => {
+          console.log("res LOOK FOR ID", res.data);
+          if (res.data.parent === null) {
+            for (let teamId of selectedTeams) {
+              axios
+                .post(
+                  `http://localhost:8000/api/teams/${teamId}/update_nodes/`,
+                  {
+                    id: res.data.id,
+                  }
+                )
+                .then((result) => {
+                  console.log(result.data);
+                })
+                .catch((err) => console.log(err));
+            }
+          }
+
+          console.log("NEW NODE ADDED", res.data);
           newActiveNode.id = res.data.id;
           setActiveNode(newActiveNode);
+          setSelectedTeams();
           setChecked([...checked, newActiveNode.value]);
           setShapes([...shapes, newActiveNode]);
           setIcon("search");

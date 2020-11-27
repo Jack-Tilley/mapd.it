@@ -2,6 +2,7 @@ import React, { useState, useCallback, createContext, useEffect } from "react";
 import { useLoadScript } from "@react-google-maps/api";
 import axios from "axios";
 import { parse, stringify } from "flatted";
+import { useHistory } from "react-router-dom";
 
 import "react-checkbox-tree/lib/react-checkbox-tree.css";
 
@@ -31,12 +32,14 @@ export const MapProvider = (props) => {
   const [activeNode, setActiveNode] = useState(null);
   const [draw, setDraw] = useState(false);
   const [icon, setIcon] = useState("search");
-  const [shapes, setShapes] = useState(
-    JSON.parse(localStorage.getItem("shapes")) || []
-  );
-  const [checked, setChecked] = useState(
-    JSON.parse(localStorage.getItem("checked")) || []
-  );
+  const [shapes, setShapes] = useState([]);
+  const [checked, setChecked] = useState([]);
+  // const [shapes, setShapes] = useState(
+  //   JSON.parse(localStorage.getItem("shapes")) || []
+  // );
+  // const [checked, setChecked] = useState(
+  //   JSON.parse(localStorage.getItem("checked")) || []
+  // );
   const [selected, setSelected] = useState(null);
   const [color, setColor] = useState("black");
   const [nodeType, setNodeType] = useState(null);
@@ -46,20 +49,30 @@ export const MapProvider = (props) => {
   const [description, setDescription] = useState("");
   const [comment, setComment] = useState("");
   const [label, setLabel] = useState("");
+  const [auth, setAuth] = useState({
+    token: localStorage.getItem("token"),
+    isAuthenticated: null,
+    isLoading: false,
+    user: null,
+  });
+  const [profileId, setProfileId] = useState(null);
+  const [teams, setTeams] = useState([]);
+  const [selectedTeams, setSelectedTeams] = useState([]);
+  const history = useHistory();
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
 
-  useEffect(() => {
-    console.log("checked added to localStorage", checked);
-    localStorage.setItem("checked", JSON.stringify(checked));
-  }, [checked]);
-  useEffect(() => {
-    console.log("shapes added to localStorage", shapes);
-    localStorage.setItem("shapes", JSON.stringify(shapes));
-  }, [shapes]);
+  // useEffect(() => {
+  //   console.log("checked added to localStorage", checked);
+  //   localStorage.setItem("checked", JSON.stringify(checked));
+  // }, [checked]);
+  // useEffect(() => {
+  //   console.log("shapes added to localStorage", shapes);
+  //   localStorage.setItem("shapes", JSON.stringify(shapes));
+  // }, [shapes]);
 
   const updateAddButton = (parentVal, parentPath) => {
     addNode.value = parentVal + addNode.value;
@@ -167,15 +180,34 @@ export const MapProvider = (props) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/nodes/")
+      .get(`http://localhost:8000/api/profiles/${profileId}`)
       .then((res) => {
-        changeIcons(res.data);
-        for (let i = 0; i < res.data.length; i++) {
-          if (res.data[i].isDir) {
-            res.data[i].children.unshift({
-              value: res.data[i].value + "/+",
+        let pteams = res.data.teams;
+        let profileNodes = [];
+        let profileTeams = [];
+        console.log("DATA", res.data);
+        for (let team of pteams) {
+          profileTeams.push({
+            teamId: team.id,
+            teamName: team.name,
+          });
+          for (let node of team.nodes) {
+            profileNodes.push(node);
+          }
+        }
+        setTeams(profileTeams);
+        // this removes duplicate nodes, is basically a set for objects
+        let newNodes = [...new Set(profileNodes.map(JSON.stringify))].map(
+          JSON.parse
+        );
+        console.log("newNodes", newNodes);
+        changeIcons(newNodes);
+        for (let i = 0; i < newNodes.length; i++) {
+          if (newNodes[i].isDir) {
+            newNodes[i].children.unshift({
+              value: newNodes[i].value + "/+",
               label: "+",
-              apiPath: res.data[i].value + "/+",
+              apiPath: newNodes[i].value + "/+",
               latLngArr: ["0", "0"],
               nodeType: "ADD",
               icon: <i className={`material-icons icon-${"blue"}`}>{"add"}</i>,
@@ -183,12 +215,12 @@ export const MapProvider = (props) => {
             });
           }
         }
-        res.data.unshift(addNode);
+        newNodes.unshift(addNode);
 
-        setNodes(res.data);
+        setNodes(newNodes);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [profileId]);
 
   return (
     <MapContext.Provider
@@ -233,6 +265,14 @@ export const MapProvider = (props) => {
         setComment,
         label,
         setLabel,
+        auth,
+        setAuth,
+        profileId,
+        setProfileId,
+        teams,
+        setTeams,
+        selectedTeams,
+        setSelectedTeams,
       ]}
     >
       {props.children}

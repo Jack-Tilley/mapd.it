@@ -3,9 +3,38 @@ from mptt.models import MPTTModel, TreeForeignKey
 from django.db.models import JSONField
 from django.contrib.postgres.fields import ArrayField
 from simple_history import register
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    teams = models.ManyToManyField('Team', blank=True, related_name="teams")
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
+
+
+class Team(models.Model):
+    name = models.CharField(max_length=64, unique=True)
+    description = models.TextField(max_length=1024)
+    # owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    # users = models.ManyToManyField('Users', null=True, blank=True)
+    nodes = models.ManyToManyField('Node', blank=True, related_name='nodes')
 
 
 # classic node model
+
+
 class Node(MPTTModel):
     label = models.CharField(max_length=50, null=True, blank=True)
     value = models.CharField(
@@ -14,7 +43,8 @@ class Node(MPTTModel):
                             null=True, blank=True, related_name='children')
     apiPath = models.CharField(max_length=200, blank=True, null=True)
     nodeType = models.CharField(max_length=20, blank=True, null=True)
-    latLngArr = ArrayField(models.CharField(max_length=40), blank=True)
+    latLngArr = ArrayField(models.CharField(
+        max_length=40), blank=True, null=True)
     # unused should be removed
     nodeReference = JSONField(blank=True, null=True)
     isDir = models.BooleanField(default=False)
@@ -26,12 +56,20 @@ class Node(MPTTModel):
     modified = models.DateTimeField(auto_now=True)
     description = models.CharField(
         max_length=240, null=True, blank=True)
+    # team = models.ForeignKey(
+    #     Team, null=True, blank=True, on_delete=models.CASCADE, related_name="Team")
 
     # def __str__(self):
     #     return self.label
 
     class MPTTMETA:
         order_insertion_by = ['label']
+
+
+# @receiver(post_save, sender=Node)
+# def save_team_nodes(sender, instance, **kwargs):
+#     instance.teams.nodes.add(instance)
+#     instance.teams.add()
 
 
 register(Node)

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from simple_history.admin import SimpleHistoryAdmin
-from .models import Node
+from .models import Node, Team, Profile
 
 
 class NodeAdmin(SimpleHistoryAdmin):
@@ -17,6 +17,7 @@ class NodeAdmin(SimpleHistoryAdmin):
 #     history_list_display = ["label"]
 #     search_fields = ['label']
 
-
 admin.site.register(Node, NodeAdmin)
+admin.site.register(Team)
+admin.site.register(Profile)
 # admin.site.register(NodeHistory, NodeHistoryAdmin)
