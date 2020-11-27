@@ -75,9 +75,18 @@ const ModalDesignRework = ({
     setComment,
     label,
     setLabel,
+    auth,
+    setAuth,
+    profileId,
+    setProfileId,
+    teams,
+    setTeams,
+    selectedTeams,
+    setSelectedTeams,
   ] = useContext(MapContext);
 
   const [isDir, setIsDir] = useState(true);
+  const [teamName, setTeamName] = useState([]);
 
   const handleSubmit = (type) => {
     setNodeType(type);
@@ -110,6 +119,13 @@ const ModalDesignRework = ({
   };
   const handleCommentChange = (event) => {
     setComment(event.target.value);
+  };
+
+  const handleSelectedTeamChange = (event) => {
+    setTeamName(event.target.value);
+    console.log(teamName);
+    setSelectedTeams(teamName);
+    console.log(selectedTeams);
   };
 
   return (
@@ -155,8 +171,18 @@ const ModalDesignRework = ({
                 fullWidth
               />
 
-              <Grid container spacing={1} style={{ paddingTop: "1em" }}>
+              <Grid container spacing={10} style={{ paddingTop: "1em" }}>
                 <Grid item xs={6}>
+                  <TeamContainer
+                    teams={teams}
+                    selectedTeams={selectedTeams}
+                    setSelectedTeams={setSelectedTeams}
+                    handleSelectedTeamChange={handleSelectedTeamChange}
+                    teamName={teamName}
+                    setTeamName={setTeamName}
+                  />
+                </Grid>
+                {/* <Grid item xs={4}>
                   <FormControl>
                     <Select
                       labelId="Label"
@@ -170,7 +196,7 @@ const ModalDesignRework = ({
                     </Select>
                     <FormHelperText>Label</FormHelperText>
                   </FormControl>
-                </Grid>
+                </Grid> */}
                 <Grid item xs={6}>
                   <DirContainer
                     handleDirChange={handleDirChange}

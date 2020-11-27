@@ -56,6 +56,8 @@ export const MapProvider = (props) => {
     user: null,
   });
   const [profileId, setProfileId] = useState(null);
+  const [teams, setTeams] = useState([]);
+  const [selectedTeams, setSelectedTeams] = useState([]);
   const history = useHistory();
 
   const { isLoaded } = useLoadScript({
@@ -180,14 +182,20 @@ export const MapProvider = (props) => {
     axios
       .get(`http://localhost:8000/api/profiles/${profileId}`)
       .then((res) => {
-        let teams = res.data.teams;
+        let pteams = res.data.teams;
         let profileNodes = [];
+        let profileTeams = [];
         console.log("DATA", res.data);
-        for (let team of teams) {
+        for (let team of pteams) {
+          profileTeams.push({
+            teamId: team.id,
+            teamName: team.name,
+          });
           for (let node of team.nodes) {
             profileNodes.push(node);
           }
         }
+        setTeams(profileTeams);
         // this removes duplicate nodes, is basically a set for objects
         let newNodes = [...new Set(profileNodes.map(JSON.stringify))].map(
           JSON.parse
@@ -261,6 +269,10 @@ export const MapProvider = (props) => {
         setAuth,
         profileId,
         setProfileId,
+        teams,
+        setTeams,
+        selectedTeams,
+        setSelectedTeams,
       ]}
     >
       {props.children}
