@@ -178,6 +178,50 @@ export const MapProvider = (props) => {
     setEditValue("");
   };
 
+  const updateNodes = () => {
+    axios
+      .get(`http://localhost:8000/api/profiles/${profileId}`)
+      .then((res) => {
+        let pteams = res.data.teams;
+        let profileNodes = [];
+        let profileTeams = [];
+        console.log("DATA", res.data);
+        for (let team of pteams) {
+          profileTeams.push({
+            teamId: team.id,
+            teamName: team.name,
+          });
+          for (let node of team.nodes) {
+            profileNodes.push(node);
+          }
+        }
+        setTeams(profileTeams);
+        // this removes duplicate nodes, is basically a set for objects
+        let newNodes = [...new Set(profileNodes.map(JSON.stringify))].map(
+          JSON.parse
+        );
+        console.log("newNodes", newNodes);
+        changeIcons(newNodes);
+        for (let i = 0; i < newNodes.length; i++) {
+          if (newNodes[i].isDir) {
+            newNodes[i].children.unshift({
+              value: newNodes[i].value + "/+",
+              label: "+",
+              apiPath: newNodes[i].value + "/+",
+              latLngArr: ["0", "0"],
+              nodeType: "ADD",
+              icon: <i className={`material-icons icon-${"blue"}`}>{"add"}</i>,
+              disabled: true,
+            });
+          }
+        }
+        newNodes.unshift(addNode);
+
+        setNodes(newNodes);
+      })
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     axios
       .get(`http://localhost:8000/api/profiles/${profileId}`)
@@ -273,6 +317,7 @@ export const MapProvider = (props) => {
         setTeams,
         selectedTeams,
         setSelectedTeams,
+        updateNodes,
       ]}
     >
       {props.children}

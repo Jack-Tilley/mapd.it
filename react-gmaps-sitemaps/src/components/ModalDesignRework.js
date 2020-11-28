@@ -89,6 +89,7 @@ const ModalDesignRework = ({
   const [teamName, setTeamName] = useState([]);
 
   const handleSubmit = (type) => {
+    setSelectedTeams(teamName);
     setNodeType(type);
     setDraw(true);
     addItem(event, isDir, type);

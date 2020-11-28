@@ -63,10 +63,7 @@ const TeamContainer = ({
   //   const teamVals = teams.map((team) => team.teamName);
 
   const handleChange = (event) => {
-    // console.log(event.target.value);
     setTeamName(event.target.value);
-    setSelectedTeams(teamName);
-    console.log(teamName);
     console.log(selectedTeams);
   };
 

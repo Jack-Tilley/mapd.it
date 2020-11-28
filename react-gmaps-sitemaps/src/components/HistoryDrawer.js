@@ -91,7 +91,7 @@ export default function HistoryDrawer() {
     <div style={{ position: "absolute", right: "1em", top: "1em" }}>
       <Paper>
         <IconButton onClick={toggleDrawer(true)} size="small">
-          <i className="material-icons icon-grey">{"history"}</i>
+          <i className="material-icons icon-grey">{"event_note"}</i>
         </IconButton>
       </Paper>
       <Drawer anchor={"right"} open={open} onClose={toggleDrawer(false)}>

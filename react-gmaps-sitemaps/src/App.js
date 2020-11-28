@@ -3,6 +3,7 @@ import { MapProvider } from "./components/MapContext";
 import Map from "./components/Map";
 import SiteTree from "./components/SiteTree";
 import HistoryDrawer from "./components/HistoryDrawer";
+import RefreshButton from "./components/RefreshButton";
 import Login from "./components/accounts/Login";
 import Register from "./components/accounts/Register";
 import PrivateRoute from "./components/common/PrivateRoute";
@@ -43,7 +44,6 @@ function App() {
                       <div className="treeContainer">
                         <SiteTree />
                       </div>
-                      <HistoryDrawer />
                     </>
                   )}
                 />

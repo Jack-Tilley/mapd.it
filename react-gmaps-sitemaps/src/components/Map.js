@@ -7,6 +7,8 @@ import AutocompleteBox from "./AutocompleteBox";
 import Directions from "./Directions";
 import InfoContainer from "./InfoContainer";
 import SettingsModal from "./SettingsModal";
+import HistoryDrawer from "./HistoryDrawer";
+import RefreshButton from "./RefreshButton";
 
 import { Paper } from "@material-ui/core";
 
@@ -63,6 +65,8 @@ const Map = ({ darkMode, setDarkMode }) => {
           darkMode={darkMode}
           setDarkMode={setDarkMode}
         />
+        <HistoryDrawer />
+        <RefreshButton />
       </GoogleMap>
     </>
   );
