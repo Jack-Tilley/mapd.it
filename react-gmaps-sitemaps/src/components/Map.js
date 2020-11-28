@@ -6,7 +6,7 @@ import ShapeSetter from "./ShapeSetter";
 import AutocompleteBox from "./AutocompleteBox";
 import Directions from "./Directions";
 import InfoContainer from "./InfoContainer";
-import SettingsModal from "./SettingsModal";
+import SettingsModal from "./settings/SettingsModal";
 import HistoryDrawer from "./HistoryDrawer";
 import RefreshButton from "./RefreshButton";
 

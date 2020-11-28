@@ -65,7 +65,7 @@ const TeamContainer = ({
     setTeamObjects(event.target.value);
   };
 
-  // converts ids back to the team object. is slow
+  // converts ids back to the team object. is slow!
   const getTeams = (ids) => {
     let checkedTeams = [];
     for (let id of ids) {
@@ -76,10 +76,10 @@ const TeamContainer = ({
 
   return (
     <FormControl className={classes.formControl}>
-      <InputLabel id="demo-mutiple-checkbox-label">Teams</InputLabel>
+      <InputLabel id="team-mutiple-checkbox-label">Teams</InputLabel>
       <Select
         labelId="demo-mutiple-checkbox-label"
-        id="demo-mutiple-checkbox"
+        id="team-mutiple-checkbox"
         multiple
         value={teamObjects}
         onChange={handleChange}

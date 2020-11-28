@@ -62,7 +62,7 @@ const TeamCreate = ({ newTeam, setNewTeam, profileId, updateNodes }) => {
         value={newTeam}
         margin="dense"
         placeholder="Create a new team"
-        id="name"
+        id="teamcreate"
         label="Create a team"
         type="text"
         onChange={(e) => setNewTeam(e.target.value)}

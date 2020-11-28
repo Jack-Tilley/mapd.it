@@ -85,16 +85,31 @@ class ProfilesView(viewsets.ModelViewSet):
         """
         print(request.data)
         team = Team.objects.get(id=request.data['id'])
-        # if not team.DoesNotExist():
-        #     print('EXIST')
         profile = self.get_object()
         profile.teams.remove(team)
         profile.save()
         teams = profile.teams.all()
         return Response(teams.values())
-        # else:
-        #     print('NOEXIST')
-        #     return Response({'status': status.HTTP_404_NOT_FOUND}, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=True, methods=['get'])
+    def view_teams(self, request, pk=None):
+        """
+        views the teams the given user is subscribed to
+        """
+        print(request.data)
+        profile = self.get_object()
+        teams = profile.teams.all()
+        res = []
+        for team in teams:
+            # profs = Profile.objects.filter(teams=team).values()
+            # for prof in profs:
+            #     print(ProfileSerializer(
+            #         prof, context=self.get_serializer_context()).data)
+            data = {"id": team.id, "name": team.name, "description": team.description, "unique_key": team.unique_key, "members": list(
+                Profile.objects.filter(teams=team).values())}
+            res.append(data)
+        print(res)
+        return Response(res)
 
 
 class HistoryView(viewsets.ModelViewSet):

@@ -1,4 +1,18 @@
 import React, { useState, useContext, useEffect } from "react";
+import { useGoogleMap } from "@react-google-maps/api";
+
+import axios from "axios";
+
+import vibrant from "../../mapStyles/vibrant";
+import greyscale from "../../mapStyles/greyscale";
+import night from "../../mapStyles/night";
+import hopper from "../../mapStyles/hopper";
+import flatpale from "../../mapStyles/flatpale";
+import blackout from "../../mapStyles/blackout";
+import unsaturated from "../../mapStyles/unsaturated";
+import bluegray from "../../mapStyles/bluegray";
+import paledawn from "../../mapStyles/paledawn";
+
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -24,43 +38,25 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
 import Switch from "@material-ui/core/Switch";
-import axios from "axios";
 
-const TeamJoin = ({ joinTeam, setJoinTeam, profileId, updateNodes }) => {
-  const handleJoinTeam = () => {
-    console.log(joinTeam);
-    if (joinTeam !== "" && joinTeam.length === 5) {
-      axios
-        .put(`http://localhost:8000/api/profiles/${profileId}/join_team/`, {
-          unique_key: joinTeam,
-        })
-        .then((result) => {
-          console.log("PUT RESULT for JOIN", result.data);
-          updateNodes();
-          setJoinTeam("");
-        })
-        .catch((err) => console.log(err));
-    } else {
-      console.log("ENTER A VALID TEAM NAME");
-    }
-  };
-  return (
-    <FormControl>
-      <TextField
-        value={joinTeam}
-        margin="dense"
-        placeholder="Enter a unique key"
-        id="name"
-        label="Join a team"
-        type="text"
-        onChange={(e) => setJoinTeam(e.target.value)}
-        fullWidth
-      />
-      <FormHelperText>Join a team</FormHelperText>
-      <IconButton onClick={() => handleJoinTeam()} size="small">
-        <i className="material-icons icon-red">{"add"}</i>
-      </IconButton>
-    </FormControl>
-  );
+// import { MapContext } from "../../MapContext";
+import { BorderAll } from "@material-ui/icons";
+
+import MapThemeSelector from "./MapThemeSelector";
+import PaletteThemeSelector from "./PaletteThemeSelector";
+
+const MapPage = ({
+  rendered,
+  mapStyle,
+  setMapStyle,
+  darkMode,
+  setDarkMode,
+}) => {
+  return rendered ? (
+    <div>
+      <MapThemeSelector mapStyle={mapStyle} setMapStyle={setMapStyle} />
+      <PaletteThemeSelector darkMode={darkMode} setDarkMode={setDarkMode} />
+    </div>
+  ) : null;
 };
-export default TeamJoin;
+export default MapPage;

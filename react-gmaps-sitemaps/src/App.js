@@ -22,7 +22,6 @@ function App() {
   const [darkMode, setDarkMode] = useState(
     "true" === localStorage.getItem("darkMode") || false
   );
-
   const theme = createMuiTheme({
     palette: {
       type: darkMode ? "dark" : "light",

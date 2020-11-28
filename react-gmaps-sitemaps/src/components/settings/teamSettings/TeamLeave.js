@@ -80,7 +80,7 @@ const TeamLeave = ({
     }
   };
   return (
-    <FormControl>
+    <FormControl className={classes.formControl}>
       <Select
         labelId="leave team"
         displayEmpty
