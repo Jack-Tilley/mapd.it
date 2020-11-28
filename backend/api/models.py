@@ -27,13 +27,13 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 class Team(models.Model):
-    name = models.CharField(max_length=64, unique=True)
-    description = models.TextField(max_length=1024)
+    name = models.CharField(max_length=64)
+    description = models.TextField(max_length=1024, null=True, blank=True)
     # owner = models.ForeignKey(User, on_delete=models.CASCADE)
     # users = models.ManyToManyField('Users', null=True, blank=True)
     nodes = models.ManyToManyField('Node', blank=True, related_name='nodes')
     unique_key = models.CharField(max_length=5,
-                                  unique=True, blank=True, null=True, validators=[MinLengthValidator(5)], default=generate_key(5))
+                                  unique=True, blank=True, null=True, validators=[MinLengthValidator(5)])
 
     def save(self, *args, **kwargs):
         print(self.unique_key)
@@ -42,7 +42,7 @@ class Team(models.Model):
             self.unique_key = generate_key(5)
             while Team.objects.filter(unique_key=self.unique_key).exists():
                 self.unique_key = generate_key(5)
-        super(MyModel, self).save()
+        super(Team, self).save()
 
 
 # classic node model

@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -20,17 +19,14 @@ import FormControl from "@material-ui/core/FormControl";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Select from "@material-ui/core/Select";
+import IconButton from "@material-ui/core/IconButton";
 
 import InputAdornment from "@material-ui/core/InputAdornment";
 
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
 
-import IconContainer from "./IconContainer";
-import ColorContainer from "./ColorContainer";
-import DirContainer from "./DirContainer";
-
-import { MapContext } from "./MapContext";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -51,57 +47,52 @@ const MenuProps = {
     },
   },
 };
-const TeamContainer = ({
+
+const TeamLeave = ({
   teams,
-  selectedTeams,
-  setSelectedTeams,
-  handleSelectedTeamChange,
-  teamObjects,
-  setTeamObjects,
+  leaveTeamId,
+  setLeaveTeamId,
+  profileId,
+  updateNodes,
 }) => {
   const classes = useStyles();
 
   const handleChange = (event) => {
-    setTeamObjects(event.target.value);
+    setLeaveTeamId(event.target.value);
   };
 
-  // converts ids back to the team object. is slow
-  const getTeams = (ids) => {
-    let checkedTeams = [];
-    for (let id of ids) {
-      checkedTeams.push(teams.find((team) => team.id === id));
+  const handleLeaveTeam = () => {
+    if (
+      leaveTeamId !== "" &&
+      leaveTeamId !== null &&
+      leaveTeamId !== undefined
+    ) {
+      axios
+        .put(`http://localhost:8000/api/profiles/${profileId}/leave_team/`, {
+          id: leaveTeamId,
+        })
+        .then((res) => {
+          console.log(res.data);
+          updateNodes();
+          setLeaveTeamId("");
+        })
+        .catch((err) => console.log(err));
     }
-    return checkedTeams;
   };
-
   return (
-    <FormControl className={classes.formControl}>
-      <InputLabel id="demo-mutiple-checkbox-label">Teams</InputLabel>
+    <FormControl>
       <Select
-        labelId="demo-mutiple-checkbox-label"
-        id="demo-mutiple-checkbox"
-        multiple
-        value={teamObjects}
-        onChange={handleChange}
-        input={<Input />}
-        MenuProps={MenuProps}
-        renderValue={(checkedTeams) => (
-          <List dense>
-            {getTeams(checkedTeams).map((checkedTeam) => (
-              <ListItemText
-                primary={checkedTeam.name}
-                key={checkedTeam.unique_key}
-              >
-                {console.log(checkedTeam)}
-              </ListItemText>
-            ))}
-          </List>
-        )}
+        labelId="leave team"
+        displayEmpty
+        id="leaveteam"
+        value={leaveTeamId}
+        onChange={(e) => handleChange(e)}
       >
+        <MenuItem key={"N/A"} value="">
+          <em>NONE</em>
+        </MenuItem>
         {teams.map((team) => (
           <MenuItem key={team.unique_key} value={team.id}>
-            {console.log(teamObjects)}
-            <Checkbox checked={teamObjects.indexOf(team.id) > -1} />
             <ListItemText
               primary={team.name}
               secondary={"#" + team.unique_key}
@@ -109,7 +100,62 @@ const TeamContainer = ({
           </MenuItem>
         ))}
       </Select>
+      <FormHelperText>Leave a team</FormHelperText>
+      <IconButton onClick={() => handleLeaveTeam()} size="small">
+        <i className="material-icons icon-red">{"delete"}</i>
+      </IconButton>
     </FormControl>
   );
 };
-export default TeamContainer;
+export default TeamLeave;
+
+// const [
+//     myMap,
+//     setMyMap,
+//     center,
+//     setCenter,
+//     isLoaded,
+//     draw,
+//     setDraw,
+//     nodes,
+//     setNodes,
+//     activeNode,
+//     setActiveNode,
+//     icon,
+//     setIcon,
+//     shapes,
+//     setShapes,
+//     checked,
+//     setChecked,
+//     selected,
+//     setSelected,
+//     color,
+//     setColor,
+//     findNode,
+//     removeNode,
+//     nodeType,
+//     setNodeType,
+//     disabled,
+//     setDisabled,
+//     editing,
+//     setEditing,
+//     editValue,
+//     setEditValue,
+//     replaceNode,
+//     editCleanup,
+//     changeIcons,
+//     description,
+//     setDescription,
+//     comment,
+//     setComment,
+//     label,
+//     setLabel,
+//     auth,
+//     setAuth,
+//     profileId,
+//     setProfileId,
+//     teams,
+//     setTeams,
+//     selectedTeams,
+//     setSelectedTeams,
+//   ] = useContext(MapContext);

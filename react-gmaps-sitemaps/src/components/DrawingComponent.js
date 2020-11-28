@@ -56,6 +56,7 @@ const DrawingComponent = () => {
     setTeams,
     selectedTeams,
     setSelectedTeams,
+    updateNodes,
   ] = useContext(MapContext);
 
   const options = {

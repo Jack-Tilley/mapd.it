@@ -33,14 +33,14 @@ class HistorySerializer(serializers.ModelSerializer):
 
 class TeamSerializer(serializers.ModelSerializer):
     # nodevals = serializers.SerializerMethodField()
-    nodes = NodeSerializer(many=True, read_only=False)
+    nodes = NodeSerializer(many=True, read_only=True)
 
     # def get_nodevals(self, obj):
     #     return obj.nodes.all().values()
 
     class Meta:
         model = Team
-        fields = ('id', 'name', 'description', 'nodes')
+        fields = ('id', 'name', 'description', 'unique_key', 'nodes')
 
 
 class UserSerializer(serializers.ModelSerializer):

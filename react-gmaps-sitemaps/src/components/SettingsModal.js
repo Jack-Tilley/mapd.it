@@ -45,6 +45,10 @@ import ColorContainer from "./ColorContainer";
 import { MapContext } from "./MapContext";
 import { BorderAll } from "@material-ui/icons";
 
+import TeamLeave from "./teamSettings/TeamLeave";
+import TeamCreate from "./teamSettings/TeamCreate";
+import TeamJoin from "./teamSettings/TeamJoin";
+
 const SettingsModal = ({
   settingsOpen,
   setSettingsOpen,
@@ -52,32 +56,60 @@ const SettingsModal = ({
   setDarkMode,
 }) => {
   const map = useGoogleMap();
-  //   const [
-  //     myMap,
-  //     setMyMap,
-  //     center,
-  //     setCenter,
-  //     isLoaded,
-  //     draw,
-  //     setDraw,
-  //     nodes,
-  //     setNodes,
-  //     activeNode,
-  //     setActiveNode,
-  //     icon,
-  //     setIcon,
-  //     shapes,
-  //     setShapes,
-  //     checked,
-  //     setChecked,
-  //     selected,
-  //     setSelected,
-  //     color,
-  //     setColor,
-  //     findNode,
-  //     removeNode,
-  //   ] = useContext(MapContext);
-
+  const [
+    myMap,
+    setMyMap,
+    center,
+    setCenter,
+    isLoaded,
+    draw,
+    setDraw,
+    nodes,
+    setNodes,
+    activeNode,
+    setActiveNode,
+    icon,
+    setIcon,
+    shapes,
+    setShapes,
+    checked,
+    setChecked,
+    selected,
+    setSelected,
+    color,
+    setColor,
+    findNode,
+    removeNode,
+    nodeType,
+    setNodeType,
+    disabled,
+    setDisabled,
+    editing,
+    setEditing,
+    editValue,
+    setEditValue,
+    replaceNode,
+    editCleanup,
+    changeIcons,
+    description,
+    setDescription,
+    comment,
+    setComment,
+    label,
+    setLabel,
+    auth,
+    setAuth,
+    profileId,
+    setProfileId,
+    teams,
+    setTeams,
+    selectedTeams,
+    setSelectedTeams,
+    updateNodes,
+  ] = useContext(MapContext);
+  const [leaveTeamId, setLeaveTeamId] = useState("");
+  const [newTeam, setNewTeam] = useState("");
+  const [joinTeam, setJoinTeam] = useState("");
   const [mapStyle, setMapStyle] = useState(
     localStorage.getItem("mapStyle") || ""
   );
@@ -176,6 +208,31 @@ const SettingsModal = ({
             />
             <FormHelperText>Dark Mode</FormHelperText>
           </FormControl>
+        </DialogContent>
+        <DialogContent>
+          <TeamLeave
+            teams={teams}
+            leaveTeamId={leaveTeamId}
+            setLeaveTeamId={setLeaveTeamId}
+            profileId={profileId}
+            updateNodes={updateNodes}
+          />
+        </DialogContent>
+        <DialogContent>
+          <TeamCreate
+            newTeam={newTeam}
+            setNewTeam={setNewTeam}
+            profileId={profileId}
+            updateNodes={updateNodes}
+          />
+        </DialogContent>
+        <DialogContent>
+          <TeamJoin
+            joinTeam={joinTeam}
+            setJoinTeam={setJoinTeam}
+            profileId={profileId}
+            updateNodes={updateNodes}
+          />
         </DialogContent>
       </Dialog>
     </div>

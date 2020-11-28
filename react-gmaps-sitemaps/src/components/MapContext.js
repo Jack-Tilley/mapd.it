@@ -188,8 +188,9 @@ export const MapProvider = (props) => {
         console.log("DATA", res.data);
         for (let team of pteams) {
           profileTeams.push({
-            teamId: team.id,
-            teamName: team.name,
+            id: team.id,
+            name: team.name,
+            unique_key: team.unique_key,
           });
           for (let node of team.nodes) {
             profileNodes.push(node);
@@ -232,8 +233,9 @@ export const MapProvider = (props) => {
         console.log("DATA", res.data);
         for (let team of pteams) {
           profileTeams.push({
-            teamId: team.id,
-            teamName: team.name,
+            id: team.id,
+            name: team.name,
+            unique_key: team.unique_key,
           });
           for (let node of team.nodes) {
             profileNodes.push(node);
@@ -260,7 +262,7 @@ export const MapProvider = (props) => {
           }
         }
         newNodes.unshift(addNode);
-
+        console.log("TEAMS", teams);
         setNodes(newNodes);
       })
       .catch((err) => console.log(err));
