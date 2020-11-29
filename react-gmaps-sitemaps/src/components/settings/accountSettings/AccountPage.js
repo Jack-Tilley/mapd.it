@@ -42,37 +42,13 @@ import Switch from "@material-ui/core/Switch";
 // import { MapContext } from "../../MapContext";
 import { BorderAll } from "@material-ui/icons";
 
-import TeamLeave from "./TeamLeave";
-import TeamCreate from "./TeamCreate";
-import TeamJoin from "./TeamJoin";
+import AccountTeamViewer from "./AccountTeamViewer";
 
-const TeamPage = ({ rendered, teams, profileId, updateNodes }) => {
-  const [newTeam, setNewTeam] = useState("");
-  const [joinTeam, setJoinTeam] = useState("");
-  const [leaveTeamId, setLeaveTeamId] = useState("");
+const AccountPage = ({ rendered, profileId }) => {
   return rendered ? (
     <div>
-      <TeamJoin
-        teams={teams}
-        joinTeam={joinTeam}
-        setJoinTeam={setJoinTeam}
-        profileId={profileId}
-        updateNodes={updateNodes}
-      />
-      <TeamCreate
-        newTeam={newTeam}
-        setNewTeam={setNewTeam}
-        profileId={profileId}
-        updateNodes={updateNodes}
-      />
-      <TeamLeave
-        teams={teams}
-        leaveTeamId={leaveTeamId}
-        setLeaveTeamId={setLeaveTeamId}
-        profileId={profileId}
-        updateNodes={updateNodes}
-      />
+      <AccountTeamViewer profileId={profileId} />
     </div>
   ) : null;
 };
-export default TeamPage;
+export default AccountPage;

@@ -47,7 +47,7 @@ const Map = ({ darkMode, setDarkMode }) => {
       <GoogleMap
         mapContainerStyle={{
           width: "100%",
-          height: "100%",
+          height: "100vh",
         }}
         zoom={10}
         center={center}

@@ -29,29 +29,27 @@ function App() {
   });
   return (
     <ThemeProvider theme={theme}>
-      <Paper>
-        <div style={{ height: "500px" }}>
-          <MapProvider>
-            <Router>
-              <Switch>
-                <PrivateRoute
-                  exact
-                  path="/"
-                  component={() => (
-                    <>
-                      <Map darkMode={darkMode} setDarkMode={setDarkMode} />
-                      <div className="treeContainer">
-                        <SiteTree />
-                      </div>
-                    </>
-                  )}
-                />
-                <Route exact path="/register" component={Register} />
-                <Route exact path="/login" component={Login} />
-              </Switch>
-            </Router>
-          </MapProvider>
-        </div>
+      <Paper style={{ padding: 0, margin: 0 }}>
+        <MapProvider>
+          <Router>
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/"
+                component={() => (
+                  <>
+                    <Map darkMode={darkMode} setDarkMode={setDarkMode} />
+                    <div className="treeContainer">
+                      <SiteTree />
+                    </div>
+                  </>
+                )}
+              />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+            </Switch>
+          </Router>
+        </MapProvider>
       </Paper>
     </ThemeProvider>
   );

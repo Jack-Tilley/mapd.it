@@ -74,6 +74,7 @@ class ProfilesView(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         team = Team.objects.get(unique_key=request.data['unique_key'])
         pfile = self.get_object()
+        # maybe check that the user is already on this team before adding
         pfile.teams.add(team)
         profile = pfile.save()
         return Response(ProfileSerializer(profile, context=self.get_serializer_context()).data)

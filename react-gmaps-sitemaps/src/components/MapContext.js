@@ -12,7 +12,7 @@ import { BusinessCenter, Add } from "@material-ui/icons";
 
 let addNode = {
   value: "/+",
-  label: "+",
+  label: "Add a new item",
   parent: null,
   apiPath: "HI/there",
   latLngArr: ["0", "0"],
@@ -58,7 +58,6 @@ export const MapProvider = (props) => {
   const [profileId, setProfileId] = useState(null);
   const [teams, setTeams] = useState([]);
   const [selectedTeams, setSelectedTeams] = useState([]);
-  const history = useHistory();
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -130,7 +129,7 @@ export const MapProvider = (props) => {
       }
       newNode.children.unshift({
         value: newNode.value + "/+",
-        label: "+",
+        label: "Add a new item",
         apiPath: newNode.value + "/+",
         latLngArr: ["0", "0"],
         nodeType: "ADD",
@@ -207,7 +206,7 @@ export const MapProvider = (props) => {
           if (newNodes[i].isDir) {
             newNodes[i].children.unshift({
               value: newNodes[i].value + "/+",
-              label: "+",
+              label: "Add a new item",
               apiPath: newNodes[i].value + "/+",
               latLngArr: ["0", "0"],
               nodeType: "ADD",
@@ -252,7 +251,7 @@ export const MapProvider = (props) => {
           if (newNodes[i].isDir) {
             newNodes[i].children.unshift({
               value: newNodes[i].value + "/+",
-              label: "+",
+              label: "Add a new item",
               apiPath: newNodes[i].value + "/+",
               latLngArr: ["0", "0"],
               nodeType: "ADD",

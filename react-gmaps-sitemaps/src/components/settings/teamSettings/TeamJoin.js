@@ -26,10 +26,11 @@ import Divider from "@material-ui/core/Divider";
 import Switch from "@material-ui/core/Switch";
 import axios from "axios";
 
-const TeamJoin = ({ joinTeam, setJoinTeam, profileId, updateNodes }) => {
+const TeamJoin = ({ teams, joinTeam, setJoinTeam, profileId, updateNodes }) => {
   const handleJoinTeam = () => {
     console.log(joinTeam);
-    if (joinTeam !== "" && joinTeam.length === 5) {
+    const alreadyInTeam = teams.some((team) => team.unique_key === joinTeam);
+    if (!alreadyInTeam && joinTeam !== "" && joinTeam.length === 5) {
       axios
         .put(`http://localhost:8000/api/profiles/${profileId}/join_team/`, {
           unique_key: joinTeam,
@@ -41,7 +42,7 @@ const TeamJoin = ({ joinTeam, setJoinTeam, profileId, updateNodes }) => {
         })
         .catch((err) => console.log(err));
     } else {
-      console.log("ENTER A VALID TEAM NAME");
+      console.log("ENTER A VALID TEAM NAME OR ALREADY IN TEAM");
     }
   };
   return (

@@ -47,6 +47,7 @@ import { BorderAll } from "@material-ui/icons";
 
 import TeamPage from "./teamSettings/TeamPage";
 import MapPage from "./mapSettings/MapPage";
+import AccountPage from "./accountSettings/AccountPage";
 
 const SettingsModal = ({
   settingsOpen,
@@ -108,6 +109,10 @@ const SettingsModal = ({
   const [page, setPage] = useState("map");
   const [mapSettingsRendered, setMapSettingsRendered] = useState(true);
   const [teamSettingsRendered, setTeamSettingsRendered] = useState(false);
+  const [accountSettingsRendered, setAccountSettingsRendered] = useState(false);
+  const [mapColor, setMapColor] = useState("default");
+  const [teamColor, setTeamColor] = useState("primary");
+  const [accountColor, setAccountColor] = useState("primary");
   const map = useGoogleMap();
 
   const [mapStyle, setMapStyle] = useState(
@@ -148,11 +153,26 @@ const SettingsModal = ({
     if (value === "map") {
       setMapSettingsRendered(true);
       setTeamSettingsRendered(false);
+      setAccountSettingsRendered(false);
+      setMapColor("default");
+      setTeamColor("primary");
+      setAccountColor("primary");
     } else if (value === "team") {
       setMapSettingsRendered(false);
       setTeamSettingsRendered(true);
+      setAccountSettingsRendered(false);
+      setMapColor("primary");
+      setTeamColor("default");
+      setAccountColor("primary");
+    } else if (value === "account") {
+      setMapSettingsRendered(false);
+      setTeamSettingsRendered(false);
+      setAccountSettingsRendered(true);
+      setMapColor("primary");
+      setTeamColor("primary");
+      setAccountColor("default");
     } else {
-      console.log("else");
+      console.log("WE ARE NOT RENDERING THE CORRECT THING");
     }
     renderPage();
   };
@@ -177,8 +197,12 @@ const SettingsModal = ({
           updateNodes={updateNodes}
         />
       );
+    } else if (page === "account") {
+      return (
+        <AccountPage rendered={accountSettingsRendered} profileId={profileId} />
+      );
     } else {
-      return <h1>NOTHING RENDERED</h1>;
+      return <div>RENDER ERROR</div>;
     }
   };
 
@@ -202,22 +226,26 @@ const SettingsModal = ({
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Settings</DialogTitle>
+        <DialogTitle id="form-dialog-title">{`Settings - ${page}`}</DialogTitle>
         <DialogContent id="settings" dividers={true}>
           {renderPage()}
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => changePage("map")} color="default">
+          <Button
+            style={{ position: "absolute", left: "2em" }}
+            onClick={() => handleClose()}
+            color="secondary"
+          >
+            Cancel
+          </Button>
+          <Button onClick={() => changePage("map")} color={mapColor}>
             Map
           </Button>
-          <Button onClick={() => changePage("team")} color="primary">
+          <Button onClick={() => changePage("team")} color={teamColor}>
             Team
           </Button>
-          <Button onClick={() => changePage("other")} color="primary">
-            Other
-          </Button>
-          <Button onClick={() => handleClose()} color="primary">
-            Cancel
+          <Button onClick={() => changePage("account")} color={accountColor}>
+            Account
           </Button>
         </DialogActions>
       </Dialog>
