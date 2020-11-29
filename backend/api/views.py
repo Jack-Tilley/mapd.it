@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from knox.models import AuthToken
 from .serializers import RegisterSerializer
 from django.contrib.auth.models import User
+from rest_framework import status
 
 from django.contrib.auth import login
 
@@ -46,7 +47,7 @@ class TeamsView(viewsets.ModelViewSet):
     @action(detail=True, methods=['post'])
     def update_nodes(self, request, pk=None):
         """
-        Returns a list of all the nodes that the given
+        Updates the list of all the nodes that the given
         team owns.
         """
         print(request.data)
@@ -62,6 +63,54 @@ class ProfilesView(viewsets.ModelViewSet):
     # this view should probably be the same as NodeView at somepoint
     serializer_class = ProfileSerializer
     queryset = Profile.objects.all()
+
+    @action(detail=True, methods=['put'])
+    def join_team(self, request, pk=None):
+        """
+        joins a team that the given profile requests
+        """
+        print(request.data)
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        team = Team.objects.get(unique_key=request.data['unique_key'])
+        pfile = self.get_object()
+        # maybe check that the user is already on this team before adding
+        pfile.teams.add(team)
+        profile = pfile.save()
+        return Response(ProfileSerializer(profile, context=self.get_serializer_context()).data)
+
+    @action(detail=True, methods=['put'])
+    def leave_team(self, request, pk=None):
+        """
+        leaves a team that the given profile is subscribed to
+        """
+        print(request.data)
+        team = Team.objects.get(id=request.data['id'])
+        profile = self.get_object()
+        profile.teams.remove(team)
+        profile.save()
+        teams = profile.teams.all()
+        return Response(teams.values())
+
+    @action(detail=True, methods=['get'])
+    def view_teams(self, request, pk=None):
+        """
+        views the teams the given user is subscribed to
+        """
+        print(request.data)
+        profile = self.get_object()
+        teams = profile.teams.all()
+        res = []
+        for team in teams:
+            # profs = Profile.objects.filter(teams=team).values()
+            # for prof in profs:
+            #     print(ProfileSerializer(
+            #         prof, context=self.get_serializer_context()).data)
+            data = {"id": team.id, "name": team.name, "description": team.description, "unique_key": team.unique_key, "members": list(
+                Profile.objects.filter(teams=team).values())}
+            res.append(data)
+        print(res)
+        return Response(res)
 
 
 class HistoryView(viewsets.ModelViewSet):

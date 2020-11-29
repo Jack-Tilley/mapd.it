@@ -120,7 +120,7 @@ const SiteTree = () => {
       newNode.children = [
         {
           value: newNode.value + "/+",
-          label: "+",
+          label: "Add a new item",
           apiPath: newNode.value + "/+",
           latLngArr: ["0", "0"],
           nodeType: "ADD",

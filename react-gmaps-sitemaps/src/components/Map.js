@@ -6,7 +6,9 @@ import ShapeSetter from "./ShapeSetter";
 import AutocompleteBox from "./AutocompleteBox";
 import Directions from "./Directions";
 import InfoContainer from "./InfoContainer";
-import SettingsModal from "./SettingsModal";
+import SettingsModal from "./settings/SettingsModal";
+import HistoryDrawer from "./HistoryDrawer";
+import RefreshButton from "./RefreshButton";
 
 import { Paper } from "@material-ui/core";
 
@@ -45,7 +47,7 @@ const Map = ({ darkMode, setDarkMode }) => {
       <GoogleMap
         mapContainerStyle={{
           width: "100%",
-          height: "100%",
+          height: "100vh",
         }}
         zoom={10}
         center={center}
@@ -63,6 +65,8 @@ const Map = ({ darkMode, setDarkMode }) => {
           darkMode={darkMode}
           setDarkMode={setDarkMode}
         />
+        <HistoryDrawer />
+        <RefreshButton />
       </GoogleMap>
     </>
   );

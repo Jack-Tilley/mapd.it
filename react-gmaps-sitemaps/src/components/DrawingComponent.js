@@ -56,6 +56,7 @@ const DrawingComponent = () => {
     setTeams,
     selectedTeams,
     setSelectedTeams,
+    updateNodes,
   ] = useContext(MapContext);
 
   const options = {
@@ -179,7 +180,7 @@ const DrawingComponent = () => {
           description: description,
         })
         .then((res) => {
-          console.log("res LOOK FOR ID", res.data);
+          console.log("selected teams", selectedTeams);
           if (res.data.parent === null) {
             for (let teamId of selectedTeams) {
               axios

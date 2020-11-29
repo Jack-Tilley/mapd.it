@@ -12,7 +12,7 @@ import { BusinessCenter, Add } from "@material-ui/icons";
 
 let addNode = {
   value: "/+",
-  label: "+",
+  label: "Add a new item",
   parent: null,
   apiPath: "HI/there",
   latLngArr: ["0", "0"],
@@ -58,7 +58,6 @@ export const MapProvider = (props) => {
   const [profileId, setProfileId] = useState(null);
   const [teams, setTeams] = useState([]);
   const [selectedTeams, setSelectedTeams] = useState([]);
-  const history = useHistory();
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -130,7 +129,7 @@ export const MapProvider = (props) => {
       }
       newNode.children.unshift({
         value: newNode.value + "/+",
-        label: "+",
+        label: "Add a new item",
         apiPath: newNode.value + "/+",
         latLngArr: ["0", "0"],
         nodeType: "ADD",
@@ -178,7 +177,7 @@ export const MapProvider = (props) => {
     setEditValue("");
   };
 
-  useEffect(() => {
+  const updateNodes = () => {
     axios
       .get(`http://localhost:8000/api/profiles/${profileId}`)
       .then((res) => {
@@ -188,8 +187,9 @@ export const MapProvider = (props) => {
         console.log("DATA", res.data);
         for (let team of pteams) {
           profileTeams.push({
-            teamId: team.id,
-            teamName: team.name,
+            id: team.id,
+            name: team.name,
+            unique_key: team.unique_key,
           });
           for (let node of team.nodes) {
             profileNodes.push(node);
@@ -206,7 +206,7 @@ export const MapProvider = (props) => {
           if (newNodes[i].isDir) {
             newNodes[i].children.unshift({
               value: newNodes[i].value + "/+",
-              label: "+",
+              label: "Add a new item",
               apiPath: newNodes[i].value + "/+",
               latLngArr: ["0", "0"],
               nodeType: "ADD",
@@ -217,6 +217,51 @@ export const MapProvider = (props) => {
         }
         newNodes.unshift(addNode);
 
+        setNodes(newNodes);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/api/profiles/${profileId}`)
+      .then((res) => {
+        let pteams = res.data.teams;
+        let profileNodes = [];
+        let profileTeams = [];
+        console.log("DATA", res.data);
+        for (let team of pteams) {
+          profileTeams.push({
+            id: team.id,
+            name: team.name,
+            unique_key: team.unique_key,
+          });
+          for (let node of team.nodes) {
+            profileNodes.push(node);
+          }
+        }
+        setTeams(profileTeams);
+        // this removes duplicate nodes, is basically a set for objects
+        let newNodes = [...new Set(profileNodes.map(JSON.stringify))].map(
+          JSON.parse
+        );
+        console.log("newNodes", newNodes);
+        changeIcons(newNodes);
+        for (let i = 0; i < newNodes.length; i++) {
+          if (newNodes[i].isDir) {
+            newNodes[i].children.unshift({
+              value: newNodes[i].value + "/+",
+              label: "Add a new item",
+              apiPath: newNodes[i].value + "/+",
+              latLngArr: ["0", "0"],
+              nodeType: "ADD",
+              icon: <i className={`material-icons icon-${"blue"}`}>{"add"}</i>,
+              disabled: true,
+            });
+          }
+        }
+        newNodes.unshift(addNode);
+        console.log("TEAMS", teams);
         setNodes(newNodes);
       })
       .catch((err) => console.log(err));
@@ -273,6 +318,7 @@ export const MapProvider = (props) => {
         setTeams,
         selectedTeams,
         setSelectedTeams,
+        updateNodes,
       ]}
     >
       {props.children}

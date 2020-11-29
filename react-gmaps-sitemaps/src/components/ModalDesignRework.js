@@ -86,9 +86,10 @@ const ModalDesignRework = ({
   ] = useContext(MapContext);
 
   const [isDir, setIsDir] = useState(true);
-  const [teamName, setTeamName] = useState([]);
+  const [teamObjects, setTeamObjects] = useState([]);
 
   const handleSubmit = (type) => {
+    setSelectedTeams(teamObjects);
     setNodeType(type);
     setDraw(true);
     addItem(event, isDir, type);
@@ -122,9 +123,9 @@ const ModalDesignRework = ({
   };
 
   const handleSelectedTeamChange = (event) => {
-    setTeamName(event.target.value);
-    console.log(teamName);
-    setSelectedTeams(teamName);
+    setTeamObjects(event.target.value);
+    console.log(teamObjects);
+    setSelectedTeams(teamObjects);
     console.log(selectedTeams);
   };
 
@@ -178,8 +179,8 @@ const ModalDesignRework = ({
                     selectedTeams={selectedTeams}
                     setSelectedTeams={setSelectedTeams}
                     handleSelectedTeamChange={handleSelectedTeamChange}
-                    teamName={teamName}
-                    setTeamName={setTeamName}
+                    teamObjects={teamObjects}
+                    setTeamObjects={setTeamObjects}
                   />
                 </Grid>
                 {/* <Grid item xs={4}>
