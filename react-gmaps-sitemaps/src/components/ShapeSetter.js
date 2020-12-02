@@ -52,13 +52,41 @@ const ShapeSetter = () => {
               }}
               key={shape.value}
               // label={shape.label}
-              icon={{
-                url: "/newIcons/" + node.iconValue + ".svg",
-                scaledSize: new window.google.maps.Size(30, 30),
-                origin: new window.google.maps.Point(0, 0),
-                anchor: new window.google.maps.Point(15, 15),
+              onLoad={(marker) => {
+                fetch("/newIcons/" + node.iconValue + ".svg")
+                  // Get SVG response as text
+                  .then((response) => response.text())
+                  // Parse to a DOM tree using DOMParser
+                  .then((str) =>
+                    new window.DOMParser().parseFromString(str, "text/xml")
+                  )
+                  // // Find path with id="myPath" and return the d attribute
+                  .then((data) =>
+                    data.getElementsByTagName("path")[0].getAttribute("d")
+                  )
+                  .then((path) => {
+                    const customIcon = () =>
+                      Object.assign({
+                        path: path,
+                        fillColor: "#d2d2d2",
+                        fillOpacity: 1,
+                        strokeColor: "#d2d2d2",
+                        strokeWeight: 1,
+                        scale: 1,
+                      });
+                    marker.setIcon(customIcon());
+                  });
               }}
+              // marker.setAttribute("style", "fill: green");
+
+              // icon={{
+              //   url: "/newIcons/" + node.iconValue + ".svg",
+              //   scaledSize: new window.google.maps.Size(30, 30),
+              //   origin: new window.google.maps.Point(0, 0),
+              //   anchor: new window.google.maps.Point(15, 15),
+              // }}
               onClick={() => setSelected(node)}
+              onMouseOver={(marker) => console.log(marker.icon)}
             />
           );
         } else if (node.nodeType === "polyline") {
