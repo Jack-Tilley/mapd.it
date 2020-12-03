@@ -15,10 +15,18 @@ class Profile(models.Model):
     teams = models.ManyToManyField('Team', blank=True, related_name="teams")
 
 
+# @receiver(post_save, sender=User)
+# def create_profile_team(sender, instance, created, **kwargs):
+#     if created:
+#         team = Team.objects.create(name=instance.username + "'s team")
+
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
+        team = Team.objects.create(name=instance.username + "'s team")
+        instance.profile.teams.add(team)
 
 
 @receiver(post_save, sender=User)

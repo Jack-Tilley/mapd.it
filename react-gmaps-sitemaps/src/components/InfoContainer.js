@@ -1,9 +1,22 @@
 import React, { useContext, useState } from "react";
 import { MapContext } from "./MapContext";
-import { InfoWindow, InfoBox } from "@react-google-maps/api";
+import { InfoWindow, OverlayView } from "@react-google-maps/api";
 import EditNodeModal from "./EditNodeModal";
 import { AirlineSeatReclineNormalRounded } from "@material-ui/icons";
+import { makeStyles } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  root: {
+    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+    border: 0,
+    borderRadius: 3,
+    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+    color: "white",
+    height: 48,
+    padding: "0 30px",
+  },
+});
 
 const InfoContainer = () => {
   const [
@@ -48,6 +61,7 @@ const InfoContainer = () => {
     label,
     setLabel,
   ] = useContext(MapContext);
+  const classes = useStyles();
 
   const [editOpen, setEditOpen] = useState(false);
   const [value, setValue] = useState("");
@@ -63,17 +77,18 @@ const InfoContainer = () => {
 
   return selected ? (
     <InfoWindow
+      // mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
       position={{
         lat: parseFloat(selected.latLngArr[0]),
         lng: parseFloat(selected.latLngArr[1]),
       }}
-      onCloseClick={() => {
-        setSelected(null);
-      }}
+      // onCloseClick={() => {
+      //   setSelected(null);
+      // }}
     >
-      <Paper>
-        <h4>{selected.label}</h4>
-        <p>{selected.description}</p>
+      <div>
+        <h4 style={{ color: "black" }}>{selected.label}</h4>
+        <p style={{ color: "black" }}>{selected.description}</p>
         <button onClick={handleEditClick}>EDIT</button>
         <EditNodeModal
           editOpen={editOpen}
@@ -81,7 +96,7 @@ const InfoContainer = () => {
           value={value}
           setValue={setValue}
         />
-      </Paper>
+      </div>
     </InfoWindow>
   ) : null;
 };

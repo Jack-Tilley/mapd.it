@@ -61,10 +61,6 @@ const TeamContainer = ({
 }) => {
   const classes = useStyles();
 
-  const handleChange = (event) => {
-    setTeamObjects(event.target.value);
-  };
-
   // converts ids back to the team object. is slow!
   const getTeams = (ids) => {
     let checkedTeams = [];
@@ -75,14 +71,14 @@ const TeamContainer = ({
   };
 
   return (
-    <FormControl className={classes.formControl}>
+    <FormControl required className={classes.formControl}>
       <InputLabel id="team-mutiple-checkbox-label">Teams</InputLabel>
       <Select
         labelId="demo-mutiple-checkbox-label"
         id="team-mutiple-checkbox"
         multiple
         value={teamObjects}
-        onChange={handleChange}
+        onChange={handleSelectedTeamChange}
         input={<Input />}
         MenuProps={MenuProps}
         renderValue={(checkedTeams) => (
@@ -91,9 +87,7 @@ const TeamContainer = ({
               <ListItemText
                 primary={checkedTeam.name}
                 key={checkedTeam.unique_key}
-              >
-                {console.log(checkedTeam)}
-              </ListItemText>
+              ></ListItemText>
             ))}
           </List>
         )}

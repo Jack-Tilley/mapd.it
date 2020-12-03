@@ -53,6 +53,8 @@ const Map = ({ darkMode, setDarkMode }) => {
         center={center}
         onLoad={(map) => setMyMap(map)}
         options={options}
+        onRightClick={() => console.log("rightClick")}
+        onClick={() => setSelected(null)}
       >
         {/* <AutocompleteBox center={center} setCenter={setCenter} /> */}
         <DrawingComponent />
