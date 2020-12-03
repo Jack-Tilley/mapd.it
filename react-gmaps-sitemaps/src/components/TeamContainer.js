@@ -100,7 +100,6 @@ const TeamContainer = ({
       >
         {teams.map((team) => (
           <MenuItem key={team.unique_key} value={team.id}>
-            {console.log(teamObjects)}
             <Checkbox checked={teamObjects.indexOf(team.id) > -1} />
             <ListItemText
               primary={team.name}
