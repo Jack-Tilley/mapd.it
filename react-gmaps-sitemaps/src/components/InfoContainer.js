@@ -90,6 +90,7 @@ const InfoContainer = () => {
       <div>
         <h4 style={{ color: "black" }}>{selected.label}</h4>
         <p style={{ color: "black" }}>{selected.description}</p>
+        <img src={selected.image} alt={selected.label} />
         <IconButton onClick={handleEditClick}>
           <i className="material-icons icon-black">edit</i>
         </IconButton>

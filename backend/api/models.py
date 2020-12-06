@@ -77,6 +77,7 @@ class Node(MPTTModel):
     modified = models.DateTimeField(auto_now=True)
     description = models.CharField(
         max_length=240, null=True, blank=True)
+    image = models.ImageField(null=True, blank=True, upload_to="images/")
     # team = models.ForeignKey(
     #     Team, null=True, blank=True, on_delete=models.CASCADE, related_name="Team")
 

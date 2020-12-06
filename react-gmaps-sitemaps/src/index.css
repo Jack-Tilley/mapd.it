@@ -86,3 +86,7 @@ i.icon-cancel {
   color: red;
   width: 50px;
 }
+
+.fileUploader {
+  border: 1px solid #e1e1e1;
+}

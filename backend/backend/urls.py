@@ -19,6 +19,8 @@ from django.urls import path, include
 from rest_framework import routers
 from api import views
 from knox import views as knox_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
 router.register(r'nodes', views.NodeView, 'nodes')
@@ -35,4 +37,5 @@ urlpatterns = [
     path('api/login/', views.LoginAPI.as_view(), name='login'),
     path('api/logout/', knox_views.LogoutView.as_view(), name='logout'),
     path('api/logoutall/', knox_views.LogoutAllView.as_view(), name='logoutall'),
-]
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -58,6 +58,7 @@ export const MapProvider = (props) => {
   const [profileId, setProfileId] = useState(null);
   const [teams, setTeams] = useState([]);
   const [selectedTeams, setSelectedTeams] = useState([]);
+  const [picture, setPicture] = useState(null);
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -175,6 +176,7 @@ export const MapProvider = (props) => {
     setDescription("");
     setNodeType(null);
     setEditValue("");
+    setPicture(null);
   };
 
   const updateNodes = () => {
@@ -319,6 +321,8 @@ export const MapProvider = (props) => {
         selectedTeams,
         setSelectedTeams,
         updateNodes,
+        picture,
+        setPicture,
       ]}
     >
       {props.children}
