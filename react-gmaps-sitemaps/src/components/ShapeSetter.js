@@ -36,7 +36,7 @@ const ShapeSetter = () => {
   return (
     <>
       {shapes.map((shape) => {
-        // !!!this is crazy inefficient: O(n^2), n = total nodes!!!
+        // TODO !!!this is crazy inefficient: O(n^2), n = total nodes!!!
         let node = findNode(shape.value);
         // console.log("NODE", node);
         // if a node has been deleted or is missing

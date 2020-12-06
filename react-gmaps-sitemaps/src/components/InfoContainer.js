@@ -5,6 +5,7 @@ import EditNodeModal from "./EditNodeModal";
 import { AirlineSeatReclineNormalRounded } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = makeStyles({
   root: {
@@ -82,20 +83,35 @@ const InfoContainer = () => {
         lat: parseFloat(selected.latLngArr[0]),
         lng: parseFloat(selected.latLngArr[1]),
       }}
-      // onCloseClick={() => {
-      //   setSelected(null);
-      // }}
+      onCloseClick={() => {
+        setSelected(null);
+      }}
     >
       <div>
         <h4 style={{ color: "black" }}>{selected.label}</h4>
         <p style={{ color: "black" }}>{selected.description}</p>
-        <button onClick={handleEditClick}>EDIT</button>
+        <IconButton onClick={handleEditClick}>
+          <i className="material-icons icon-black">edit</i>
+        </IconButton>
+        {/* <button onClick={handleEditClick}>EDIT</button> */}
         <EditNodeModal
           editOpen={editOpen}
           setEditOpen={setEditOpen}
           value={value}
           setValue={setValue}
         />
+        <a
+          href={
+            "http://maps.google.com/maps?daddr=" +
+            selected.latLngArr[0] +
+            "," +
+            selected.latLngArr[1]
+          }
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Get Directions
+        </a>
       </div>
     </InfoWindow>
   ) : null;
