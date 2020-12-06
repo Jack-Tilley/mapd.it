@@ -8,8 +8,10 @@ import Directions from "./Directions";
 import InfoContainer from "./InfoContainer";
 import SettingsModal from "./settings/SettingsModal";
 import HistoryDrawer from "./HistoryDrawer";
-import DistanceFinder from "./DistanceFinder";
-import RefreshButton from "./RefreshButton";
+import DistanceFinder from "./mapTools/DistanceFinder";
+import PanTool from "./mapTools/PanTool";
+import RefreshButton from "./mapTools/RefreshButton";
+import ToolContainer from "./mapTools/ToolContainer";
 
 import { Paper } from "@material-ui/core";
 
@@ -69,8 +71,10 @@ const Map = ({ darkMode, setDarkMode }) => {
           setDarkMode={setDarkMode}
         />
         <HistoryDrawer />
-        <DistanceFinder />
-        <RefreshButton />
+        {/* <DistanceFinder />
+        <PanTool />
+        <RefreshButton /> */}
+        <ToolContainer />
       </GoogleMap>
     </>
   );

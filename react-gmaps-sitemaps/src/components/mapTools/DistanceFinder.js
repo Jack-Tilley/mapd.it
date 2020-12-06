@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 
 import IconButton from "@material-ui/core/IconButton";
-import { MapContext } from "./MapContext";
+import { MapContext } from "../MapContext";
 
 import { Paper } from "@material-ui/core";
 import {
@@ -38,7 +38,10 @@ const distanceConverter = (distance) => {
   }
 };
 
-export default function DistanceFinder() {
+export default function DistanceFinder({
+  distanceToolRendered,
+  setDistanceToolRendered,
+}) {
   const [
     myMap,
     setMyMap,
@@ -93,7 +96,6 @@ export default function DistanceFinder() {
   const map = useGoogleMap();
   let lat = map.getCenter().lat();
   let lng = map.getCenter().lng();
-  const [rendered, setRendered] = useState(false);
   const [m1, setM1] = useState({ lat: lat, lng: lng });
   const [m2, setM2] = useState({ lat: lat, lng: lng });
   const [distanceLabel, setDistanceLabel] = useState(
@@ -148,18 +150,18 @@ export default function DistanceFinder() {
       distanceConverter(getDistance(m1.lat, m1.lng, m2.lat, m2.lng))
     );
     setMidpoint({ lat: lat, lng: lng });
-    setRendered(!rendered);
+    setDistanceToolRendered(!distanceToolRendered);
   };
   return (
     <>
-      <div style={{ position: "absolute", right: "1em", top: "15em" }}>
+      <div style={{ position: "absolute", left: "15em", top: "3em" }}>
         <Paper>
           <IconButton onClick={() => handleDistanceButtonClick()} size="small">
-            <i className="material-icons icon-grey">{"measure"}</i>
+            <i className="material-icons icon-grey">{"straighten"}</i>
           </IconButton>
         </Paper>
       </div>
-      {rendered ? (
+      {distanceToolRendered ? (
         <>
           <Marker
             position={m1}
