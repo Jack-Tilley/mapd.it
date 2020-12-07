@@ -88,6 +88,13 @@ class Node(MPTTModel):
         order_insertion_by = ['label']
 
 
+class Comment(models.Model):
+    node = models.ForeignKey(
+        Node, on_delete=models.CASCADE, related_name='comments')
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    content = models.TextField()
+    created = models.DateTimeField(auto_now=True)
+
 # @receiver(post_save, sender=Node)
 # def save_team_nodes(sender, instance, **kwargs):
 #     instance.teams.nodes.add(instance)
