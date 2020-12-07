@@ -23,8 +23,11 @@ import ColorContainer from "./ColorContainer";
 import DirContainer from "./DirContainer";
 import TeamContainer from "./TeamContainer";
 
-import CommentsList from "./CommentsList";
+import RefreshChatButton from "./RefreshChatButton";
 
+import CommentsList from "./CommentsList";
+import { IconButton } from "@material-ui/core";
+import Icon from "@material-ui/core/Icon";
 import axios from "axios";
 
 import { MapContext } from "./MapContext";
@@ -83,6 +86,11 @@ const CommentModal = ({ commentOpen, setCommentOpen }) => {
 
   const [comments, setComments] = useState([]);
   const [value, setValue] = useState("");
+  const bottomRef = React.useRef();
+
+  const scrollToBottom = () => {
+    bottomRef.current.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
     axios
@@ -115,6 +123,17 @@ const CommentModal = ({ commentOpen, setCommentOpen }) => {
       })
       .catch((err) => console.log(err));
     console.log("submit clicked");
+    scrollToBottom();
+  };
+  const handleRefresh = () => {
+    axios
+      .get(`http://localhost:8000/api/allNodes/${selected.id}/comments/`)
+      .then((result) => {
+        console.log("comments", result.data);
+        setComments(result.data);
+      })
+      .catch((err) => console.log(err));
+    scrollToBottom();
   };
 
   const handleClose = () => {
@@ -133,27 +152,57 @@ const CommentModal = ({ commentOpen, setCommentOpen }) => {
         scroll="paper"
         fullWidth
       >
-        <DialogTitle id="form-dialog-title">Comments</DialogTitle>
-        <DialogContent scroll="paper" dividers={true}>
-          <CommentsList comments={comments} />
-          <TextField
-            id="comement-insert"
-            label="Add a comment..."
-            multiline
-            fullWidth
-            value={value}
-            rows={4}
-            placeholder="Add a comment..."
-            onChange={handleChange}
+        <DialogTitle id="form-dialog-title">
+          Comments
+          <RefreshChatButton
+            setComments={setComments}
+            selected={selected}
+            handleRefresh={handleRefresh}
           />
+        </DialogTitle>
+        <DialogContent scroll="paper" dividers={true}>
+          <CommentsList comments={comments} bottomRef={bottomRef} />
+          <div ref={bottomRef} />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="default">
-            Done
-          </Button>
-          <Button onClick={() => handleSubmit()} color="primary">
+        <DialogActions style={{ overflow: "hidden" }}>
+          <FormControl fullWidth>
+            <TextField
+              autoFocus
+              id="comement-insert"
+              label="Add a comment..."
+              variant="outlined"
+              multiline
+              value={value}
+              rows={4}
+              onChange={handleChange}
+              InputProps={{
+                endAdornment: (
+                  <Button
+                    variant="contained"
+                    style={{
+                      position: "absolute",
+                      bottom: 3,
+                      right: 3,
+                    }}
+                    color="primary"
+                    endIcon={<Icon>send</Icon>}
+                    onClick={() => handleSubmit()}
+                  >
+                    Comment
+                  </Button>
+                ),
+              }}
+            />
+          </FormControl>
+          <div>
+            <Button variant="contained" onClick={handleClose} color="default">
+              Done
+            </Button>
+          </div>
+
+          {/* <Button onClick={() => handleSubmit()} color="primary">
             Comment
-          </Button>
+          </Button> */}
         </DialogActions>
       </Dialog>
     </div>

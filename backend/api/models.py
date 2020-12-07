@@ -92,7 +92,7 @@ class Comment(models.Model):
     node = models.ForeignKey(
         Node, on_delete=models.CASCADE, related_name='comments')
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    content = models.TextField()
+    content = models.CharField(max_length=256, blank=False, null=False)
     created = models.DateTimeField(auto_now=True)
 
 # @receiver(post_save, sender=Node)

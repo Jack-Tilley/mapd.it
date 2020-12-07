@@ -8,6 +8,11 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 
+const formatTime = (datetime) => {
+  const time = new Date(datetime);
+  return time.getUTCHours() + ":" + ("0" + time.getUTCMinutes()).slice(-2);
+};
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -18,14 +23,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CommentsList = ({ comments }) => {
+const CommentsList = ({ comments, bottomRef, scrollToBottom }) => {
   const classes = useStyles();
 
   return (
     <List className={classes.root}>
       {comments.map((comment) => (
         <>
-          <ListItem alignItems="flex-start">
+          <ListItem alignItems="flex-start" key={comment.created}>
             <ListItemAvatar>
               <Avatar>{comment.profile.user.username.charAt(0)} </Avatar>
             </ListItemAvatar>
@@ -39,9 +44,9 @@ const CommentsList = ({ comments }) => {
                     className={classes.inline}
                     color="textPrimary"
                   >
-                    {comment.profile.user.username + " - "}
+                    {comment.profile.user.username}
                   </Typography>
-                  {comment.created + " UTC"}
+                  {"   - " + formatTime(comment.created) + " UTC"}
                 </>
               }
             />
