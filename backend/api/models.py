@@ -8,6 +8,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.validators import MinLengthValidator
 from .utils import generate_key
+from PIL import Image as PIL_Image
 
 
 class Profile(models.Model):
@@ -100,11 +101,18 @@ class Image(models.Model):
     node = models.ForeignKey(
         Node, on_delete=models.CASCADE, related_name="images")
 
+    def save(self, *args, **kwargs):
+        super().save()  # saving image first
+        img = PIL_Image.open(self.image.path)  # Open image using self
+        if img.height > 500 or img.width > 500:
+            new_size = (500, 500)
+            img.thumbnail((new_size), PIL_Image.ANTIALIAS)
+            img.save(self.image.path)  # saving image at the same path
+
 
 # @receiver(post_save, sender=Node)
 # def save_team_nodes(sender, instance, **kwargs):
 #     instance.teams.nodes.add(instance)
 #     instance.teams.add()
-
 
 register(Node)

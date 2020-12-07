@@ -28,13 +28,47 @@ import RefreshChatButton from "./RefreshChatButton";
 import CommentsList from "./CommentsList";
 import { IconButton } from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
-import axios from "axios";
 
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import axios from "axios";
+import { makeStyles } from "@material-ui/core/styles";
 import ImageUpload from "./ImageUpload";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
 
 import { MapContext } from "./MapContext";
 
-const ImageModal = ({ imageOpen, setImageOpen }) => {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    overflow: "hidden",
+    backgroundColor: theme.palette.background.paper,
+  },
+  gridList: {
+    flexWrap: "nowrap",
+    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+    transform: "translateZ(0)",
+  },
+  title: {
+    color: theme.palette.primary.light,
+  },
+  titleBar: {
+    background:
+      "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+  },
+}));
+
+const urlbase = "http://localhost:8000";
+const ImageModal = ({
+  imageOpen,
+  setImageOpen,
+  images,
+  setImages,
+  gatherImages,
+}) => {
   const [
     myMap,
     setMyMap,
@@ -88,6 +122,7 @@ const ImageModal = ({ imageOpen, setImageOpen }) => {
     picture,
     setPicture,
   ] = useContext(MapContext);
+  const classes = useStyles();
 
   const handleClose = () => {
     setImageOpen(false);
@@ -98,32 +133,32 @@ const ImageModal = ({ imageOpen, setImageOpen }) => {
     setPicture(e.target.files[0]);
   };
   const handleSubmit = () => {
-    console.log("picFile", picture["FILES"]);
+    console.log("picFile", picture);
     let data = new FormData(); // creates a new FormData object
     data.append("image", picture);
-    data.append("description", "hello");
-    data.append("node", "205");
-    // let form_data = new FormData();
-    // form_data.append("image", picture, "imgname");
-    // form_data.append("description", "hello this is desc");
-    // form_data.append("node", selected.id);
-    // axios
-    //   .post("http://localhost:8000/api/images/", form_data, {
-    //     headers: {
-    //       "content-type": "multipart/form-data",
-    //     },
-    //   })
-    //   .then((res) => {
-    //     console.log(res.data);
-    //   })
-    //   .catch((err) => console.log(err));
-    ////
+    data.append("description", "hardcoded desription");
+    data.append("node", selected.id);
     axios
       .post("http://localhost:8000/api/images/", data, {
         headers: { "Content-Type": "multipart/form-data" },
       })
-      .then((res) => console.log(res.data))
+      .then((res) => {
+        console.log(res.data);
+        gatherImages();
+      })
       .catch((err) => console.log(err));
+  };
+  const renderImages = () => {
+    console.log("images", images);
+    return (
+      <GridList cellHeight={300} className={classes.gridList} cols={2.5}>
+        {images.map((image) => (
+          <GridListTile key={image.id}>
+            <img src={urlbase + image.image} alt={image.image} />
+          </GridListTile>
+        ))}
+      </GridList>
+    );
   };
 
   return (
@@ -137,6 +172,7 @@ const ImageModal = ({ imageOpen, setImageOpen }) => {
       >
         <DialogTitle id="form-dialog-title">Images</DialogTitle>
         <DialogContent scroll="paper" dividers={true}>
+          {images.length > 0 ? renderImages() : null}
           <ImageUpload handlePictureChange={handlePictureChange} />
         </DialogContent>
         <DialogActions style={{ overflow: "hidden" }}>

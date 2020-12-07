@@ -72,13 +72,13 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ('node', 'content', 'profile', 'created')
+        fields = ('id', 'node', 'content', 'profile', 'created')
 
 
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
-        fields = ('image', 'description', 'node')
+        fields = ('id', 'image', 'description', 'node')
 
 
 class BaseCommentSerializer(serializers.ModelSerializer):

@@ -33,6 +33,12 @@ class AllNodesView(viewsets.ModelViewSet):
         comments = node.comments.all()
         return Response(CommentSerializer(comments, many=True).data)
 
+    @action(detail=True, methods=['get'])
+    def images(self, request, pk=None):
+        node = self.get_object()
+        images = node.images.all()
+        return Response(ImageSerializer(images, many=True).data)
+
 
 class TeamsView(viewsets.ModelViewSet):
     # this view should probably be the same as NodeView at somepoint
