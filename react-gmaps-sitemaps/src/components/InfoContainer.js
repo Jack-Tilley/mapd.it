@@ -3,6 +3,7 @@ import { MapContext } from "./MapContext";
 import { InfoWindow, OverlayView } from "@react-google-maps/api";
 import EditNodeModal from "./EditNodeModal";
 import CommentModal from "./CommentModal";
+import ImageModal from "./ImageModal";
 import { AirlineSeatReclineNormalRounded } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
@@ -67,6 +68,7 @@ const InfoContainer = () => {
 
   const [editOpen, setEditOpen] = useState(false);
   const [commentOpen, setCommentOpen] = useState(false);
+  const [imageOpen, setImageOpen] = useState(false);
   const [value, setValue] = useState("");
 
   const handleEditClick = () => {
@@ -80,6 +82,9 @@ const InfoContainer = () => {
 
   const handleCommentClick = () => {
     setCommentOpen(true);
+  };
+  const handleImageClick = () => {
+    setImageOpen(true);
   };
 
   return selected ? (
@@ -103,7 +108,9 @@ const InfoContainer = () => {
         <IconButton onClick={handleCommentClick}>
           <i className="material-icons icon-black">comment</i>
         </IconButton>
-        {/* <button onClick={handleEditClick}>EDIT</button> */}
+        <IconButton onClick={handleImageClick}>
+          <i className="material-icons icon-black">image</i>
+        </IconButton>
         <EditNodeModal
           editOpen={editOpen}
           setEditOpen={setEditOpen}
@@ -114,6 +121,7 @@ const InfoContainer = () => {
           commentOpen={commentOpen}
           setCommentOpen={setCommentOpen}
         />
+        <ImageModal imageOpen={imageOpen} setImageOpen={setImageOpen} />
         <a
           href={
             "http://maps.google.com/maps?daddr=" +

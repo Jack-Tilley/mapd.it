@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .serializers import NodeSerializer, HistorySerializer, TeamSerializer, ProfileSerializer, CommentSerializer, ProfileInfoSerializer, BaseCommentSerializer
-from .models import Node, Team, Profile, Comment
+from .serializers import NodeSerializer, HistorySerializer, TeamSerializer, ProfileSerializer, CommentSerializer, ProfileInfoSerializer, BaseCommentSerializer, ImageSerializer
+from .models import Node, Team, Profile, Comment, Image
 from rest_framework import generics, permissions
 from rest_framework.response import Response
 from knox.models import AuthToken
@@ -127,6 +127,11 @@ class CommentsView(viewsets.ModelViewSet):
 class BaseCommentsView(viewsets.ModelViewSet):
     serializer_class = BaseCommentSerializer
     queryset = Comment.objects.all()
+
+
+class ImagesView(viewsets.ModelViewSet):
+    serializer_class = ImageSerializer
+    queryset = Image.objects.all()
 
 
 class HistoryView(viewsets.ModelViewSet):

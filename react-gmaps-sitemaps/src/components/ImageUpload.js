@@ -7,17 +7,29 @@ const ImageUpload = ({ handlePictureChange }) => {
   //     console.log(picture);
   //   };
   return (
-    <ImageUploader
-      withIcon={false}
-      withPreview={true}
-      label=""
-      buttonText="Upload Image"
-      onChange={handlePictureChange}
-      imgExtension={[".jpg", ".jpeg", ".png", ".svg"]}
-      maxFileSize={1048576}
-      fileSizeError="file size is too big"
-      singleImage={true}
-    />
+    // <ImageUploader
+    //   withIcon={false}
+    //   withPreview={true}
+    //   label=""
+    //   buttonText="Upload Image"
+    //   onChange={(e) => handlePictureChange(e)}
+    //   imgExtension={[".jpg", ".jpeg", ".png", ".svg"]}
+    //   maxFileSize={1048576}
+    //   fileSizeError="file size is too big"
+    //   singleImage={true}
+    // />
+    <div className="App">
+      <p>
+        <input
+          type="file"
+          id="image"
+          accept="image/*"
+          onChange={(e) => handlePictureChange(e)}
+          required
+        />
+      </p>
+      <input type="submit" />
+    </div>
   );
 };
 export default ImageUpload;

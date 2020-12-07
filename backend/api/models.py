@@ -77,9 +77,7 @@ class Node(MPTTModel):
     modified = models.DateTimeField(auto_now=True)
     description = models.CharField(
         max_length=240, null=True, blank=True)
-    image = models.ImageField(null=True, blank=True, upload_to="images/")
-    # team = models.ForeignKey(
-    #     Team, null=True, blank=True, on_delete=models.CASCADE, related_name="Team")
+    # image = models.ImageField(null=True, blank=True, upload_to="images/")
 
     # def __str__(self):
     #     return self.label
@@ -94,6 +92,14 @@ class Comment(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     content = models.CharField(max_length=256, blank=False, null=False)
     created = models.DateTimeField(auto_now=True)
+
+
+class Image(models.Model):
+    image = models.ImageField(upload_to="images/")
+    description = models.CharField(max_length=128, blank=True, null=True)
+    node = models.ForeignKey(
+        Node, on_delete=models.CASCADE, related_name="images")
+
 
 # @receiver(post_save, sender=Node)
 # def save_team_nodes(sender, instance, **kwargs):
