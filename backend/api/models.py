@@ -15,10 +15,18 @@ class Profile(models.Model):
     teams = models.ManyToManyField('Team', blank=True, related_name="teams")
 
 
+# @receiver(post_save, sender=User)
+# def create_profile_team(sender, instance, created, **kwargs):
+#     if created:
+#         team = Team.objects.create(name=instance.username + "'s team")
+
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
+        team = Team.objects.create(name=instance.username + "'s team")
+        instance.profile.teams.add(team)
 
 
 @receiver(post_save, sender=User)
@@ -69,6 +77,7 @@ class Node(MPTTModel):
     modified = models.DateTimeField(auto_now=True)
     description = models.CharField(
         max_length=240, null=True, blank=True)
+    image = models.ImageField(null=True, blank=True, upload_to="images/")
     # team = models.ForeignKey(
     #     Team, null=True, blank=True, on_delete=models.CASCADE, related_name="Team")
 
@@ -78,6 +87,13 @@ class Node(MPTTModel):
     class MPTTMETA:
         order_insertion_by = ['label']
 
+
+class Comment(models.Model):
+    node = models.ForeignKey(
+        Node, on_delete=models.CASCADE, related_name='comments')
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    content = models.CharField(max_length=256, blank=False, null=False)
+    created = models.DateTimeField(auto_now=True)
 
 # @receiver(post_save, sender=Node)
 # def save_team_nodes(sender, instance, **kwargs):

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { MapContext } from "./MapContext";
 import { GoogleMap, InfoWindow, useGoogleMap } from "@react-google-maps/api";
 import DrawingComponent from "./DrawingComponent";
@@ -8,7 +8,10 @@ import Directions from "./Directions";
 import InfoContainer from "./InfoContainer";
 import SettingsModal from "./settings/SettingsModal";
 import HistoryDrawer from "./HistoryDrawer";
-import RefreshButton from "./RefreshButton";
+import DistanceFinder from "./mapTools/DistanceFinder";
+import PanTool from "./mapTools/PanTool";
+import RefreshButton from "./mapTools/RefreshButton";
+import ToolContainer from "./mapTools/ToolContainer";
 
 import { Paper } from "@material-ui/core";
 
@@ -53,8 +56,10 @@ const Map = ({ darkMode, setDarkMode }) => {
         center={center}
         onLoad={(map) => setMyMap(map)}
         options={options}
+        onRightClick={() => console.log("rightClick")}
+        onClick={() => setSelected(null)}
       >
-        {/* <AutocompleteBox center={center} setCenter={setCenter} /> */}
+        <AutocompleteBox center={center} setCenter={setCenter} />
         <DrawingComponent />
         <ShapeSetter />
         {/* <Directions /> */}
@@ -66,7 +71,10 @@ const Map = ({ darkMode, setDarkMode }) => {
           setDarkMode={setDarkMode}
         />
         <HistoryDrawer />
-        <RefreshButton />
+        {/* <DistanceFinder />
+        <PanTool />
+        <RefreshButton /> */}
+        <ToolContainer />
       </GoogleMap>
     </>
   );

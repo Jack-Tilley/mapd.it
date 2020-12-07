@@ -118,6 +118,8 @@ const SettingsModal = ({
   const [mapStyle, setMapStyle] = useState(
     localStorage.getItem("mapStyle") || ""
   );
+  const [mapTypes, setMapTypes] = useState("roadmap");
+
   useEffect(() => {
     console.log("map or mapStyle has updated");
     if (mapStyle === "bluegray") {
@@ -143,6 +145,10 @@ const SettingsModal = ({
     }
     localStorage.setItem("mapStyle", mapStyle);
   }, [mapStyle, map]);
+
+  useEffect(() => {
+    map.setOptions({ mapTypeId: mapTypes });
+  }, [mapTypes, map]);
 
   const handleClose = () => {
     setSettingsOpen(false);
@@ -186,6 +192,8 @@ const SettingsModal = ({
           setMapStyle={setMapStyle}
           darkMode={darkMode}
           setDarkMode={setDarkMode}
+          mapTypes={mapTypes}
+          setMapTypes={setMapTypes}
         />
       );
     } else if (page === "team") {

@@ -9,12 +9,17 @@ const PaletteThemeSelector = ({ darkMode, setDarkMode }) => {
     localStorage.setItem("darkMode", darkMode);
   }, [darkMode]);
 
+  const handleDarkModeChange = (e) => {
+    e.preventDefault();
+    setDarkMode(!darkMode);
+  };
+
   return (
     <FormControl>
       <Switch
         checked={darkMode}
         value={darkMode}
-        onClick={(e) => setDarkMode(!darkMode)}
+        onClick={(e) => handleDarkModeChange(e)}
       />
       <FormHelperText>Dark Mode</FormHelperText>
     </FormControl>

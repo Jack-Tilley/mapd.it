@@ -87,15 +87,22 @@ const ModalDesignRework = ({
 
   const [isDir, setIsDir] = useState(true);
   const [teamObjects, setTeamObjects] = useState([]);
+  const [submitTeamDisabled, setSubmitTeamDisabled] = useState(true);
+  const [submitValueDisabled, setSubmitValueDisabled] = useState(true);
+  const [submitDisabled, setSubmitDisabled] = useState(true);
 
   const handleSubmit = (type) => {
-    setSelectedTeams(teamObjects);
-    setNodeType(type);
-    setDraw(true);
-    addItem(event, isDir, type);
-    setModalOpen(false);
-    setEvent("");
-    setIsDir(true);
+    if (teamObjects.length < 1) {
+      console.log("Fill in required");
+    } else {
+      setSelectedTeams(teamObjects);
+      setNodeType(type);
+      setDraw(true);
+      addItem(event, isDir, type);
+      setModalOpen(false);
+      setEvent("");
+      setIsDir(true);
+    }
   };
 
   const handleClose = () => {
@@ -122,11 +129,42 @@ const ModalDesignRework = ({
     setComment(event.target.value);
   };
 
+  const handleTeamSubmitEnable = (teamObjs) => {
+    if (teamObjs.length > 0) {
+      setSubmitTeamDisabled(false);
+    } else {
+      setSubmitTeamDisabled(true);
+    }
+    handleSubmitEnable();
+  };
+  const handleValueSubmitEnable = (val) => {
+    if (val.length > 0) {
+      setSubmitValueDisabled(false);
+    } else {
+      setSubmitValueDisabled(true);
+    }
+    handleSubmitEnable();
+  };
+  const handleSubmitEnable = () => {
+    if (submitTeamDisabled && submitValueDisabled) {
+      setSubmitDisabled(true);
+    } else {
+      setSubmitDisabled(false);
+    }
+  };
+
   const handleSelectedTeamChange = (event) => {
     setTeamObjects(event.target.value);
-    console.log(teamObjects);
-    setSelectedTeams(teamObjects);
-    console.log(selectedTeams);
+    handleTeamSubmitEnable(event.target.value);
+    handleValueSubmitEnable(value);
+    handleSubmitEnable();
+  };
+
+  const handleValueChange = (e) => {
+    setValue(e.target.value);
+    handleValueSubmitEnable(e.target.value);
+    handleValueSubmitEnable(teamObjects);
+    handleSubmitEnable();
   };
 
   return (
@@ -150,13 +188,15 @@ const ModalDesignRework = ({
                   ),
                 }}
                 autoFocus
+                autoComplete="off"
+                required
                 value={value}
                 margin="dense"
                 placeholder="Give your item a title"
                 id="name"
                 label="Node Name"
                 type="text"
-                onChange={(e) => setValue(e.target.value)}
+                onChange={(e) => handleValueChange(e)}
                 fullWidth
               />
               <TextField
@@ -225,10 +265,18 @@ const ModalDesignRework = ({
           <Button onClick={handleClose} color="default">
             Cancel
           </Button>
-          <Button onClick={() => handleSubmit("marker")} color="primary">
+          <Button
+            disabled={submitDisabled}
+            onClick={() => handleSubmit("marker")}
+            color="primary"
+          >
             Marker
           </Button>
-          <Button onClick={() => handleSubmit("polyline")} color="primary">
+          <Button
+            disabled={submitDisabled}
+            onClick={() => handleSubmit("polyline")}
+            color="primary"
+          >
             Polyline
           </Button>
         </DialogActions>
@@ -238,42 +286,3 @@ const ModalDesignRework = ({
 };
 
 export default ModalDesignRework;
-
-{
-  /* <DialogContent id="buttons">
-          <Grid container spacing={1}>
-            <Grid item xs={8}>
-              <IconContainer handleButtonClick={handleButtonClick} />
-            </Grid>
-            <Grid item xs={2}>
-              <ColorContainer
-                handleColorChange={handleColorChange}
-                color={color}
-              />
-            </Grid>
-            <Grid item xs={1}>
-              <DirContainer handleDirChange={handleDirChange} isDir={isDir} />
-            </Grid>
-          </Grid>
-        </DialogContent>
-        <DialogContent id="text">
-          <TextField
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <i className={`material-icons icon-${color}`}>{icon}</i>
-                </InputAdornment>
-              ),
-            }}
-            autoFocus
-            value={value}
-            margin="dense"
-            placeholder="Give your item a title"
-            id="name"
-            label="Node Name"
-            type="text"
-            onChange={(e) => setValue(e.target.value)}
-            fullWidth
-          />
-        </DialogContent> */
-}

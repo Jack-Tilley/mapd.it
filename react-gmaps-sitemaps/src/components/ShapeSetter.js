@@ -36,7 +36,7 @@ const ShapeSetter = () => {
   return (
     <>
       {shapes.map((shape) => {
-        // !!!this is crazy inefficient: O(n^2), n = total nodes!!!
+        // TODO !!!this is crazy inefficient: O(n^2), n = total nodes!!!
         let node = findNode(shape.value);
         // console.log("NODE", node);
         // if a node has been deleted or is missing
@@ -58,6 +58,38 @@ const ShapeSetter = () => {
                 origin: new window.google.maps.Point(0, 0),
                 anchor: new window.google.maps.Point(15, 15),
               }}
+              // onLoad={(marker) => {
+              //   fetch("/newIcons/" + node.iconValue + ".svg")
+              //     // Get SVG response as text
+              //     .then((response) => response.text())
+              //     // Parse to a DOM tree using DOMParser
+              //     .then((str) =>
+              //       new window.DOMParser().parseFromString(str, "text/xml")
+              //     )
+              //     // // Find path with id="myPath" and return the d attribute
+              //     .then((data) =>
+              //       data.getElementsByTagName("path")[0].getAttribute("d")
+              //     )
+              //     .then((path) => {
+              //       const customIcon = (opts) =>
+              //         Object.assign(
+              //           {
+              //             path: path,
+              //             fillColor: node.color,
+              //             fillOpacity: 1,
+              //             strokeColor: node.color,
+              //             strokeWeight: 1,
+              //             // scaledSize: window.google.maps.Size(30, 30),
+              //             origin: window.google.maps.Point(0, 0),
+              //             anchor: window.google.maps.Point(15, 15),
+              //             opacity: 1,
+              //             scale: 1.5,
+              //           },
+              //           opts
+              //         );
+              //       marker.setIcon(customIcon({}));
+              //     });
+              // }}
               onClick={() => setSelected(node)}
             />
           );

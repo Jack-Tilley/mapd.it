@@ -32,10 +32,12 @@ div.treeContainer {
   left: 1rem;
   /* background-color: white; */
   margin: 0;
+  margin-right: 5px;
   padding: 0;
   max-height: 240px;
   max-width: 200px;
   min-width: 200px;
+  text-overflow: ellipses;
   /* box-sizing: border-box; */
   /* border: 1px solid transparent; */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
@@ -46,7 +48,6 @@ div.gmnoprint {
   padding-left: 19.5em;
   padding-top: 1em;
 }
-
 form {
   z-index: 13;
 }
@@ -84,4 +85,8 @@ i.icon-grey {
 i.icon-cancel {
   color: red;
   width: 50px;
+}
+
+.fileUploader {
+  border: 1px solid #e1e1e1;
 }

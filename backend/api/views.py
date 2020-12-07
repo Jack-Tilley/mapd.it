@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .serializers import NodeSerializer, HistorySerializer, TeamSerializer, ProfileSerializer
-from .models import Node, Team, Profile
+from .serializers import NodeSerializer, HistorySerializer, TeamSerializer, ProfileSerializer, CommentSerializer, ProfileInfoSerializer, BaseCommentSerializer
+from .models import Node, Team, Profile, Comment
 from rest_framework import generics, permissions
 from rest_framework.response import Response
 from knox.models import AuthToken
@@ -27,13 +27,19 @@ class AllNodesView(viewsets.ModelViewSet):
     serializer_class = NodeSerializer
     queryset = Node.objects.all()
 
+    @action(detail=True, methods=['get'])
+    def comments(self, request, pk=None):
+        node = self.get_object()
+        comments = node.comments.all()
+        return Response(CommentSerializer(comments, many=True).data)
+
 
 class TeamsView(viewsets.ModelViewSet):
     # this view should probably be the same as NodeView at somepoint
     serializer_class = TeamSerializer
     queryset = Team.objects.all()
 
-    @action(detail=True, methods=['get'], serializer_class=NodeSerializer)
+    @ action(detail=True, methods=['get'], serializer_class=NodeSerializer)
     def nodes(self, request, pk=None):
         """
         Returns a list of all the nodes that the given
@@ -44,7 +50,7 @@ class TeamsView(viewsets.ModelViewSet):
         nodes = team.nodes.all()
         return Response(nodes.values())
 
-    @action(detail=True, methods=['post'])
+    @ action(detail=True, methods=['post'])
     def update_nodes(self, request, pk=None):
         """
         Updates the list of all the nodes that the given
@@ -64,7 +70,7 @@ class ProfilesView(viewsets.ModelViewSet):
     serializer_class = ProfileSerializer
     queryset = Profile.objects.all()
 
-    @action(detail=True, methods=['put'])
+    @ action(detail=True, methods=['put'])
     def join_team(self, request, pk=None):
         """
         joins a team that the given profile requests
@@ -79,7 +85,7 @@ class ProfilesView(viewsets.ModelViewSet):
         profile = pfile.save()
         return Response(ProfileSerializer(profile, context=self.get_serializer_context()).data)
 
-    @action(detail=True, methods=['put'])
+    @ action(detail=True, methods=['put'])
     def leave_team(self, request, pk=None):
         """
         leaves a team that the given profile is subscribed to
@@ -92,7 +98,7 @@ class ProfilesView(viewsets.ModelViewSet):
         teams = profile.teams.all()
         return Response(teams.values())
 
-    @action(detail=True, methods=['get'])
+    @ action(detail=True, methods=['get'])
     def view_teams(self, request, pk=None):
         """
         views the teams the given user is subscribed to
@@ -111,6 +117,16 @@ class ProfilesView(viewsets.ModelViewSet):
             res.append(data)
         print(res)
         return Response(res)
+
+
+class CommentsView(viewsets.ModelViewSet):
+    serializer_class = CommentSerializer
+    queryset = Comment.objects.all()
+
+
+class BaseCommentsView(viewsets.ModelViewSet):
+    serializer_class = BaseCommentSerializer
+    queryset = Comment.objects.all()
 
 
 class HistoryView(viewsets.ModelViewSet):
