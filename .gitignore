@@ -156,3 +156,17 @@ packages/react-devtools-shell/dist
 packages/react-devtools-scheduling-profiler/dist
 backend/api/__pycache__/models.cpython-38.pyc
 
+.installed.cfg
+bin
+develop-eggs
+dist
+downloads
+eggs
+parts
+src/*.egg-info
+lib
+lib64
+*.pyc
+*.pyo
+build/
+dist/
