@@ -40,24 +40,23 @@ function App() {
           <Switch>
             <PrivateRoute
               exact
-              path="/"
+              path="/map"
               component={() => (
                 <>
                   <Map darkMode={darkMode} setDarkMode={setDarkMode} />
-                  <div className="treeContainer">
+                  {/* <div className="treeContainer">
                     <SiteTree />
-                  </div>
+                  </div> */}
                 </>
               )}
             />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/home" component={Home} />
+            <Route exact path="/" component={Home} />
             <Route path="/services" component={Services} />
             <Route path="/products" component={Products} />
             <Route path="/sign-up" component={SignUp} />
           </Switch>
-          <Footer />
         </Router>
       </MapProvider>
       {/* </Paper> */}

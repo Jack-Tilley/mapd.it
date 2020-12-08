@@ -2,6 +2,7 @@ import React from "react";
 import HeroSection from "../../HeroSection";
 import { homeObjOne, homeObjTwo, homeObjThree, homeObjFour } from "./Data";
 import Pricing from "../../Pricing";
+import Footer from "../Footer/Footer";
 
 function Home() {
   return (
@@ -9,8 +10,9 @@ function Home() {
       <HeroSection {...homeObjOne} />
       <HeroSection {...homeObjThree} />
       <HeroSection {...homeObjTwo} />
-      <Pricing />
+      {/* <Pricing /> */}
       <HeroSection {...homeObjFour} />
+      <Footer />
     </>
   );
 }

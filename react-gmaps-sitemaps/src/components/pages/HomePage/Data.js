@@ -3,9 +3,9 @@ export const homeObjOne = {
   lightText: true,
   lightTextDesc: true,
   topLine: "Exclusive Access",
-  headline: "Unlimited Transactions with zero fees",
+  headline: "Team Collaboration Reimagined",
   description:
-    "Get access to our exclusive diamond card that allows you to  send unlimited transactions without getting charged any fees",
+    "Get access to a brand new way to manage your jobsites and get real time status updates on the progress of your teams",
   buttonLabel: "Get Started",
   imgStart: "",
   img: "images/svg-1.svg",
@@ -31,9 +31,9 @@ export const homeObjThree = {
   lightText: false,
   lightTextDesc: false,
   topLine: "EASY SETUP",
-  headline: "Super fast and simple onboarding process",
+  headline: "Super fast and simple to learn",
   description:
-    "Get everything set up and ready in under 10 minutes. All you need to do is add your information and you're ready to go.",
+    "Get your team set up in under 5 minutes. All you need to do is add your information and you're ready to go.",
   buttonLabel: "Start Now",
   imgStart: "start",
   img: "images/svg-7.svg",
@@ -41,9 +41,9 @@ export const homeObjThree = {
 };
 
 export const homeObjFour = {
-  lightBg: false,
-  lightText: true,
-  lightTextDesc: true,
+  lightBg: true,
+  lightText: false,
+  lightTextDesc: false,
   topLine: "DATA ANALYTICS",
   headline: "Every transaction is stored on our secure cloud database",
   description:

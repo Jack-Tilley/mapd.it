@@ -154,7 +154,7 @@ export default function DistanceFinder({
   };
   return (
     <>
-      <div style={{ position: "absolute", left: "15em", top: "3em" }}>
+      <div style={{ position: "absolute", left: "17.25em", top: "3em" }}>
         <Paper>
           <IconButton onClick={() => handleDistanceButtonClick()} size="small">
             <i className="material-icons icon-grey">{"straighten"}</i>
