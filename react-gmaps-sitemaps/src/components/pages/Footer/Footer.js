@@ -9,7 +9,7 @@ import {
   FaTwitter,
   FaLinkedin,
 } from "react-icons/fa";
-import { MdFingerprint } from "react-icons/md";
+import { MdTonality } from "react-icons/md";
 
 function Footer() {
   return (
@@ -72,7 +72,7 @@ function Footer() {
         <div className="social-media-wrap">
           <div className="footer-logo">
             <Link to="/" className="social-logo">
-              <MdFingerprint className="navbar-icon" />
+              <MdTonality className="navbar-icon" />
               mapd.it
             </Link>
           </div>

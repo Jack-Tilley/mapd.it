@@ -2,14 +2,15 @@ export const homeObjOne = {
   lightBg: false,
   lightText: true,
   lightTextDesc: true,
-  topLine: "SIGN UP TODAY",
-  headline: "Join today to receive an exclusive offer",
+  topLine: "Exclusive Access",
+  headline: "Team Collaboration Reimagined",
   description:
-    "Get access to our exclusive diamond card that allows you to  send unlimited transactions without getting charged any fees",
-  buttonLabel: "Sign Up",
+    "Get access to a brand new way to manage your jobsites and get real time status updates on the progress of your teams",
+  buttonLabel: "Get Started",
   imgStart: "",
-  img: "images/svg-6.svg",
+  img: "images/location_hold_stars.svg",
   alt: "Credit Card",
+  buttonLink: "/sign-up",
 };
 
 export const homeObjTwo = {
@@ -24,6 +25,7 @@ export const homeObjTwo = {
   imgStart: "",
   img: "images/svg-5.svg",
   alt: "Vault",
+  buttonLink: "/sign-up",
 };
 
 export const homeObjThree = {
@@ -31,13 +33,14 @@ export const homeObjThree = {
   lightText: false,
   lightTextDesc: false,
   topLine: "EASY SETUP",
-  headline: "Super fast and simple onboarding process",
+  headline: "Super fast and simple to learn",
   description:
-    "Get everything set up and ready in under 10 minutes. All you need to do is add your information and you're ready to go.",
+    "Get your team set up in under 5 minutes. All you need to do is add your information and you're ready to go.",
   buttonLabel: "Start Now",
   imgStart: "start",
-  img: "images/svg-7.svg",
-  alt: "Vault",
+  img: "images/light_map_stars.svg",
+  alt: "map",
+  buttonLink: "/sign-up",
 };
 
 export const homeObjFour = {
@@ -52,4 +55,5 @@ export const homeObjFour = {
   imgStart: "start",
   img: "images/svg-8.svg",
   alt: "Vault",
+  buttonLink: "/sign-up",
 };

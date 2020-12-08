@@ -2,28 +2,30 @@ export const homeObjOne = {
   lightBg: true,
   lightText: false,
   lightTextDesc: false,
-  topLine: "VIEW OUR PRODUCTS",
-  headline: "Shop through our catalog of products",
+  topLine: "VIEW OUR FEATURES",
+  headline: "View our extensive list of ways we can serve your team",
   description:
-    "We provide worldwide shipping to all countries. If there are any issues, just issue a refund and we will process your request",
-  buttonLabel: "Shop Now",
+    "We provide limitless ways to keep you and your teams connected, find out all the ways mapd.it can strengthen your team",
+  buttonLabel: "View Features",
   imgStart: "",
   img: "images/svg-4.svg",
   alt: "Credit Card",
+  buttonLink: "/sign-up",
 };
 
 export const homeObjTwo = {
   lightBg: false,
   lightText: true,
   lightTextDesc: true,
-  topLine: "100% SECURE",
-  headline: "Stay protected 24/7 anywhere anytime",
+  topLine: "DATA INSIGHTS",
+  headline: "Get insights into the work your team puts in",
   description:
-    "We have you covered no matter where you are located. Over 140 locations worldwide to ensure you have access anytime",
-  buttonLabel: "Learn More",
-  imgStart: "",
-  img: "images/svg-5.svg",
+    "Never ever have to worry again about how your teams are performing. We'll handle that for you.",
+  buttonLabel: "Sign Up Now",
+  imgStart: "start",
+  img: "images/svg-8.svg",
   alt: "Vault",
+  buttonLink: "/sign-up",
 };
 
 export const homeObjThree = {
@@ -38,6 +40,7 @@ export const homeObjThree = {
   imgStart: "start",
   img: "images/svg-7.svg",
   alt: "Vault",
+  buttonLink: "/sign-up",
 };
 
 export const homeObjFour = {
@@ -52,4 +55,5 @@ export const homeObjFour = {
   imgStart: "start",
   img: "images/svg-8.svg",
   alt: "Vault",
+  buttonLink: "/sign-up",
 };

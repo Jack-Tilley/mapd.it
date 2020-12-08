@@ -8,22 +8,24 @@ export const homeObjOne = {
     "Get access to a brand new way to manage your jobsites and get real time status updates on the progress of your teams",
   buttonLabel: "Get Started",
   imgStart: "",
-  img: "images/svg-1.svg",
+  img: "images/location_hold_stars.svg",
   alt: "Credit Card",
+  buttonLink: "/sign-up",
 };
 
 export const homeObjTwo = {
   lightBg: false,
   lightText: true,
   lightTextDesc: true,
-  topLine: "100% SECURE",
-  headline: "Stay protected 24/7 anywhere anytime",
+  topLine: "Tools for teamwork",
+  headline: "Stay connected with your team wherever you are.",
   description:
-    "We have you covered no matter where you are located. Over 140 locations worldwide to ensure you have access anytime",
+    "We have you covered no matter where you are located. INCLUDE MORE ABOUT FEATURES HERE",
   buttonLabel: "Learn More",
   imgStart: "",
   img: "images/svg-5.svg",
   alt: "Vault",
+  buttonLink: "/features",
 };
 
 export const homeObjThree = {
@@ -36,20 +38,22 @@ export const homeObjThree = {
     "Get your team set up in under 5 minutes. All you need to do is add your information and you're ready to go.",
   buttonLabel: "Start Now",
   imgStart: "start",
-  img: "images/svg-7.svg",
-  alt: "Vault",
+  img: "images/light_map_stars.svg",
+  alt: "map",
+  buttonLink: "/sign-up",
 };
 
 export const homeObjFour = {
   lightBg: true,
   lightText: false,
   lightTextDesc: false,
-  topLine: "DATA ANALYTICS",
-  headline: "Every transaction is stored on our secure cloud database",
+  topLine: "DATA INSIGHTS",
+  headline: "Get insights into the work your team puts in",
   description:
-    "Never ever have to worry again about saved reciepts. We store your data, so you can access it anytime.",
+    "Never ever have to worry again about how your teams are performing. We'll handle that for you.",
   buttonLabel: "Sign Up Now",
   imgStart: "start",
   img: "images/svg-8.svg",
   alt: "Vault",
+  buttonLink: "/sign-up",
 };

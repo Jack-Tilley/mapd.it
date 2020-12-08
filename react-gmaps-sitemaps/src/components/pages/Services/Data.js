@@ -10,6 +10,7 @@ export const homeObjOne = {
   imgStart: "",
   img: "images/svg-1.svg",
   alt: "Credit Card",
+  buttonLink: "/sign-up",
 };
 
 export const homeObjTwo = {
@@ -24,6 +25,7 @@ export const homeObjTwo = {
   imgStart: "",
   img: "images/svg-5.svg",
   alt: "Vault",
+  buttonLink: "/sign-up",
 };
 
 export const homeObjThree = {
@@ -38,6 +40,7 @@ export const homeObjThree = {
   imgStart: "start",
   img: "images/svg-7.svg",
   alt: "Vault",
+  buttonLink: "/sign-up",
 };
 
 export const homeObjFour = {
@@ -52,4 +55,5 @@ export const homeObjFour = {
   imgStart: "start",
   img: "images/svg-8.svg",
   alt: "Vault",
+  buttonLink: "/sign-up",
 };

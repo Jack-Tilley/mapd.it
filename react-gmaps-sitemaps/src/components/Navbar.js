@@ -1,12 +1,66 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Button } from "./Button";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import { MdFingerprint } from "react-icons/md";
+import { MdTonality } from "react-icons/md";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
+import { MapContext } from "./MapContext";
 
 function Navbar() {
+  const [
+    myMap,
+    setMyMap,
+    center,
+    setCenter,
+    isLoaded,
+    draw,
+    setDraw,
+    nodes,
+    setNodes,
+    activeNode,
+    setActiveNode,
+    icon,
+    setIcon,
+    shapes,
+    setShapes,
+    checked,
+    setChecked,
+    selected,
+    setSelected,
+    color,
+    setColor,
+    findNode,
+    removeNode,
+    nodeType,
+    setNodeType,
+    disabled,
+    setDisabled,
+    editing,
+    setEditing,
+    editValue,
+    setEditValue,
+    replaceNode,
+    editCleanup,
+    changeIcons,
+    description,
+    setDescription,
+    comment,
+    setComment,
+    label,
+    setLabel,
+    auth,
+    setAuth,
+    profileId,
+    setProfileId,
+    teams,
+    setTeams,
+    selectedTeams,
+    setSelectedTeams,
+    updateNodes,
+    picture,
+    setPicture,
+  ] = useContext(MapContext);
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -21,6 +75,51 @@ function Navbar() {
     }
   };
 
+  const handleUserIsSignedIn = () => {
+    if (!auth.isAuthenticated) {
+      console.log("auth", auth);
+      return (
+        <li className="nav-btn">
+          {button ? (
+            <Link to="/sign-up" className="btn-link">
+              <Button buttonStyle="btn--outline">SIGN UP</Button>
+            </Link>
+          ) : (
+            <Link to="/sign-up" className="btn-link">
+              <Button
+                buttonStyle="btn--outline"
+                buttonSize="btn--mobile"
+                onClick={closeMobileMenu}
+              >
+                SIGN UP
+              </Button>
+            </Link>
+          )}
+        </li>
+      );
+    } else {
+      return (
+        <li className="nav-btn">
+          {button ? (
+            <Link to="/sign-up" className="btn-link">
+              <Button buttonStyle="btn--outline">YOU ARE SIGNED IN</Button>
+            </Link>
+          ) : (
+            <Link to="/sign-up" className="btn-link">
+              <Button
+                buttonStyle="btn--outline"
+                buttonSize="btn--mobile"
+                onClick={closeMobileMenu}
+              >
+                YOU ARE SIGNED IN
+              </Button>
+            </Link>
+          )}
+        </li>
+      );
+    }
+  };
+
   useEffect(() => {
     showButton();
   }, []);
@@ -32,8 +131,8 @@ function Navbar() {
       <IconContext.Provider value={{ color: "#fff" }}>
         <nav className="navbar">
           <div className="navbar-container container">
-            <Link to="/home" className="navbar-logo" onClick={closeMobileMenu}>
-              <MdFingerprint className="navbar-icon" />
+            <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
+              <MdTonality className="navbar-icon" />
               mapd.it
             </Link>
             <div className="menu-icon" onClick={handleClick}>
@@ -52,30 +151,14 @@ function Navbar() {
               </li>
               <li className="nav-item">
                 <Link
-                  to="/products"
+                  to="/features"
                   className="nav-links"
                   onClick={closeMobileMenu}
                 >
                   Features
                 </Link>
               </li>
-              <li className="nav-btn">
-                {button ? (
-                  <Link to="/sign-up" className="btn-link">
-                    <Button buttonStyle="btn--outline">SIGN UP</Button>
-                  </Link>
-                ) : (
-                  <Link to="/sign-up" className="btn-link">
-                    <Button
-                      buttonStyle="btn--outline"
-                      buttonSize="btn--mobile"
-                      onClick={closeMobileMenu}
-                    >
-                      SIGN UP
-                    </Button>
-                  </Link>
-                )}
-              </li>
+              {handleUserIsSignedIn()}
             </ul>
           </div>
         </nav>

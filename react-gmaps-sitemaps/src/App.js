@@ -17,10 +17,10 @@ import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
 import Home from "./components/pages/HomePage/Home";
 import Services from "./components/pages/Services/Services";
-import Products from "./components/pages/Products/Products";
+import Features from "./components/pages/Features/Features";
 import SignUp from "./components/pages/SignUp/SignUp";
 import Navbar from "./components/Navbar";
-import Footer from "./components/pages/Footer/Footer";
+// import Footer from "./components/pages/Footer/Footer";
 
 function App() {
   const [darkMode, setDarkMode] = useState(
@@ -42,19 +42,14 @@ function App() {
               exact
               path="/map"
               component={() => (
-                <>
-                  <Map darkMode={darkMode} setDarkMode={setDarkMode} />
-                  {/* <div className="treeContainer">
-                    <SiteTree />
-                  </div> */}
-                </>
+                <Map darkMode={darkMode} setDarkMode={setDarkMode} />
               )}
             />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/" component={Home} />
             <Route path="/services" component={Services} />
-            <Route path="/products" component={Products} />
+            <Route path="/features" component={Features} />
             <Route path="/sign-up" component={SignUp} />
           </Switch>
         </Router>
