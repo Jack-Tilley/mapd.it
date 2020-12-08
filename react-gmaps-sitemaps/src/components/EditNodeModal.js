@@ -23,7 +23,7 @@ import Divider from "@material-ui/core/Divider";
 import IconContainer from "./IconContainer";
 import ColorContainer from "./ColorContainer";
 
-import ImageUpload from "./ImageUpload";
+// import ImageUpload from "./ImageUpload";
 
 import { MapContext } from "./MapContext";
 
@@ -89,20 +89,14 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
       setEditing(true);
       setDraw(true);
     } else {
-      console.log("picturesubmit", picture);
       axios
-        .put(
-          `http://localhost:8000/api/allNodes/${selected.id}/`,
-          { "Content-Type": "multipart/form-data" },
-          {
-            value: value,
-            label: value,
-            color: color,
-            iconValue: icon,
-            description: description,
-            image: picture,
-          }
-        )
+        .put(`http://localhost:8000/api/allNodes/${selected.id}/`, {
+          value: value,
+          label: value,
+          color: color,
+          iconValue: icon,
+          description: description,
+        })
         .then((res) => {
           if (res.data.parent === null) {
             // console.log("THIS IS A LONE NODE");
@@ -139,10 +133,6 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
 
   const handleColorChange = (event) => {
     setColor(event.target.value);
-  };
-  const handlePictureChange = (pic) => {
-    console.log("picture", pic);
-    setPicture(pic);
   };
 
   const handleDelete = () => {
@@ -221,7 +211,6 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
                     </Select>
                     <FormHelperText>Label</FormHelperText>
                   </FormControl> */}
-                  <ImageUpload handlePictureChange={handlePictureChange} />
                 </Grid>
               </Grid>
             </Grid>

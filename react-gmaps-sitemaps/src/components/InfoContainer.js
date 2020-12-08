@@ -1,12 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { MapContext } from "./MapContext";
 import { InfoWindow, OverlayView } from "@react-google-maps/api";
 import EditNodeModal from "./EditNodeModal";
 import CommentModal from "./CommentModal";
-import { AirlineSeatReclineNormalRounded } from "@material-ui/icons";
+import ImageModal from "./ImageModal";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
+import axios from "axios";
 
 const useStyles = makeStyles({
   root: {
@@ -20,6 +21,7 @@ const useStyles = makeStyles({
   },
 });
 
+const urlbase = "http://localhost:8000";
 const InfoContainer = () => {
   const [
     myMap,
@@ -67,7 +69,19 @@ const InfoContainer = () => {
 
   const [editOpen, setEditOpen] = useState(false);
   const [commentOpen, setCommentOpen] = useState(false);
+  const [imageOpen, setImageOpen] = useState(false);
+  const [images, setImages] = useState([]);
   const [value, setValue] = useState("");
+
+  const gatherImages = () => {
+    axios
+      .get(`http://localhost:8000/api/allNodes/${selected.id}/images`)
+      .then((res) => {
+        console.log(res.data);
+        setImages(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const handleEditClick = () => {
     setColor(selected.color);
@@ -81,10 +95,13 @@ const InfoContainer = () => {
   const handleCommentClick = () => {
     setCommentOpen(true);
   };
+  const handleImageClick = () => {
+    setImageOpen(true);
+    gatherImages();
+  };
 
   return selected ? (
     <InfoWindow
-      // mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
       position={{
         lat: parseFloat(selected.latLngArr[0]),
         lng: parseFloat(selected.latLngArr[1]),
@@ -96,14 +113,15 @@ const InfoContainer = () => {
       <div>
         <h4 style={{ color: "black" }}>{selected.label}</h4>
         <p style={{ color: "black" }}>{selected.description}</p>
-        <img src={selected.image} alt={selected.label} />
         <IconButton onClick={handleEditClick}>
           <i className="material-icons icon-black">edit</i>
         </IconButton>
         <IconButton onClick={handleCommentClick}>
           <i className="material-icons icon-black">comment</i>
         </IconButton>
-        {/* <button onClick={handleEditClick}>EDIT</button> */}
+        <IconButton onClick={handleImageClick}>
+          <i className="material-icons icon-black">image</i>
+        </IconButton>
         <EditNodeModal
           editOpen={editOpen}
           setEditOpen={setEditOpen}
@@ -113,6 +131,13 @@ const InfoContainer = () => {
         <CommentModal
           commentOpen={commentOpen}
           setCommentOpen={setCommentOpen}
+        />
+        <ImageModal
+          imageOpen={imageOpen}
+          setImageOpen={setImageOpen}
+          images={images}
+          setImages={setImages}
+          gatherImages={gatherImages}
         />
         <a
           href={

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Node, Team, Profile, Comment
+from .models import Node, Team, Profile, Comment, Image
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 from django.contrib.auth.models import User
@@ -15,7 +15,7 @@ class NodeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Node
         fields = ('id', 'label', 'value', 'parent',
-                  'apiPath', 'nodeType', 'nodeReference', 'latLngArr', 'isDir', 'icon', "iconValue", 'color', "created", "modified", "description", "image", 'children')
+                  'apiPath', 'nodeType', 'nodeReference', 'latLngArr', 'isDir', 'icon', "iconValue", 'color', "created", "modified", "description", 'children')
 
 
 class HistorySerializer(serializers.ModelSerializer):
@@ -72,7 +72,13 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ('node', 'content', 'profile', 'created')
+        fields = ('id', 'node', 'content', 'profile', 'created')
+
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fields = ('id', 'image', 'description', 'node')
 
 
 class BaseCommentSerializer(serializers.ModelSerializer):
