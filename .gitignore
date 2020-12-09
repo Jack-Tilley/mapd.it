@@ -170,3 +170,9 @@ lib64
 *.pyo
 build/
 dist/
+venv/lib/python3.8/site-packages/__pycache__/autopep8.cpython-38.pyc
+venv/lib/python3.8/site-packages/__pycache__/pycodestyle.cpython-38.pyc
+venv/lib/python3.8/site-packages/toml/__pycache__/__init__.cpython-38.pyc
+venv/lib/python3.8/site-packages/toml/__pycache__/decoder.cpython-38.pyc
+venv/lib/python3.8/site-packages/toml/__pycache__/encoder.cpython-38.pyc
+venv/lib/python3.8/site-packages/toml/__pycache__/tz.cpython-38.pyc

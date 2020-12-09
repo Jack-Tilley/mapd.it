@@ -17,15 +17,15 @@ export const homeObjTwo = {
   lightBg: false,
   lightText: true,
   lightTextDesc: true,
-  topLine: "100% SECURE",
-  headline: "Stay protected 24/7 anywhere anytime",
+  topLine: "Tools for teamwork",
+  headline: "Stay connected with your team wherever you are.",
   description:
-    "We have you covered no matter where you are located. Over 140 locations worldwide to ensure you have access anytime",
+    "We have you covered no matter where you are located. INCLUDE MORE ABOUT FEATURES HERE",
   buttonLabel: "Learn More",
   imgStart: "",
   img: "images/svg-5.svg",
   alt: "Vault",
-  buttonLink: "/sign-up",
+  buttonLink: "/features",
 };
 
 export const homeObjThree = {
@@ -44,13 +44,13 @@ export const homeObjThree = {
 };
 
 export const homeObjFour = {
-  lightBg: false,
-  lightText: true,
-  lightTextDesc: true,
-  topLine: "DATA ANALYTICS",
-  headline: "Every transaction is stored on our secure cloud database",
+  lightBg: true,
+  lightText: false,
+  lightTextDesc: false,
+  topLine: "DATA INSIGHTS",
+  headline: "Get insights into the work your team puts in",
   description:
-    "Never ever have to worry again about saved reciepts. We store your data, so you can access it anytime.",
+    "Never ever have to worry again about how your teams are performing. We'll handle that for you.",
   buttonLabel: "Sign Up Now",
   imgStart: "start",
   img: "images/svg-8.svg",

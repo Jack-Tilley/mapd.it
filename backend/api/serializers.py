@@ -87,6 +87,12 @@ class BaseCommentSerializer(serializers.ModelSerializer):
         fields = ('node', 'content', 'profile', 'created')
 
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'password')
+
+
 # Register Serializer
 
 

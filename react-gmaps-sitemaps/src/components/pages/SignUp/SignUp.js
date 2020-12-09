@@ -1,15 +1,10 @@
 import React from "react";
-import HeroSection from "../../HeroSection";
-import { homeObjOne, homeObjTwo, homeObjThree, homeObjFour } from "./Data";
-import Pricing from "../../Pricing";
-import Footer from "../Footer/Footer";
+import RegisterForm from "../../Forms/RegisterForm";
 
 function SignUp() {
   return (
     <>
-      <HeroSection {...homeObjOne} />
-      <HeroSection {...homeObjThree} />
-      <Footer />
+      <RegisterForm />
     </>
   );
 }

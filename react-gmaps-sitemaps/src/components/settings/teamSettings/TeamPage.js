@@ -45,6 +45,7 @@ import { BorderAll } from "@material-ui/icons";
 import TeamLeave from "./TeamLeave";
 import TeamCreate from "./TeamCreate";
 import TeamJoin from "./TeamJoin";
+import TeamViewer from "./TeamViewer";
 
 const TeamPage = ({ rendered, teams, profileId, updateNodes }) => {
   const [newTeam, setNewTeam] = useState("");
@@ -72,6 +73,7 @@ const TeamPage = ({ rendered, teams, profileId, updateNodes }) => {
         profileId={profileId}
         updateNodes={updateNodes}
       />
+      <TeamViewer profileId={profileId} />
     </div>
   ) : null;
 };

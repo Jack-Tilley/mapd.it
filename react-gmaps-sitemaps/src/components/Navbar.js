@@ -76,42 +76,63 @@ function Navbar() {
   };
 
   const handleUserIsSignedIn = () => {
+    console.log("auth", auth);
+    // not auth
     if (!auth.isAuthenticated) {
-      console.log("auth", auth);
       return (
-        <li className="nav-btn">
-          {button ? (
-            <Link to="/sign-up" className="btn-link">
-              <Button buttonStyle="btn--outline">SIGN UP</Button>
-            </Link>
-          ) : (
-            <Link to="/sign-up" className="btn-link">
-              <Button
-                buttonStyle="btn--outline"
-                buttonSize="btn--mobile"
-                onClick={closeMobileMenu}
-              >
-                SIGN UP
-              </Button>
-            </Link>
-          )}
-        </li>
+        <>
+          <li className="nav-btn">
+            {button ? (
+              <Link to="/sign-up" className="btn-link">
+                <Button buttonStyle="btn--outline">SIGN UP</Button>
+              </Link>
+            ) : (
+              <Link to="/sign-up" className="btn-link">
+                <Button
+                  buttonStyle="btn--outline"
+                  buttonSize="btn--mobile"
+                  onClick={closeMobileMenu}
+                >
+                  SIGN UP
+                </Button>
+              </Link>
+            )}
+          </li>
+          <li className="nav-btn">
+            {button ? (
+              <Link to="/sign-in" className="btn-link">
+                <Button buttonStyle="btn--outline">SIGN IN</Button>
+              </Link>
+            ) : (
+              <Link to="/sign-in" className="btn-link">
+                <Button
+                  buttonStyle="btn--outline"
+                  buttonSize="btn--mobile"
+                  onClick={closeMobileMenu}
+                >
+                  SIGN IN
+                </Button>
+              </Link>
+            )}
+          </li>
+        </>
       );
     } else {
+      // is auth
       return (
         <li className="nav-btn">
           {button ? (
-            <Link to="/sign-up" className="btn-link">
-              <Button buttonStyle="btn--outline">YOU ARE SIGNED IN</Button>
+            <Link to="/account" className="btn-link">
+              <Button buttonStyle="btn--outline">My Account</Button>
             </Link>
           ) : (
-            <Link to="/sign-up" className="btn-link">
+            <Link to="/account" className="btn-link">
               <Button
                 buttonStyle="btn--outline"
                 buttonSize="btn--mobile"
                 onClick={closeMobileMenu}
               >
-                YOU ARE SIGNED IN
+                My Account
               </Button>
             </Link>
           )}

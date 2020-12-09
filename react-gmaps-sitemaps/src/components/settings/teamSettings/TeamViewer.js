@@ -48,7 +48,7 @@ const MenuProps = {
   },
 };
 
-const AccountTeamViewer = ({ profileId }) => {
+const TeamViewer = ({ profileId }) => {
   const [myTeams, setMyTeams] = useState([]);
   const [activeTeam, setActiveTeam] = useState("");
 
@@ -115,7 +115,7 @@ const AccountTeamViewer = ({ profileId }) => {
     </>
   );
 };
-export default AccountTeamViewer;
+export default TeamViewer;
 
 // const [
 //     myMap,

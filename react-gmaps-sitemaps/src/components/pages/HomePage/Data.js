@@ -23,7 +23,7 @@ export const homeObjTwo = {
     "We have you covered no matter where you are located. INCLUDE MORE ABOUT FEATURES HERE",
   buttonLabel: "Learn More",
   imgStart: "",
-  img: "images/svg-5.svg",
+  img: "images/around_the_world.svg",
   alt: "Vault",
   buttonLink: "/features",
 };
@@ -53,7 +53,7 @@ export const homeObjFour = {
     "Never ever have to worry again about how your teams are performing. We'll handle that for you.",
   buttonLabel: "Sign Up Now",
   imgStart: "start",
-  img: "images/svg-8.svg",
+  img: "images/analytics.svg",
   alt: "Vault",
   buttonLink: "/sign-up",
 };
