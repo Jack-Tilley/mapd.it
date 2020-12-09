@@ -7,7 +7,7 @@ import Register from "./components/accounts/Register";
 import PrivateRoute from "./components/common/PrivateRoute";
 import React, { useState, useEffect } from "react";
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
@@ -52,8 +52,8 @@ function App() {
               path="/account"
               component={() => <MyAccount />}
             />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
+            {/* <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} /> */}
             <Route exact path="/" component={Home} />
             <Route path="/services" component={Services} />
             <Route path="/features" component={Features} />

@@ -89,17 +89,13 @@ const ModalDesignRework = ({
   const [teamObjects, setTeamObjects] = useState([]);
 
   const handleSubmit = (type) => {
-    if (teamObjects.length < 1) {
-      console.log("Fill in required");
-    } else {
-      setSelectedTeams(teamObjects);
-      setNodeType(type);
-      setDraw(true);
-      addItem(event, isDir, type);
-      setModalOpen(false);
-      setEvent("");
-      setIsDir(true);
-    }
+    setSelectedTeams(teamObjects);
+    setNodeType(type);
+    setDraw(true);
+    addItem(event, isDir, type);
+    setModalOpen(false);
+    setEvent("");
+    setIsDir(true);
   };
 
   const handleClose = () => {

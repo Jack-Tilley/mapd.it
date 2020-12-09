@@ -60,3 +60,13 @@ export function validateLogin(values) {
   }
   return errors;
 }
+
+export function validateNode(values) {
+  let errors = {};
+
+  if (!values.nodeName.trim()) {
+    errors.nodeName = "Node name required";
+  }
+
+  return errors;
+}
