@@ -27,7 +27,7 @@ import ColorContainer from "./ColorContainer";
 
 import { MapContext } from "./MapContext";
 
-const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
+const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
   const [
     myMap,
     setMyMap,
@@ -67,8 +67,8 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
     setDescription,
     comment,
     setComment,
-    label,
-    setLabel,
+    lab,
+    setLab,
     auth,
     setAuth,
     profileId,
@@ -84,15 +84,14 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
 
   const handleSubmit = (needsLocationChange) => {
     if (needsLocationChange) {
-      setEditValue(value);
+      setEditValue(label);
       setNodeType(selected.nodeType);
       setEditing(true);
       setDraw(true);
     } else {
       axios
         .put(`http://localhost:8000/api/allNodes/${selected.id}/`, {
-          value: value,
-          label: value,
+          label: label,
           color: color,
           iconValue: icon,
           description: description,
@@ -177,13 +176,13 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
                   ),
                 }}
                 autoFocus
-                value={value}
+                value={label}
                 margin="dense"
                 placeholder="Give your item a title"
                 id="name"
                 label="Node Name"
                 type="text"
-                onChange={(e) => setValue(e.target.value)}
+                onChange={(e) => setLabel(e.target.value)}
                 fullWidth
               />
               <TextField

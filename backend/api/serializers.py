@@ -15,7 +15,7 @@ class NodeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Node
         fields = ('id', 'label', 'value', 'parent',
-                  'apiPath', 'nodeType', 'nodeReference', 'latLngArr', 'isDir', 'icon', "iconValue", 'color', "created", "modified", "description", 'children')
+                  'nodeType', 'latLngArr', 'isDir', "iconValue", 'color', "created", "modified", "description", 'children')
 
 
 class HistorySerializer(serializers.ModelSerializer):

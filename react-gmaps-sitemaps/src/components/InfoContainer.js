@@ -62,8 +62,8 @@ const InfoContainer = () => {
     setDescription,
     comment,
     setComment,
-    label,
-    setLabel,
+    lab,
+    setLab,
   ] = useContext(MapContext);
   const classes = useStyles();
 
@@ -71,7 +71,7 @@ const InfoContainer = () => {
   const [commentOpen, setCommentOpen] = useState(false);
   const [imageOpen, setImageOpen] = useState(false);
   const [images, setImages] = useState([]);
-  const [value, setValue] = useState("");
+  const [label, setLabel] = useState("");
 
   const gatherImages = () => {
     axios
@@ -86,7 +86,7 @@ const InfoContainer = () => {
   const handleEditClick = () => {
     setColor(selected.color);
     setIcon(selected.iconValue);
-    setValue(selected.label);
+    setLabel(selected.label);
     setDescription(selected.description);
     console.log("selected", selected);
     setEditOpen(true);
@@ -125,8 +125,8 @@ const InfoContainer = () => {
         <EditNodeModal
           editOpen={editOpen}
           setEditOpen={setEditOpen}
-          value={value}
-          setValue={setValue}
+          label={label}
+          setLabel={setLabel}
         />
         <CommentModal
           commentOpen={commentOpen}

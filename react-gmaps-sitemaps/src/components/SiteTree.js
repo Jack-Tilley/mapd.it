@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import CheckboxTree from "react-checkbox-tree";
 import "react-checkbox-tree/lib/react-checkbox-tree.css";
+import { v4 as uuidv4 } from "uuid";
 
 // import { faHome } from "@fortawesome/free-solid-svg-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -50,11 +51,11 @@ const SiteTree = () => {
     setDescription,
     comment,
     setComment,
-    label,
-    setLabel,
+    la,
+    setLa,
   ] = useContext(MapContext);
   const [expanded, setExpanded] = useState([]);
-  const [value, setValue] = useState("");
+  const [label, setLabel] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [event, setEvent] = useState();
 
@@ -99,8 +100,8 @@ const SiteTree = () => {
   const addItem = (target, isDir, type) => {
     // updateDM()
     let newNode = {
-      value: value,
-      label: value,
+      value: uuidv4(),
+      label: label,
       latLngArr: [],
       apiPath: "",
       parent: target.parent,
@@ -121,7 +122,7 @@ const SiteTree = () => {
         {
           value: newNode.value + "/+",
           label: "Add a new item",
-          apiPath: newNode.value + "/+",
+          apiPath: newNode.label + "/+",
           latLngArr: ["0", "0"],
           nodeType: "ADD",
           icon: <i className={`material-icons icon-${"blue"}`}>{"add"}</i>,
@@ -130,7 +131,7 @@ const SiteTree = () => {
       ];
     }
     setActiveNode(newNode);
-    setValue("");
+    setLabel("");
     if (target.parent.children !== undefined) {
       setNodes(
         nodes.map((item) =>
@@ -165,8 +166,8 @@ const SiteTree = () => {
       <ModalDesignRework
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
-        value={value}
-        setValue={setValue}
+        label={label}
+        setLabel={setLabel}
         addItem={addItem}
         event={event}
         setEvent={setEvent}

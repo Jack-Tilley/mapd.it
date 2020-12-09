@@ -28,8 +28,8 @@ import { MapContext } from "./MapContext";
 const ModalDesignRework = ({
   modalOpen,
   setModalOpen,
-  value,
-  setValue,
+  label,
+  setLabel,
   addItem,
   event,
   setEvent,
@@ -73,8 +73,8 @@ const ModalDesignRework = ({
     setDescription,
     comment,
     setComment,
-    label,
-    setLabel,
+    la,
+    setLa,
     auth,
     setAuth,
     profileId,
@@ -126,8 +126,8 @@ const ModalDesignRework = ({
     setTeamObjects(e.target.value);
   };
 
-  const handleValueChange = (e) => {
-    setValue(e.target.value);
+  const handleLabelChange = (e) => {
+    setLabel(e.target.value);
   };
 
   return (
@@ -154,13 +154,13 @@ const ModalDesignRework = ({
                 }}
                 autoFocus
                 autoComplete="off"
-                value={value}
+                value={label}
                 margin="dense"
                 placeholder="Give your item a title"
                 id="name"
                 label="Node Name"
                 type="text"
-                onChange={(e) => handleValueChange(e)}
+                onChange={(e) => handleLabelChange(e)}
                 fullWidth
               />
               <TextField

@@ -128,7 +128,6 @@ const DrawingComponent = () => {
     if (editing) {
       axios
         .put(`http://localhost:8000/api/allNodes/${selected.id}/`, {
-          value: editValue,
           label: editValue,
           color: color,
           iconValue: icon,

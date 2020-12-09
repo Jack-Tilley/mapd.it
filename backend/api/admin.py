@@ -5,10 +5,10 @@ from .models import Node, Team, Profile, Comment, Image
 
 class NodeAdmin(SimpleHistoryAdmin):
 
-    list_display = ['label', 'value', 'parent',
-                    'apiPath', 'nodeType', 'modified']
-    history_list_display = ['label', 'value', 'parent',
-                            'apiPath' 'modified', 'latLngArr']
+    list_display = ['label', 'parent',
+                    'nodeType', 'modified']
+    history_list_display = ['label', 'parent',
+                            'modified', 'latLngArr']
     search_fields = ['label']
 
 
