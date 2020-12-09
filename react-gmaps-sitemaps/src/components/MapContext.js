@@ -131,7 +131,6 @@ export const MapProvider = (props) => {
       newNode.children.unshift({
         value: newNode.value + "/+",
         label: "Add a new item",
-        apiPath: newNode.value + "/+",
         latLngArr: ["0", "0"],
         nodeType: "ADD",
         icon: <i className={`material-icons icon-${"blue"}`}>{"add"}</i>,

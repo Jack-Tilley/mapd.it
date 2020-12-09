@@ -168,10 +168,8 @@ const DrawingComponent = () => {
         .post("http://localhost:8000/api/nodes/", {
           label: newActiveNode.label,
           nodeType: newActiveNode.nodeType,
-          nodeReference: stringify(newActiveNode.nodeReference),
           value: newActiveNode.value,
           parent: newActiveNode.parent_id,
-          apiPath: newActiveNode.apiPath,
           latLngArr: newActiveNode.latLngArr,
           isDir: newActiveNode.isDir,
           iconValue: icon,

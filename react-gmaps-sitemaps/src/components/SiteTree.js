@@ -103,7 +103,6 @@ const SiteTree = () => {
       value: uuidv4(),
       label: label,
       latLngArr: [],
-      apiPath: "",
       parent: target.parent,
       parent_id: target.parent.id,
       nodeType: type,
@@ -122,7 +121,6 @@ const SiteTree = () => {
         {
           value: newNode.value + "/+",
           label: "Add a new item",
-          apiPath: newNode.label + "/+",
           latLngArr: ["0", "0"],
           nodeType: "ADD",
           icon: <i className={`material-icons icon-${"blue"}`}>{"add"}</i>,
