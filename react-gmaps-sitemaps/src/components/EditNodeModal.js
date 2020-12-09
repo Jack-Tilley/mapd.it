@@ -158,6 +158,8 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
   return (
     <div>
       <Dialog
+        fullWidth={true}
+        maxWidth={"md"}
         open={editOpen}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
@@ -218,8 +220,9 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
               <Divider orientation="vertical" />
             </Grid>
             <Grid item xs={5} style={{ paddingLeft: 0 }}>
-              <div style={{ overflow: "auto", maxHeight: "150px" }}></div>
-              <IconContainer handleButtonClick={handleButtonClick} />
+              <div>
+                <IconContainer handleButtonClick={handleButtonClick} />
+              </div>
               <div>
                 <ColorContainer
                   handleColorChange={handleColorChange}
