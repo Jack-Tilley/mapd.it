@@ -3,6 +3,7 @@ import FormLogin from "./FormLogin";
 import FormSuccess from "./FormSuccess";
 import axios from "axios";
 import { MapContext } from "../MapContext";
+import { AuthContext } from "../AuthContext";
 import { Redirect } from "react-router-dom";
 
 const LoginForm = () => {
@@ -47,8 +48,8 @@ const LoginForm = () => {
     setComment,
     label,
     setLabel,
-    auth,
-    setAuth,
+    a,
+    setA,
     profileId,
     setProfileId,
     teams,
@@ -59,6 +60,7 @@ const LoginForm = () => {
     picture,
     setPicture,
   ] = useContext(MapContext);
+  const [auth, setAuth] = useContext(AuthContext);
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const submitForm = (username, password) => {

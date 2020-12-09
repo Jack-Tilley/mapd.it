@@ -5,62 +5,10 @@ import "./Navbar.css";
 import { MdTonality } from "react-icons/md";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
-import { MapContext } from "./MapContext";
+import { AuthContext } from "./AuthContext";
 
 function Navbar() {
-  const [
-    myMap,
-    setMyMap,
-    center,
-    setCenter,
-    isLoaded,
-    draw,
-    setDraw,
-    nodes,
-    setNodes,
-    activeNode,
-    setActiveNode,
-    icon,
-    setIcon,
-    shapes,
-    setShapes,
-    checked,
-    setChecked,
-    selected,
-    setSelected,
-    color,
-    setColor,
-    findNode,
-    removeNode,
-    nodeType,
-    setNodeType,
-    disabled,
-    setDisabled,
-    editing,
-    setEditing,
-    editValue,
-    setEditValue,
-    replaceNode,
-    editCleanup,
-    changeIcons,
-    description,
-    setDescription,
-    comment,
-    setComment,
-    label,
-    setLabel,
-    auth,
-    setAuth,
-    profileId,
-    setProfileId,
-    teams,
-    setTeams,
-    selectedTeams,
-    setSelectedTeams,
-    updateNodes,
-    picture,
-    setPicture,
-  ] = useContext(MapContext);
+  const [auth, setAuth] = useContext(AuthContext);
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 

@@ -83,6 +83,9 @@ const ModalDesignRework = ({
     setTeams,
     selectedTeams,
     setSelectedTeams,
+    updateNodes,
+    picture,
+    setPicture,
   ] = useContext(MapContext);
 
   const [isDir, setIsDir] = useState(true);
@@ -106,24 +109,21 @@ const ModalDesignRework = ({
     setIcon(btnIcon);
   };
 
-  const handleColorChange = (event) => {
-    setColor(event.target.value);
+  const handleColorChange = (e) => {
+    setColor(e.target.value);
   };
 
-  const handleDirChange = (event) => {
-    console.log("event", event.target.value);
-    setIsDir(event.target.value);
+  const handleDirChange = (e) => {
+    console.log("event", e.target.value);
+    setIsDir(e.target.value);
   };
 
-  const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
-  };
-  const handleCommentChange = (event) => {
-    setComment(event.target.value);
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
   };
 
-  const handleSelectedTeamChange = (event) => {
-    setTeamObjects(event.target.value);
+  const handleSelectedTeamChange = (e) => {
+    setTeamObjects(e.target.value);
   };
 
   const handleValueChange = (e) => {
@@ -133,6 +133,8 @@ const ModalDesignRework = ({
   return (
     <div>
       <Dialog
+        fullWidth={true}
+        maxWidth={"md"}
         open={modalOpen}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
@@ -152,7 +154,6 @@ const ModalDesignRework = ({
                 }}
                 autoFocus
                 autoComplete="off"
-                required
                 value={value}
                 margin="dense"
                 placeholder="Give your item a title"
@@ -163,7 +164,7 @@ const ModalDesignRework = ({
                 fullWidth
               />
               <TextField
-                id="multiline-flexible"
+                id="description"
                 margin="dense"
                 label="Description..."
                 placeholder="Description goes here..."
@@ -171,7 +172,7 @@ const ModalDesignRework = ({
                 rows={6}
                 value={description}
                 type="text"
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => handleDescriptionChange(e)}
                 fullWidth
               />
 
@@ -186,21 +187,6 @@ const ModalDesignRework = ({
                     setTeamObjects={setTeamObjects}
                   />
                 </Grid>
-                {/* <Grid item xs={4}>
-                  <FormControl>
-                    <Select
-                      labelId="Label"
-                      id="Label"
-                      //   value={mapStyle}
-                      //   onChange={(e) => changeOptions(e.target.value)}
-                    >
-                      <MenuItem value="INPROGRESS">
-                        <em>In Progress</em>
-                      </MenuItem>
-                    </Select>
-                    <FormHelperText>Label</FormHelperText>
-                  </FormControl>
-                </Grid> */}
                 <Grid item xs={6}>
                   <DirContainer
                     handleDirChange={handleDirChange}
