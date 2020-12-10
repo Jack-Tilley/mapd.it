@@ -61,10 +61,18 @@ const Map = ({ darkMode, setDarkMode }) => {
 
   const renderMap = () => (
     <>
+      {/* 80 px is our view height of the navbar */}
       <GoogleMap
         mapContainerStyle={{
+          // paddingTop: "80px",
+          overflow: "auto",
           width: "100%",
-          height: "90vh",
+          height: "calc(100vh - 80px)",
+          maxHeight: "calc(100vh - 80px)",
+          position: "fixed",
+          margin: 0,
+          // display: "flex",
+          // bottom: 0,
         }}
         zoom={10}
         center={center}
