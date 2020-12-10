@@ -1,14 +1,14 @@
-import React, { useState, useCallback, createContext, useEffect } from "react";
+import React, {
+  useState,
+  useCallback,
+  createContext,
+  useEffect,
+  useMemo,
+} from "react";
 import { useLoadScript } from "@react-google-maps/api";
 import axios from "axios";
-import { parse, stringify } from "flatted";
-import { useHistory } from "react-router-dom";
 
 import "react-checkbox-tree/lib/react-checkbox-tree.css";
-
-import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { BusinessCenter, Add } from "@material-ui/icons";
 
 let addNode = {
   value: "/+",
@@ -43,18 +43,16 @@ export const MapProvider = (props) => {
   const [selected, setSelected] = useState(null);
   const [color, setColor] = useState("black");
   const [nodeType, setNodeType] = useState(null);
-  const [disabled, setDisabled] = useState(false);
   const [editing, setEditing] = useState(false);
   const [editValue, setEditValue] = useState("");
   const [description, setDescription] = useState("");
-  const [comment, setComment] = useState("");
   const [label, setLabel] = useState("");
-  const [auth, setAuth] = useState({
-    token: localStorage.getItem("token"),
-    isAuthenticated: null,
-    isLoading: false,
-    user: null,
-  });
+  // const [auth, setAuth] = useState({
+  //   token: localStorage.getItem("token"),
+  //   isAuthenticated: null,
+  //   isLoading: false,
+  //   user: null,
+  // });
   const [profileId, setProfileId] = useState(null);
   const [teams, setTeams] = useState([]);
   const [selectedTeams, setSelectedTeams] = useState([]);
@@ -74,12 +72,12 @@ export const MapProvider = (props) => {
   //   localStorage.setItem("shapes", JSON.stringify(shapes));
   // }, [shapes]);
 
-  const updateAddButton = (parentVal, parentPath) => {
-    addNode.value = parentVal + addNode.value;
-    addNode.apiPath = parentPath.value + "/+";
-    return addNode;
-  };
-  const changeIcons = (nodes) => {
+  // const updateAddButton = (parentVal, parentPath) => {
+  //   addNode.value = parentVal + addNode.value;
+  //   addNode.apiPath = parentPath.value + "/+";
+  //   return addNode;
+  // };
+  const changeIcons = useCallback((nodes) => {
     for (let i = 0; i < nodes.length; i++) {
       nodes[i].icon = (
         <i className={`material-icons icon-${nodes[i].color}`}>
@@ -94,23 +92,26 @@ export const MapProvider = (props) => {
         );
       }
     }
-  };
+  }, []);
 
-  const findNode = (nodeValue) => {
-    for (let i = 0; i < nodes.length; i++) {
-      if (nodes[i].value === nodeValue) {
-        return nodes[i];
-      }
-      if (nodes[i].children !== undefined) {
-        for (let j = 0; j < nodes[i].children.length; j++) {
-          if (nodes[i].children && nodes[i].children[j].value === nodeValue) {
-            return nodes[i].children[j];
+  const findNode = useCallback(
+    (nodeValue) => {
+      for (let i = 0; i < nodes.length; i++) {
+        if (nodes[i].value === nodeValue) {
+          return nodes[i];
+        }
+        if (nodes[i].children !== undefined) {
+          for (let j = 0; j < nodes[i].children.length; j++) {
+            if (nodes[i].children && nodes[i].children[j].value === nodeValue) {
+              return nodes[i].children[j];
+            }
           }
         }
       }
-    }
-    return null;
-  };
+      return null;
+    },
+    [nodes]
+  );
 
   const changeNodeIcons = (node) => {
     console.log("NODEINPROGRESS", node);
@@ -140,45 +141,54 @@ export const MapProvider = (props) => {
     return newNode;
   };
 
-  const replaceNode = (nodeId, updatedNode) => {
-    let newNodes = [...nodes];
-    for (let i = 0; i < newNodes.length; i++) {
-      if (newNodes[i].id === nodeId) {
-        newNodes[i] = changeNodeIcons(updatedNode);
-        return newNodes;
+  const replaceNode = useCallback(
+    (nodeId, updatedNode) => {
+      let newNodes = [...nodes];
+      for (let i = 0; i < newNodes.length; i++) {
+        if (newNodes[i].id === nodeId) {
+          newNodes[i] = changeNodeIcons(updatedNode);
+          return newNodes;
+        }
       }
-    }
-  };
+    },
+    [nodes]
+  );
 
-  const removeNode = (nodeValue) => {
-    let newNodes = [...nodes];
-    for (let i = 0; i < newNodes.length; i++) {
-      if (newNodes[i].children !== undefined) {
-        newNodes[i].children = newNodes[i].children.filter(
-          (child) => child.value !== nodeValue
-        );
+  const removeNode = useCallback(
+    (nodeValue) => {
+      let newNodes = [...nodes];
+      for (let i = 0; i < newNodes.length; i++) {
+        if (newNodes[i].children !== undefined) {
+          newNodes[i].children = newNodes[i].children.filter(
+            (child) => child.value !== nodeValue
+          );
+        }
       }
-    }
-    return newNodes.filter((node) => node.value !== nodeValue);
-  };
+      return newNodes.filter((node) => node.value !== nodeValue);
+    },
+    [nodes]
+  );
 
-  const editCleanup = (data) => {
-    let newChecked = checked.filter((node) => node !== selected.value);
-    newChecked.push(data.value);
-    setChecked(newChecked);
-    let newShapes = shapes.filter((node) => node.value !== selected.value);
-    newShapes.push(data);
-    setShapes(newShapes);
-    setSelected(null);
-    setIcon("search");
-    setColor("black");
-    setDescription("");
-    setNodeType(null);
-    setEditValue("");
-    setPicture(null);
-  };
+  const editCleanup = useCallback(
+    (data) => {
+      let newChecked = checked.filter((node) => node !== selected.value);
+      newChecked.push(data.value);
+      setChecked(newChecked);
+      let newShapes = shapes.filter((node) => node.value !== selected.value);
+      newShapes.push(data);
+      setShapes(newShapes);
+      setSelected(null);
+      setIcon("search");
+      setColor("black");
+      setDescription("");
+      setNodeType(null);
+      setEditValue("");
+      setPicture(null);
+    },
+    [checked, selected, shapes]
+  );
 
-  const updateNodes = () => {
+  const updateNodes = useCallback(() => {
     axios
       .get(`http://localhost:8000/api/profiles/${profileId}`)
       .then((res) => {
@@ -221,7 +231,7 @@ export const MapProvider = (props) => {
         setNodes(newNodes);
       })
       .catch((err) => console.log(err));
-  };
+  }, [profileId, changeIcons]);
 
   useEffect(() => {
     axios
@@ -268,61 +278,171 @@ export const MapProvider = (props) => {
       .catch((err) => console.log(err));
   }, [profileId]);
 
+  const providerValue = useMemo(
+    () => ({
+      myMap,
+      setMyMap,
+      center,
+      setCenter,
+      isLoaded,
+      draw,
+      setDraw,
+      nodes,
+      setNodes,
+      activeNode,
+      setActiveNode,
+      icon,
+      setIcon,
+      shapes,
+      setShapes,
+      checked,
+      setChecked,
+      selected,
+      setSelected,
+      color,
+      setColor,
+      findNode,
+      removeNode,
+      nodeType,
+      setNodeType,
+      // disabled,
+      // setDisabled,
+      editing,
+      setEditing,
+      editValue,
+      setEditValue,
+      replaceNode,
+      editCleanup,
+      changeIcons,
+      description,
+      setDescription,
+      // comment,
+      // setComment,
+      label,
+      setLabel,
+      // auth,
+      // setAuth,
+      profileId,
+      setProfileId,
+      teams,
+      setTeams,
+      selectedTeams,
+      setSelectedTeams,
+      updateNodes,
+      picture,
+      setPicture,
+    }),
+    [
+      myMap,
+      setMyMap,
+      center,
+      setCenter,
+      isLoaded,
+      draw,
+      setDraw,
+      nodes,
+      setNodes,
+      activeNode,
+      setActiveNode,
+      icon,
+      setIcon,
+      shapes,
+      setShapes,
+      checked,
+      setChecked,
+      selected,
+      setSelected,
+      color,
+      setColor,
+      findNode,
+      removeNode,
+      nodeType,
+      setNodeType,
+      // disabled,
+      // setDisabled,
+      editing,
+      setEditing,
+      editValue,
+      setEditValue,
+      replaceNode,
+      editCleanup,
+      changeIcons,
+      description,
+      setDescription,
+      // comment,
+      // setComment,
+      label,
+      setLabel,
+      // auth,
+      // setAuth,
+      profileId,
+      setProfileId,
+      teams,
+      setTeams,
+      selectedTeams,
+      setSelectedTeams,
+      updateNodes,
+      picture,
+      setPicture,
+    ]
+  );
+
   return (
     <MapContext.Provider
-      value={[
-        myMap,
-        setMyMap,
-        center,
-        setCenter,
-        isLoaded,
-        draw,
-        setDraw,
-        nodes,
-        setNodes,
-        activeNode,
-        setActiveNode,
-        icon,
-        setIcon,
-        shapes,
-        setShapes,
-        checked,
-        setChecked,
-        selected,
-        setSelected,
-        color,
-        setColor,
-        findNode,
-        removeNode,
-        nodeType,
-        setNodeType,
-        disabled,
-        setDisabled,
-        editing,
-        setEditing,
-        editValue,
-        setEditValue,
-        replaceNode,
-        editCleanup,
-        changeIcons,
-        description,
-        setDescription,
-        comment,
-        setComment,
-        label,
-        setLabel,
-        auth,
-        setAuth,
-        profileId,
-        setProfileId,
-        teams,
-        setTeams,
-        selectedTeams,
-        setSelectedTeams,
-        updateNodes,
-        picture,
-        setPicture,
-      ]}
+      value={providerValue}
+      // value={[
+      //   myMap,
+      //   setMyMap,
+      //   center,
+      //   setCenter,
+      //   isLoaded,
+      //   draw,
+      //   setDraw,
+      //   nodes,
+      //   setNodes,
+      //   activeNode,
+      //   setActiveNode,
+      //   icon,
+      //   setIcon,
+      //   shapes,
+      //   setShapes,
+      //   checked,
+      //   setChecked,
+      //   selected,
+      //   setSelected,
+      //   color,
+      //   setColor,
+      //   findNode,
+      //   removeNode,
+      //   nodeType,
+      //   setNodeType,
+      //   // disabled,
+      //   // setDisabled,
+      //   editing,
+      //   setEditing,
+      //   editValue,
+      //   setEditValue,
+      //   replaceNode,
+      //   editCleanup,
+      //   changeIcons,
+      //   description,
+      //   setDescription,
+      //   // comment,
+      //   // setComment,
+      //   label,
+      //   setLabel,
+      //   // auth,
+      //   // setAuth,
+      //   profileId,
+      //   setProfileId,
+      //   teams,
+      //   setTeams,
+      //   selectedTeams,
+      //   setSelectedTeams,
+      //   updateNodes,
+      //   picture,
+      //   setPicture,
+      // ]}
     >
       {props.children}
     </MapContext.Provider>

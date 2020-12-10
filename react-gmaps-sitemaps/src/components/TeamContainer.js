@@ -53,11 +53,11 @@ const MenuProps = {
 };
 const TeamContainer = ({
   teams,
-  selectedTeams,
-  setSelectedTeams,
+  // selectedTeams,
+  // setSelectedTeams,
   handleSelectedTeamChange,
   teamObjects,
-  setTeamObjects,
+  // setTeamObjects,
 }) => {
   const classes = useStyles();
 

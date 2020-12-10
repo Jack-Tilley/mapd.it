@@ -4,30 +4,31 @@ import { MapContext } from "./MapContext";
 import { Marker, Polyline, InfoWindow } from "@react-google-maps/api";
 
 const ShapeSetter = () => {
-  const [
-    myMap,
-    setMyMap,
-    center,
-    setCenter,
-    isLoaded,
-    draw,
-    setDraw,
-    nodes,
-    setNodes,
-    activeNode,
-    setActiveNode,
-    icon,
-    setIcon,
-    shapes,
-    setShapes,
-    checked,
-    setChecked,
-    selected,
-    setSelected,
-    color,
-    setColor,
-    findNode,
-  ] = useContext(MapContext);
+  // const [
+  //   myMap,
+  //   setMyMap,
+  //   center,
+  //   setCenter,
+  //   isLoaded,
+  //   draw,
+  //   setDraw,
+  //   nodes,
+  //   setNodes,
+  //   activeNode,
+  //   setActiveNode,
+  //   icon,
+  //   setIcon,
+  //   shapes,
+  //   setShapes,
+  //   checked,
+  //   setChecked,
+  //   selected,
+  //   setSelected,
+  //   color,
+  //   setColor,
+  //   findNode,
+  // ] = useContext(MapContext);
+  const { shapes, setSelected, findNode } = useContext(MapContext);
 
   // useEffect(() => {
   //   console.log("shapes", shapes);

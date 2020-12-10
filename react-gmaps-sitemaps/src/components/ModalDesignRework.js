@@ -34,59 +34,72 @@ const ModalDesignRework = ({
   event,
   setEvent,
 }) => {
-  const [
-    myMap,
-    setMyMap,
-    center,
-    setCenter,
-    isLoaded,
-    draw,
+  // const [
+  //   myMap,
+  //   setMyMap,
+  //   center,
+  //   setCenter,
+  //   isLoaded,
+  //   draw,
+  //   setDraw,
+  //   nodes,
+  //   setNodes,
+  //   activeNode,
+  //   setActiveNode,
+  //   icon,
+  //   setIcon,
+  //   shapes,
+  //   setShapes,
+  //   checked,
+  //   setChecked,
+  //   selected,
+  //   setSelected,
+  //   color,
+  //   setColor,
+  //   findNode,
+  //   removeNode,
+  //   nodeType,
+  //   setNodeType,
+  //   disabled,
+  //   setDisabled,
+  //   editing,
+  //   setEditing,
+  //   editValue,
+  //   setEditValue,
+  //   replaceNode,
+  //   editCleanup,
+  //   changeIcons,
+  //   description,
+  //   setDescription,
+  //   comment,
+  //   setComment,
+  //   la,
+  //   setLa,
+  //   auth,
+  //   setAuth,
+  //   profileId,
+  //   setProfileId,
+  //   teams,
+  //   setTeams,
+  //   selectedTeams,
+  //   setSelectedTeams,
+  //   updateNodes,
+  //   picture,
+  //   setPicture,
+  // ] = useContext(MapContext);
+  const {
     setDraw,
-    nodes,
-    setNodes,
-    activeNode,
-    setActiveNode,
     icon,
     setIcon,
-    shapes,
-    setShapes,
-    checked,
-    setChecked,
-    selected,
-    setSelected,
     color,
     setColor,
-    findNode,
-    removeNode,
-    nodeType,
     setNodeType,
-    disabled,
-    setDisabled,
-    editing,
-    setEditing,
-    editValue,
-    setEditValue,
-    replaceNode,
-    editCleanup,
-    changeIcons,
     description,
     setDescription,
-    comment,
-    setComment,
-    la,
-    setLa,
-    auth,
-    setAuth,
-    profileId,
-    setProfileId,
     teams,
-    setTeams,
     selectedTeams,
     setSelectedTeams,
-    updateNodes,
-    picture,
-    setPicture,
-  ] = useContext(MapContext);
+  } = useContext(MapContext);
 
   const [isDir, setIsDir] = useState(true);
   const [teamObjects, setTeamObjects] = useState([]);
@@ -180,11 +193,11 @@ const ModalDesignRework = ({
                 <Grid item xs={6}>
                   <TeamContainer
                     teams={teams}
-                    selectedTeams={selectedTeams}
-                    setSelectedTeams={setSelectedTeams}
+                    // selectedTeams={selectedTeams}
+                    // setSelectedTeams={setSelectedTeams}
                     handleSelectedTeamChange={handleSelectedTeamChange}
                     teamObjects={teamObjects}
-                    setTeamObjects={setTeamObjects}
+                    // setTeamObjects={setTeamObjects}
                   />
                 </Grid>
                 <Grid item xs={6}>

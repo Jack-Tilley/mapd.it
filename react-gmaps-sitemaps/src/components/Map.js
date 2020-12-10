@@ -17,27 +17,40 @@ import SiteTree from "./SiteTree";
 import { Paper } from "@material-ui/core";
 
 const Map = ({ darkMode, setDarkMode }) => {
-  const [
-    myMap,
-    setMyMap,
+  // const [
+  //   myMap,
+  //   setMyMap,
+  //   center,
+  //   setCenter,
+  //   isLoaded,
+  //   draw,
+  //   setDraw,
+  //   nodes,
+  //   setNodes,
+  //   activeNode,
+  //   setActiveNode,
+  //   icon,
+  //   setIcon,
+  //   shapes,
+  //   setShapes,
+  //   checked,
+  //   setChecked,
+  //   selected,
+  //   setSelected,
+  // ] = useContext(MapContext);
+  const {
     center,
     setCenter,
-    isLoaded,
-    draw,
-    setDraw,
-    nodes,
-    setNodes,
-    activeNode,
-    setActiveNode,
-    icon,
-    setIcon,
-    shapes,
-    setShapes,
-    checked,
-    setChecked,
+    myMap,
+    setMyMap,
     selected,
     setSelected,
-  ] = useContext(MapContext);
+    isLoaded,
+  } = useContext(MapContext);
+  // const [center, setCenter] = values.center;
+  // const [myMap, setMyMap] = values.myMap;
+  // const [selected, setSelected] = values.myMap;
+  // const [isLoaded] = values.isLoaded;
 
   const [settingsOpen, setSettingsOpen] = useState(false);
 
@@ -75,9 +88,6 @@ const Map = ({ darkMode, setDarkMode }) => {
           setDarkMode={setDarkMode}
         />
         <HistoryDrawer />
-        {/* <DistanceFinder />
-        <PanTool />
-        <RefreshButton /> */}
         <ToolContainer />
       </GoogleMap>
     </>
