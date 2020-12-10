@@ -126,6 +126,9 @@ const DrawingComponent = () => {
   const handleActiveNodeChange = (position, nodeType, nodeReference, icon) => {
     nodeReference.visible = false;
     if (editing) {
+      if (editValue === "") {
+        setEditValue("UNNAMED" + nodeType);
+      }
       axios
         .put(`http://localhost:8000/api/allNodes/${selected.id}/`, {
           label: editValue,
