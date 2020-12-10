@@ -70,7 +70,7 @@ const Login = () => {
           isAuthenticated: true,
           isLoading: false,
         });
-        return history.push("/");
+        return history.push("/map");
       })
 
       .catch((err) => {

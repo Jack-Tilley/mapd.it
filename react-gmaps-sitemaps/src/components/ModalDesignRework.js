@@ -28,81 +28,90 @@ import { MapContext } from "./MapContext";
 const ModalDesignRework = ({
   modalOpen,
   setModalOpen,
-  value,
-  setValue,
+  label,
+  setLabel,
   addItem,
   event,
   setEvent,
 }) => {
-  const [
-    myMap,
-    setMyMap,
-    center,
-    setCenter,
-    isLoaded,
-    draw,
+  // const [
+  //   myMap,
+  //   setMyMap,
+  //   center,
+  //   setCenter,
+  //   isLoaded,
+  //   draw,
+  //   setDraw,
+  //   nodes,
+  //   setNodes,
+  //   activeNode,
+  //   setActiveNode,
+  //   icon,
+  //   setIcon,
+  //   shapes,
+  //   setShapes,
+  //   checked,
+  //   setChecked,
+  //   selected,
+  //   setSelected,
+  //   color,
+  //   setColor,
+  //   findNode,
+  //   removeNode,
+  //   nodeType,
+  //   setNodeType,
+  //   disabled,
+  //   setDisabled,
+  //   editing,
+  //   setEditing,
+  //   editValue,
+  //   setEditValue,
+  //   replaceNode,
+  //   editCleanup,
+  //   changeIcons,
+  //   description,
+  //   setDescription,
+  //   comment,
+  //   setComment,
+  //   la,
+  //   setLa,
+  //   auth,
+  //   setAuth,
+  //   profileId,
+  //   setProfileId,
+  //   teams,
+  //   setTeams,
+  //   selectedTeams,
+  //   setSelectedTeams,
+  //   updateNodes,
+  //   picture,
+  //   setPicture,
+  // ] = useContext(MapContext);
+  const {
     setDraw,
-    nodes,
-    setNodes,
-    activeNode,
-    setActiveNode,
     icon,
     setIcon,
-    shapes,
-    setShapes,
-    checked,
-    setChecked,
-    selected,
-    setSelected,
     color,
     setColor,
-    findNode,
-    removeNode,
-    nodeType,
     setNodeType,
-    disabled,
-    setDisabled,
-    editing,
-    setEditing,
-    editValue,
-    setEditValue,
-    replaceNode,
-    editCleanup,
-    changeIcons,
     description,
     setDescription,
-    comment,
-    setComment,
-    label,
-    setLabel,
-    auth,
-    setAuth,
-    profileId,
-    setProfileId,
     teams,
-    setTeams,
     selectedTeams,
     setSelectedTeams,
-  ] = useContext(MapContext);
+  } = useContext(MapContext);
 
   const [isDir, setIsDir] = useState(true);
   const [teamObjects, setTeamObjects] = useState([]);
-  const [submitTeamDisabled, setSubmitTeamDisabled] = useState(true);
-  const [submitValueDisabled, setSubmitValueDisabled] = useState(true);
-  const [submitDisabled, setSubmitDisabled] = useState(true);
 
   const handleSubmit = (type) => {
-    if (teamObjects.length < 1) {
-      console.log("Fill in required");
-    } else {
-      setSelectedTeams(teamObjects);
-      setNodeType(type);
-      setDraw(true);
-      addItem(event, isDir, type);
-      setModalOpen(false);
-      setEvent("");
-      setIsDir(true);
-    }
+    setSelectedTeams(teamObjects);
+    setNodeType(type);
+    setDraw(true);
+    addItem(event, isDir, type);
+    setModalOpen(false);
+    setEvent("");
+    setIsDir(true);
   };
 
   const handleClose = () => {
@@ -113,63 +122,32 @@ const ModalDesignRework = ({
     setIcon(btnIcon);
   };
 
-  const handleColorChange = (event) => {
-    setColor(event.target.value);
+  const handleColorChange = (e) => {
+    setColor(e.target.value);
   };
 
-  const handleDirChange = (event) => {
-    console.log("event", event.target.value);
-    setIsDir(event.target.value);
+  const handleDirChange = (e) => {
+    console.log("event", e.target.value);
+    setIsDir(e.target.value);
   };
 
-  const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
-  };
-  const handleCommentChange = (event) => {
-    setComment(event.target.value);
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
   };
 
-  const handleTeamSubmitEnable = (teamObjs) => {
-    if (teamObjs.length > 0) {
-      setSubmitTeamDisabled(false);
-    } else {
-      setSubmitTeamDisabled(true);
-    }
-    handleSubmitEnable();
-  };
-  const handleValueSubmitEnable = (val) => {
-    if (val.length > 0) {
-      setSubmitValueDisabled(false);
-    } else {
-      setSubmitValueDisabled(true);
-    }
-    handleSubmitEnable();
-  };
-  const handleSubmitEnable = () => {
-    if (submitTeamDisabled && submitValueDisabled) {
-      setSubmitDisabled(true);
-    } else {
-      setSubmitDisabled(false);
-    }
+  const handleSelectedTeamChange = (e) => {
+    setTeamObjects(e.target.value);
   };
 
-  const handleSelectedTeamChange = (event) => {
-    setTeamObjects(event.target.value);
-    handleTeamSubmitEnable(event.target.value);
-    handleValueSubmitEnable(value);
-    handleSubmitEnable();
-  };
-
-  const handleValueChange = (e) => {
-    setValue(e.target.value);
-    handleValueSubmitEnable(e.target.value);
-    handleValueSubmitEnable(teamObjects);
-    handleSubmitEnable();
+  const handleLabelChange = (e) => {
+    setLabel(e.target.value);
   };
 
   return (
     <div>
       <Dialog
+        fullWidth={true}
+        maxWidth={"md"}
         open={modalOpen}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
@@ -189,18 +167,17 @@ const ModalDesignRework = ({
                 }}
                 autoFocus
                 autoComplete="off"
-                required
-                value={value}
+                value={label}
                 margin="dense"
                 placeholder="Give your item a title"
                 id="name"
                 label="Node Name"
                 type="text"
-                onChange={(e) => handleValueChange(e)}
+                onChange={(e) => handleLabelChange(e)}
                 fullWidth
               />
               <TextField
-                id="multiline-flexible"
+                id="description"
                 margin="dense"
                 label="Description..."
                 placeholder="Description goes here..."
@@ -208,7 +185,7 @@ const ModalDesignRework = ({
                 rows={6}
                 value={description}
                 type="text"
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => handleDescriptionChange(e)}
                 fullWidth
               />
 
@@ -216,28 +193,13 @@ const ModalDesignRework = ({
                 <Grid item xs={6}>
                   <TeamContainer
                     teams={teams}
-                    selectedTeams={selectedTeams}
-                    setSelectedTeams={setSelectedTeams}
+                    // selectedTeams={selectedTeams}
+                    // setSelectedTeams={setSelectedTeams}
                     handleSelectedTeamChange={handleSelectedTeamChange}
                     teamObjects={teamObjects}
-                    setTeamObjects={setTeamObjects}
+                    // setTeamObjects={setTeamObjects}
                   />
                 </Grid>
-                {/* <Grid item xs={4}>
-                  <FormControl>
-                    <Select
-                      labelId="Label"
-                      id="Label"
-                      //   value={mapStyle}
-                      //   onChange={(e) => changeOptions(e.target.value)}
-                    >
-                      <MenuItem value="INPROGRESS">
-                        <em>In Progress</em>
-                      </MenuItem>
-                    </Select>
-                    <FormHelperText>Label</FormHelperText>
-                  </FormControl>
-                </Grid> */}
                 <Grid item xs={6}>
                   <DirContainer
                     handleDirChange={handleDirChange}
@@ -265,18 +227,10 @@ const ModalDesignRework = ({
           <Button onClick={handleClose} color="default">
             Cancel
           </Button>
-          <Button
-            disabled={submitDisabled}
-            onClick={() => handleSubmit("marker")}
-            color="primary"
-          >
+          <Button onClick={() => handleSubmit("marker")} color="primary">
             Marker
           </Button>
-          <Button
-            disabled={submitDisabled}
-            onClick={() => handleSubmit("polyline")}
-            color="primary"
-          >
+          <Button onClick={() => handleSubmit("polyline")} color="primary">
             Polyline
           </Button>
         </DialogActions>

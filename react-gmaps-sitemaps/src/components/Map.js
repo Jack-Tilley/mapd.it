@@ -12,31 +12,45 @@ import DistanceFinder from "./mapTools/DistanceFinder";
 import PanTool from "./mapTools/PanTool";
 import RefreshButton from "./mapTools/RefreshButton";
 import ToolContainer from "./mapTools/ToolContainer";
+import SiteTree from "./SiteTree";
 
 import { Paper } from "@material-ui/core";
 
 const Map = ({ darkMode, setDarkMode }) => {
-  const [
-    myMap,
-    setMyMap,
+  // const [
+  //   myMap,
+  //   setMyMap,
+  //   center,
+  //   setCenter,
+  //   isLoaded,
+  //   draw,
+  //   setDraw,
+  //   nodes,
+  //   setNodes,
+  //   activeNode,
+  //   setActiveNode,
+  //   icon,
+  //   setIcon,
+  //   shapes,
+  //   setShapes,
+  //   checked,
+  //   setChecked,
+  //   selected,
+  //   setSelected,
+  // ] = useContext(MapContext);
+  const {
     center,
     setCenter,
-    isLoaded,
-    draw,
-    setDraw,
-    nodes,
-    setNodes,
-    activeNode,
-    setActiveNode,
-    icon,
-    setIcon,
-    shapes,
-    setShapes,
-    checked,
-    setChecked,
+    myMap,
+    setMyMap,
     selected,
     setSelected,
-  ] = useContext(MapContext);
+    isLoaded,
+  } = useContext(MapContext);
+  // const [center, setCenter] = values.center;
+  // const [myMap, setMyMap] = values.myMap;
+  // const [selected, setSelected] = values.myMap;
+  // const [isLoaded] = values.isLoaded;
 
   const [settingsOpen, setSettingsOpen] = useState(false);
 
@@ -50,7 +64,7 @@ const Map = ({ darkMode, setDarkMode }) => {
       <GoogleMap
         mapContainerStyle={{
           width: "100%",
-          height: "100vh",
+          height: "90vh",
         }}
         zoom={10}
         center={center}
@@ -59,6 +73,9 @@ const Map = ({ darkMode, setDarkMode }) => {
         onRightClick={() => console.log("rightClick")}
         onClick={() => setSelected(null)}
       >
+        <div className="treeContainer">
+          <SiteTree />
+        </div>
         <AutocompleteBox center={center} setCenter={setCenter} />
         <DrawingComponent />
         <ShapeSetter />
@@ -71,9 +88,6 @@ const Map = ({ darkMode, setDarkMode }) => {
           setDarkMode={setDarkMode}
         />
         <HistoryDrawer />
-        {/* <DistanceFinder />
-        <PanTool />
-        <RefreshButton /> */}
         <ToolContainer />
       </GoogleMap>
     </>

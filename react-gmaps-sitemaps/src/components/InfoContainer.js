@@ -23,55 +23,62 @@ const useStyles = makeStyles({
 
 const urlbase = "http://localhost:8000";
 const InfoContainer = () => {
-  const [
-    myMap,
-    setMyMap,
-    center,
-    setCenter,
-    isLoaded,
-    draw,
-    setDraw,
-    nodes,
-    setNodes,
-    activeNode,
-    setActiveNode,
-    icon,
+  // const [
+  //   myMap,
+  //   setMyMap,
+  //   center,
+  //   setCenter,
+  //   isLoaded,
+  //   draw,
+  //   setDraw,
+  //   nodes,
+  //   setNodes,
+  //   activeNode,
+  //   setActiveNode,
+  //   icon,
+  //   setIcon,
+  //   shapes,
+  //   setShapes,
+  //   checked,
+  //   setChecked,
+  //   selected,
+  //   setSelected,
+  //   color,
+  //   setColor,
+  //   findNode,
+  //   removeNode,
+  //   nodeType,
+  //   setNodeType,
+  //   disabled,
+  //   setDisabled,
+  //   editing,
+  //   setEditing,
+  //   editValue,
+  //   setEditValue,
+  //   replaceNode,
+  //   editCleanup,
+  //   changeIcons,
+  //   description,
+  //   setDescription,
+  //   comment,
+  //   setComment,
+  //   lab,
+  //   setLab,
+  // ] = useContext(MapContext);
+  const {
     setIcon,
-    shapes,
-    setShapes,
-    checked,
-    setChecked,
     selected,
     setSelected,
-    color,
     setColor,
-    findNode,
-    removeNode,
-    nodeType,
-    setNodeType,
-    disabled,
-    setDisabled,
-    editing,
-    setEditing,
-    editValue,
-    setEditValue,
-    replaceNode,
-    editCleanup,
-    changeIcons,
-    description,
     setDescription,
-    comment,
-    setComment,
-    label,
-    setLabel,
-  ] = useContext(MapContext);
+  } = useContext(MapContext);
   const classes = useStyles();
 
   const [editOpen, setEditOpen] = useState(false);
   const [commentOpen, setCommentOpen] = useState(false);
   const [imageOpen, setImageOpen] = useState(false);
   const [images, setImages] = useState([]);
-  const [value, setValue] = useState("");
+  const [label, setLabel] = useState("");
 
   const gatherImages = () => {
     axios
@@ -86,7 +93,7 @@ const InfoContainer = () => {
   const handleEditClick = () => {
     setColor(selected.color);
     setIcon(selected.iconValue);
-    setValue(selected.label);
+    setLabel(selected.label);
     setDescription(selected.description);
     console.log("selected", selected);
     setEditOpen(true);
@@ -125,8 +132,8 @@ const InfoContainer = () => {
         <EditNodeModal
           editOpen={editOpen}
           setEditOpen={setEditOpen}
-          value={value}
-          setValue={setValue}
+          label={label}
+          setLabel={setLabel}
         />
         <CommentModal
           commentOpen={commentOpen}

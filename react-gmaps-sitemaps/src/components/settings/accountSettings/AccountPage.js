@@ -42,12 +42,12 @@ import Switch from "@material-ui/core/Switch";
 // import { MapContext } from "../../MapContext";
 import { BorderAll } from "@material-ui/icons";
 
-import AccountTeamViewer from "./AccountTeamViewer";
+import TeamViewer from "../teamSettings/TeamViewer";
 
 const AccountPage = ({ rendered, profileId }) => {
   return rendered ? (
     <div>
-      <AccountTeamViewer profileId={profileId} />
+      <TeamViewer profileId={profileId} />
     </div>
   ) : null;
 };

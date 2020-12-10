@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ImageUploader from "react-images-upload";
 const ImageUpload = ({ handlePictureChange }) => {
   return (
     <div className="App">

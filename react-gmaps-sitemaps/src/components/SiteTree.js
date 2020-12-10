@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import CheckboxTree from "react-checkbox-tree";
 import "react-checkbox-tree/lib/react-checkbox-tree.css";
+import { v4 as uuidv4 } from "uuid";
 
 // import { faHome } from "@fortawesome/free-solid-svg-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,50 +12,71 @@ import { Paper } from "@material-ui/core";
 import ModalDesignRework from "./ModalDesignRework";
 
 const SiteTree = () => {
-  const [
-    myMap,
-    setMyMap,
-    center,
-    setCenter,
-    isLoaded,
-    draw,
-    setDraw,
-    nodes,
-    setNodes,
-    activeNode,
-    setActiveNode,
-    icon,
-    setIcon,
-    shapes,
-    setShapes,
+  // const [
+  //   myMap,
+  //   setMyMap,
+  //   center,
+  //   setCenter,
+  //   isLoaded,
+  //   draw,
+  //   setDraw,
+  //   nodes,
+  //   setNodes,
+  //   activeNode,
+  //   setActiveNode,
+  //   icon,
+  //   setIcon,
+  //   shapes,
+  //   setShapes,
+  //   checked,
+  //   setChecked,
+  //   selected,
+  //   setSelected,
+  //   color,
+  //   setColor,
+  //   findNode,
+  //   removeNode,
+  //   nodeType,
+  //   setNodeType,
+  //   disabled,
+  //   setDisabled,
+  //   editing,
+  //   setEditing,
+  //   editValue,
+  //   setEditValue,
+  //   replaceNode,
+  //   editCleanup,
+  //   changeIcons,
+  //   description,
+  //   setDescription,
+  //   comment,
+  //   setComment,
+  //   la,
+  //   setLa,
+  // ] = useContext(MapContext);
+  const {
     checked,
     setChecked,
-    selected,
-    setSelected,
+    shapes,
+    setShapes,
+    draw,
+    setDraw,
+    findNode,
+    activeNode,
+    setActiveNode,
     color,
     setColor,
-    findNode,
-    removeNode,
-    nodeType,
-    setNodeType,
-    disabled,
-    setDisabled,
-    editing,
-    setEditing,
-    editValue,
-    setEditValue,
-    replaceNode,
-    editCleanup,
-    changeIcons,
     description,
     setDescription,
-    comment,
-    setComment,
-    label,
-    setLabel,
-  ] = useContext(MapContext);
+    center,
+    setCenter,
+    nodes,
+    setNodes,
+    icon,
+    setIcon,
+  } = useContext(MapContext);
   const [expanded, setExpanded] = useState([]);
-  const [value, setValue] = useState("");
+  const [label, setLabel] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [event, setEvent] = useState();
 
@@ -99,10 +121,9 @@ const SiteTree = () => {
   const addItem = (target, isDir, type) => {
     // updateDM()
     let newNode = {
-      value: value,
-      label: value,
+      value: uuidv4(),
+      label: label,
       latLngArr: [],
-      apiPath: "",
       parent: target.parent,
       parent_id: target.parent.id,
       nodeType: type,
@@ -121,7 +142,6 @@ const SiteTree = () => {
         {
           value: newNode.value + "/+",
           label: "Add a new item",
-          apiPath: newNode.value + "/+",
           latLngArr: ["0", "0"],
           nodeType: "ADD",
           icon: <i className={`material-icons icon-${"blue"}`}>{"add"}</i>,
@@ -130,7 +150,7 @@ const SiteTree = () => {
       ];
     }
     setActiveNode(newNode);
-    setValue("");
+    setLabel("");
     if (target.parent.children !== undefined) {
       setNodes(
         nodes.map((item) =>
@@ -165,8 +185,8 @@ const SiteTree = () => {
       <ModalDesignRework
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
-        value={value}
-        setValue={setValue}
+        label={label}
+        setLabel={setLabel}
         addItem={addItem}
         event={event}
         setEvent={setEvent}

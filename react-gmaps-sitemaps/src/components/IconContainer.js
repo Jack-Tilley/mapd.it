@@ -7,11 +7,10 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 
-const IconContainer = ({ handleButtonClick, handleColorChange, color }) => {
-  const getAllIcons = () => {};
+const IconContainer = ({ handleButtonClick }) => {
   return (
-    <div style={{ overflow: "auto", maxHeight: "200px", paddingBottom: "1em" }}>
-      <FormLabel>Icons</FormLabel>
+    <div style={{ overflow: "auto", maxHeight: "200px", marginBottom: "1em" }}>
+      <FormLabel component="legend">Icons</FormLabel>
       <IconList handleButtonClick={handleButtonClick} />
     </div>
   );

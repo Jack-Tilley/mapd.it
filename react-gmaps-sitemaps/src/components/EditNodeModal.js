@@ -27,19 +27,64 @@ import ColorContainer from "./ColorContainer";
 
 import { MapContext } from "./MapContext";
 
-const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
-  const [
-    myMap,
-    setMyMap,
-    center,
-    setCenter,
-    isLoaded,
-    draw,
+const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
+  // const [
+  //   myMap,
+  //   setMyMap,
+  //   center,
+  //   setCenter,
+  //   isLoaded,
+  //   draw,
+  //   setDraw,
+  //   nodes,
+  //   setNodes,
+  //   activeNode,
+  //   setActiveNode,
+  //   icon,
+  //   setIcon,
+  //   shapes,
+  //   setShapes,
+  //   checked,
+  //   setChecked,
+  //   selected,
+  //   setSelected,
+  //   color,
+  //   setColor,
+  //   findNode,
+  //   removeNode,
+  //   nodeType,
+  //   setNodeType,
+  //   disabled,
+  //   setDisabled,
+  //   editing,
+  //   setEditing,
+  //   editValue,
+  //   setEditValue,
+  //   replaceNode,
+  //   editCleanup,
+  //   changeIcons,
+  //   description,
+  //   setDescription,
+  //   comment,
+  //   setComment,
+  //   lab,
+  //   setLab,
+  //   auth,
+  //   setAuth,
+  //   profileId,
+  //   setProfileId,
+  //   teams,
+  //   setTeams,
+  //   selectedTeams,
+  //   setSelectedTeams,
+  //   updateNodes,
+  //   picture,
+  //   setPicture,
+  // ] = useContext(MapContext);
+
+  const {
     setDraw,
-    nodes,
     setNodes,
-    activeNode,
-    setActiveNode,
     icon,
     setIcon,
     shapes,
@@ -50,49 +95,26 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
     setSelected,
     color,
     setColor,
-    findNode,
     removeNode,
-    nodeType,
     setNodeType,
-    disabled,
-    setDisabled,
-    editing,
     setEditing,
-    editValue,
     setEditValue,
     replaceNode,
     editCleanup,
-    changeIcons,
     description,
     setDescription,
-    comment,
-    setComment,
-    label,
-    setLabel,
-    auth,
-    setAuth,
-    profileId,
-    setProfileId,
-    teams,
-    setTeams,
-    selectedTeams,
-    setSelectedTeams,
-    updateNodes,
-    picture,
-    setPicture,
-  ] = useContext(MapContext);
+  } = useContext(MapContext);
 
   const handleSubmit = (needsLocationChange) => {
     if (needsLocationChange) {
-      setEditValue(value);
+      setEditValue(label);
       setNodeType(selected.nodeType);
       setEditing(true);
       setDraw(true);
     } else {
       axios
         .put(`http://localhost:8000/api/allNodes/${selected.id}/`, {
-          value: value,
-          label: value,
+          label: label,
           color: color,
           iconValue: icon,
           description: description,
@@ -158,6 +180,8 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
   return (
     <div>
       <Dialog
+        fullWidth={true}
+        maxWidth={"md"}
         open={editOpen}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
@@ -175,13 +199,13 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
                   ),
                 }}
                 autoFocus
-                value={value}
+                value={label}
                 margin="dense"
                 placeholder="Give your item a title"
                 id="name"
                 label="Node Name"
                 type="text"
-                onChange={(e) => setValue(e.target.value)}
+                onChange={(e) => setLabel(e.target.value)}
                 fullWidth
               />
               <TextField
@@ -218,8 +242,9 @@ const EditNodeModal = ({ editOpen, setEditOpen, value, setValue }) => {
               <Divider orientation="vertical" />
             </Grid>
             <Grid item xs={5} style={{ paddingLeft: 0 }}>
-              <div style={{ overflow: "auto", maxHeight: "150px" }}></div>
-              <IconContainer handleButtonClick={handleButtonClick} />
+              <div>
+                <IconContainer handleButtonClick={handleButtonClick} />
+              </div>
               <div>
                 <ColorContainer
                   handleColorChange={handleColorChange}

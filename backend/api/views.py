@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .serializers import NodeSerializer, HistorySerializer, TeamSerializer, ProfileSerializer, CommentSerializer, ProfileInfoSerializer, BaseCommentSerializer, ImageSerializer
+from rest_framework.views import APIView
+from .serializers import NodeSerializer, HistorySerializer, TeamSerializer, ProfileSerializer, CommentSerializer, ProfileInfoSerializer, BaseCommentSerializer, ImageSerializer, UserSerializer
 from .models import Node, Team, Profile, Comment, Image
 from rest_framework import generics, permissions
 from rest_framework.response import Response
@@ -138,6 +139,12 @@ class BaseCommentsView(viewsets.ModelViewSet):
 class ImagesView(viewsets.ModelViewSet):
     serializer_class = ImageSerializer
     queryset = Image.objects.all()
+
+
+class UserView(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    http_method_names = ['get']
 
 
 class HistoryView(viewsets.ModelViewSet):

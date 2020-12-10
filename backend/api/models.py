@@ -8,6 +8,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.validators import MinLengthValidator
 from .utils import generate_key
+import uuid
 from PIL import Image as PIL_Image
 
 
@@ -60,17 +61,15 @@ class Team(models.Model):
 class Node(MPTTModel):
     label = models.CharField(max_length=50, null=True, blank=True)
     value = models.CharField(
-        max_length=200, unique=True, null=True, blank=True)
+        max_length=100, unique=True, default=uuid.uuid4)
     parent = TreeForeignKey('self', on_delete=models.CASCADE,
                             null=True, blank=True, related_name='children')
-    apiPath = models.CharField(max_length=200, blank=True, null=True)
     nodeType = models.CharField(max_length=20, blank=True, null=True)
     latLngArr = ArrayField(models.CharField(
         max_length=40), blank=True, null=True)
     # unused should be removed
-    nodeReference = JSONField(blank=True, null=True)
     isDir = models.BooleanField(default=False)
-    icon = models.CharField(max_length=30, blank=True, null=True)
+
     iconValue = models.CharField(max_length=30, blank=True, null=True)
     color = models.CharField(max_length=16, blank=True,
                              null=True, default="black")

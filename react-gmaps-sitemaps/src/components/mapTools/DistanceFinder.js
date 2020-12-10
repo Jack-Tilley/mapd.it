@@ -42,57 +42,6 @@ export default function DistanceFinder({
   distanceToolRendered,
   setDistanceToolRendered,
 }) {
-  const [
-    myMap,
-    setMyMap,
-    center,
-    setCenter,
-    isLoaded,
-    draw,
-    setDraw,
-    nodes,
-    setNodes,
-    activeNode,
-    setActiveNode,
-    icon,
-    setIcon,
-    shapes,
-    setShapes,
-    checked,
-    setChecked,
-    selected,
-    setSelected,
-    color,
-    setColor,
-    findNode,
-    removeNode,
-    nodeType,
-    setNodeType,
-    disabled,
-    setDisabled,
-    editing,
-    setEditing,
-    editValue,
-    setEditValue,
-    replaceNode,
-    editCleanup,
-    changeIcons,
-    description,
-    setDescription,
-    comment,
-    setComment,
-    label,
-    setLabel,
-    auth,
-    setAuth,
-    profileId,
-    setProfileId,
-    teams,
-    setTeams,
-    selectedTeams,
-    setSelectedTeams,
-    updateNodes,
-  ] = useContext(MapContext);
   const map = useGoogleMap();
   let lat = map.getCenter().lat();
   let lng = map.getCenter().lng();
@@ -154,7 +103,7 @@ export default function DistanceFinder({
   };
   return (
     <>
-      <div style={{ position: "absolute", left: "15em", top: "3em" }}>
+      <div style={{ position: "absolute", left: "17.25em", top: "3em" }}>
         <Paper>
           <IconButton onClick={() => handleDistanceButtonClick()} size="small">
             <i className="material-icons icon-grey">{"straighten"}</i>

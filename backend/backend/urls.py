@@ -31,6 +31,7 @@ router.register(r'profiles', views.ProfilesView, 'profiles')
 router.register(r'comments', views.CommentsView, 'comments')
 router.register(r'basecomments', views.BaseCommentsView, 'basecomments')
 router.register(r'images', views.ImagesView, 'images')
+router.register(r'users', views.UserView, 'users')
 
 
 urlpatterns = [
