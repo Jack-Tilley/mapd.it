@@ -12,12 +12,12 @@ import "react-checkbox-tree/lib/react-checkbox-tree.css";
 
 let addNode = {
   value: "/+",
-  label: "Add a new item",
+  // label: "Add a new item",
   parent: null,
   apiPath: "HI/there",
   latLngArr: ["0", "0"],
   nodeType: "ADD",
-  icon: <i className={`material-icons icon-${"blue"}`}>{"add"}</i>,
+  icon: <i className={`material-icons icon-${"blue"}`}>{"control_point"}</i>,
   disabled: true,
 };
 
@@ -131,10 +131,12 @@ export const MapProvider = (props) => {
       }
       newNode.children.unshift({
         value: newNode.value + "/+",
-        label: "Add a new item",
+        // label: "Add a new item",
         latLngArr: ["0", "0"],
         nodeType: "ADD",
-        icon: <i className={`material-icons icon-${"blue"}`}>{"add"}</i>,
+        icon: (
+          <i className={`material-icons icon-${"blue"}`}>{"control_point"}</i>
+        ),
         disabled: true,
       });
     }
@@ -217,11 +219,15 @@ export const MapProvider = (props) => {
           if (newNodes[i].isDir) {
             newNodes[i].children.unshift({
               value: newNodes[i].value + "/+",
-              label: "Add a new item",
+              // label: "Add a new item",
               apiPath: newNodes[i].value + "/+",
               latLngArr: ["0", "0"],
               nodeType: "ADD",
-              icon: <i className={`material-icons icon-${"blue"}`}>{"add"}</i>,
+              icon: (
+                <i className={`material-icons icon-${"blue"}`}>
+                  {"control_point"}
+                </i>
+              ),
               disabled: true,
             });
           }
@@ -262,11 +268,15 @@ export const MapProvider = (props) => {
           if (newNodes[i].isDir) {
             newNodes[i].children.unshift({
               value: newNodes[i].value + "/+",
-              label: "Add a new item",
+              // label: "Add a new item",
               apiPath: newNodes[i].value + "/+",
               latLngArr: ["0", "0"],
               nodeType: "ADD",
-              icon: <i className={`material-icons icon-${"blue"}`}>{"add"}</i>,
+              icon: (
+                <i className={`material-icons icon-${"blue"}`}>
+                  {"control_point"}
+                </i>
+              ),
               disabled: true,
             });
           }

@@ -193,11 +193,8 @@ const ModalDesignRework = ({
                 <Grid item xs={6}>
                   <TeamContainer
                     teams={teams}
-                    // selectedTeams={selectedTeams}
-                    // setSelectedTeams={setSelectedTeams}
                     handleSelectedTeamChange={handleSelectedTeamChange}
                     teamObjects={teamObjects}
-                    // setTeamObjects={setTeamObjects}
                   />
                 </Grid>
                 <Grid item xs={6}>

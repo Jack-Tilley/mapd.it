@@ -126,42 +126,8 @@ const SiteTree = () => {
       isDir: isDir,
       description: description,
     };
-    // if (
-    //   isDir &&
-    //   (newNode.parent === null ||
-    //     newNode.parent === undefined ||
-    //     Object.keys(newNode.parent).length === 0)
-    // ) {
-    //   newNode.children = [
-    //     {
-    //       value: newNode.value + "/+",
-    //       label: "Add a new item",
-    //       latLngArr: ["0", "0"],
-    //       nodeType: "ADD",
-    //       icon: <i className={`material-icons icon-${"blue"}`}>{"add"}</i>,
-    //       disabled: true,
-    //     },
-    //   ];
-    // }
     setActiveNode(newNode);
     setLabel("");
-    // if (target.parent.children !== undefined) {
-    //   setNodes(
-    //     nodes.map((item) =>
-    //       item.children === target.parent.children
-    //         ? {
-    //             ...item,
-    //             children: target.parent.children.concat(newNode),
-    //           }
-    //         : item
-    //     )
-    //   );
-    // } else {
-    //   newNode.parent = null;
-    //   let newNodes = [...nodes];
-    //   newNodes.push(newNode);
-    //   setNodes(newNodes);
-    // }
   };
 
   return (
