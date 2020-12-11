@@ -86,6 +86,7 @@ const DrawingComponent = () => {
     setShapes,
     selectedTeams,
     setSelectedTeams,
+    updateNodes,
   } = useContext(MapContext);
 
   const options = {
@@ -106,9 +107,9 @@ const DrawingComponent = () => {
   const handleCancel = () => {
     setEditing(false);
     setDraw(false);
-    if (!editing) {
-      setNodes(removeNode(activeNode.value));
-    }
+    // if (!editing) {
+    //   setNodes(removeNode(activeNode.value));
+    // }
     setColor("black");
     setIcon("search");
     setNodeType(null);
@@ -228,6 +229,7 @@ const DrawingComponent = () => {
 
           console.log("NEW NODE ADDED", res.data);
           newActiveNode.id = res.data.id;
+          updateNodes();
           setActiveNode(newActiveNode);
           setSelectedTeams();
           setChecked([...checked, newActiveNode.value]);
