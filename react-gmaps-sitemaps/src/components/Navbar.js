@@ -114,17 +114,17 @@ function Navbar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/map" className="nav-links" onClick={closeMobileMenu}>
-                  Map
-                </Link>
-              </li>
-              <li className="nav-item">
                 <Link
                   to="/features"
                   className="nav-links"
                   onClick={closeMobileMenu}
                 >
                   Features
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/map" className="nav-links" onClick={closeMobileMenu}>
+                  Map
                 </Link>
               </li>
               {handleUserIsSignedIn()}

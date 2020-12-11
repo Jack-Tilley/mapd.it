@@ -65,7 +65,7 @@ const Map = ({ darkMode, setDarkMode }) => {
       <GoogleMap
         mapContainerStyle={{
           // paddingTop: "80px",
-          overflow: "auto",
+          // overflow: "hidden",
           width: "100%",
           height: "calc(100vh - 80px)",
           maxHeight: "calc(100vh - 80px)",
