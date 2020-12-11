@@ -16,6 +16,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import AccountPage from "../../settings/accountSettings/AccountPage";
 import TeamPage from "../../settings/teamSettings/TeamPage";
+import Logout from "../../settings/Logout";
 import { MapContext } from "../../MapContext";
 
 const drawerWidth = 240;
@@ -168,6 +169,16 @@ const MyAccount = () => {
                 </ListItemIcon>
                 <ListItemText primary={"Insights"} />
               </ListItem>
+              <ListItem
+                button
+                key={"logout"}
+                onClick={() => handleTabChange("logout")}
+              >
+                <ListItemIcon>
+                  <MailIcon style={{ color: "#f7f8fa" }} />
+                </ListItemIcon>
+                <ListItemText primary={"Logout"} />
+              </ListItem>
             </List>
             <Divider light={true} />
           </div>
@@ -185,6 +196,7 @@ const MyAccount = () => {
               updateNodes={updateNodes}
             />
             {/* <MapPage rendered={true} teams={teams} profileId={profileId} updateNodes={updateNodes}/> */}
+            <Logout rendered={picked === "logout" ? true : false} />
           </div>
         </main>
       </div>

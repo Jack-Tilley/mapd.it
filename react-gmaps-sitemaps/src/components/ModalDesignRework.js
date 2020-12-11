@@ -144,95 +144,90 @@ const ModalDesignRework = ({
   };
 
   return (
-    <div>
-      <Dialog
-        fullWidth={true}
-        maxWidth={"md"}
-        open={modalOpen}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-        scroll="paper"
-      >
-        <DialogTitle id="form-dialog-title">Add New Node</DialogTitle>
-        <DialogContent scroll="paper" dividers={true}>
-          <Grid container spacing={1}>
-            <Grid item xs={6}>
-              <TextField
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <i className={`material-icons icon-${color}`}>{icon}</i>
-                    </InputAdornment>
-                  ),
-                }}
-                autoFocus
-                autoComplete="off"
-                value={label}
-                margin="dense"
-                placeholder="Give your item a title"
-                id="name"
-                label="Node Name"
-                type="text"
-                onChange={(e) => handleLabelChange(e)}
-                fullWidth
-              />
-              <TextField
-                id="description"
-                margin="dense"
-                label="Description..."
-                placeholder="Description goes here..."
-                multiline
-                rows={6}
-                value={description}
-                type="text"
-                onChange={(e) => handleDescriptionChange(e)}
-                fullWidth
-              />
+    <Dialog
+      fullWidth={true}
+      maxWidth={"md"}
+      open={modalOpen}
+      onClose={handleClose}
+      aria-labelledby="form-dialog-title"
+      scroll="paper"
+    >
+      <DialogTitle id="form-dialog-title">Add New Node</DialogTitle>
+      <DialogContent scroll="paper" dividers={true}>
+        <Grid container spacing={1}>
+          <Grid item xs={6}>
+            <TextField
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <i className={`material-icons icon-${color}`}>{icon}</i>
+                  </InputAdornment>
+                ),
+              }}
+              autoFocus
+              autoComplete="off"
+              value={label}
+              margin="dense"
+              placeholder="Give your item a title"
+              id="name"
+              label="Node Name"
+              type="text"
+              onChange={(e) => handleLabelChange(e)}
+              fullWidth
+            />
+            <TextField
+              id="description"
+              margin="dense"
+              label="Description..."
+              placeholder="Description goes here..."
+              multiline
+              rows={6}
+              value={description}
+              type="text"
+              onChange={(e) => handleDescriptionChange(e)}
+              fullWidth
+            />
 
-              <Grid container spacing={10} style={{ paddingTop: "1em" }}>
-                <Grid item xs={6}>
-                  <TeamContainer
-                    teams={teams}
-                    handleSelectedTeamChange={handleSelectedTeamChange}
-                    teamObjects={teamObjects}
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <DirContainer
-                    handleDirChange={handleDirChange}
-                    isDir={isDir}
-                  />
-                </Grid>
+            <Grid container spacing={10} style={{ paddingTop: "1em" }}>
+              <Grid item xs={6}>
+                <TeamContainer
+                  teams={teams}
+                  handleSelectedTeamChange={handleSelectedTeamChange}
+                  teamObjects={teamObjects}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <DirContainer handleDirChange={handleDirChange} isDir={isDir} />
               </Grid>
             </Grid>
-            <Grid item xs={1} style={{ paddingRight: 0 }}>
-              <Divider orientation="vertical" />
-            </Grid>
-            <Grid item xs={5} style={{ paddingLeft: 0 }}>
-              <div style={{ overflow: "auto", maxHeight: "150px" }}></div>
-              <IconContainer handleButtonClick={handleButtonClick} />
-              <div>
-                <ColorContainer
-                  handleColorChange={handleColorChange}
-                  color={color}
-                />
-              </div>
-            </Grid>
           </Grid>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="default">
-            Cancel
-          </Button>
-          <Button onClick={() => handleSubmit("marker")} color="primary">
-            Marker
-          </Button>
-          <Button onClick={() => handleSubmit("polyline")} color="primary">
-            Polyline
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+          <Grid item xs={1} style={{ paddingRight: 0 }}>
+            <Divider orientation="vertical" />
+          </Grid>
+          <Grid item xs={5} style={{ paddingLeft: 0 }}>
+            <div style={{ overflow: "auto", maxHeight: "150px" }}></div>
+            <IconContainer handleButtonClick={handleButtonClick} />
+            <div>
+              <ColorContainer
+                handleColorChange={handleColorChange}
+                color={color}
+              />
+            </div>
+          </Grid>
+        </Grid>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} color="default">
+          Cancel
+        </Button>
+        <Button onClick={() => handleSubmit("marker")} color="primary">
+          Marker
+        </Button>
+        <Button onClick={() => handleSubmit("polyline")} color="primary">
+          Polyline
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 
