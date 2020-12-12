@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.views import APIView
-from .serializers import NodeSerializer, HistorySerializer, TeamSerializer, ProfileSerializer, CommentSerializer, ProfileInfoSerializer, BaseCommentSerializer, ImageSerializer, UserSerializer
+from .serializers import NodeSerializer, HistorySerializer, TeamSerializer, ProfileSerializer, CommentSerializer, ProfileInfoSerializer, BaseCommentSerializer, ImageSerializer, UserSerializer, TeamHistorySerializer
 from .models import Node, Team, Profile, Comment, Image
 from rest_framework import generics, permissions
 from rest_framework.response import Response
@@ -151,6 +151,10 @@ class HistoryView(viewsets.ModelViewSet):
     serializer_class = HistorySerializer
     queryset = Node.objects.all()
 
+
+class TeamHistoryView(viewsets.ModelViewSet):
+    serializer_class = TeamHistorySerializer
+    queryset = Team.objects.all()
 # Register API
 
 

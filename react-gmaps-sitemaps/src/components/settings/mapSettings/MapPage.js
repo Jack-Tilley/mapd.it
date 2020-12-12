@@ -1,6 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
+import React from "react";
 import MapThemeSelector from "./MapThemeSelector";
-import PaletteThemeSelector from "./PaletteThemeSelector";
 import MapTypeSelector from "./MapTypeSelector";
 
 const MapPage = ({

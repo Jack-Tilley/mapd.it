@@ -1,36 +1,16 @@
-import React, { useState, useContext, useEffect } from "react";
-
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-
 import FormControl from "@material-ui/core/FormControl";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import Select from "@material-ui/core/Select";
-
-import InputAdornment from "@material-ui/core/InputAdornment";
-
-import Grid from "@material-ui/core/Grid";
-import Divider from "@material-ui/core/Divider";
-
-import IconContainer from "./IconContainer";
-import ColorContainer from "./ColorContainer";
-import DirContainer from "./DirContainer";
-import TeamContainer from "./TeamContainer";
-
-import RefreshChatButton from "./RefreshChatButton";
-
-import CommentsList from "./CommentsList";
-import { IconButton } from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
+import TextField from "@material-ui/core/TextField";
 import axios from "axios";
-
+import React, { useContext, useEffect, useState } from "react";
+import CommentsList from "./CommentsList";
 import { MapContext } from "./MapContext";
+import RefreshChatButton from "./RefreshChatButton";
 
 const CommentModal = ({ commentOpen, setCommentOpen }) => {
   // const [

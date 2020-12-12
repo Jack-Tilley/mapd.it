@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import { DirectionsRenderer, DirectionsService } from "@react-google-maps/api";
+import React, { useState } from "react";
 const Directions = () => {
   const [response, setResponse] = useState(null);
 

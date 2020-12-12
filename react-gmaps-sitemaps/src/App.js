@@ -1,28 +1,19 @@
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import { MapProvider } from "./components/MapContext";
 import { AuthProvider } from "./components/AuthContext";
-import Map from "./components/Map";
-import SiteTree from "./components/SiteTree";
-import Login from "./components/accounts/Login";
-import Register from "./components/accounts/Register";
 import PrivateRoute from "./components/common/PrivateRoute";
-import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
-
-import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import { Paper } from "@material-ui/core";
-import Home from "./components/pages/HomePage/Home";
-import Services from "./components/pages/Services/Services";
-import Features from "./components/pages/Features/Features";
-import SignUp from "./components/pages/SignUp/SignUp";
-import SignIn from "./components/pages/SignIn/SignIn";
-import MyAccount from "./components/pages/MyAccount/MyAccount";
+import Map from "./components/Map";
+import { MapProvider } from "./components/MapContext";
 import Navbar from "./components/Navbar";
+import Features from "./components/pages/Features/Features";
+import Home from "./components/pages/HomePage/Home";
+import MyAccount from "./components/pages/MyAccount/MyAccount";
+import Services from "./components/pages/Services/Services";
+import SignIn from "./components/pages/SignIn/SignIn";
+import SignUp from "./components/pages/SignUp/SignUp";
+
 // import Footer from "./components/pages/Footer/Footer";
 
 function App() {

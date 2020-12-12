@@ -1,9 +1,6 @@
-import React from "react";
-
-import IconButton from "@material-ui/core/IconButton";
 import { Paper } from "@material-ui/core";
-
-import axios from "axios";
+import IconButton from "@material-ui/core/IconButton";
+import React from "react";
 
 const RefreshChatButton = ({ setComments, selected, handleRefresh }) => {
   return (

@@ -1,53 +1,25 @@
-import React, { useState, useContext, useEffect } from "react";
-import { useGoogleMap } from "@react-google-maps/api";
-
-import axios from "axios";
-
-import vibrant from "../mapStyles/vibrant";
-import greyscale from "../mapStyles/greyscale";
-import night from "../mapStyles/night";
-import hopper from "../mapStyles/hopper";
-import flatpale from "../mapStyles/flatpale";
-import blackout from "../mapStyles/blackout";
-import unsaturated from "../mapStyles/unsaturated";
-import bluegray from "../mapStyles/bluegray";
-import paledawn from "../mapStyles/paledawn";
-
+import { Paper } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-
-import { Paper } from "@material-ui/core";
-
-import InputLabel from "@material-ui/core/InputLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import Select from "@material-ui/core/Select";
-import NativeSelect from "@material-ui/core/NativeSelect";
-import MenuItem from "@material-ui/core/MenuItem";
-
 import IconButton from "@material-ui/core/IconButton";
-
-import InputAdornment from "@material-ui/core/InputAdornment";
-
-import Grid from "@material-ui/core/Grid";
-import Divider from "@material-ui/core/Divider";
-import Switch from "@material-ui/core/Switch";
-
-import IconContainer from "../IconContainer";
-import ColorContainer from "../ColorContainer";
-
+import { useGoogleMap } from "@react-google-maps/api";
+import React, { useContext, useEffect, useState } from "react";
 import { MapContext } from "../MapContext";
-import { BorderAll } from "@material-ui/icons";
-
-import TeamPage from "./teamSettings/TeamPage";
-import MapPage from "./mapSettings/MapPage";
+import blackout from "../mapStyles/blackout";
+import bluegray from "../mapStyles/bluegray";
+import flatpale from "../mapStyles/flatpale";
+import greyscale from "../mapStyles/greyscale";
+import hopper from "../mapStyles/hopper";
+import night from "../mapStyles/night";
+import paledawn from "../mapStyles/paledawn";
+import unsaturated from "../mapStyles/unsaturated";
+import vibrant from "../mapStyles/vibrant";
 import AccountPage from "./accountSettings/AccountPage";
+import MapPage from "./mapSettings/MapPage";
+import TeamPage from "./teamSettings/TeamPage";
 
 const SettingsModal = ({
   settingsOpen,

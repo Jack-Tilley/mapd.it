@@ -1,10 +1,9 @@
-import React, { useState, useContext } from "react";
-import { MapContext } from "./MapContext";
+import { Paper } from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
 import { DrawingManager } from "@react-google-maps/api";
 import axios from "axios";
-import { parse, stringify } from "flatted";
-import IconButton from "@material-ui/core/IconButton";
-import { Paper } from "@material-ui/core";
+import React, { useContext } from "react";
+import { MapContext } from "./MapContext";
 
 const DrawingComponent = () => {
   // const [

@@ -28,6 +28,17 @@ class HistorySerializer(serializers.ModelSerializer):
         model = Node
         fields = ['history']
 
+
+class TeamHistorySerializer(serializers.ModelSerializer):
+    history = serializers.SerializerMethodField()
+
+    def get_history(self, obj):
+        return obj.history.all().values()
+
+    class Meta:
+        model = Team
+        fields = ['history']
+
 # User Serializer
 
 

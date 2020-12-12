@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Button } from "./Button";
-import { Link } from "react-router-dom";
-import "./Navbar.css";
-import { MdTonality } from "react-icons/md";
+import React, { useContext, useEffect, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
+import { MdTonality } from "react-icons/md";
+import { Link } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
+import "./Navbar.css";
 
 function Navbar() {
   const [auth, setAuth] = useContext(AuthContext);

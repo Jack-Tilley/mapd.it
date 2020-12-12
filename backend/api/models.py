@@ -29,6 +29,7 @@ def create_user_profile(sender, instance, created, **kwargs):
         Profile.objects.create(user=instance)
         team = Team.objects.create(name=instance.username + "'s team")
         instance.profile.teams.add(team)
+        instance.save()
 
 
 @receiver(post_save, sender=User)
@@ -115,3 +116,4 @@ class Image(models.Model):
 #     instance.teams.add()
 
 register(Node)
+register(Team)

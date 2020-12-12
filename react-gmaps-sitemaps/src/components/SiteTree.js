@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import { Paper } from "@material-ui/core";
+import React, { useContext, useState } from "react";
 import CheckboxTree from "react-checkbox-tree";
 import "react-checkbox-tree/lib/react-checkbox-tree.css";
 import { v4 as uuidv4 } from "uuid";
-
 // import { faHome } from "@fortawesome/free-solid-svg-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { MapContext } from "./MapContext";
-import { Paper } from "@material-ui/core";
 import ModalDesignRework from "./ModalDesignRework";
 
 const SiteTree = () => {

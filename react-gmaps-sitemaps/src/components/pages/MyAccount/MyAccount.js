@@ -1,20 +1,16 @@
-import React, { useState, useContext } from "react";
-
-import { makeStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
+import Drawer from "@material-ui/core/Drawer";
+import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
+import { makeStyles } from "@material-ui/core/styles";
+import Toolbar from "@material-ui/core/Toolbar";
 import MailIcon from "@material-ui/icons/Mail";
+import React, { useContext, useState } from "react";
+import { MapContext } from "../../MapContext";
 import AccountPage from "../../settings/accountSettings/AccountPage";
 import TeamPage from "../../settings/teamSettings/TeamPage";
-import Logout from "../../settings/Logout";
-import { MapContext } from "../../MapContext";
 
 const drawerWidth = 240;
 

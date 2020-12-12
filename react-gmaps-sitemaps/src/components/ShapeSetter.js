@@ -1,7 +1,6 @@
-import React, { useState, useContext, useEffect } from "react";
+import { Marker, Polyline } from "@react-google-maps/api";
+import React, { useContext } from "react";
 import { MapContext } from "./MapContext";
-
-import { Marker, Polyline, InfoWindow } from "@react-google-maps/api";
 
 const ShapeSetter = () => {
   // const [

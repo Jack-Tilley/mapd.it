@@ -1,20 +1,14 @@
-import React, { useState, useContext, useRef } from "react";
-import { MapContext } from "./MapContext";
-import { GoogleMap, InfoWindow, useGoogleMap } from "@react-google-maps/api";
-import DrawingComponent from "./DrawingComponent";
-import ShapeSetter from "./ShapeSetter";
+import { GoogleMap } from "@react-google-maps/api";
+import React, { useContext, useState } from "react";
 import AutocompleteBox from "./AutocompleteBox";
-import Directions from "./Directions";
-import InfoContainer from "./InfoContainer";
-import SettingsModal from "./settings/SettingsModal";
+import DrawingComponent from "./DrawingComponent";
 import HistoryDrawer from "./HistoryDrawer";
-import DistanceFinder from "./mapTools/DistanceFinder";
-import PanTool from "./mapTools/PanTool";
-import RefreshButton from "./mapTools/RefreshButton";
+import InfoContainer from "./InfoContainer";
+import { MapContext } from "./MapContext";
 import ToolContainer from "./mapTools/ToolContainer";
+import SettingsModal from "./settings/SettingsModal";
+import ShapeSetter from "./ShapeSetter";
 import SiteTree from "./SiteTree";
-
-import { Paper } from "@material-ui/core";
 
 const Map = ({ darkMode, setDarkMode }) => {
   // const [
