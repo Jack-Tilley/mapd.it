@@ -103,15 +103,46 @@ const ModalDesignRework = ({
 
   const [isDir, setIsDir] = useState(true);
   const [teamObjects, setTeamObjects] = useState([]);
+  const [validationMessage, setValidationMessage] = useState("");
+  const [nameError, setNameError] = useState(false);
+  const [teamError, setTeamError] = useState(false);
+
+  const handleValidation = () => {
+    if (teamObjects.length < 1 && label === "") {
+      setValidationMessage("- Please fill out the required fields!");
+      setNameError(true);
+      setTeamError(true);
+    } else if (teamObjects.length < 1) {
+      setValidationMessage("- Please assign this item to at least one team!");
+      setNameError(false);
+      setTeamError(true);
+    } else if (label === "") {
+      setValidationMessage("- Please give this item a name!");
+      setNameError(true);
+      setTeamError(false);
+    } else {
+      setValidationMessage("");
+      setNameError(false);
+      setTeamError(false);
+    }
+  };
 
   const handleSubmit = (type) => {
-    setSelectedTeams(teamObjects);
-    setNodeType(type);
-    setDraw(true);
-    addItem(event, isDir, type);
-    setModalOpen(false);
-    setEvent("");
-    setIsDir(true);
+    if (teamObjects.length > 0 && label !== "") {
+      setSelectedTeams(teamObjects);
+      setNodeType(type);
+      setDraw(true);
+      addItem(event, isDir, type);
+      setModalOpen(false);
+      setEvent("");
+      setIsDir(true);
+      setValidationMessage("");
+      setNameError(false);
+      setTeamError(false);
+    } else {
+      handleValidation();
+      console.log("SELECT A TEAM FIRST");
+    }
   };
 
   const handleClose = () => {
@@ -152,7 +183,9 @@ const ModalDesignRework = ({
       aria-labelledby="form-dialog-title"
       scroll="paper"
     >
-      <DialogTitle id="form-dialog-title">Add New Node</DialogTitle>
+      <DialogTitle id="form-dialog-title">
+        Add New Node <span style={{ color: "red" }}>{validationMessage}</span>
+      </DialogTitle>
       <DialogContent scroll="paper" dividers={true}>
         <Grid container spacing={1}>
           <Grid item xs={6}>
@@ -165,6 +198,7 @@ const ModalDesignRework = ({
                 ),
               }}
               autoFocus
+              error={nameError}
               autoComplete="off"
               value={label}
               margin="dense"
@@ -173,15 +207,17 @@ const ModalDesignRework = ({
               label="Node Name"
               type="text"
               onChange={(e) => handleLabelChange(e)}
+              inputProps={{ maxLength: 48 }}
               fullWidth
             />
             <TextField
+              inputProps={{ maxLength: 250 }}
               id="description"
               margin="dense"
               label="Description..."
               placeholder="Description goes here..."
               multiline
-              rows={6}
+              rows={5}
               value={description}
               type="text"
               onChange={(e) => handleDescriptionChange(e)}
@@ -194,11 +230,12 @@ const ModalDesignRework = ({
                   teams={teams}
                   handleSelectedTeamChange={handleSelectedTeamChange}
                   teamObjects={teamObjects}
+                  teamError={teamError}
                 />
               </Grid>
-              <Grid item xs={6}>
+              {/* <Grid item xs={6}>
                 <DirContainer handleDirChange={handleDirChange} isDir={isDir} />
-              </Grid>
+              </Grid> */}
             </Grid>
           </Grid>
           <Grid item xs={1} style={{ paddingRight: 0 }}>

@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from "uuid";
 // import { faHome } from "@fortawesome/free-solid-svg-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import AddNodeModal from "./AddNodeModal";
 import { MapContext } from "./MapContext";
 import { Paper } from "@material-ui/core";
 import ModalDesignRework from "./ModalDesignRework";
@@ -133,6 +132,7 @@ const SiteTree = () => {
   return (
     <Paper>
       <CheckboxTree
+        style={{ wordWrap: "break-word" }}
         checked={checked}
         expanded={expanded}
         iconsClass="fa5"

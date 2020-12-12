@@ -57,6 +57,7 @@ const TeamContainer = ({
   // setSelectedTeams,
   handleSelectedTeamChange,
   teamObjects,
+  teamError,
   // setTeamObjects,
 }) => {
   const classes = useStyles();
@@ -71,10 +72,14 @@ const TeamContainer = ({
   };
 
   return (
-    <FormControl required className={classes.formControl}>
-      <InputLabel id="team-mutiple-checkbox-label">Teams</InputLabel>
+    <FormControl className={classes.formControl}>
+      <InputLabel error={teamError} id="team-mutiple-checkbox-label">
+        Teams
+      </InputLabel>
       <Select
-        labelId="demo-mutiple-checkbox-label"
+        error={teamError}
+        label="Team Select"
+        // labelId="demo-mutiple-checkbox-label"
         id="team-mutiple-checkbox"
         multiple
         value={teamObjects}

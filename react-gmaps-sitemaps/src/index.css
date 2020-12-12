@@ -1,48 +1,16 @@
-/* body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-size: 18px;
-} */
-
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-} */
-
-div.treeContainer {
+.treeContainer {
   position: absolute;
   top: 1rem;
   left: 1rem;
+  border-radius: 10px;
   /* background-color: white; */
   margin: 0;
   margin-right: 5px;
   padding: 0;
-  max-height: 240px;
-  max-width: 200px;
-  min-width: 200px;
-  text-overflow: ellipses;
-  /* box-sizing: border-box; */
-  /* border: 1px solid transparent; */
+  max-height: 220px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   border-radius: 1px;
-  overflow: auto;
+  overflow-y: auto;
 }
 div.gmnoprint {
   padding-left: 19.5em;
@@ -89,4 +57,17 @@ i.icon-cancel {
 
 .fileUploader {
   border: 1px solid #e1e1e1;
+}
+
+li.rct-node {
+  max-width: 200px;
+  min-width: 200px;
+}
+
+div.react-checkbox-tree {
+  overflow-y: auto;
+}
+
+span .rct-node-icon {
+  display: inline-block;
 }

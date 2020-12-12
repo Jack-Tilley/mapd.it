@@ -12,9 +12,7 @@ const Logout = ({ rendered }) => {
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
-  return rendered ? (
-    <button onClick={() => handleLogout()}>logout</button>
-  ) : null;
+  return rendered ? <div>Coming Soon...</div> : null;
 };
 
 export default Logout;

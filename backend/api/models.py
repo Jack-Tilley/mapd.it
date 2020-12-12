@@ -61,22 +61,22 @@ class Team(models.Model):
 class Node(MPTTModel):
     label = models.CharField(max_length=50, null=True, blank=True)
     value = models.CharField(
-        max_length=100, unique=True, default=uuid.uuid4)
+        max_length=64, unique=True, default=uuid.uuid4)
     parent = TreeForeignKey('self', on_delete=models.CASCADE,
                             null=True, blank=True, related_name='children')
-    nodeType = models.CharField(max_length=20, blank=True, null=True)
+    nodeType = models.CharField(max_length=16, blank=True, null=True)
     latLngArr = ArrayField(models.CharField(
         max_length=40), blank=True, null=True)
     # unused should be removed
     isDir = models.BooleanField(default=False)
 
-    iconValue = models.CharField(max_length=30, blank=True, null=True)
+    iconValue = models.CharField(max_length=32, blank=True, null=True)
     color = models.CharField(max_length=16, blank=True,
                              null=True, default="black")
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     description = models.CharField(
-        max_length=240, null=True, blank=True)
+        max_length=256, null=True, blank=True)
     # image = models.ImageField(null=True, blank=True, upload_to="images/")
 
     # def __str__(self):

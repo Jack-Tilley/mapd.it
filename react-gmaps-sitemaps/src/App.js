@@ -26,13 +26,14 @@ import Navbar from "./components/Navbar";
 // import Footer from "./components/pages/Footer/Footer";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(
-    "true" === localStorage.getItem("darkMode") || false
-  );
+  // const [darkMode, setDarkMode] = useState(
+  //   "true" === localStorage.getItem("darkMode") || false
+  // );
+  const [darkMode, setDarkMode] = useState(false);
   const theme = createMuiTheme({
-    palette: {
-      type: darkMode ? "dark" : "light",
-    },
+    // palette: {
+    //   type: darkMode ? "dark" : "light",
+    // },
   });
   return (
     <ThemeProvider theme={theme}>

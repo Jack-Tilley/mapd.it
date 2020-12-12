@@ -1,7 +1,4 @@
 import React, { useState, useContext } from "react";
-import HeroSection from "../../HeroSection";
-import { homeObjOne, homeObjTwo, homeObjThree, homeObjFour } from "./Data";
-import Footer from "../Footer/Footer";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -157,7 +154,7 @@ const MyAccount = () => {
                 <ListItemIcon>
                   <MailIcon style={{ color: "#f7f8fa" }} />
                 </ListItemIcon>
-                <ListItemText primary={"Map"} />
+                <ListItemText primary={"Map - Coming Soon"} />
               </ListItem>
               <ListItem
                 button
@@ -167,9 +164,9 @@ const MyAccount = () => {
                 <ListItemIcon>
                   <MailIcon style={{ color: "#f7f8fa" }} />
                 </ListItemIcon>
-                <ListItemText primary={"Insights"} />
+                <ListItemText primary={"Insights - Coming Soon"} />
               </ListItem>
-              <ListItem
+              {/* <ListItem
                 button
                 key={"logout"}
                 onClick={() => handleTabChange("logout")}
@@ -177,8 +174,8 @@ const MyAccount = () => {
                 <ListItemIcon>
                   <MailIcon style={{ color: "#f7f8fa" }} />
                 </ListItemIcon>
-                <ListItemText primary={"Logout"} />
-              </ListItem>
+                <ListItemText primary={"Logout - Coming Soon"} />
+              </ListItem> */}
             </List>
             <Divider light={true} />
           </div>
@@ -196,7 +193,7 @@ const MyAccount = () => {
               updateNodes={updateNodes}
             />
             {/* <MapPage rendered={true} teams={teams} profileId={profileId} updateNodes={updateNodes}/> */}
-            <Logout rendered={picked === "logout" ? true : false} />
+            {/* <Logout rendered={picked === "logout" ? true : false} /> */}
           </div>
         </main>
       </div>

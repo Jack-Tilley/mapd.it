@@ -82,7 +82,7 @@ const Map = ({ darkMode, setDarkMode }) => {
         onClick={() => setSelected(null)}
       >
         <div className="treeContainer">
-          <SiteTree />
+          <SiteTree className="treeContainer" />
         </div>
         <AutocompleteBox center={center} setCenter={setCenter} />
         <DrawingComponent />
