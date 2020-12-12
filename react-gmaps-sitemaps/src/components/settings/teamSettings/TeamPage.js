@@ -3,34 +3,55 @@ import TeamCreate from "./TeamCreate";
 import TeamJoin from "./TeamJoin";
 import TeamLeave from "./TeamLeave";
 import TeamViewer from "./TeamViewer";
+import { Divider } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  item: {
+    display: "inline-block",
+  },
+});
 
 const TeamPage = ({ rendered, teams, profileId, updateNodes }) => {
+  const classes = useStyles();
   const [newTeam, setNewTeam] = useState("");
   const [joinTeam, setJoinTeam] = useState("");
   const [leaveTeamId, setLeaveTeamId] = useState("");
   return rendered ? (
     <div>
-      <TeamJoin
-        teams={teams}
-        joinTeam={joinTeam}
-        setJoinTeam={setJoinTeam}
-        profileId={profileId}
-        updateNodes={updateNodes}
-      />
-      <TeamCreate
-        newTeam={newTeam}
-        setNewTeam={setNewTeam}
-        profileId={profileId}
-        updateNodes={updateNodes}
-      />
-      <TeamLeave
-        teams={teams}
-        leaveTeamId={leaveTeamId}
-        setLeaveTeamId={setLeaveTeamId}
-        profileId={profileId}
-        updateNodes={updateNodes}
-      />
-      <TeamViewer profileId={profileId} />
+      <h4>Team Settings</h4>
+      <div className={classes.item}>
+        <TeamViewer profileId={profileId} />
+      </div>
+      <Divider />
+      <div className={classes.item}>
+        <TeamJoin
+          teams={teams}
+          joinTeam={joinTeam}
+          setJoinTeam={setJoinTeam}
+          profileId={profileId}
+          updateNodes={updateNodes}
+        />
+      </div>
+      <Divider />
+      <div>
+        <TeamCreate
+          newTeam={newTeam}
+          setNewTeam={setNewTeam}
+          profileId={profileId}
+          updateNodes={updateNodes}
+        />
+      </div>
+      <Divider />
+      <div>
+        <TeamLeave
+          teams={teams}
+          leaveTeamId={leaveTeamId}
+          setLeaveTeamId={setLeaveTeamId}
+          profileId={profileId}
+          updateNodes={updateNodes}
+        />
+      </div>
     </div>
   ) : null;
 };

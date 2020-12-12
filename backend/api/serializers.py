@@ -78,6 +78,19 @@ class ProfileInfoSerializer(serializers.ModelSerializer):
         fields = ('id', 'user')
 
 
+class TeamMembersSerializer(serializers.ModelSerializer):
+    profiles = ProfileInfoSerializer(
+        many=True, read_only=True, source="profile_set")
+
+    # def get_nodevals(self, obj):
+    #     return obj.nodes.all().values()
+
+    class Meta:
+        model = Team
+        fields = ('id', 'name', 'description',
+                  'unique_key', 'profiles')
+
+
 class CommentSerializer(serializers.ModelSerializer):
     profile = ProfileInfoSerializer(many=False, read_only=True)
 

@@ -43,9 +43,9 @@ const TeamViewer = ({ profileId }) => {
           <h4>{activeTeam.name}</h4>
           <p>{activeTeam.description}</p>
           <ul style={{ overflow: "auto" }}>
-            {"members"}
+            {"members ids"}
             {activeTeam.members.map((member) => (
-              <li>
+              <li key={member.id}>
                 <p>{member.id}</p>
               </li>
             ))}

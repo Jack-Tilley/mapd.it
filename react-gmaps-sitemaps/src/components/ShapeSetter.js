@@ -44,8 +44,8 @@ const ShapeSetter = () => {
         if (node === null) {
           return null;
         }
-        console.log(<i className="material-icons icon-grey">{"refresh"}</i>);
-        console.log(<AccessAlarmIcon />);
+        // console.log(<i className="material-icons icon-grey">{"refresh"}</i>);
+        // console.log(<AccessAlarmIcon />);
         if (node.nodeType === "marker") {
           return (
             <Marker

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.views import APIView
-from .serializers import NodeSerializer, HistorySerializer, TeamSerializer, ProfileSerializer, CommentSerializer, ProfileInfoSerializer, BaseCommentSerializer, ImageSerializer, UserSerializer, TeamHistorySerializer
+from .serializers import NodeSerializer, HistorySerializer, TeamSerializer, ProfileSerializer, CommentSerializer, ProfileInfoSerializer, BaseCommentSerializer, ImageSerializer, UserSerializer, TeamHistorySerializer, TeamMembersSerializer
 from .models import Node, Team, Profile, Comment, Image
 from rest_framework import generics, permissions
 from rest_framework.response import Response
@@ -115,6 +115,8 @@ class ProfilesView(viewsets.ModelViewSet):
         teams = profile.teams.all()
         res = []
         for team in teams:
+            # print(Profile.objects.filter(
+            #     teams=team).prefetch_related('username').values())
             # profs = Profile.objects.filter(teams=team).values()
             # for prof in profs:
             #     print(ProfileSerializer(

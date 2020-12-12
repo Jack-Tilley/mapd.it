@@ -11,6 +11,7 @@ import React, { useContext, useState } from "react";
 import { MapContext } from "../../MapContext";
 import AccountPage from "../../settings/accountSettings/AccountPage";
 import TeamPage from "../../settings/teamSettings/TeamPage";
+import AccountSettings from "./AccountSettings";
 
 const drawerWidth = 240;
 
@@ -178,7 +179,7 @@ const MyAccount = () => {
         </Drawer>
         <main className={classes.content}>
           <div>
-            <AccountPage
+            <AccountSettings
               rendered={picked === "account" ? true : false}
               profileId={profileId}
             />

@@ -72,7 +72,7 @@ const LoginForm = () => {
         password: password,
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setProfileId(res.data.profile_id);
         localStorage.setItem("token", res.data.token);
         setAuth({
