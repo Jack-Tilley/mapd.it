@@ -278,7 +278,15 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleDelete} color="secondary">
+          <Button
+            style={{
+              position: "absolute",
+              // bottom: "1.5em",
+              left: "1em",
+            }}
+            onClick={handleDelete}
+            color="secondary"
+          >
             DELETE
           </Button>
           <Button onClick={handleClose} color="default">

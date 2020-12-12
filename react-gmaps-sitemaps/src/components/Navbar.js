@@ -29,7 +29,17 @@ function Navbar() {
     if (!auth.isAuthenticated) {
       return (
         <>
-          <li className="nav-btn">
+          <li className="nav-item">
+            <Link to="/sign-up" className="nav-links" onClick={closeMobileMenu}>
+              Sign Up
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/sign-in" className="nav-links" onClick={closeMobileMenu}>
+              Sign In
+            </Link>
+          </li>
+          {/* <li className="nav-btn">
             {button ? (
               <Link to="/sign-up" className="btn-link">
                 <Button buttonStyle="btn--outline">SIGN UP</Button>
@@ -62,14 +72,14 @@ function Navbar() {
                 </Button>
               </Link>
             )}
-          </li>
+          </li> */}
         </>
       );
     } else {
       // is auth
       return (
-        <li className="nav-btn">
-          {button ? (
+        <li className="nav-item">
+          {/* {button ? (
             <Link to="/account" className="btn-link">
               <Button buttonStyle="btn--outline">My Account</Button>
             </Link>
@@ -83,7 +93,10 @@ function Navbar() {
                 My Account
               </Button>
             </Link>
-          )}
+          )} */}
+          <Link to="/account" className="nav-links" onClick={closeMobileMenu}>
+            My Account
+          </Link>
         </li>
       );
     }

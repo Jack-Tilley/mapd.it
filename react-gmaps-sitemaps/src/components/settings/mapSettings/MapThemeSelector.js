@@ -18,10 +18,10 @@ const MapThemeSelector = ({ mapStyle, setMapStyle }) => {
         value={mapStyle}
         onChange={(e) => changeOptions(e.target.value)}
       >
-        <MenuItem value="">
+        <MenuItem value="bluegray">
           <em>Default</em>
         </MenuItem>
-        <MenuItem value={"bluegray"}>BlueGray</MenuItem>
+        {/* <MenuItem value={"bluegray"}>BlueGray</MenuItem> */}
         <MenuItem value={"greyscale"}>Greyscale</MenuItem>
         <MenuItem value={"unsaturated"}>Unsaturated</MenuItem>
         <MenuItem value={"paledawn"}>Paledawn</MenuItem>

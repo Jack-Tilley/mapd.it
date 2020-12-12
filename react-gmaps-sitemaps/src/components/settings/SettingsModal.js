@@ -117,7 +117,7 @@ const SettingsModal = ({
   const map = useGoogleMap();
 
   const [mapStyle, setMapStyle] = useState(
-    localStorage.getItem("mapStyle") || ""
+    localStorage.getItem("mapStyle") || "bluegray"
   );
   const [mapTypes, setMapTypes] = useState("roadmap");
 
@@ -241,11 +241,11 @@ const SettingsModal = ({
         </DialogContent>
         <DialogActions>
           <Button
-            style={{ position: "absolute", left: "2em" }}
+            style={{ position: "absolute", left: "1.5em" }}
             onClick={() => handleClose()}
             color="secondary"
           >
-            Cancel
+            Done
           </Button>
           <Button onClick={() => changePage("map")} color={mapColor}>
             Map
@@ -253,9 +253,9 @@ const SettingsModal = ({
           <Button onClick={() => changePage("team")} color={teamColor}>
             Team
           </Button>
-          <Button onClick={() => changePage("account")} color={accountColor}>
+          {/* <Button onClick={() => changePage("account")} color={accountColor}>
             Account
-          </Button>
+          </Button> */}
         </DialogActions>
       </Dialog>
     </div>

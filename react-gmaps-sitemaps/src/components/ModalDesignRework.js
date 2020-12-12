@@ -254,7 +254,15 @@ const ModalDesignRework = ({
         </Grid>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="default">
+        <Button
+          style={{
+            position: "absolute",
+            // bottom: "1.5em",
+            left: "1em",
+          }}
+          onClick={handleClose}
+          color="default"
+        >
           Cancel
         </Button>
         <Button onClick={() => handleSubmit("marker")} color="primary">

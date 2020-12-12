@@ -15,7 +15,7 @@ const MapPage = ({
   return rendered ? (
     <div>
       <MapThemeSelector mapStyle={mapStyle} setMapStyle={setMapStyle} />
-      <PaletteThemeSelector darkMode={darkMode} setDarkMode={setDarkMode} />
+      {/* <PaletteThemeSelector darkMode={darkMode} setDarkMode={setDarkMode} /> */}
       <MapTypeSelector mapTypes={mapTypes} setMapTypes={setMapTypes} />
     </div>
   ) : null;
