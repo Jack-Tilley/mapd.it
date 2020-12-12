@@ -1,14 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import { Paper } from "@material-ui/core";
+import React, { useContext, useState } from "react";
 import CheckboxTree from "react-checkbox-tree";
 import "react-checkbox-tree/lib/react-checkbox-tree.css";
 import { v4 as uuidv4 } from "uuid";
-
 // import { faHome } from "@fortawesome/free-solid-svg-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import AddNodeModal from "./AddNodeModal";
 import { MapContext } from "./MapContext";
-import { Paper } from "@material-ui/core";
 import ModalDesignRework from "./ModalDesignRework";
 
 const SiteTree = () => {
@@ -60,20 +57,14 @@ const SiteTree = () => {
     shapes,
     setShapes,
     draw,
-    setDraw,
     findNode,
-    activeNode,
     setActiveNode,
     color,
-    setColor,
     description,
-    setDescription,
-    center,
     setCenter,
     nodes,
     setNodes,
     icon,
-    setIcon,
   } = useContext(MapContext);
   const [expanded, setExpanded] = useState([]);
   const [label, setLabel] = useState("");
@@ -81,14 +72,14 @@ const SiteTree = () => {
   const [event, setEvent] = useState();
 
   const onCheck = (checked, targetNode) => {
-    console.log("checkedlist", checked);
+    // console.log("checkedlist", checked);
     setChecked(checked);
-    console.log(targetNode);
+    // console.log(targetNode);
     if (targetNode.checked === true) {
-      console.log("CHECKED");
+      // console.log("CHECKED");
       setShapes([...shapes, targetNode]);
     } else {
-      console.log("UNCHECKED");
+      // console.log("UNCHECKED");
       setShapes(shapes.filter((shape) => shape.value !== targetNode.value));
     }
   };
@@ -99,7 +90,7 @@ const SiteTree = () => {
   };
 
   const onClick = (e) => {
-    console.log(e);
+    // console.log(e);
 
     if (e.value.slice(-1) === "+" && !draw) {
       setEvent(e);
@@ -132,47 +123,14 @@ const SiteTree = () => {
       isDir: isDir,
       description: description,
     };
-    if (
-      isDir &&
-      (newNode.parent === null ||
-        newNode.parent === undefined ||
-        Object.keys(newNode.parent).length === 0)
-    ) {
-      newNode.children = [
-        {
-          value: newNode.value + "/+",
-          label: "Add a new item",
-          latLngArr: ["0", "0"],
-          nodeType: "ADD",
-          icon: <i className={`material-icons icon-${"blue"}`}>{"add"}</i>,
-          disabled: true,
-        },
-      ];
-    }
     setActiveNode(newNode);
     setLabel("");
-    if (target.parent.children !== undefined) {
-      setNodes(
-        nodes.map((item) =>
-          item.children === target.parent.children
-            ? {
-                ...item,
-                children: target.parent.children.concat(newNode),
-              }
-            : item
-        )
-      );
-    } else {
-      newNode.parent = null;
-      let newNodes = [...nodes];
-      newNodes.push(newNode);
-      setNodes(newNodes);
-    }
   };
 
   return (
     <Paper>
       <CheckboxTree
+        style={{ wordWrap: "break-word" }}
         checked={checked}
         expanded={expanded}
         iconsClass="fa5"

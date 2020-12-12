@@ -1,34 +1,13 @@
-import React, { useState, useContext, useEffect } from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-
-import { Paper } from "@material-ui/core";
-
-import InputLabel from "@material-ui/core/InputLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import Select from "@material-ui/core/Select";
-import NativeSelect from "@material-ui/core/NativeSelect";
-import MenuItem from "@material-ui/core/MenuItem";
-
+import FormHelperText from "@material-ui/core/FormHelperText";
 import IconButton from "@material-ui/core/IconButton";
-
-import InputAdornment from "@material-ui/core/InputAdornment";
-
-import Grid from "@material-ui/core/Grid";
-import Divider from "@material-ui/core/Divider";
-import Switch from "@material-ui/core/Switch";
+import TextField from "@material-ui/core/TextField";
 import axios from "axios";
+import React from "react";
 
 const TeamJoin = ({ teams, joinTeam, setJoinTeam, profileId, updateNodes }) => {
   const handleJoinTeam = () => {
-    console.log(joinTeam);
+    // console.log(joinTeam);
     const alreadyInTeam = teams.some((team) => team.unique_key === joinTeam);
     if (!alreadyInTeam && joinTeam !== "" && joinTeam.length === 5) {
       axios
@@ -36,13 +15,13 @@ const TeamJoin = ({ teams, joinTeam, setJoinTeam, profileId, updateNodes }) => {
           unique_key: joinTeam,
         })
         .then((result) => {
-          console.log("PUT RESULT for JOIN", result.data);
+          // console.log("PUT RESULT for JOIN", result.data);
           updateNodes();
           setJoinTeam("");
         })
         .catch((err) => console.log(err));
     } else {
-      console.log("ENTER A VALID TEAM NAME OR ALREADY IN TEAM");
+      // console.log("ENTER A VALID TEAM NAME OR ALREADY IN TEAM");
     }
   };
   return (

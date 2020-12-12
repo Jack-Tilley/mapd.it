@@ -1,22 +1,17 @@
-import React, { useState, useContext } from "react";
-import HeroSection from "../../HeroSection";
-import { homeObjOne, homeObjTwo, homeObjThree, homeObjFour } from "./Data";
-import Footer from "../Footer/Footer";
-
-import { makeStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
+import Drawer from "@material-ui/core/Drawer";
+import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
+import { makeStyles } from "@material-ui/core/styles";
+import Toolbar from "@material-ui/core/Toolbar";
 import MailIcon from "@material-ui/icons/Mail";
+import React, { useContext, useState } from "react";
+import { MapContext } from "../../MapContext";
 import AccountPage from "../../settings/accountSettings/AccountPage";
 import TeamPage from "../../settings/teamSettings/TeamPage";
-import { MapContext } from "../../MapContext";
+import AccountSettings from "./AccountSettings";
 
 const drawerWidth = 240;
 
@@ -156,7 +151,7 @@ const MyAccount = () => {
                 <ListItemIcon>
                   <MailIcon style={{ color: "#f7f8fa" }} />
                 </ListItemIcon>
-                <ListItemText primary={"Map"} />
+                <ListItemText primary={"Map - Coming Soon"} />
               </ListItem>
               <ListItem
                 button
@@ -166,15 +161,25 @@ const MyAccount = () => {
                 <ListItemIcon>
                   <MailIcon style={{ color: "#f7f8fa" }} />
                 </ListItemIcon>
-                <ListItemText primary={"Insights"} />
+                <ListItemText primary={"Insights - Coming Soon"} />
               </ListItem>
+              {/* <ListItem
+                button
+                key={"logout"}
+                onClick={() => handleTabChange("logout")}
+              >
+                <ListItemIcon>
+                  <MailIcon style={{ color: "#f7f8fa" }} />
+                </ListItemIcon>
+                <ListItemText primary={"Logout - Coming Soon"} />
+              </ListItem> */}
             </List>
             <Divider light={true} />
           </div>
         </Drawer>
         <main className={classes.content}>
           <div>
-            <AccountPage
+            <AccountSettings
               rendered={picked === "account" ? true : false}
               profileId={profileId}
             />
@@ -185,6 +190,7 @@ const MyAccount = () => {
               updateNodes={updateNodes}
             />
             {/* <MapPage rendered={true} teams={teams} profileId={profileId} updateNodes={updateNodes}/> */}
+            {/* <Logout rendered={picked === "logout" ? true : false} /> */}
           </div>
         </main>
       </div>

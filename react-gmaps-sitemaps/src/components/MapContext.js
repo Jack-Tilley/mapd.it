@@ -1,23 +1,22 @@
-import React, {
-  useState,
-  useCallback,
-  createContext,
-  useEffect,
-  useMemo,
-} from "react";
 import { useLoadScript } from "@react-google-maps/api";
 import axios from "axios";
-
+import React, {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import "react-checkbox-tree/lib/react-checkbox-tree.css";
 
 let addNode = {
   value: "/+",
-  label: "Add a new item",
+  // label: "Add a new item",
   parent: null,
   apiPath: "HI/there",
   latLngArr: ["0", "0"],
   nodeType: "ADD",
-  icon: <i className={`material-icons icon-${"blue"}`}>{"add"}</i>,
+  icon: <i className={`material-icons icon-${"blue"}`}>{"control_point"}</i>,
   disabled: true,
 };
 
@@ -114,7 +113,7 @@ export const MapProvider = (props) => {
   );
 
   const changeNodeIcons = (node) => {
-    console.log("NODEINPROGRESS", node);
+    // console.log("NODEINPROGRESS", node);
     let newNode = node;
     newNode.icon = (
       <i className={`material-icons icon-${node.color}`}>{node.iconValue}</i>
@@ -131,10 +130,12 @@ export const MapProvider = (props) => {
       }
       newNode.children.unshift({
         value: newNode.value + "/+",
-        label: "Add a new item",
+        // label: "Add a new item",
         latLngArr: ["0", "0"],
         nodeType: "ADD",
-        icon: <i className={`material-icons icon-${"blue"}`}>{"add"}</i>,
+        icon: (
+          <i className={`material-icons icon-${"blue"}`}>{"control_point"}</i>
+        ),
         disabled: true,
       });
     }
@@ -195,7 +196,7 @@ export const MapProvider = (props) => {
         let pteams = res.data.teams;
         let profileNodes = [];
         let profileTeams = [];
-        console.log("DATA", res.data);
+        // console.log("DATA", res.data);
         for (let team of pteams) {
           profileTeams.push({
             id: team.id,
@@ -211,17 +212,21 @@ export const MapProvider = (props) => {
         let newNodes = [...new Set(profileNodes.map(JSON.stringify))].map(
           JSON.parse
         );
-        console.log("newNodes", newNodes);
+        // console.log("newNodes", newNodes);
         changeIcons(newNodes);
         for (let i = 0; i < newNodes.length; i++) {
           if (newNodes[i].isDir) {
             newNodes[i].children.unshift({
               value: newNodes[i].value + "/+",
-              label: "Add a new item",
+              // label: "Add a new item",
               apiPath: newNodes[i].value + "/+",
               latLngArr: ["0", "0"],
               nodeType: "ADD",
-              icon: <i className={`material-icons icon-${"blue"}`}>{"add"}</i>,
+              icon: (
+                <i className={`material-icons icon-${"blue"}`}>
+                  {"control_point"}
+                </i>
+              ),
               disabled: true,
             });
           }
@@ -240,7 +245,7 @@ export const MapProvider = (props) => {
         let pteams = res.data.teams;
         let profileNodes = [];
         let profileTeams = [];
-        console.log("DATA", res.data);
+        // console.log("DATA", res.data);
         for (let team of pteams) {
           profileTeams.push({
             id: team.id,
@@ -256,23 +261,27 @@ export const MapProvider = (props) => {
         let newNodes = [...new Set(profileNodes.map(JSON.stringify))].map(
           JSON.parse
         );
-        console.log("newNodes", newNodes);
+        // console.log("newNodes", newNodes);
         changeIcons(newNodes);
         for (let i = 0; i < newNodes.length; i++) {
           if (newNodes[i].isDir) {
             newNodes[i].children.unshift({
               value: newNodes[i].value + "/+",
-              label: "Add a new item",
+              // label: "Add a new item",
               apiPath: newNodes[i].value + "/+",
               latLngArr: ["0", "0"],
               nodeType: "ADD",
-              icon: <i className={`material-icons icon-${"blue"}`}>{"add"}</i>,
+              icon: (
+                <i className={`material-icons icon-${"blue"}`}>
+                  {"control_point"}
+                </i>
+              ),
               disabled: true,
             });
           }
         }
         newNodes.unshift(addNode);
-        console.log("TEAMS", teams);
+        // console.log("TEAMS", teams);
         setNodes(newNodes);
       })
       .catch((err) => console.log(err));

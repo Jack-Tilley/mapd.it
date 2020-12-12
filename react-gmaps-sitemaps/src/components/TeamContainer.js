@@ -1,36 +1,13 @@
-import React, { useState, useContext, useEffect } from "react";
-
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControl from "@material-ui/core/FormControl";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
-import ListItemText from "@material-ui/core/ListItemText";
-import Checkbox from "@material-ui/core/Checkbox";
-import clsx from "clsx";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import FormControl from "@material-ui/core/FormControl";
+import ListItemText from "@material-ui/core/ListItemText";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import Select from "@material-ui/core/Select";
-
-import InputAdornment from "@material-ui/core/InputAdornment";
-
-import Grid from "@material-ui/core/Grid";
-import Divider from "@material-ui/core/Divider";
-
-import IconContainer from "./IconContainer";
-import ColorContainer from "./ColorContainer";
-import DirContainer from "./DirContainer";
-
-import { MapContext } from "./MapContext";
+import { makeStyles } from "@material-ui/core/styles";
+import React from "react";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -57,6 +34,7 @@ const TeamContainer = ({
   // setSelectedTeams,
   handleSelectedTeamChange,
   teamObjects,
+  teamError,
   // setTeamObjects,
 }) => {
   const classes = useStyles();
@@ -71,10 +49,14 @@ const TeamContainer = ({
   };
 
   return (
-    <FormControl required className={classes.formControl}>
-      <InputLabel id="team-mutiple-checkbox-label">Teams</InputLabel>
+    <FormControl className={classes.formControl}>
+      <InputLabel error={teamError} id="team-mutiple-checkbox-label">
+        Teams
+      </InputLabel>
       <Select
-        labelId="demo-mutiple-checkbox-label"
+        error={teamError}
+        label="Team Select"
+        // labelId="demo-mutiple-checkbox-label"
         id="team-mutiple-checkbox"
         multiple
         value={teamObjects}

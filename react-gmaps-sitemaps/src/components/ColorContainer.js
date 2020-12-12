@@ -1,20 +1,18 @@
-import React from "react";
-
+import {
+  blue,
+  green,
+  orange,
+  purple,
+  red,
+  yellow,
+} from "@material-ui/core/colors";
+import FormControl from "@material-ui/core/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormLabel from "@material-ui/core/FormLabel";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-
 import { withStyles } from "@material-ui/core/styles";
-import {
-  green,
-  blue,
-  red,
-  orange,
-  yellow,
-  purple,
-} from "@material-ui/core/colors";
+import React from "react";
 
 const GreenRadio = withStyles({
   root: {

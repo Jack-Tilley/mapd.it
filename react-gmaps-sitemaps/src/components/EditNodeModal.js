@@ -1,30 +1,17 @@
-import React, { useState, useContext, useEffect } from "react";
-
-import axios from "axios";
-
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-
-import FormControl from "@material-ui/core/FormControl";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import Select from "@material-ui/core/Select";
-
-import InputAdornment from "@material-ui/core/InputAdornment";
-
-import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
-
-import IconContainer from "./IconContainer";
+import Grid from "@material-ui/core/Grid";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import TextField from "@material-ui/core/TextField";
+import axios from "axios";
+import React, { useContext, useState } from "react";
 import ColorContainer from "./ColorContainer";
-
+import IconContainer from "./IconContainer";
 // import ImageUpload from "./ImageUpload";
-
 import { MapContext } from "./MapContext";
 
 const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
@@ -105,7 +92,24 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
     setDescription,
   } = useContext(MapContext);
 
+  const [validationMessage, setValidationMessage] = useState("");
+  const [nameError, setNameError] = useState(false);
+
+  const handleValidation = () => {
+    if (label === "") {
+      setValidationMessage("- Please give this item a name!");
+      setNameError(true);
+    } else {
+      setValidationMessage("");
+      setNameError(false);
+    }
+  };
+
   const handleSubmit = (needsLocationChange) => {
+    if (label === "") {
+      handleValidation();
+      return;
+    }
     if (needsLocationChange) {
       setEditValue(label);
       setNodeType(selected.nodeType);
@@ -186,7 +190,10 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Edit Existing Node</DialogTitle>
+        <DialogTitle id="form-dialog-title">
+          Edit Existing Node{" "}
+          <span style={{ color: "red" }}>{validationMessage}</span>
+        </DialogTitle>
         <DialogContent scroll="paper" dividers={true}>
           <Grid container spacing={1}>
             <Grid item xs={6}>
@@ -198,6 +205,7 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
                     </InputAdornment>
                   ),
                 }}
+                error={nameError}
                 autoFocus
                 value={label}
                 margin="dense"
@@ -207,6 +215,7 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
                 type="text"
                 onChange={(e) => setLabel(e.target.value)}
                 fullWidth
+                inputProps={{ maxLength: 48 }}
               />
               <TextField
                 id="multiline-flexible"
@@ -218,6 +227,7 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
                 type="text"
                 onChange={(e) => setDescription(e.target.value)}
                 fullWidth
+                inputProps={{ maxLength: 250 }}
               />
 
               <Grid container spacing={1} style={{ paddingTop: "1em" }}>
@@ -255,7 +265,15 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleDelete} color="secondary">
+          <Button
+            style={{
+              position: "absolute",
+              // bottom: "1.5em",
+              left: "1em",
+            }}
+            onClick={handleDelete}
+            color="secondary"
+          >
             DELETE
           </Button>
           <Button onClick={handleClose} color="default">

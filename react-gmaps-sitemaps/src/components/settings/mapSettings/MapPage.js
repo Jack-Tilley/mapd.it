@@ -1,6 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
+import React from "react";
 import MapThemeSelector from "./MapThemeSelector";
-import PaletteThemeSelector from "./PaletteThemeSelector";
 import MapTypeSelector from "./MapTypeSelector";
 
 const MapPage = ({
@@ -15,7 +14,7 @@ const MapPage = ({
   return rendered ? (
     <div>
       <MapThemeSelector mapStyle={mapStyle} setMapStyle={setMapStyle} />
-      <PaletteThemeSelector darkMode={darkMode} setDarkMode={setDarkMode} />
+      {/* <PaletteThemeSelector darkMode={darkMode} setDarkMode={setDarkMode} /> */}
       <MapTypeSelector mapTypes={mapTypes} setMapTypes={setMapTypes} />
     </div>
   ) : null;

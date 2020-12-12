@@ -8,13 +8,14 @@ import {
   FaYoutube,
   FaTwitter,
   FaLinkedin,
+  FaGithub,
 } from "react-icons/fa";
 import { MdTonality } from "react-icons/md";
 
 function Footer() {
   return (
     <div className="footer-container">
-      <section className="footer-subscription">
+      {/* <section className="footer-subscription">
         <p className="footer-subscription-heading">
           Join our exclusive mailing list to receive our latest updates.
         </p>
@@ -32,39 +33,58 @@ function Footer() {
             <Button buttonStyle="btn--outline">Subscribe</Button>
           </form>
         </div>
-      </section>
+      </section> */}
       <div className="footer-links">
         <div className="footer-link-wrapper">
           <div className="footer-link-items">
             <h2>About Us</h2>
-            <Link to="/sign-up">How it works</Link>
-            <Link to="/">Testimonials</Link>
-            <Link to="/">Careers</Link>
-            <Link to="/">Investors</Link>
-            <Link to="/">Terms of Service</Link>
+            <Link to="/features">About</Link>
+            <Link to="/">Creator</Link>
+            <Link to="/features">How it works</Link>
+            <Link to="/">Contact</Link>
           </div>
           <div className="footer-link-items">
             <h2>Contact Us</h2>
             <Link to="/">Contact</Link>
-            <Link to="/">Support</Link>
-            <Link to="/">Destinations</Link>
-            <Link to="/">Sponsorships</Link>
+            <Link to="/">Features</Link>
+            <Link to="/">Source</Link>
+            <Link to="/">Email</Link>
           </div>
         </div>
         <div className="footer-link-wrapper">
-          <div className="footer-link-items">
+          {/* <div className="footer-link-items">
             <h2>Videos</h2>
             <Link to="/">Submit Video</Link>
             <Link to="/">Ambassadors</Link>
             <Link to="/">Agency</Link>
             <Link to="/">Influencer</Link>
-          </div>
+          </div> */}
           <div className="footer-link-items">
-            <h2>Social Media</h2>
-            <Link to="/">Instagram</Link>
-            <Link to="/">Facebook</Link>
-            <Link to="/">Youtube</Link>
-            <Link to="/">Twitter</Link>
+            <h2>Documentation</h2>
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://github.com/Jack-Tilley/sitemaps"
+            >
+              Github
+            </a>
+            <a target="_blank" rel="noreferrer" href="https://reactjs.org/">
+              React JS
+            </a>
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://www.django-rest-framework.org/"
+            >
+              Django-rest-framework
+            </a>
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://developers.google.com/maps/documentation/javascript/overview"
+            >
+              Google Maps
+            </a>
           </div>
         </div>
       </div>
@@ -78,48 +98,38 @@ function Footer() {
           </div>
           <small className="website-rights">mapd.it © 2020</small>
           <div className="social-icons">
-            <Link
+            <a
               className="social-icon-link"
-              to="/"
               target="_blank"
-              aria-label="Facebook"
+              rel="noreferrer"
+              href="https://github.com/Jack-Tilley/sitemaps"
             >
-              <FaFacebook />
-            </Link>
-            <Link
+              <FaGithub />
+            </a>
+            <a
               className="social-icon-link"
-              to="/"
               target="_blank"
-              aria-label="Instagram"
-            >
-              <FaInstagram />
-            </Link>
-            <Link
-              className="social-icon-link"
-              to={
-                "//www.youtube.com/channel/UCsKsymTY_4BYR-wytLjex7A?view_as=subscriber"
-              }
-              target="_blank"
-              aria-label="Youtube"
-            >
-              <FaYoutube />
-            </Link>
-            <Link
-              className="social-icon-link"
-              to="/"
-              target="_blank"
-              aria-label="Twitter"
+              rel="noreferrer"
+              href="https://github.com/Jack-Tilley/sitemaps"
             >
               <FaTwitter />
-            </Link>
-            <Link
+            </a>
+            <a
               className="social-icon-link"
-              to="/"
               target="_blank"
-              aria-label="LinkedIn"
+              rel="noreferrer"
+              href="https://github.com/Jack-Tilley/sitemaps"
+            >
+              <FaYoutube />
+            </a>
+            <a
+              className="social-icon-link"
+              target="_blank"
+              rel="noreferrer"
+              href="https://github.com/Jack-Tilley/sitemaps"
             >
               <FaLinkedin />
-            </Link>
+            </a>
           </div>
         </div>
       </section>

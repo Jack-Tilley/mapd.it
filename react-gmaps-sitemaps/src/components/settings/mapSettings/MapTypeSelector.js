@@ -1,9 +1,8 @@
-import React from "react";
-
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+import FormHelperText from "@material-ui/core/FormHelperText";
 import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import React from "react";
 
 const MapTypeSelector = ({ mapTypes, setMapTypes }) => {
   const changeOptions = (value) => {

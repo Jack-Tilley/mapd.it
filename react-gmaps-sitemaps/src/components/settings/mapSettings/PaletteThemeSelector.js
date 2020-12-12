@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
-
+import FormHelperText from "@material-ui/core/FormHelperText";
 import Switch from "@material-ui/core/Switch";
+import React, { useEffect } from "react";
 
 const PaletteThemeSelector = ({ darkMode, setDarkMode }) => {
   useEffect(() => {

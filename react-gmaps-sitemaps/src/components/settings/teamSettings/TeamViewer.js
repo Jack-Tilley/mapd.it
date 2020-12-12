@@ -1,32 +1,11 @@
-import React, { useState, useContext, useEffect } from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import ListItemText from "@material-ui/core/ListItemText";
-import Checkbox from "@material-ui/core/Checkbox";
-import clsx from "clsx";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
 import FormControl from "@material-ui/core/FormControl";
-import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import ListItemText from "@material-ui/core/ListItemText";
+import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-import IconButton from "@material-ui/core/IconButton";
-
-import InputAdornment from "@material-ui/core/InputAdornment";
-
-import Grid from "@material-ui/core/Grid";
-import Divider from "@material-ui/core/Divider";
-
+import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -54,7 +33,7 @@ const TeamViewer = ({ profileId }) => {
 
   const viewTeam = (e) => {
     setActiveTeam(e.target.value);
-    console.log(activeTeam);
+    // console.log(activeTeam);
   };
 
   const renderTeam = () => {
@@ -64,9 +43,9 @@ const TeamViewer = ({ profileId }) => {
           <h4>{activeTeam.name}</h4>
           <p>{activeTeam.description}</p>
           <ul style={{ overflow: "auto" }}>
-            {"members"}
+            {"members ids"}
             {activeTeam.members.map((member) => (
-              <li>
+              <li key={member.id}>
                 <p>{member.id}</p>
               </li>
             ))}
@@ -81,7 +60,7 @@ const TeamViewer = ({ profileId }) => {
     axios
       .get(`http://localhost:8000/api/profiles/${profileId}/view_teams/`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setMyTeams(res.data);
       })
       .catch((err) => console.log(err));
@@ -109,7 +88,7 @@ const TeamViewer = ({ profileId }) => {
         <FormHelperText>View a team</FormHelperText>
       </FormControl>
       <div>
-        {console.log("activeTeam", activeTeam)}
+        {/* {console.log("activeTeam", activeTeam)} */}
         {renderTeam()}
       </div>
     </>

@@ -1,20 +1,14 @@
-import React, { useState, useContext, useRef } from "react";
-import { MapContext } from "./MapContext";
-import { GoogleMap, InfoWindow, useGoogleMap } from "@react-google-maps/api";
-import DrawingComponent from "./DrawingComponent";
-import ShapeSetter from "./ShapeSetter";
+import { GoogleMap } from "@react-google-maps/api";
+import React, { useContext, useState } from "react";
 import AutocompleteBox from "./AutocompleteBox";
-import Directions from "./Directions";
-import InfoContainer from "./InfoContainer";
-import SettingsModal from "./settings/SettingsModal";
+import DrawingComponent from "./DrawingComponent";
 import HistoryDrawer from "./HistoryDrawer";
-import DistanceFinder from "./mapTools/DistanceFinder";
-import PanTool from "./mapTools/PanTool";
-import RefreshButton from "./mapTools/RefreshButton";
+import InfoContainer from "./InfoContainer";
+import { MapContext } from "./MapContext";
 import ToolContainer from "./mapTools/ToolContainer";
+import SettingsModal from "./settings/SettingsModal";
+import ShapeSetter from "./ShapeSetter";
 import SiteTree from "./SiteTree";
-
-import { Paper } from "@material-ui/core";
 
 const Map = ({ darkMode, setDarkMode }) => {
   // const [
@@ -38,15 +32,9 @@ const Map = ({ darkMode, setDarkMode }) => {
   //   selected,
   //   setSelected,
   // ] = useContext(MapContext);
-  const {
-    center,
-    setCenter,
-    myMap,
-    setMyMap,
-    selected,
-    setSelected,
-    isLoaded,
-  } = useContext(MapContext);
+  const { center, setCenter, setMyMap, setSelected, isLoaded } = useContext(
+    MapContext
+  );
   // const [center, setCenter] = values.center;
   // const [myMap, setMyMap] = values.myMap;
   // const [selected, setSelected] = values.myMap;
@@ -61,10 +49,19 @@ const Map = ({ darkMode, setDarkMode }) => {
 
   const renderMap = () => (
     <>
+      {/* 80 px is our view height of the navbar */}
       <GoogleMap
         mapContainerStyle={{
+          // paddingTop: "80px",
+          // overflow: "hidden",
           width: "100%",
-          height: "90vh",
+          height: "calc(100vh - 80px)",
+          maxHeight: "calc(100vh - 80px)",
+          position: "absolute",
+          bottom: 0,
+          margin: 0,
+          // display: "flex",
+          // bottom: 0,
         }}
         zoom={10}
         center={center}
@@ -74,7 +71,7 @@ const Map = ({ darkMode, setDarkMode }) => {
         onClick={() => setSelected(null)}
       >
         <div className="treeContainer">
-          <SiteTree />
+          <SiteTree className="treeContainer" />
         </div>
         <AutocompleteBox center={center} setCenter={setCenter} />
         <DrawingComponent />

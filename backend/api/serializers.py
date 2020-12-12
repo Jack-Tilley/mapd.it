@@ -28,6 +28,17 @@ class HistorySerializer(serializers.ModelSerializer):
         model = Node
         fields = ['history']
 
+
+class TeamHistorySerializer(serializers.ModelSerializer):
+    history = serializers.SerializerMethodField()
+
+    def get_history(self, obj):
+        return obj.history.all().values()
+
+    class Meta:
+        model = Team
+        fields = ['history']
+
 # User Serializer
 
 
@@ -65,6 +76,19 @@ class ProfileInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ('id', 'user')
+
+
+class TeamMembersSerializer(serializers.ModelSerializer):
+    profiles = ProfileInfoSerializer(
+        many=True, read_only=True, source="profile_set")
+
+    # def get_nodevals(self, obj):
+    #     return obj.nodes.all().values()
+
+    class Meta:
+        model = Team
+        fields = ('id', 'name', 'description',
+                  'unique_key', 'profiles')
 
 
 class CommentSerializer(serializers.ModelSerializer):

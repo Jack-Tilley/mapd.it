@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import { DirectionsRenderer, DirectionsService } from "@react-google-maps/api";
+import React, { useState } from "react";
 const Directions = () => {
   const [response, setResponse] = useState(null);
 
@@ -10,7 +10,7 @@ const Directions = () => {
       if (response.status === "OK") {
         setResponse(response);
       } else {
-        console.log("response: ", response);
+        // console.log("response: ", response);
       }
     }
   };

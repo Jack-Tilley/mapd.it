@@ -1,15 +1,12 @@
-import React, { useState, useContext } from "react";
-
-import IconButton from "@material-ui/core/IconButton";
-import { MapContext } from "../MapContext";
-
 import { Paper } from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
 import {
-  Polyline,
   Marker,
   OverlayView,
+  Polyline,
   useGoogleMap,
 } from "@react-google-maps/api";
+import React, { useState } from "react";
 
 const getDistance = (lat1, lon1, lat2, lon2) => {
   var R = 6371; // Radius of the earth in km

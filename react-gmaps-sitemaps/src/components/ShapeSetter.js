@@ -1,7 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
+import { Marker, Polyline } from "@react-google-maps/api";
+import React, { useContext } from "react";
 import { MapContext } from "./MapContext";
-
-import { Marker, Polyline, InfoWindow } from "@react-google-maps/api";
+import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
 
 const ShapeSetter = () => {
   // const [
@@ -44,6 +44,8 @@ const ShapeSetter = () => {
         if (node === null) {
           return null;
         }
+        // console.log(<i className="material-icons icon-grey">{"refresh"}</i>);
+        // console.log(<AccessAlarmIcon />);
         if (node.nodeType === "marker") {
           return (
             <Marker
@@ -119,10 +121,6 @@ const ShapeSetter = () => {
 };
 export default ShapeSetter;
 
-{
-  /* {console.log("YY", findNode("yy").latLngArr[0].substring(1, 17))}
-      {console.log("YY", findNode("yy").latLngArr[0].substring(20, 37))} */
-}
 // let mi = new window.google.maps.MarkerImage(
 //   "/newIcons/" + node.iconValue + ".svg",
 //   null,

@@ -1,8 +1,6 @@
-import React, { useState, useContext } from "react";
+import { Paper } from "@material-ui/core";
 import { Autocomplete } from "@react-google-maps/api";
-import { Paper, requirePropFactory } from "@material-ui/core";
-import { Input } from "@material-ui/core";
-import { MapContext } from "./MapContext";
+import React, { useState } from "react";
 
 // pac-container {
 //   background-color: blue !important;

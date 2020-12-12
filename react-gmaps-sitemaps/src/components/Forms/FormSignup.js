@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Form.css";
 import useForm from "./useForm";
 import { validateSignup } from "./validateInfo";
-import "./Form.css";
 
 const FormSignup = ({ submitForm }) => {
   const { handleChange, values, handleSubmit, errors } = useForm(

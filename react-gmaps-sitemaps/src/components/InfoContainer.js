@@ -1,13 +1,12 @@
-import React, { useContext, useState, useEffect } from "react";
-import { MapContext } from "./MapContext";
-import { InfoWindow, OverlayView } from "@react-google-maps/api";
-import EditNodeModal from "./EditNodeModal";
-import CommentModal from "./CommentModal";
-import ImageModal from "./ImageModal";
-import { makeStyles } from "@material-ui/core/styles";
-import { Paper } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
+import { makeStyles } from "@material-ui/core/styles";
+import { InfoWindow } from "@react-google-maps/api";
 import axios from "axios";
+import React, { useContext, useState } from "react";
+import CommentModal from "./CommentModal";
+import EditNodeModal from "./EditNodeModal";
+import ImageModal from "./ImageModal";
+import { MapContext } from "./MapContext";
 
 const useStyles = makeStyles({
   root: {
