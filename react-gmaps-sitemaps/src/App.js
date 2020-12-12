@@ -9,6 +9,7 @@ import { MapProvider } from "./components/MapContext";
 import Navbar from "./components/Navbar";
 import Features from "./components/pages/Features/Features";
 import Home from "./components/pages/HomePage/Home";
+import NotFound from "./components/pages/NotFound/NotFound";
 import MyAccount from "./components/pages/MyAccount/MyAccount";
 import Services from "./components/pages/Services/Services";
 import SignIn from "./components/pages/SignIn/SignIn";
@@ -53,6 +54,7 @@ function App() {
               <Route path="/features" component={Features} />
               <Route path="/sign-up" component={SignUp} />
               <Route path="/sign-in" component={SignIn} />
+              <Route path="*" component={NotFound} />
             </Switch>
           </Router>
         </MapProvider>

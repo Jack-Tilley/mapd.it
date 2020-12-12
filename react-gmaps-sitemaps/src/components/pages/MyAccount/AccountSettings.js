@@ -30,7 +30,7 @@ const AccountSettings = ({ rendered, profileId }) => {
   }, [profileId]);
   return rendered ? (
     <div>
-      <h4>My Account</h4>
+      <h4>My Account - In Progress</h4>
       <div className={classes.intro}>
         <h3>Signed in as {username}</h3>
       </div>
