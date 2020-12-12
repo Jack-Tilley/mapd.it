@@ -113,7 +113,7 @@ export const MapProvider = (props) => {
   );
 
   const changeNodeIcons = (node) => {
-    console.log("NODEINPROGRESS", node);
+    // console.log("NODEINPROGRESS", node);
     let newNode = node;
     newNode.icon = (
       <i className={`material-icons icon-${node.color}`}>{node.iconValue}</i>
@@ -196,7 +196,7 @@ export const MapProvider = (props) => {
         let pteams = res.data.teams;
         let profileNodes = [];
         let profileTeams = [];
-        console.log("DATA", res.data);
+        // console.log("DATA", res.data);
         for (let team of pteams) {
           profileTeams.push({
             id: team.id,
@@ -212,7 +212,7 @@ export const MapProvider = (props) => {
         let newNodes = [...new Set(profileNodes.map(JSON.stringify))].map(
           JSON.parse
         );
-        console.log("newNodes", newNodes);
+        // console.log("newNodes", newNodes);
         changeIcons(newNodes);
         for (let i = 0; i < newNodes.length; i++) {
           if (newNodes[i].isDir) {
@@ -245,7 +245,7 @@ export const MapProvider = (props) => {
         let pteams = res.data.teams;
         let profileNodes = [];
         let profileTeams = [];
-        console.log("DATA", res.data);
+        // console.log("DATA", res.data);
         for (let team of pteams) {
           profileTeams.push({
             id: team.id,
@@ -261,7 +261,7 @@ export const MapProvider = (props) => {
         let newNodes = [...new Set(profileNodes.map(JSON.stringify))].map(
           JSON.parse
         );
-        console.log("newNodes", newNodes);
+        // console.log("newNodes", newNodes);
         changeIcons(newNodes);
         for (let i = 0; i < newNodes.length; i++) {
           if (newNodes[i].isDir) {
@@ -281,7 +281,7 @@ export const MapProvider = (props) => {
           }
         }
         newNodes.unshift(addNode);
-        console.log("TEAMS", teams);
+        // console.log("TEAMS", teams);
         setNodes(newNodes);
       })
       .catch((err) => console.log(err));

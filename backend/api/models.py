@@ -47,7 +47,7 @@ class Team(models.Model):
                                   unique=True, blank=True, null=True, validators=[MinLengthValidator(5)])
 
     def save(self, *args, **kwargs):
-        print(self.unique_key)
+        # print(self.unique_key)
         if not self.unique_key:
             # Generate ID once, then check the db. If exists, keep trying.
             self.unique_key = generate_key(5)

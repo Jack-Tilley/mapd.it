@@ -94,7 +94,7 @@ const SettingsModal = ({
   const [mapTypes, setMapTypes] = useState("roadmap");
 
   useEffect(() => {
-    console.log("map or mapStyle has updated");
+    // console.log("map or mapStyle has updated");
     if (mapStyle === "bluegray") {
       map.setOptions({ styles: bluegray });
     } else if (mapStyle === "greyscale") {

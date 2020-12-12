@@ -52,7 +52,7 @@ class TeamsView(viewsets.ModelViewSet):
         Returns a list of all the nodes that the given
         team owns.
         """
-        print(request.data)
+        # print(request.data)
         team = self.get_object()
         nodes = team.nodes.all()
         return Response(nodes.values())
@@ -63,7 +63,7 @@ class TeamsView(viewsets.ModelViewSet):
         Updates the list of all the nodes that the given
         team owns.
         """
-        print(request.data)
+        # print(request.data)
         node = Node.objects.get(id=request.data['id'])
         team = self.get_object()
         team.nodes.add(node)
@@ -82,7 +82,7 @@ class ProfilesView(viewsets.ModelViewSet):
         """
         joins a team that the given profile requests
         """
-        print(request.data)
+        # print(request.data)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         team = Team.objects.get(unique_key=request.data['unique_key'])
@@ -97,7 +97,7 @@ class ProfilesView(viewsets.ModelViewSet):
         """
         leaves a team that the given profile is subscribed to
         """
-        print(request.data)
+        # print(request.data)
         team = Team.objects.get(id=request.data['id'])
         profile = self.get_object()
         profile.teams.remove(team)
@@ -110,7 +110,7 @@ class ProfilesView(viewsets.ModelViewSet):
         """
         views the teams the given user is subscribed to
         """
-        print(request.data)
+        # print(request.data)
         profile = self.get_object()
         teams = profile.teams.all()
         res = []
@@ -122,7 +122,7 @@ class ProfilesView(viewsets.ModelViewSet):
             data = {"id": team.id, "name": team.name, "description": team.description, "unique_key": team.unique_key, "members": list(
                 Profile.objects.filter(teams=team).values())}
             res.append(data)
-        print(res)
+        # print(res)
         return Response(res)
 
 

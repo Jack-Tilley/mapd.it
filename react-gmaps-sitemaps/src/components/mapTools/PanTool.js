@@ -1,9 +1,6 @@
-import React, { useState, useContext } from "react";
-
-import IconButton from "@material-ui/core/IconButton";
-import { MapContext } from "../MapContext";
-
 import { Paper } from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
+import React from "react";
 
 export default function PanTool({
   distanceToolRendered,

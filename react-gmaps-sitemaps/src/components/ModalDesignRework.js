@@ -129,7 +129,7 @@ const ModalDesignRework = ({
       setTeamError(false);
     } else {
       handleValidation();
-      console.log("SELECT A TEAM FIRST");
+      // console.log("SELECT A TEAM FIRST");
     }
   };
 
@@ -146,7 +146,7 @@ const ModalDesignRework = ({
   };
 
   const handleDirChange = (e) => {
-    console.log("event", e.target.value);
+    // console.log("event", e.target.value);
     setIsDir(e.target.value);
   };
 

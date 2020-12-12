@@ -32,15 +32,9 @@ const Map = ({ darkMode, setDarkMode }) => {
   //   selected,
   //   setSelected,
   // ] = useContext(MapContext);
-  const {
-    center,
-    setCenter,
-    myMap,
-    setMyMap,
-    selected,
-    setSelected,
-    isLoaded,
-  } = useContext(MapContext);
+  const { center, setCenter, setMyMap, setSelected, isLoaded } = useContext(
+    MapContext
+  );
   // const [center, setCenter] = values.center;
   // const [myMap, setMyMap] = values.myMap;
   // const [selected, setSelected] = values.myMap;

@@ -7,7 +7,7 @@ import React from "react";
 
 const TeamCreate = ({ newTeam, setNewTeam, profileId, updateNodes }) => {
   const handleCreateTeam = () => {
-    console.log(newTeam);
+    // console.log(newTeam);
     if (newTeam !== "") {
       axios
         .post("http://localhost:8000/api/teams/", {
@@ -15,7 +15,7 @@ const TeamCreate = ({ newTeam, setNewTeam, profileId, updateNodes }) => {
           description: "",
         })
         .then((res) => {
-          console.log("NEWTEAM", res.data);
+          // console.log("NEWTEAM", res.data);
           if (res.data.name === newTeam) {
             axios
               .put(
@@ -23,7 +23,7 @@ const TeamCreate = ({ newTeam, setNewTeam, profileId, updateNodes }) => {
                 res.data
               )
               .then((result) => {
-                console.log("PUT RESULT", result.data);
+                // console.log("PUT RESULT", result.data);
                 updateNodes();
                 setNewTeam("");
               })
@@ -32,7 +32,7 @@ const TeamCreate = ({ newTeam, setNewTeam, profileId, updateNodes }) => {
         })
         .catch((err) => console.log(err));
     } else {
-      console.log("ENTER A VALID TEAM NAME");
+      // console.log("ENTER A VALID TEAM NAME");
     }
   };
   return (

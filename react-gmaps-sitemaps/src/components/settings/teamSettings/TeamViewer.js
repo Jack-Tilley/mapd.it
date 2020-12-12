@@ -33,7 +33,7 @@ const TeamViewer = ({ profileId }) => {
 
   const viewTeam = (e) => {
     setActiveTeam(e.target.value);
-    console.log(activeTeam);
+    // console.log(activeTeam);
   };
 
   const renderTeam = () => {
@@ -60,7 +60,7 @@ const TeamViewer = ({ profileId }) => {
     axios
       .get(`http://localhost:8000/api/profiles/${profileId}/view_teams/`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setMyTeams(res.data);
       })
       .catch((err) => console.log(err));
@@ -88,7 +88,7 @@ const TeamViewer = ({ profileId }) => {
         <FormHelperText>View a team</FormHelperText>
       </FormControl>
       <div>
-        {console.log("activeTeam", activeTeam)}
+        {/* {console.log("activeTeam", activeTeam)} */}
         {renderTeam()}
       </div>
     </>

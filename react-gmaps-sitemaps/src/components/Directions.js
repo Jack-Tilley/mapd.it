@@ -10,7 +10,7 @@ const Directions = () => {
       if (response.status === "OK") {
         setResponse(response);
       } else {
-        console.log("response: ", response);
+        // console.log("response: ", response);
       }
     }
   };

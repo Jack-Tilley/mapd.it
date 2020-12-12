@@ -1,10 +1,9 @@
-import React, { useState, useContext } from "react";
+import axios from "axios";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../AuthContext";
+import { MapContext } from "../MapContext";
 import FormLogin from "./FormLogin";
 import FormSuccess from "./FormSuccess";
-import axios from "axios";
-import { MapContext } from "../MapContext";
-import { AuthContext } from "../AuthContext";
-import { Redirect } from "react-router-dom";
 
 const LoginForm = () => {
   // const [

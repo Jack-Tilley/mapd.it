@@ -23,7 +23,7 @@ function Navbar() {
   };
 
   const handleUserIsSignedIn = () => {
-    console.log("auth", auth);
+    // console.log("auth", auth);
     // not auth
     if (!auth.isAuthenticated) {
       return (

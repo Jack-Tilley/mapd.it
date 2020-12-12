@@ -67,7 +67,6 @@ const DrawingComponent = () => {
     setNodes,
     editing,
     setEditing,
-    removeNode,
     activeNode,
     setActiveNode,
     draw,
@@ -123,7 +122,7 @@ const DrawingComponent = () => {
       path.push(roughPath[i].slice(1), roughPath[i + 1].slice(0, -1));
     }
     handleActiveNodeChange(path, "polyline", polyline, icon);
-    console.log(polyline);
+    // console.log(polyline);
 
     polyline.setMap(null); // makes polyline invisible
     setDraw(false); // we do this instead of !draw because we want drawing component to leave when a new one is added
@@ -137,19 +136,19 @@ const DrawingComponent = () => {
       marker.title = activeNode.label;
       marker.label = activeNode.label;
     }
-    console.log("marker");
+    // console.log("marker");
     marker.icon = <i className={`material-icons icon-${color}`}>{icon}</i>;
-    console.log("marker", marker);
+    // console.log("marker", marker);
     // marker.icon = icon // need to figure out how to get custom icon
     let position = [marker.position.lat(), marker.position.lng()];
-    console.log("POSITION", position);
+    // console.log("POSITION", position);
     handleActiveNodeChange(position, "marker", marker, icon);
     setDraw(false); // we do this instead of !draw because we want drawing component to leave when a new one is added
   };
 
   const onOverlayComplete = (e) => {
     // add overlay to nodes
-    console.log("Drawing component unmounted");
+    // console.log("Drawing component unmounted");
   };
 
   const handleActiveNodeChange = (position, nodeType, nodeReference, icon) => {
@@ -167,12 +166,12 @@ const DrawingComponent = () => {
           description: description,
         })
         .then((res) => {
-          console.log("result", res.data);
+          // console.log("result", res.data);
           // REPLACE NODE IN HERE WITH THE RESULT
           setEditing(false);
-          console.log("parent", res.data.parent);
+          // console.log("parent", res.data.parent);
           if (res.data.parent === null) {
-            console.log("THIS IS A LONE NODE");
+            // console.log("THIS IS A LONE NODE");
             let newNodes = replaceNode(selected.id, res.data);
             setNodes(newNodes);
           } else {
@@ -184,7 +183,7 @@ const DrawingComponent = () => {
               })
               .catch((err) => console.log(err));
           }
-          console.log("SELECTEDVALUE", selected.value);
+          // console.log("SELECTEDVALUE", selected.value);
           // cleanup
           editCleanup(res.data);
         })
@@ -209,7 +208,7 @@ const DrawingComponent = () => {
           description: description,
         })
         .then((res) => {
-          console.log("selected teams", selectedTeams);
+          // console.log("selected teams", selectedTeams);
           if (res.data.parent === null) {
             for (let teamId of selectedTeams) {
               axios
@@ -220,13 +219,13 @@ const DrawingComponent = () => {
                   }
                 )
                 .then((result) => {
-                  console.log(result.data);
+                  // console.log(result.data);
                 })
                 .catch((err) => console.log(err));
             }
           }
 
-          console.log("NEW NODE ADDED", res.data);
+          // console.log("NEW NODE ADDED", res.data);
           newActiveNode.id = res.data.id;
           updateNodes();
           setActiveNode(newActiveNode);

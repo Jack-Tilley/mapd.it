@@ -72,14 +72,14 @@ const SiteTree = () => {
   const [event, setEvent] = useState();
 
   const onCheck = (checked, targetNode) => {
-    console.log("checkedlist", checked);
+    // console.log("checkedlist", checked);
     setChecked(checked);
-    console.log(targetNode);
+    // console.log(targetNode);
     if (targetNode.checked === true) {
-      console.log("CHECKED");
+      // console.log("CHECKED");
       setShapes([...shapes, targetNode]);
     } else {
-      console.log("UNCHECKED");
+      // console.log("UNCHECKED");
       setShapes(shapes.filter((shape) => shape.value !== targetNode.value));
     }
   };
@@ -90,7 +90,7 @@ const SiteTree = () => {
   };
 
   const onClick = (e) => {
-    console.log(e);
+    // console.log(e);
 
     if (e.value.slice(-1) === "+" && !draw) {
       setEvent(e);

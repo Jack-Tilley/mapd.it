@@ -78,14 +78,14 @@ const CommentModal = ({ commentOpen, setCommentOpen }) => {
     axios
       .get(`http://localhost:8000/api/allNodes/${selected.id}/comments/`)
       .then((res) => {
-        console.log("comments", res.data);
+        // console.log("comments", res.data);
         setComments(res.data);
       })
       .catch((err) => console.log(err));
   }, [selected.id]);
 
   const handleSubmit = () => {
-    console.log("prof", profileId);
+    // console.log("prof", profileId);
     axios
       .post(`http://localhost:8000/api/basecomments/`, {
         node: selected.id,
@@ -93,25 +93,25 @@ const CommentModal = ({ commentOpen, setCommentOpen }) => {
         profile: profileId,
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setValue("");
         axios
           .get(`http://localhost:8000/api/allNodes/${selected.id}/comments/`)
           .then((result) => {
-            console.log("comments", result.data);
+            // console.log("comments", result.data);
             setComments(result.data);
           })
           .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
-    console.log("submit clicked");
+    // console.log("submit clicked");
     scrollToBottom();
   };
   const handleRefresh = () => {
     axios
       .get(`http://localhost:8000/api/allNodes/${selected.id}/comments/`)
       .then((result) => {
-        console.log("comments", result.data);
+        // console.log("comments", result.data);
         setComments(result.data);
       })
       .catch((err) => console.log(err));

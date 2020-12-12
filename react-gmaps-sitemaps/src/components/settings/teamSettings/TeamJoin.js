@@ -7,7 +7,7 @@ import React from "react";
 
 const TeamJoin = ({ teams, joinTeam, setJoinTeam, profileId, updateNodes }) => {
   const handleJoinTeam = () => {
-    console.log(joinTeam);
+    // console.log(joinTeam);
     const alreadyInTeam = teams.some((team) => team.unique_key === joinTeam);
     if (!alreadyInTeam && joinTeam !== "" && joinTeam.length === 5) {
       axios
@@ -15,13 +15,13 @@ const TeamJoin = ({ teams, joinTeam, setJoinTeam, profileId, updateNodes }) => {
           unique_key: joinTeam,
         })
         .then((result) => {
-          console.log("PUT RESULT for JOIN", result.data);
+          // console.log("PUT RESULT for JOIN", result.data);
           updateNodes();
           setJoinTeam("");
         })
         .catch((err) => console.log(err));
     } else {
-      console.log("ENTER A VALID TEAM NAME OR ALREADY IN TEAM");
+      // console.log("ENTER A VALID TEAM NAME OR ALREADY IN TEAM");
     }
   };
   return (
