@@ -129,6 +129,7 @@ const SiteTree = () => {
 
   return (
     <Paper>
+      {console.log("SiteTree updated")}
       <CheckboxTree
         style={{ wordWrap: "break-word" }}
         checked={checked}

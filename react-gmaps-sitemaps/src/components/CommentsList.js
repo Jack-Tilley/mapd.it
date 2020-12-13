@@ -6,12 +6,8 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import { formatTime } from "../utils/utils";
 import React from "react";
-
-const formatTime = (datetime) => {
-  const time = new Date(datetime);
-  return time.getUTCHours() + ":" + ("0" + time.getUTCMinutes()).slice(-2);
-};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 const CommentsList = ({ comments, bottomRef, scrollToBottom }) => {
   const classes = useStyles();
 
-  return (
+  return comments.length > 0 ? (
     <List className={classes.root}>
       {comments.map((comment) => (
         <>
@@ -46,15 +42,17 @@ const CommentsList = ({ comments, bottomRef, scrollToBottom }) => {
                   >
                     {comment.profile.user.username}
                   </Typography>
-                  {"   - " + formatTime(comment.created) + " UTC"}
+                  {"   - " + formatTime(comment.created)}
                 </>
               }
             />
           </ListItem>
-          <Divider />
+          <Divider key={comment.created + "divider"} />
         </>
       ))}
     </List>
+  ) : (
+    <div>No comments posted yet... Be the first!</div>
   );
 };
 export default CommentsList;

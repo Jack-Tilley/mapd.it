@@ -102,7 +102,7 @@ class CommentSerializer(serializers.ModelSerializer):
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
-        fields = ('id', 'image', 'description', 'node')
+        fields = ('id', 'image', 'title', 'description', 'node', 'created')
 
 
 class BaseCommentSerializer(serializers.ModelSerializer):

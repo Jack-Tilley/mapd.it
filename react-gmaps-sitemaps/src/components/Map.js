@@ -50,6 +50,7 @@ const Map = ({ darkMode, setDarkMode }) => {
   const renderMap = () => (
     <>
       {/* 80 px is our view height of the navbar */}
+      {console.log("Map updated")}
       <GoogleMap
         mapContainerStyle={{
           // paddingTop: "80px",
