@@ -1,7 +1,7 @@
 import { Marker, Polyline } from "@react-google-maps/api";
 import React, { useContext } from "react";
 import { MapContext } from "./MapContext";
-import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
+import { findNode } from "../utils/contextUtils";
 
 const ShapeSetter = () => {
   // const [
@@ -28,7 +28,7 @@ const ShapeSetter = () => {
   //   setColor,
   //   findNode,
   // ] = useContext(MapContext);
-  const { shapes, setSelected, findNode } = useContext(MapContext);
+  const { shapes, nodes, setSelected } = useContext(MapContext);
 
   // useEffect(() => {
   //   console.log("shapes", shapes);
@@ -38,7 +38,7 @@ const ShapeSetter = () => {
     <>
       {shapes.map((shape) => {
         // TODO !!!this is crazy inefficient: O(n^2), n = total nodes!!!
-        let node = findNode(shape.value);
+        let node = findNode(shape.value, nodes);
         // console.log("NODE", node);
         // if a node has been deleted or is missing
         if (node === null) {

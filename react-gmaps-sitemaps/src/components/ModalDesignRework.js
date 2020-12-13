@@ -85,7 +85,6 @@ const ModalDesignRework = ({
     description,
     setDescription,
     teams,
-    selectedTeams,
     setSelectedTeams,
   } = useContext(MapContext);
 

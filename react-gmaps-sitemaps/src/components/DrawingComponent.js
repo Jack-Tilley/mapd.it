@@ -4,6 +4,7 @@ import { DrawingManager } from "@react-google-maps/api";
 import axios from "axios";
 import React, { useContext } from "react";
 import { MapContext } from "./MapContext";
+import { updateNodes, editCleanup, replaceNode } from "../utils/contextUtils";
 
 const DrawingComponent = () => {
   // const [
@@ -75,16 +76,18 @@ const DrawingComponent = () => {
     setNodeType,
     description,
     setDescription,
-    replaceNode,
     selected,
-    editCleanup,
     checked,
     setChecked,
     shapes,
     setShapes,
     selectedTeams,
     setSelectedTeams,
-    updateNodes,
+    profileId,
+    setTeams,
+    setSelected,
+    nodes,
+    // updateNodes,
   } = useContext(MapContext);
 
   const options = {
@@ -151,7 +154,12 @@ const DrawingComponent = () => {
     // console.log("Drawing component unmounted");
   };
 
-  const handleActiveNodeChange = (position, nodeType, nodeReference, icon) => {
+  const handleActiveNodeChange = async (
+    position,
+    nodeType,
+    nodeReference,
+    icon
+  ) => {
     nodeReference.visible = false;
     if (editing) {
       if (editValue === "") {
@@ -172,7 +180,7 @@ const DrawingComponent = () => {
           // console.log("parent", res.data.parent);
           if (res.data.parent === null) {
             // console.log("THIS IS A LONE NODE");
-            let newNodes = replaceNode(selected.id, res.data);
+            let newNodes = replaceNode(selected.id, res.data, nodes);
             setNodes(newNodes);
           } else {
             axios
@@ -185,7 +193,19 @@ const DrawingComponent = () => {
           }
           // console.log("SELECTEDVALUE", selected.value);
           // cleanup
-          editCleanup(res.data);
+          editCleanup(
+            res.data,
+            checked,
+            shapes,
+            selected,
+            setChecked,
+            setShapes,
+            setSelected,
+            setIcon,
+            setNodeType,
+            setDescription,
+            setEditValue
+          );
         })
         .catch((err) => {
           console.log(err);
@@ -227,7 +247,8 @@ const DrawingComponent = () => {
 
           // console.log("NEW NODE ADDED", res.data);
           newActiveNode.id = res.data.id;
-          updateNodes();
+          let ret = updateNodes(profileId, setNodes, setTeams);
+          console.log("return value", ret);
           setActiveNode(newActiveNode);
           setSelectedTeams();
           setChecked([...checked, newActiveNode.value]);
