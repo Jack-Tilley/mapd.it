@@ -115,6 +115,7 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
             setSelected,
             setIcon,
             setNodeType,
+            setColor,
             setDescription,
             setEditValue
           );

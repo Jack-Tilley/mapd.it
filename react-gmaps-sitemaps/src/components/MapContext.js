@@ -187,20 +187,38 @@ const AddEditStore = () => {
   const [description, setDescription] = useState("");
   const [icon, setIcon] = useState("search");
 
-  return {
-    color,
-    setColor,
-    nodeType,
-    setNodeType,
-    editing,
-    setEditing,
-    editValue,
-    setEditValue,
-    description,
-    setDescription,
-    icon,
-    setIcon,
-  };
+  const providerValue = useMemo(
+    () => ({
+      color,
+      setColor,
+      nodeType,
+      setNodeType,
+      editing,
+      setEditing,
+      editValue,
+      setEditValue,
+      description,
+      setDescription,
+      icon,
+      setIcon,
+    }),
+    [
+      color,
+      setColor,
+      nodeType,
+      setNodeType,
+      editing,
+      setEditing,
+      editValue,
+      setEditValue,
+      description,
+      setDescription,
+      icon,
+      setIcon,
+    ]
+  );
+
+  return providerValue;
 };
 
 const TeamStore = () => {
