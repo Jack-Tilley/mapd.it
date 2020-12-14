@@ -1,4 +1,4 @@
-export const homeObjOne = {
+export const homeObjTwo = {
   lightBg: true,
   lightText: false,
   lightTextDesc: false,
@@ -13,7 +13,7 @@ export const homeObjOne = {
   buttonLink: "/sign-up",
 };
 
-export const homeObjTwo = {
+export const homeObjOne = {
   lightBg: false,
   lightText: true,
   lightTextDesc: true,
@@ -32,11 +32,11 @@ export const homeObjThree = {
   lightBg: true,
   lightText: false,
   lightTextDesc: false,
-  topLine: "EASY SETUP",
-  headline: "Super fast and simple onboarding process",
+  topLine: "Communicate Quicker",
+  headline: "Communicate any updates or issues instantly ",
   description:
-    "Get everything set up and ready in under 10 minutes. All you need to do is add your information and you're ready to go.",
-  buttonLabel: "Start Now",
+    "Chat about the updates or issues your team is currently facing in order to fix them as soon as possible.",
+  buttonLabel: "Try it now",
   imgStart: "start",
   img: "images/svg-7.svg",
   alt: "Vault",
@@ -47,11 +47,25 @@ export const homeObjFour = {
   lightBg: false,
   lightText: true,
   lightTextDesc: true,
-  topLine: "DATA ANALYTICS",
-  headline: "Every transaction is stored on our secure cloud database",
+  topLine: "Photo Evidence",
+  headline: "See every piece of your jobsite from start to finish",
   description:
-    "Never ever have to worry again about saved reciepts. We store your data, so you can access it anytime.",
-  buttonLabel: "Sign Up Now",
+    "Uploading photos of your jobsite lets your team see the progress you're making day by day",
+  buttonLabel: "Try it Now",
+  imgStart: "start",
+  img: "images/svg-8.svg",
+  alt: "Vault",
+  buttonLink: "/sign-up",
+};
+export const homeObjFive = {
+  lightBg: false,
+  lightText: true,
+  lightTextDesc: true,
+  topLine: "Be Everywhere",
+  headline: "Travel anywhere in the world whenever you feel like it",
+  description:
+    "Be wherever your jobs are and see the progress your team is making in real time. ",
+  buttonLabel: "Try it Now",
   imgStart: "start",
   img: "images/svg-8.svg",
   alt: "Vault",

@@ -20,7 +20,7 @@ export const homeObjTwo = {
   topLine: "Tools for teamwork",
   headline: "Stay connected with your team wherever you are.",
   description:
-    "We have you covered no matter where you are located. INCLUDE MORE ABOUT FEATURES HERE",
+    "Wherever you are in the world, we help make sure you have your teams covered.",
   buttonLabel: "Learn More",
   imgStart: "",
   img: "images/around_the_world.svg",

@@ -23,6 +23,7 @@ import MyAccount from "./components/pages/MyAccount/MyAccount";
 import Services from "./components/pages/Services/Services";
 import SignIn from "./components/pages/SignIn/SignIn";
 import SignUp from "./components/pages/SignUp/SignUp";
+import About from "./components/pages/About/About";
 
 // import Footer from "./components/pages/Footer/Footer";
 
@@ -66,9 +67,8 @@ function App() {
                               path="/account"
                               component={() => <MyAccount />}
                             />
-                            {/* <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} /> */}
                             <Route exact path="/" component={Home} />
+                            <Route exact path="/about" component={About} />
                             <Route path="/services" component={Services} />
                             <Route path="/features" component={Features} />
                             <Route path="/sign-up" component={SignUp} />
