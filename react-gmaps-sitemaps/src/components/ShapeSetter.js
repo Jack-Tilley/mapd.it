@@ -1,6 +1,11 @@
 import { Marker, Polyline } from "@react-google-maps/api";
 import React, { useContext } from "react";
-import { MapContext } from "./MapContext";
+import {
+  MapContext,
+  useTreeContext,
+  useNodeContext,
+  useSelectedContext,
+} from "./MapContext";
 import { findNode } from "../utils/contextUtils";
 
 const ShapeSetter = () => {
@@ -28,7 +33,10 @@ const ShapeSetter = () => {
   //   setColor,
   //   findNode,
   // ] = useContext(MapContext);
-  const { shapes, nodes, setSelected } = useContext(MapContext);
+  // const { shapes, nodes, setSelected } = useContext(MapContext);
+  const { shapes } = useTreeContext();
+  const { nodes } = useNodeContext();
+  const { setSelected } = useSelectedContext();
 
   // useEffect(() => {
   //   console.log("shapes", shapes);

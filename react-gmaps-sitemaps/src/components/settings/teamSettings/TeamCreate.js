@@ -5,7 +5,14 @@ import TextField from "@material-ui/core/TextField";
 import axios from "axios";
 import React from "react";
 
-const TeamCreate = ({ newTeam, setNewTeam, profileId, updateNodes }) => {
+const TeamCreate = ({
+  newTeam,
+  setNewTeam,
+  profileId,
+  updateNodes,
+  setNodes,
+  setTeams,
+}) => {
   const handleCreateTeam = () => {
     // console.log(newTeam);
     if (newTeam !== "") {
@@ -24,7 +31,7 @@ const TeamCreate = ({ newTeam, setNewTeam, profileId, updateNodes }) => {
               )
               .then((result) => {
                 // console.log("PUT RESULT", result.data);
-                updateNodes();
+                updateNodes(profileId, setNodes, setTeams);
                 setNewTeam("");
               })
               .catch((err) => console.log(err));

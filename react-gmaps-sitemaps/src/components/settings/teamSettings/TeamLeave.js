@@ -34,6 +34,8 @@ const TeamLeave = ({
   setLeaveTeamId,
   profileId,
   updateNodes,
+  setNodes,
+  setTeams,
 }) => {
   const classes = useStyles();
 
@@ -53,7 +55,7 @@ const TeamLeave = ({
         })
         .then((res) => {
           // console.log(res.data);
-          updateNodes();
+          updateNodes(profileId, setNodes, setTeams);
           setLeaveTeamId("");
         })
         .catch((err) => console.log(err));

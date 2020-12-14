@@ -12,7 +12,7 @@ import axios from "axios";
 import { formatTime } from "../utils/utils";
 import React, { useContext, useState } from "react";
 import ImageUpload from "./ImageUpload";
-import { MapContext } from "./MapContext";
+import { MapContext, useSelectedContext } from "./MapContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -92,7 +92,7 @@ const ImageModal = ({
   //   picture,
   //   setPicture,
   // ] = useContext(MapContext);
-  const { selected } = useContext(MapContext);
+  const { selected } = useSelectedContext();
   const [picture, setPicture] = useState(null);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");

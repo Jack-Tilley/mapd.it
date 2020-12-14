@@ -65,7 +65,7 @@ const ImageUpload = ({
           Enter a description here
         </FormHelperText>
 
-        <Button variant="outlined" type="submit" color="primary" fullWidth>
+        <Button variant="contained" type="submit" color="primary" fullWidth>
           Submit Picture
         </Button>
       </form>

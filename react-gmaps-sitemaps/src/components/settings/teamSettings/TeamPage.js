@@ -12,7 +12,14 @@ const useStyles = makeStyles({
   },
 });
 
-const TeamPage = ({ rendered, teams, profileId, updateNodes }) => {
+const TeamPage = ({
+  rendered,
+  teams,
+  profileId,
+  updateNodes,
+  setNodes,
+  setTeams,
+}) => {
   const classes = useStyles();
   const [newTeam, setNewTeam] = useState("");
   const [joinTeam, setJoinTeam] = useState("");
@@ -31,6 +38,8 @@ const TeamPage = ({ rendered, teams, profileId, updateNodes }) => {
           setJoinTeam={setJoinTeam}
           profileId={profileId}
           updateNodes={updateNodes}
+          setNodes={setNodes}
+          setTeams={setTeams}
         />
       </div>
       <Divider />
@@ -40,6 +49,8 @@ const TeamPage = ({ rendered, teams, profileId, updateNodes }) => {
           setNewTeam={setNewTeam}
           profileId={profileId}
           updateNodes={updateNodes}
+          setNodes={setNodes}
+          setTeams={setTeams}
         />
       </div>
       <Divider />
@@ -50,6 +61,8 @@ const TeamPage = ({ rendered, teams, profileId, updateNodes }) => {
           setLeaveTeamId={setLeaveTeamId}
           profileId={profileId}
           updateNodes={updateNodes}
+          setNodes={setNodes}
+          setTeams={setTeams}
         />
       </div>
     </div>

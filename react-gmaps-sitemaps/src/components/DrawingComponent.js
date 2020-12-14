@@ -3,7 +3,17 @@ import IconButton from "@material-ui/core/IconButton";
 import { DrawingManager } from "@react-google-maps/api";
 import axios from "axios";
 import React, { useContext } from "react";
-import { MapContext } from "./MapContext";
+// import { MapContext } from "./MapContext";
+import {
+  useAddEditContext,
+  useMapContext,
+  useNodeContext,
+  useDrawContext,
+  useProfileContext,
+  useSelectedContext,
+  useTeamContext,
+  useTreeContext,
+} from "./MapContext";
 import { updateNodes, editCleanup, replaceNode } from "../utils/contextUtils";
 
 const DrawingComponent = () => {
@@ -58,37 +68,62 @@ const DrawingComponent = () => {
   //   setSelectedTeams,
   //   updateNodes,
   // ] = useContext(MapContext);
+  // const {
+  //   color,
+  //   setColor,
+  //   editValue,
+  //   setEditValue,
+  //   icon,
+  //   setIcon,
+  //   setNodes,
+  //   editing,
+  //   setEditing,
+  //   activeNode,
+  //   setActiveNode,
+  //   draw,
+  //   setDraw,
+  //   nodeType,
+  //   setNodeType,
+  //   description,
+  //   setDescription,
+  //   selected,
+  //   checked,
+  //   setChecked,
+  //   shapes,
+  //   setShapes,
+  //   selectedTeams,
+  //   setSelectedTeams,
+  //   profileId,
+  //   setTeams,
+  //   setSelected,
+  //   nodes,
+  //   // updateNodes,
+  // } = useContext(MapContext);
+
   const {
     color,
     setColor,
-    editValue,
-    setEditValue,
-    icon,
-    setIcon,
-    setNodes,
-    editing,
-    setEditing,
-    activeNode,
-    setActiveNode,
-    draw,
-    setDraw,
     nodeType,
     setNodeType,
+    editing,
+    setEditing,
+    editValue,
+    setEditValue,
     description,
     setDescription,
-    selected,
-    checked,
-    setChecked,
-    shapes,
-    setShapes,
-    selectedTeams,
-    setSelectedTeams,
-    profileId,
-    setTeams,
-    setSelected,
-    nodes,
-    // updateNodes,
-  } = useContext(MapContext);
+    icon,
+    setIcon,
+  } = useAddEditContext();
+
+  const { setTeams, selectedTeams, setSelectedTeams } = useTeamContext();
+
+  const { draw, setDraw } = useDrawContext();
+  const { checked, setChecked, shapes, setShapes } = useTreeContext();
+
+  const { selected, setSelected } = useSelectedContext();
+
+  const { nodes, setNodes, activeNode, setActiveNode } = useNodeContext();
+  const { profileId, setProfileId } = useProfileContext();
 
   const options = {
     polylineOptions: {
@@ -186,7 +221,7 @@ const DrawingComponent = () => {
             axios
               .get(`http://localhost:8000/api/nodes/${res.data.parent}`)
               .then((result) => {
-                let newNodes = replaceNode(res.data.parent, result.data);
+                let newNodes = replaceNode(res.data.parent, result.data, nodes);
                 setNodes(newNodes);
               })
               .catch((err) => console.log(err));
@@ -202,6 +237,7 @@ const DrawingComponent = () => {
             setShapes,
             setSelected,
             setIcon,
+            setColor,
             setNodeType,
             setDescription,
             setEditValue

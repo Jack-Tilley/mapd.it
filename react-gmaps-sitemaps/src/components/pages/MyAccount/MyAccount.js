@@ -8,10 +8,16 @@ import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import MailIcon from "@material-ui/icons/Mail";
 import React, { useContext, useState } from "react";
-import { MapContext } from "../../MapContext";
+import {
+  MapContext,
+  useTeamContext,
+  useProfileContext,
+  useNodeContext,
+} from "../../MapContext";
 import AccountPage from "../../settings/accountSettings/AccountPage";
 import TeamPage from "../../settings/teamSettings/TeamPage";
 import AccountSettings from "./AccountSettings";
+import { updateNodes } from "../../../utils/contextUtils";
 
 const drawerWidth = 240;
 
@@ -42,60 +48,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MyAccount = () => {
-  // const [
-  //   myMap,
-  //   setMyMap,
-  //   center,
-  //   setCenter,
-  //   isLoaded,
-  //   draw,
-  //   setDraw,
-  //   nodes,
-  //   setNodes,
-  //   activeNode,
-  //   setActiveNode,
-  //   icon,
-  //   setIcon,
-  //   shapes,
-  //   setShapes,
-  //   checked,
-  //   setChecked,
-  //   selected,
-  //   setSelected,
-  //   color,
-  //   setColor,
-  //   findNode,
-  //   removeNode,
-  //   nodeType,
-  //   setNodeType,
-  //   disabled,
-  //   setDisabled,
-  //   editing,
-  //   setEditing,
-  //   editValue,
-  //   setEditValue,
-  //   replaceNode,
-  //   editCleanup,
-  //   changeIcons,
-  //   description,
-  //   setDescription,
-  //   comment,
-  //   setComment,
-  //   label,
-  //   setLabel,
-  //   auth,
-  //   setAuth,
-  //   profileId,
-  //   setProfileId,
-  //   teams,
-  //   setTeams,
-  //   selectedTeams,
-  //   setSelectedTeams,
-  //   updateNodes,
-  //   picture,
-  //   setPicture,
-  // ] = useContext(MapContext);
-  const { profileId, teams, updateNodes } = useContext(MapContext);
+  const { profileId } = useProfileContext();
+  const { teams, setTeams } = useTeamContext();
+  const { setNodes } = useNodeContext();
   const classes = useStyles();
   const [picked, setPicked] = useState("account");
 
@@ -188,6 +143,8 @@ const MyAccount = () => {
               teams={teams}
               profileId={profileId}
               updateNodes={updateNodes}
+              setNodes={setNodes}
+              setTeams={setTeams}
             />
             {/* <MapPage rendered={true} teams={teams} profileId={profileId} updateNodes={updateNodes}/> */}
             {/* <Logout rendered={picked === "logout" ? true : false} /> */}

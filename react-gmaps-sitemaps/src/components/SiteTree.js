@@ -1,28 +1,46 @@
 import { Paper } from "@material-ui/core";
-import React, { useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CheckboxTree from "react-checkbox-tree";
 import "react-checkbox-tree/lib/react-checkbox-tree.css";
 import { v4 as uuidv4 } from "uuid";
-// import { faHome } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { MapContext } from "./MapContext";
+import { updateNodes } from "../utils/contextUtils";
+import {
+  useTreeContext,
+  useDrawContext,
+  useNodeContext,
+  useAddEditContext,
+  useMapContext,
+  useTeamContext,
+  useProfileContext,
+} from "./MapContext";
 import { findNode } from "../utils/contextUtils";
 import ModalDesignRework from "./ModalDesignRework";
 
 const SiteTree = () => {
-  const {
-    checked,
-    setChecked,
-    shapes,
-    setShapes,
-    draw,
-    setActiveNode,
-    color,
-    description,
-    setCenter,
-    nodes,
-    icon,
-  } = useContext(MapContext);
+  const { checked, setChecked, shapes, setShapes } = useTreeContext();
+  const { draw } = useDrawContext();
+  const { nodes, setNodes, setActiveNode } = useNodeContext();
+  const { setTeams } = useTeamContext();
+  const { profileId } = useProfileContext();
+  const { color, description, icon } = useAddEditContext();
+  const { setCenter } = useMapContext();
+  useEffect(() => {
+    console.log("RESET TTREE");
+    updateNodes(profileId, setNodes, setTeams);
+  }, [profileId]);
+  // const {
+  //   checked,
+  //   setChecked,
+  //   shapes,
+  //   setShapes,
+  //   draw,
+  //   setActiveNode,
+  //   color,
+  //   description,
+  //   setCenter,
+  //   nodes,
+  //   icon,
+  // } = useContext(MapContext);
   const [expanded, setExpanded] = useState([]);
   const [label, setLabel] = useState("");
   const [modalOpen, setModalOpen] = useState(false);

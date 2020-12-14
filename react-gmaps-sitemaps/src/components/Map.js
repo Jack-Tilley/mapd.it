@@ -4,7 +4,7 @@ import AutocompleteBox from "./AutocompleteBox";
 import DrawingComponent from "./DrawingComponent";
 import HistoryDrawer from "./HistoryDrawer";
 import InfoContainer from "./InfoContainer";
-import { MapContext } from "./MapContext";
+import { MapContext, useMapContext, useSelectedContext } from "./MapContext";
 import ToolContainer from "./mapTools/ToolContainer";
 import SettingsModal from "./settings/SettingsModal";
 import ShapeSetter from "./ShapeSetter";
@@ -32,9 +32,8 @@ const Map = ({ darkMode, setDarkMode }) => {
   //   selected,
   //   setSelected,
   // ] = useContext(MapContext);
-  const { center, setCenter, setMyMap, setSelected, isLoaded } = useContext(
-    MapContext
-  );
+  const { center, setCenter, setMyMap, isLoaded } = useMapContext();
+  const { selected, setSelected } = useSelectedContext();
   // const [center, setCenter] = values.center;
   // const [myMap, setMyMap] = values.myMap;
   // const [selected, setSelected] = values.myMap;

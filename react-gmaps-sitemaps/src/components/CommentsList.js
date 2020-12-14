@@ -27,7 +27,7 @@ const CommentsList = ({ comments, bottomRef, scrollToBottom }) => {
       {comments.map((comment) => (
         <>
           <ListItem alignItems="flex-start" key={comment.created}>
-            <ListItemAvatar>
+            <ListItemAvatar key={comment.created}>
               <Avatar>{comment.profile.user.username.charAt(0)} </Avatar>
             </ListItemAvatar>
             <ListItemText

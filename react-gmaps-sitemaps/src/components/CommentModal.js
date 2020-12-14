@@ -9,62 +9,12 @@ import TextField from "@material-ui/core/TextField";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import CommentsList from "./CommentsList";
-import { MapContext } from "./MapContext";
+import { useSelectedContext, useProfileContext } from "./MapContext";
 import RefreshChatButton from "./RefreshChatButton";
 
 const CommentModal = ({ commentOpen, setCommentOpen }) => {
-  // const [
-  //   myMap,
-  //   setMyMap,
-  //   center,
-  //   setCenter,
-  //   isLoaded,
-  //   draw,
-  //   setDraw,
-  //   nodes,
-  //   setNodes,
-  //   activeNode,
-  //   setActiveNode,
-  //   icon,
-  //   setIcon,
-  //   shapes,
-  //   setShapes,
-  //   checked,
-  //   setChecked,
-  //   selected,
-  //   setSelected,
-  //   color,
-  //   setColor,
-  //   findNode,
-  //   removeNode,
-  //   nodeType,
-  //   setNodeType,
-  //   disabled,
-  //   setDisabled,
-  //   editing,
-  //   setEditing,
-  //   editValue,
-  //   setEditValue,
-  //   replaceNode,
-  //   editCleanup,
-  //   changeIcons,
-  //   description,
-  //   setDescription,
-  //   comment,
-  //   setComment,
-  //   label,
-  //   setLabel,
-  //   auth,
-  //   setAuth,
-  //   profileId,
-  //   setProfileId,
-  //   teams,
-  //   setTeams,
-  //   selectedTeams,
-  //   setSelectedTeams,
-  // ] = useContext(MapContext);
-
-  const { selected, profileId } = useContext(MapContext);
+  const { selected } = useSelectedContext();
+  const { profileId } = useProfileContext();
 
   const [comments, setComments] = useState([]);
   const [value, setValue] = useState("");
