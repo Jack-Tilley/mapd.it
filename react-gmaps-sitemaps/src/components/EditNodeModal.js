@@ -168,6 +168,20 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
         setChecked(checked.filter((check) => check !== selected.value));
         setNodes(newNodes);
         setSelected(null);
+        editCleanup(
+          null,
+          checked,
+          shapes,
+          selected,
+          setChecked,
+          setShapes,
+          setSelected,
+          setIcon,
+          setNodeType,
+          setColor,
+          setDescription,
+          setEditValue
+        );
         //setShapes, setChecked, set others, set activeNode, setNodes()
       })
       .catch((err) => {
