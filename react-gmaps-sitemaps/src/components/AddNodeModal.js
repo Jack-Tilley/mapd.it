@@ -153,7 +153,6 @@ const AddNodeModal = ({
       aria-labelledby="form-dialog-title"
       scroll="paper"
     >
-      {console.log("Add Modal Updated")}
       <DialogTitle id="form-dialog-title">
         Add New Item <span style={{ color: "red" }}>{validationMessage}</span>
       </DialogTitle>

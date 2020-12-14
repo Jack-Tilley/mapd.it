@@ -25,7 +25,6 @@ const SiteTree = () => {
   const { color, description, icon } = useAddEditContext();
   const { setCenter } = useMapContext();
   useEffect(() => {
-    console.log("RESET TTREE");
     updateNodes(profileId, setNodes, setTeams);
   }, [profileId]);
   // const {

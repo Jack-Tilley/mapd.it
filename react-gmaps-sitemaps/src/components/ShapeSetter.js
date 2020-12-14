@@ -26,6 +26,9 @@ const ShapeSetter = () => {
         // console.log(<i className="material-icons icon-grey">{"refresh"}</i>);
         // console.log(<AccessAlarmIcon />);
         if (node.nodeType === "marker") {
+          // let marker = new window.google.maps.Marker();
+          // marker.setIcon("/newIcons/" + node.iconValue + ".svg");
+          // console.log(marker);
           return (
             <Marker
               position={{
@@ -39,6 +42,8 @@ const ShapeSetter = () => {
                 scaledSize: new window.google.maps.Size(30, 30),
                 origin: new window.google.maps.Point(0, 0),
                 anchor: new window.google.maps.Point(15, 15),
+                strokeColor: "#AB47BC",
+                fillColor: "#BA68C8",
               }}
               animation={window.google.maps.Animation.DROP}
               // omMouseOut={() => handleMouseOut()}
