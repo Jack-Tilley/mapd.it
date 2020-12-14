@@ -115,7 +115,7 @@ const DrawingComponent = () => {
     setIcon,
   } = useAddEditContext();
 
-  const { teams, setTeams, selectedTeams, setSelectedTeams } = useTeamContext();
+  const { setTeams, selectedTeams, setSelectedTeams } = useTeamContext();
 
   const { draw, setDraw } = useDrawContext();
   const { checked, setChecked, shapes, setShapes } = useTreeContext();
@@ -221,7 +221,7 @@ const DrawingComponent = () => {
             axios
               .get(`http://localhost:8000/api/nodes/${res.data.parent}`)
               .then((result) => {
-                let newNodes = replaceNode(res.data.parent, result.data);
+                let newNodes = replaceNode(res.data.parent, result.data, nodes);
                 setNodes(newNodes);
               })
               .catch((err) => console.log(err));
@@ -237,6 +237,7 @@ const DrawingComponent = () => {
             setShapes,
             setSelected,
             setIcon,
+            setColor,
             setNodeType,
             setDescription,
             setEditValue

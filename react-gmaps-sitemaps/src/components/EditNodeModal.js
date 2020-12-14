@@ -105,6 +105,19 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
               })
               .catch((err) => console.log(err));
           }
+          editCleanup(
+            res.data,
+            checked,
+            shapes,
+            selected,
+            setChecked,
+            setShapes,
+            setSelected,
+            setIcon,
+            setNodeType,
+            setDescription,
+            setEditValue
+          );
         })
         .catch((err) => {
           console.log(err);
@@ -112,7 +125,7 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
       // axios.put to api/node/<nodeid>
       // then update references to that node
     }
-    handleClose();
+    setEditOpen(false);
     // console.log("selected", selected);
   };
 
@@ -126,8 +139,8 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
       setShapes,
       setSelected,
       setIcon,
-      setColor,
       setNodeType,
+      setColor,
       setDescription,
       setEditValue
     );
