@@ -71,7 +71,6 @@ const InfoContainer = () => {
     setColor,
     setDescription,
   } = useContext(MapContext);
-  const classes = useStyles();
 
   const [editOpen, setEditOpen] = useState(false);
   const [commentOpen, setCommentOpen] = useState(false);
@@ -94,7 +93,6 @@ const InfoContainer = () => {
     setIcon(selected.iconValue);
     setLabel(selected.label);
     setDescription(selected.description);
-    console.log("selected", selected);
     setEditOpen(true);
   };
 
@@ -117,6 +115,7 @@ const InfoContainer = () => {
       }}
     >
       <div>
+        {console.log("Infowindow updated")}
         <h4 style={{ color: "black" }}>{selected.label}</h4>
         <p style={{ color: "black" }}>{selected.description}</p>
         <IconButton onClick={handleEditClick}>

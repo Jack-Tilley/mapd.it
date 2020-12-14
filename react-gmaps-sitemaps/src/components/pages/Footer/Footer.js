@@ -39,15 +39,27 @@ function Footer() {
           <div className="footer-link-items">
             <h2>About Us</h2>
             <Link to="/features">About</Link>
-            <Link to="/">Creator</Link>
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://github.com/Jack-Tilley/"
+            >
+              Creator
+            </a>
             <Link to="/features">How it works</Link>
             <Link to="/">Contact</Link>
           </div>
           <div className="footer-link-items">
             <h2>Contact Us</h2>
             <Link to="/">Contact</Link>
-            <Link to="/">Features</Link>
-            <Link to="/">Source</Link>
+            <Link to="/features">Features</Link>
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://github.com/Jack-Tilley/"
+            >
+              Creator
+            </a>
             <Link to="/">Email</Link>
           </div>
         </div>

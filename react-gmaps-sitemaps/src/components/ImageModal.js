@@ -5,9 +5,12 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
+
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
-import React, { useContext } from "react";
+import { formatTime } from "../utils/utils";
+import React, { useContext, useState } from "react";
 import ImageUpload from "./ImageUpload";
 import { MapContext } from "./MapContext";
 
@@ -24,13 +27,8 @@ const useStyles = makeStyles((theme) => ({
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: "translateZ(0)",
   },
-  title: {
-    color: theme.palette.primary.light,
-  },
-  titleBar: {
-    background:
-      "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
-  },
+  title: {},
+  titleBar: {},
 }));
 
 const urlbase = "http://localhost:8000";
@@ -94,8 +92,20 @@ const ImageModal = ({
   //   picture,
   //   setPicture,
   // ] = useContext(MapContext);
-  const { selected, picture, setPicture } = useContext(MapContext);
+  const { selected } = useContext(MapContext);
+  const [picture, setPicture] = useState(null);
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const [rendered, setRendered] = useState("show");
   const classes = useStyles();
+
+  const handleViewClick = () => {
+    setRendered("show");
+  };
+
+  const handleAddClick = () => {
+    setRendered("add");
+  };
 
   const handleClose = () => {
     setImageOpen(false);
@@ -105,11 +115,17 @@ const ImageModal = ({
     console.log("picture", e.target.files[0]);
     setPicture(e.target.files[0]);
   };
-  const handleSubmit = () => {
+  const handlePictureSubmit = (e) => {
+    e.preventDefault();
+
+    if (picture === null) {
+      return;
+    }
     console.log("picFile", picture);
     let data = new FormData(); // creates a new FormData object
     data.append("image", picture);
-    data.append("description", "hardcoded desription");
+    data.append("title", title);
+    data.append("description", desc);
     data.append("node", selected.id);
     axios
       .post("http://localhost:8000/api/images/", data, {
@@ -118,19 +134,38 @@ const ImageModal = ({
       .then((res) => {
         console.log(res.data);
         gatherImages();
+        setPicture(null);
+        setTitle("");
+        setDesc("");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setPicture(null);
+        setTitle("");
+        setDesc("");
+        console.log(err);
+      });
+    e.target.reset();
   };
   const renderImages = () => {
     console.log("images", images);
     return (
-      <GridList cellHeight={300} className={classes.gridList} cols={2.5}>
-        {images.map((image) => (
-          <GridListTile key={image.id}>
-            <img src={urlbase + image.image} alt={image.image} />
-          </GridListTile>
-        ))}
-      </GridList>
+      <div className={classes.root}>
+        <GridList cellHeight={300} className={classes.gridList} cols={2.5}>
+          {images.map((image) => (
+            <GridListTile key={image.id}>
+              <img src={urlbase + image.image} alt={image.title} />
+              <GridListTileBar
+                title={image.title}
+                subtitle={formatTime(image.created)}
+                classes={{
+                  root: classes.titleBar,
+                  title: classes.title,
+                }}
+              />
+            </GridListTile>
+          ))}
+        </GridList>
+      </div>
     );
   };
 
@@ -144,17 +179,46 @@ const ImageModal = ({
         fullWidth
       >
         <DialogTitle id="form-dialog-title">Images</DialogTitle>
-        <DialogContent scroll="paper" dividers={true}>
-          {images.length > 0 ? renderImages() : null}
-          <ImageUpload handlePictureChange={handlePictureChange} />
-        </DialogContent>
-        <DialogActions style={{ overflow: "hidden" }}>
+        {rendered === "show" ? (
+          <DialogContent scroll="paper" dividers={true}>
+            {images.length > 0 ? (
+              renderImages()
+            ) : (
+              <div>No images posted yet...</div>
+            )}
+          </DialogContent>
+        ) : (
+          <DialogContent scroll="paper" dividers={true}>
+            <ImageUpload
+              handlePictureChange={handlePictureChange}
+              handlePictureSubmit={handlePictureSubmit}
+              title={title}
+              setTitle={setTitle}
+              desc={desc}
+              setDesc={setDesc}
+            />
+          </DialogContent>
+        )}
+        <DialogActions>
           <div>
-            <Button variant="contained" onClick={handleClose} color="default">
+            <Button
+              style={{ position: "absolute", left: "1.5em" }}
+              onClick={handleClose}
+              color="secondary"
+            >
               Done
             </Button>
-            <Button variant="contained" onClick={handleSubmit} color="default">
-              Submit
+            <Button
+              onClick={handleViewClick}
+              color={rendered === "show" ? "default" : "primary"}
+            >
+              View All
+            </Button>
+            <Button
+              onClick={handleAddClick}
+              color={rendered !== "show" ? "default" : "primary"}
+            >
+              Upload New Image
             </Button>
           </div>
         </DialogActions>

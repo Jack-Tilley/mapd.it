@@ -97,9 +97,11 @@ class Comment(models.Model):
 
 class Image(models.Model):
     image = models.ImageField(upload_to="images/")
+    title = models.CharField(max_length=32, blank=True, null=True)
     description = models.CharField(max_length=128, blank=True, null=True)
     node = models.ForeignKey(
         Node, on_delete=models.CASCADE, related_name="images")
+    created = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
         super().save()  # saving image first

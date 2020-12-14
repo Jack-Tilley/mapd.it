@@ -12,6 +12,7 @@ import React, { useContext, useState } from "react";
 import ColorContainer from "./ColorContainer";
 import IconContainer from "./IconContainer";
 // import ImageUpload from "./ImageUpload";
+import { replaceNode, editCleanup } from "../utils/contextUtils";
 import { MapContext } from "./MapContext";
 
 const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
@@ -86,10 +87,9 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
     setNodeType,
     setEditing,
     setEditValue,
-    replaceNode,
-    editCleanup,
     description,
     setDescription,
+    nodes,
   } = useContext(MapContext);
 
   const [validationMessage, setValidationMessage] = useState("");
@@ -126,18 +126,30 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
         .then((res) => {
           if (res.data.parent === null) {
             // console.log("THIS IS A LONE NODE");
-            let newNodes = replaceNode(selected.id, res.data);
+            let newNodes = replaceNode(selected.id, res.data, nodes);
             setNodes(newNodes);
           } else {
             axios
               .get(`http://localhost:8000/api/nodes/${res.data.parent}`)
               .then((result) => {
-                let newNodes = replaceNode(res.data.parent, result.data);
+                let newNodes = replaceNode(res.data.parent, result.data, nodes);
                 setNodes(newNodes);
               })
               .catch((err) => console.log(err));
           }
-          editCleanup(res.data);
+          editCleanup(
+            res.data,
+            checked,
+            shapes,
+            selected,
+            setChecked,
+            setShapes,
+            setSelected,
+            setIcon,
+            setNodeType,
+            setDescription,
+            setEditValue
+          );
         })
         .catch((err) => {
           console.log(err);

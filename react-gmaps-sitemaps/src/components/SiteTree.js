@@ -6,64 +6,21 @@ import { v4 as uuidv4 } from "uuid";
 // import { faHome } from "@fortawesome/free-solid-svg-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { MapContext } from "./MapContext";
+import { findNode } from "../utils/contextUtils";
 import ModalDesignRework from "./ModalDesignRework";
 
 const SiteTree = () => {
-  // const [
-  //   myMap,
-  //   setMyMap,
-  //   center,
-  //   setCenter,
-  //   isLoaded,
-  //   draw,
-  //   setDraw,
-  //   nodes,
-  //   setNodes,
-  //   activeNode,
-  //   setActiveNode,
-  //   icon,
-  //   setIcon,
-  //   shapes,
-  //   setShapes,
-  //   checked,
-  //   setChecked,
-  //   selected,
-  //   setSelected,
-  //   color,
-  //   setColor,
-  //   findNode,
-  //   removeNode,
-  //   nodeType,
-  //   setNodeType,
-  //   disabled,
-  //   setDisabled,
-  //   editing,
-  //   setEditing,
-  //   editValue,
-  //   setEditValue,
-  //   replaceNode,
-  //   editCleanup,
-  //   changeIcons,
-  //   description,
-  //   setDescription,
-  //   comment,
-  //   setComment,
-  //   la,
-  //   setLa,
-  // ] = useContext(MapContext);
   const {
     checked,
     setChecked,
     shapes,
     setShapes,
     draw,
-    findNode,
     setActiveNode,
     color,
     description,
     setCenter,
     nodes,
-    setNodes,
     icon,
   } = useContext(MapContext);
   const [expanded, setExpanded] = useState([]);
@@ -97,7 +54,7 @@ const SiteTree = () => {
       setActiveNode(null);
       handleClickOpen();
     } else if (!draw) {
-      let node = findNode(e.value);
+      let node = findNode(e.value, nodes);
       setCenter({
         lat: parseFloat(node.latLngArr[0]),
         lng: parseFloat(node.latLngArr[1]),

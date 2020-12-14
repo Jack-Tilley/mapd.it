@@ -85,7 +85,6 @@ const ModalDesignRework = ({
     description,
     setDescription,
     teams,
-    selectedTeams,
     setSelectedTeams,
   } = useContext(MapContext);
 
@@ -171,6 +170,7 @@ const ModalDesignRework = ({
       aria-labelledby="form-dialog-title"
       scroll="paper"
     >
+      {console.log("Add Modal Updated")}
       <DialogTitle id="form-dialog-title">
         Add New Node <span style={{ color: "red" }}>{validationMessage}</span>
       </DialogTitle>
