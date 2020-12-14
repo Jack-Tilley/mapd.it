@@ -12,22 +12,19 @@ import React, { useContext, useState } from "react";
 import ColorContainer from "./ColorContainer";
 import IconContainer from "./IconContainer";
 // import ImageUpload from "./ImageUpload";
-import { replaceNode, editCleanup } from "../utils/contextUtils";
-import { MapContext } from "./MapContext";
+import { replaceNode, editCleanup, removeNode } from "../utils/contextUtils";
+import {
+  useAddEditContext,
+  useSelectedContext,
+  useTreeContext,
+  useNodeContext,
+  useDrawContext,
+} from "./MapContext";
 
 const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
-  // const [
-  //   myMap,
-  //   setMyMap,
-  //   center,
-  //   setCenter,
-  //   isLoaded,
-  //   draw,
+  // const {
   //   setDraw,
-  //   nodes,
   //   setNodes,
-  //   activeNode,
-  //   setActiveNode,
   //   icon,
   //   setIcon,
   //   shapes,
@@ -38,59 +35,30 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
   //   setSelected,
   //   color,
   //   setColor,
-  //   findNode,
   //   removeNode,
-  //   nodeType,
   //   setNodeType,
-  //   disabled,
-  //   setDisabled,
-  //   editing,
   //   setEditing,
-  //   editValue,
   //   setEditValue,
-  //   replaceNode,
-  //   editCleanup,
-  //   changeIcons,
   //   description,
   //   setDescription,
-  //   comment,
-  //   setComment,
-  //   lab,
-  //   setLab,
-  //   auth,
-  //   setAuth,
-  //   profileId,
-  //   setProfileId,
-  //   teams,
-  //   setTeams,
-  //   selectedTeams,
-  //   setSelectedTeams,
-  //   updateNodes,
-  //   picture,
-  //   setPicture,
-  // ] = useContext(MapContext);
+  //   nodes,
+  // } = useContext(MapContext);
 
   const {
-    setDraw,
-    setNodes,
     icon,
     setIcon,
-    shapes,
-    setShapes,
-    checked,
-    setChecked,
-    selected,
-    setSelected,
     color,
     setColor,
-    removeNode,
     setNodeType,
     setEditing,
     setEditValue,
     description,
     setDescription,
-    nodes,
-  } = useContext(MapContext);
+  } = useAddEditContext();
+  const { selected, setSelected } = useSelectedContext();
+  const { shapes, setShapes, checked, setChecked } = useTreeContext();
+  const { nodes, setNodes } = useNodeContext();
+  const { setDraw } = useDrawContext();
 
   const [validationMessage, setValidationMessage] = useState("");
   const [nameError, setNameError] = useState(false);
@@ -137,19 +105,6 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
               })
               .catch((err) => console.log(err));
           }
-          editCleanup(
-            res.data,
-            checked,
-            shapes,
-            selected,
-            setChecked,
-            setShapes,
-            setSelected,
-            setIcon,
-            setNodeType,
-            setDescription,
-            setEditValue
-          );
         })
         .catch((err) => {
           console.log(err);
@@ -157,11 +112,25 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
       // axios.put to api/node/<nodeid>
       // then update references to that node
     }
-    setEditOpen(false);
+    handleClose();
     // console.log("selected", selected);
   };
 
   const handleClose = () => {
+    editCleanup(
+      null,
+      checked,
+      shapes,
+      selected,
+      setChecked,
+      setShapes,
+      setSelected,
+      setIcon,
+      setColor,
+      setNodeType,
+      setDescription,
+      setEditValue
+    );
     setEditOpen(false);
   };
 
@@ -180,7 +149,7 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
       .delete(`http://localhost:8000/api/allNodes/${selected.id}`)
       .then((res) => {
         setEditOpen(false);
-        let newNodes = removeNode(selected.value);
+        let newNodes = removeNode(selected.value, nodes);
         // this should be updated to not loop through each node multiple times
         setShapes(shapes.filter((node) => node.value !== selected.value));
         setChecked(checked.filter((check) => check !== selected.value));

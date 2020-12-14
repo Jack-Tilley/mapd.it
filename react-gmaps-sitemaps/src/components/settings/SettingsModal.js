@@ -7,7 +7,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import IconButton from "@material-ui/core/IconButton";
 import { useGoogleMap } from "@react-google-maps/api";
 import React, { useContext, useEffect, useState } from "react";
-import { MapContext } from "../MapContext";
+import { MapContext, useProfileContext, useTeamContext } from "../MapContext";
 import blackout from "../mapStyles/blackout";
 import bluegray from "../mapStyles/bluegray";
 import flatpale from "../mapStyles/flatpale";
@@ -20,6 +20,7 @@ import vibrant from "../mapStyles/vibrant";
 import AccountPage from "./accountSettings/AccountPage";
 import MapPage from "./mapSettings/MapPage";
 import TeamPage from "./teamSettings/TeamPage";
+import { updateNodes } from "../../utils/contextUtils";
 
 const SettingsModal = ({
   settingsOpen,
@@ -27,58 +28,8 @@ const SettingsModal = ({
   darkMode,
   setDarkMode,
 }) => {
-  // const [
-  //   myMap,
-  //   setMyMap,
-  //   center,
-  //   setCenter,
-  //   isLoaded,
-  //   draw,
-  //   setDraw,
-  //   nodes,
-  //   setNodes,
-  //   activeNode,
-  //   setActiveNode,
-  //   icon,
-  //   setIcon,
-  //   shapes,
-  //   setShapes,
-  //   checked,
-  //   setChecked,
-  //   selected,
-  //   setSelected,
-  //   color,
-  //   setColor,
-  //   findNode,
-  //   removeNode,
-  //   nodeType,
-  //   setNodeType,
-  //   disabled,
-  //   setDisabled,
-  //   editing,
-  //   setEditing,
-  //   editValue,
-  //   setEditValue,
-  //   replaceNode,
-  //   editCleanup,
-  //   changeIcons,
-  //   description,
-  //   setDescription,
-  //   comment,
-  //   setComment,
-  //   label,
-  //   setLabel,
-  //   auth,
-  //   setAuth,
-  //   profileId,
-  //   setProfileId,
-  //   teams,
-  //   setTeams,
-  //   selectedTeams,
-  //   setSelectedTeams,
-  //   updateNodes,
-  // ] = useContext(MapContext);
-  const { profileId, teams, updateNodes } = useContext(MapContext);
+  const { profileId } = useProfileContext();
+  const { teams } = useTeamContext();
   const [page, setPage] = useState("map");
   const [mapSettingsRendered, setMapSettingsRendered] = useState(true);
   const [teamSettingsRendered, setTeamSettingsRendered] = useState(false);

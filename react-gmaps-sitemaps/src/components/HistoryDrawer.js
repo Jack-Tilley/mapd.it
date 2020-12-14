@@ -9,7 +9,7 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import { makeStyles } from "@material-ui/core/styles";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import React, { useContext, useEffect, useState } from "react";
-import { MapContext } from "./MapContext";
+import { MapContext, useTeamContext } from "./MapContext";
 
 const useStyles = makeStyles({
   list: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 });
 
 export default function HistoryDrawer() {
-  const { teams } = useContext(MapContext);
+  const { teams } = useTeamContext;
   const [open, setOpen] = useState(false);
   const [history, setHistory] = useState([]);
 

@@ -2,10 +2,18 @@ import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
+import { updateNodes } from "../../../utils/contextUtils";
 import axios from "axios";
 import React from "react";
 
-const TeamJoin = ({ teams, joinTeam, setJoinTeam, profileId, updateNodes }) => {
+const TeamJoin = ({
+  teams,
+  joinTeam,
+  setJoinTeam,
+  profileId,
+  setNodes,
+  setTeams,
+}) => {
   const handleJoinTeam = () => {
     // console.log(joinTeam);
     const alreadyInTeam = teams.some((team) => team.unique_key === joinTeam);
@@ -16,7 +24,7 @@ const TeamJoin = ({ teams, joinTeam, setJoinTeam, profileId, updateNodes }) => {
         })
         .then((result) => {
           // console.log("PUT RESULT for JOIN", result.data);
-          updateNodes();
+          updateNodes(profileId, setNodes, setTeams);
           setJoinTeam("");
         })
         .catch((err) => console.log(err));

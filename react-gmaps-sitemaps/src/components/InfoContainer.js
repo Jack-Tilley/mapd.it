@@ -6,7 +6,11 @@ import React, { useContext, useState } from "react";
 import CommentModal from "./CommentModal";
 import EditNodeModal from "./EditNodeModal";
 import ImageModal from "./ImageModal";
-import { MapContext } from "./MapContext";
+import {
+  MapContext,
+  useAddEditContext,
+  useSelectedContext,
+} from "./MapContext";
 
 const useStyles = makeStyles({
   root: {
@@ -22,55 +26,15 @@ const useStyles = makeStyles({
 
 const urlbase = "http://localhost:8000";
 const InfoContainer = () => {
-  // const [
-  //   myMap,
-  //   setMyMap,
-  //   center,
-  //   setCenter,
-  //   isLoaded,
-  //   draw,
-  //   setDraw,
-  //   nodes,
-  //   setNodes,
-  //   activeNode,
-  //   setActiveNode,
-  //   icon,
+  const { setIcon, setColor, setDescription } = useAddEditContext();
+  const { selected, setSelected } = useSelectedContext();
+  // const {
   //   setIcon,
-  //   shapes,
-  //   setShapes,
-  //   checked,
-  //   setChecked,
   //   selected,
   //   setSelected,
-  //   color,
   //   setColor,
-  //   findNode,
-  //   removeNode,
-  //   nodeType,
-  //   setNodeType,
-  //   disabled,
-  //   setDisabled,
-  //   editing,
-  //   setEditing,
-  //   editValue,
-  //   setEditValue,
-  //   replaceNode,
-  //   editCleanup,
-  //   changeIcons,
-  //   description,
   //   setDescription,
-  //   comment,
-  //   setComment,
-  //   lab,
-  //   setLab,
-  // ] = useContext(MapContext);
-  const {
-    setIcon,
-    selected,
-    setSelected,
-    setColor,
-    setDescription,
-  } = useContext(MapContext);
+  // } = useContext(MapContext);
 
   const [editOpen, setEditOpen] = useState(false);
   const [commentOpen, setCommentOpen] = useState(false);

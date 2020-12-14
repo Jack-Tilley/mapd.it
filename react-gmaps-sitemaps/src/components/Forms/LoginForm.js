@@ -1,65 +1,24 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../AuthContext";
-import { MapContext } from "../MapContext";
+// import { MapContext } from "../MapContext";
+import {
+  // useAddEditContext,
+  // useMapContext,
+  // useNodeContext,
+  // useDrawContext,
+  useProfileContext,
+  // useSelectedContext,
+  // useTeamContext,
+  // useTreeContext,
+  // useAllContext,
+} from "../MapContext";
 import FormLogin from "./FormLogin";
 import FormSuccess from "./FormSuccess";
 
 const LoginForm = () => {
-  // const [
-  //   myMap,
-  //   setMyMap,
-  //   center,
-  //   setCenter,
-  //   isLoaded,
-  //   draw,
-  //   setDraw,
-  //   nodes,
-  //   setNodes,
-  //   activeNode,
-  //   setActiveNode,
-  //   icon,
-  //   setIcon,
-  //   shapes,
-  //   setShapes,
-  //   checked,
-  //   setChecked,
-  //   selected,
-  //   setSelected,
-  //   color,
-  //   setColor,
-  //   findNode,
-  //   removeNode,
-  //   nodeType,
-  //   setNodeType,
-  //   disabled,
-  //   setDisabled,
-  //   editing,
-  //   setEditing,
-  //   editValue,
-  //   setEditValue,
-  //   replaceNode,
-  //   editCleanup,
-  //   changeIcons,
-  //   description,
-  //   setDescription,
-  //   comment,
-  //   setComment,
-  //   label,
-  //   setLabel,
-  //   a,
-  //   setA,
-  //   profileId,
-  //   setProfileId,
-  //   teams,
-  //   setTeams,
-  //   selectedTeams,
-  //   setSelectedTeams,
-  //   updateNodes,
-  //   picture,
-  //   setPicture,
-  // ] = useContext(MapContext);
-  const { profileId, setProfileId } = useContext(MapContext);
+  // const { profileId, setProfileId } = useContext(MapContext);
+  const { profileId, setProfileId } = useProfileContext();
   console.log("VALUES", profileId);
   // const [profileId, setProfileId] = values.profileId;
   const [auth, setAuth] = useContext(AuthContext);

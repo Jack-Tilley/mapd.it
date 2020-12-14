@@ -5,7 +5,16 @@ import "./App.css";
 import { AuthProvider } from "./components/AuthContext";
 import PrivateRoute from "./components/common/PrivateRoute";
 import Map from "./components/Map";
-import { MapProvider } from "./components/MapContext";
+import {
+  MapProvider,
+  NodeProvider,
+  DrawProvider,
+  TreeProvider,
+  SelectedProvider,
+  AddEditProvider,
+  ProfileProvider,
+  TeamProvider,
+} from "./components/MapContext";
 import Navbar from "./components/Navbar";
 import Features from "./components/pages/Features/Features";
 import Home from "./components/pages/HomePage/Home";
@@ -32,31 +41,48 @@ function App() {
       {/* <Paper style={{ padding: 0, margin: 0 }}> */}
       <AuthProvider>
         <MapProvider>
-          <Router>
-            <Navbar />
-            <Switch>
-              <PrivateRoute
-                exact
-                path="/map"
-                component={() => (
-                  <Map darkMode={darkMode} setDarkMode={setDarkMode} />
-                )}
-              />
-              <PrivateRoute
-                exact
-                path="/account"
-                component={() => <MyAccount />}
-              />
-              {/* <Route exact path="/register" component={Register} />
+          <NodeProvider>
+            <DrawProvider>
+              <TreeProvider>
+                <SelectedProvider>
+                  <AddEditProvider>
+                    <ProfileProvider>
+                      <TeamProvider>
+                        <Router>
+                          <Navbar />
+                          <Switch>
+                            <PrivateRoute
+                              exact
+                              path="/map"
+                              component={() => (
+                                <Map
+                                  darkMode={darkMode}
+                                  setDarkMode={setDarkMode}
+                                />
+                              )}
+                            />
+                            <PrivateRoute
+                              exact
+                              path="/account"
+                              component={() => <MyAccount />}
+                            />
+                            {/* <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} /> */}
-              <Route exact path="/" component={Home} />
-              <Route path="/services" component={Services} />
-              <Route path="/features" component={Features} />
-              <Route path="/sign-up" component={SignUp} />
-              <Route path="/sign-in" component={SignIn} />
-              <Route path="*" component={NotFound} />
-            </Switch>
-          </Router>
+                            <Route exact path="/" component={Home} />
+                            <Route path="/services" component={Services} />
+                            <Route path="/features" component={Features} />
+                            <Route path="/sign-up" component={SignUp} />
+                            <Route path="/sign-in" component={SignIn} />
+                            <Route path="*" component={NotFound} />
+                          </Switch>
+                        </Router>
+                      </TeamProvider>
+                    </ProfileProvider>
+                  </AddEditProvider>
+                </SelectedProvider>
+              </TreeProvider>
+            </DrawProvider>
+          </NodeProvider>
         </MapProvider>
       </AuthProvider>
       {/* </Paper> */}

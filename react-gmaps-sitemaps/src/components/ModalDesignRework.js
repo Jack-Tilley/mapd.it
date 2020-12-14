@@ -10,7 +10,13 @@ import TextField from "@material-ui/core/TextField";
 import React, { useContext, useState } from "react";
 import ColorContainer from "./ColorContainer";
 import IconContainer from "./IconContainer";
-import { MapContext } from "./MapContext";
+import {
+  MapContext,
+  useDrawContext,
+  useAddEditContext,
+  useSelectedContext,
+  useTeamContext,
+} from "./MapContext";
 import TeamContainer from "./TeamContainer";
 
 const ModalDesignRework = ({
@@ -22,61 +28,8 @@ const ModalDesignRework = ({
   event,
   setEvent,
 }) => {
-  // const [
-  //   myMap,
-  //   setMyMap,
-  //   center,
-  //   setCenter,
-  //   isLoaded,
-  //   draw,
-  //   setDraw,
-  //   nodes,
-  //   setNodes,
-  //   activeNode,
-  //   setActiveNode,
-  //   icon,
-  //   setIcon,
-  //   shapes,
-  //   setShapes,
-  //   checked,
-  //   setChecked,
-  //   selected,
-  //   setSelected,
-  //   color,
-  //   setColor,
-  //   findNode,
-  //   removeNode,
-  //   nodeType,
-  //   setNodeType,
-  //   disabled,
-  //   setDisabled,
-  //   editing,
-  //   setEditing,
-  //   editValue,
-  //   setEditValue,
-  //   replaceNode,
-  //   editCleanup,
-  //   changeIcons,
-  //   description,
-  //   setDescription,
-  //   comment,
-  //   setComment,
-  //   la,
-  //   setLa,
-  //   auth,
-  //   setAuth,
-  //   profileId,
-  //   setProfileId,
-  //   teams,
-  //   setTeams,
-  //   selectedTeams,
-  //   setSelectedTeams,
-  //   updateNodes,
-  //   picture,
-  //   setPicture,
-  // ] = useContext(MapContext);
+  const { setDraw } = useDrawContext();
   const {
-    setDraw,
     icon,
     setIcon,
     color,
@@ -84,9 +37,20 @@ const ModalDesignRework = ({
     setNodeType,
     description,
     setDescription,
-    teams,
-    setSelectedTeams,
-  } = useContext(MapContext);
+  } = useAddEditContext();
+  const { teams, setSelectedTeams } = useTeamContext();
+  // const {
+  //   setDraw,
+  //   icon,
+  //   setIcon,
+  //   color,
+  //   setColor,
+  //   setNodeType,
+  //   description,
+  //   setDescription,
+  //   teams,
+  //   setSelectedTeams,
+  // } = useContext(MapContext);
 
   const [isDir, setIsDir] = useState(true);
   const [teamObjects, setTeamObjects] = useState([]);

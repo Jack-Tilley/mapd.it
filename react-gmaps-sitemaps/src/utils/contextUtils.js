@@ -105,19 +105,22 @@ export const editCleanup = (
   setShapes,
   setSelected,
   setIcon,
+  setColor,
   setNodeType,
   setDescription,
   setEditValue
 ) => {
-  let newChecked = checked.filter((node) => node !== selected.value);
-  newChecked.push(data.value);
-  setChecked(newChecked);
-  let newShapes = shapes.filter((node) => node.value !== selected.value);
-  newShapes.push(data);
-  setShapes(newShapes);
+  if (data !== null) {
+    let newChecked = checked.filter((node) => node !== selected.value);
+    newChecked.push(data.value);
+    setChecked(newChecked);
+    let newShapes = shapes.filter((node) => node.value !== selected.value);
+    newShapes.push(data);
+    setShapes(newShapes);
+  }
   setSelected(null);
   setIcon("search");
-  setIcon("black");
+  setColor("black");
   setDescription("");
   setNodeType(null);
   setEditValue("");
