@@ -283,8 +283,8 @@ const DrawingComponent = () => {
 
           // console.log("NEW NODE ADDED", res.data);
           newActiveNode.id = res.data.id;
-          let ret = updateNodes(profileId, setNodes, setTeams);
-          console.log("return value", ret);
+          updateNodes(profileId, setNodes, setTeams);
+          // console.log("return value", ret);
           setActiveNode(newActiveNode);
           setSelectedTeams();
           setChecked([...checked, newActiveNode.value]);

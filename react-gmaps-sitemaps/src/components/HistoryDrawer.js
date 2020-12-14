@@ -86,7 +86,7 @@ export default function HistoryDrawer() {
   );
 
   return (
-    <div style={{ position: "absolute", right: "1em", top: "1em" }}>
+    <div style={{ position: "absolute", top: "3em", left: "21.25em" }}>
       <Paper>
         <IconButton onClick={toggleDrawer(true)} size="small">
           <i className="material-icons icon-grey">{"event_note"}</i>

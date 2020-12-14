@@ -200,8 +200,15 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">
-          Edit Existing Node{" "}
-          <span style={{ color: "red" }}>{validationMessage}</span>
+          Edit Existing Item
+          {/* <span style={{ color: "red" }}>{validationMessage}</span> */}
+          <Button
+            style={{ position: "absolute", top: "1em", right: "1em" }}
+            onClick={handleClose}
+            color="default"
+          >
+            Cancel
+          </Button>
         </DialogTitle>
         <DialogContent scroll="paper" dividers={true}>
           <Grid container spacing={1}>
@@ -279,19 +286,32 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
               position: "absolute",
               // bottom: "1.5em",
               left: "1em",
+              marginRight: "20px",
             }}
             onClick={handleDelete}
+            variant="contained"
             color="secondary"
           >
             DELETE
           </Button>
-          <Button onClick={handleClose} color="default">
-            Cancel
-          </Button>
-          <Button onClick={() => handleSubmit(true)} color="primary">
+          <Button
+            style={{
+              height: "50px",
+              width: "80px",
+            }}
+            onClick={() => handleSubmit(true)}
+            color="primary"
+          >
             Update Location
           </Button>
-          <Button onClick={() => handleSubmit(false)} color="primary">
+          <Button
+            style={{
+              height: "50px",
+              width: "80px",
+            }}
+            onClick={() => handleSubmit(false)}
+            color="primary"
+          >
             Keep Location
           </Button>
         </DialogActions>

@@ -29,7 +29,7 @@ const RefreshButton = () => {
     updateNodes(profileId, setNodes, setTeams);
   };
   return (
-    <div style={{ position: "absolute", left: "19.5em", top: "3em" }}>
+    <div style={{ position: "absolute", left: "19em", top: "3em" }}>
       <Paper>
         <IconButton onClick={() => handleRefresh()} size="small">
           <i className="material-icons icon-grey">{"refresh"}</i>

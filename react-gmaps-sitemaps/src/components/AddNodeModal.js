@@ -19,7 +19,7 @@ import {
 } from "./MapContext";
 import TeamContainer from "./TeamContainer";
 
-const ModalDesignRework = ({
+const AddNodeModal = ({
   modalOpen,
   setModalOpen,
   label,
@@ -27,6 +27,8 @@ const ModalDesignRework = ({
   addItem,
   event,
   setEvent,
+  isParent,
+  setIsParent,
 }) => {
   const { setDraw } = useDrawContext();
   const {
@@ -59,28 +61,45 @@ const ModalDesignRework = ({
   const [teamError, setTeamError] = useState(false);
 
   const handleValidation = () => {
-    if (teamObjects.length < 1 && label === "") {
-      setValidationMessage("- Please fill out the required fields!");
-      setNameError(true);
-      setTeamError(true);
-    } else if (teamObjects.length < 1) {
-      setValidationMessage("- Please assign this item to at least one team!");
-      setNameError(false);
-      setTeamError(true);
-    } else if (label === "") {
-      setValidationMessage("- Please give this item a name!");
-      setNameError(true);
-      setTeamError(false);
+    if (isParent) {
+      if (teamObjects.length < 1 && label === "") {
+        setValidationMessage("- Please fill out the required fields!");
+        setNameError(true);
+        setTeamError(true);
+      } else if (teamObjects.length < 1) {
+        setValidationMessage("- Please assign this item to at least one team!");
+        setNameError(false);
+        setTeamError(true);
+      } else if (label === "") {
+        setValidationMessage("- Please give this item a name!");
+        setNameError(true);
+        setTeamError(false);
+      } else {
+        setValidationMessage("");
+        setNameError(false);
+        setTeamError(false);
+      }
     } else {
-      setValidationMessage("");
-      setNameError(false);
-      setTeamError(false);
+      if (label === "") {
+        setValidationMessage("- Please give this item a name!");
+        setNameError(true);
+        setTeamError(false);
+      } else {
+        setValidationMessage("");
+        setNameError(false);
+        setTeamError(false);
+      }
     }
   };
 
   const handleSubmit = (type) => {
-    if (teamObjects.length > 0 && label !== "") {
-      setSelectedTeams(teamObjects);
+    if (
+      (teamObjects.length > 0 && label !== "") ||
+      (label !== "" && !isParent)
+    ) {
+      if (isParent) {
+        setSelectedTeams(teamObjects);
+      }
       setNodeType(type);
       setDraw(true);
       addItem(event, isDir, type);
@@ -136,7 +155,7 @@ const ModalDesignRework = ({
     >
       {console.log("Add Modal Updated")}
       <DialogTitle id="form-dialog-title">
-        Add New Node <span style={{ color: "red" }}>{validationMessage}</span>
+        Add New Item <span style={{ color: "red" }}>{validationMessage}</span>
       </DialogTitle>
       <DialogContent scroll="paper" dividers={true}>
         <Grid container spacing={1}>
@@ -177,14 +196,16 @@ const ModalDesignRework = ({
             />
 
             <Grid container spacing={10} style={{ paddingTop: "1em" }}>
-              <Grid item xs={6}>
-                <TeamContainer
-                  teams={teams}
-                  handleSelectedTeamChange={handleSelectedTeamChange}
-                  teamObjects={teamObjects}
-                  teamError={teamError}
-                />
-              </Grid>
+              {isParent ? (
+                <Grid item xs={6}>
+                  <TeamContainer
+                    teams={teams}
+                    handleSelectedTeamChange={handleSelectedTeamChange}
+                    teamObjects={teamObjects}
+                    teamError={teamError}
+                  />
+                </Grid>
+              ) : null}
               {/* <Grid item xs={6}>
                 <DirContainer handleDirChange={handleDirChange} isDir={isDir} />
               </Grid> */}
@@ -221,11 +242,11 @@ const ModalDesignRework = ({
           Marker
         </Button>
         <Button onClick={() => handleSubmit("polyline")} color="primary">
-          Polyline
+          Outline
         </Button>
       </DialogActions>
     </Dialog>
   );
 };
 
-export default ModalDesignRework;
+export default AddNodeModal;

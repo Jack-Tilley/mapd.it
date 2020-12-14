@@ -14,7 +14,7 @@ import {
   useProfileContext,
 } from "./MapContext";
 import { findNode } from "../utils/contextUtils";
-import ModalDesignRework from "./ModalDesignRework";
+import AddNodeModal from "./AddNodeModal";
 
 const SiteTree = () => {
   const { checked, setChecked, shapes, setShapes } = useTreeContext();
@@ -45,6 +45,7 @@ const SiteTree = () => {
   const [label, setLabel] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [event, setEvent] = useState();
+  const [isParent, setIsParent] = useState(true);
 
   const onCheck = (checked, targetNode) => {
     // console.log("checkedlist", checked);
@@ -69,6 +70,7 @@ const SiteTree = () => {
 
     if (e.value.slice(-1) === "+" && !draw) {
       setEvent(e);
+      setIsParent(e.value.slice(-2) === "0+");
       setActiveNode(null);
       handleClickOpen();
     } else if (!draw) {
@@ -115,7 +117,7 @@ const SiteTree = () => {
         onExpand={onExpand}
         onClick={onClick}
       ></CheckboxTree>
-      <ModalDesignRework
+      <AddNodeModal
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
         label={label}
@@ -123,6 +125,8 @@ const SiteTree = () => {
         addItem={addItem}
         event={event}
         setEvent={setEvent}
+        isParent={isParent}
+        setIsParent={setIsParent}
       />
     </Paper>
   );

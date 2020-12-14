@@ -9,6 +9,7 @@ import ToolContainer from "./mapTools/ToolContainer";
 import SettingsModal from "./settings/SettingsModal";
 import ShapeSetter from "./ShapeSetter";
 import SiteTree from "./SiteTree";
+import PersonalLocator from "./PersonalLocator";
 
 const Map = ({ darkMode, setDarkMode }) => {
   // const [
@@ -86,6 +87,7 @@ const Map = ({ darkMode, setDarkMode }) => {
         />
         <HistoryDrawer />
         <ToolContainer />
+        <PersonalLocator setCenter={setCenter} />
       </GoogleMap>
     </>
   );

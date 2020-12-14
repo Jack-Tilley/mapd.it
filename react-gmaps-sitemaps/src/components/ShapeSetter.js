@@ -1,7 +1,6 @@
 import { Marker, Polyline } from "@react-google-maps/api";
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import {
-  MapContext,
   useTreeContext,
   useNodeContext,
   useSelectedContext,
@@ -9,38 +8,10 @@ import {
 import { findNode } from "../utils/contextUtils";
 
 const ShapeSetter = () => {
-  // const [
-  //   myMap,
-  //   setMyMap,
-  //   center,
-  //   setCenter,
-  //   isLoaded,
-  //   draw,
-  //   setDraw,
-  //   nodes,
-  //   setNodes,
-  //   activeNode,
-  //   setActiveNode,
-  //   icon,
-  //   setIcon,
-  //   shapes,
-  //   setShapes,
-  //   checked,
-  //   setChecked,
-  //   selected,
-  //   setSelected,
-  //   color,
-  //   setColor,
-  //   findNode,
-  // ] = useContext(MapContext);
   // const { shapes, nodes, setSelected } = useContext(MapContext);
   const { shapes } = useTreeContext();
   const { nodes } = useNodeContext();
   const { setSelected } = useSelectedContext();
-
-  // useEffect(() => {
-  //   console.log("shapes", shapes);
-  // }, [shapes]);
 
   return (
     <>
@@ -69,6 +40,8 @@ const ShapeSetter = () => {
                 origin: new window.google.maps.Point(0, 0),
                 anchor: new window.google.maps.Point(15, 15),
               }}
+              animation={window.google.maps.Animation.DROP}
+              // omMouseOut={() => handleMouseOut()}
               // onLoad={(marker) => {
               //   fetch("/newIcons/" + node.iconValue + ".svg")
               //     // Get SVG response as text
