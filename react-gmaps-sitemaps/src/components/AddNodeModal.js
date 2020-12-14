@@ -234,13 +234,22 @@ const AddNodeModal = ({
           }}
           onClick={handleClose}
           color="default"
+          variant="contained"
         >
           Cancel
         </Button>
-        <Button onClick={() => handleSubmit("marker")} color="primary">
+        <Button
+          variant="contained"
+          onClick={() => handleSubmit("marker")}
+          color="primary"
+        >
           Marker
         </Button>
-        <Button onClick={() => handleSubmit("polyline")} color="primary">
+        <Button
+          variant="contained"
+          onClick={() => handleSubmit("polyline")}
+          color="primary"
+        >
           Outline
         </Button>
       </DialogActions>

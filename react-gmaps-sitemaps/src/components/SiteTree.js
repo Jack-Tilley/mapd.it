@@ -26,7 +26,7 @@ const SiteTree = () => {
   const { setCenter } = useMapContext();
   useEffect(() => {
     updateNodes(profileId, setNodes, setTeams);
-  }, [profileId]);
+  }, [profileId, setTeams]);
   // const {
   //   checked,
   //   setChecked,

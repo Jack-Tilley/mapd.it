@@ -1,16 +1,19 @@
 import axios from "axios";
-export function validateSignup(values) {
+export async function validateSignup(values) {
   let errors = {};
 
   if (!values.username.trim()) {
     errors.username = "Username required";
   }
-  axios
-    .get("http://localhost:8000/api/users/")
+  await axios
+    .get(`http://localhost:8000/api/user_exists/${values.username.trim()}/`)
     .then((res) => {
-      // THIS IS REALLY BAD
-      if (res.data.some((user) => user.username === values.username))
-        errors.username = "username is already taken";
+      // console.log(res.data);
+      if (res.data.exists === true) {
+        // console.log(res.data);
+        errors.username = "This usename is already taken";
+        return "This username is already taken";
+      }
     })
     .catch((err) => console.log(err));
 
@@ -37,18 +40,21 @@ export function validateSignup(values) {
   return errors;
 }
 
-export function validateLogin(values) {
+export async function validateLogin(values) {
   let errors = {};
 
   if (!values.username.trim()) {
     errors.username = "Username required";
   }
-  axios
-    .get("http://localhost:8000/api/users/")
+  await axios
+    .get(`http://localhost:8000/api/user_exists/${values.username.trim()}/`)
     .then((res) => {
-      // THIS IS REALLY BAD
-      if (!res.data.some((user) => user.username === values.username))
-        errors.username = "this user doesn't exist";
+      // console.log(res.data);
+      if (res.data.exists === false) {
+        // console.log(res.data);
+        errors.username = "No user exists with this username";
+        return "No user exists with this username";
+      }
     })
     .catch((err) => console.log(err));
   // else if (!/^[A-Za-z]+/.test(values.name.trim())) {
@@ -58,15 +64,5 @@ export function validateLogin(values) {
   if (!values.password) {
     errors.password = "Password is required";
   }
-  return errors;
-}
-
-export function validateNode(values) {
-  let errors = {};
-
-  if (!values.nodeName.trim()) {
-    errors.nodeName = "Node name required";
-  }
-
   return errors;
 }

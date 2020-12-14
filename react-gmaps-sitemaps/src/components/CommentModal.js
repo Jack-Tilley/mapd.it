@@ -85,7 +85,7 @@ const CommentModal = ({ commentOpen, setCommentOpen }) => {
         fullWidth
       >
         <DialogTitle id="form-dialog-title">
-          Comments
+          Comments - {selected.label}
           <RefreshChatButton
             setComments={setComments}
             selected={selected}

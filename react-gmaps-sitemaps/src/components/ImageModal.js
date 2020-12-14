@@ -178,7 +178,9 @@ const ImageModal = ({
         scroll="paper"
         fullWidth
       >
-        <DialogTitle id="form-dialog-title">Images</DialogTitle>
+        <DialogTitle id="form-dialog-title">
+          Images - {selected.label}
+        </DialogTitle>
         {rendered === "show" ? (
           <DialogContent scroll="paper" dividers={true}>
             {images.length > 0 ? (
@@ -202,21 +204,38 @@ const ImageModal = ({
         <DialogActions>
           <div>
             <Button
-              style={{ position: "absolute", left: "1.5em" }}
+              style={{
+                position: "absolute",
+                left: "1.5em",
+                bottom: "2.5em",
+              }}
               onClick={handleClose}
-              color="secondary"
+              color="default"
+              variant="contained"
             >
               Done
             </Button>
             <Button
               onClick={handleViewClick}
               color={rendered === "show" ? "default" : "primary"}
+              variant="contained"
+              style={{
+                height: "50px",
+                width: "80px",
+              }}
             >
               View All
             </Button>
             <Button
               onClick={handleAddClick}
               color={rendered !== "show" ? "default" : "primary"}
+              variant="contained"
+              style={{
+                height: "80px",
+                width: "80px",
+                marginLeft: "5px",
+                marginRight: "5px",
+              }}
             >
               Upload New Image
             </Button>

@@ -8,9 +8,10 @@ import Grid from "@material-ui/core/Grid";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import ColorContainer from "./ColorContainer";
 import IconContainer from "./IconContainer";
+import { Icon } from "@material-ui/core";
 // import ImageUpload from "./ImageUpload";
 import { replaceNode, editCleanup, removeNode } from "../utils/contextUtils";
 import {
@@ -22,28 +23,6 @@ import {
 } from "./MapContext";
 
 const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
-  // const {
-  //   setDraw,
-  //   setNodes,
-  //   icon,
-  //   setIcon,
-  //   shapes,
-  //   setShapes,
-  //   checked,
-  //   setChecked,
-  //   selected,
-  //   setSelected,
-  //   color,
-  //   setColor,
-  //   removeNode,
-  //   setNodeType,
-  //   setEditing,
-  //   setEditValue,
-  //   description,
-  //   setDescription,
-  //   nodes,
-  // } = useContext(MapContext);
-
   const {
     icon,
     setIcon,
@@ -62,6 +41,7 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
 
   const [validationMessage, setValidationMessage] = useState("");
   const [nameError, setNameError] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   const handleValidation = () => {
     if (label === "") {
@@ -131,6 +111,7 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
   };
 
   const handleClose = () => {
+    setConfirmDelete(false);
     editCleanup(
       null,
       checked,
@@ -138,7 +119,7 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
       selected,
       setChecked,
       setShapes,
-      setSelected,
+      () => {},
       setIcon,
       setNodeType,
       setColor,
@@ -155,7 +136,10 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
   const handleColorChange = (event) => {
     setColor(event.target.value);
   };
-
+  const handleDeleteClicked = (e) => {
+    e.preventDefault();
+    setConfirmDelete(true);
+  };
   const handleDelete = () => {
     // console.log("selected", selected);
     // warning confirmation then...
@@ -206,6 +190,7 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
             style={{ position: "absolute", top: "1em", right: "1em" }}
             onClick={handleClose}
             color="default"
+            variant="contained"
           >
             Cancel
           </Button>
@@ -281,19 +266,36 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button
-            style={{
-              position: "absolute",
-              // bottom: "1.5em",
-              left: "1em",
-              marginRight: "20px",
-            }}
-            onClick={handleDelete}
-            variant="contained"
-            color="secondary"
-          >
-            DELETE
-          </Button>
+          {confirmDelete === false ? (
+            <Button
+              style={{
+                position: "absolute",
+                // bottom: "1.5em",
+                left: "1em",
+                marginRight: "20px",
+              }}
+              onClick={() => setConfirmDelete(true)}
+              variant="contained"
+              color="secondary"
+            >
+              DELETE
+            </Button>
+          ) : (
+            <Button
+              style={{
+                position: "absolute",
+                // bottom: "1.5em",
+                left: "1em",
+                marginRight: "20px",
+              }}
+              onClick={handleDelete}
+              variant="contained"
+              color="secondary"
+              endIcon={<i className="material-icons">{"delete"}</i>}
+            >
+              CONFIRM
+            </Button>
+          )}
           <Button
             style={{
               height: "50px",
@@ -301,6 +303,7 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
             }}
             onClick={() => handleSubmit(true)}
             color="primary"
+            variant="contained"
           >
             Update Location
           </Button>
@@ -311,6 +314,7 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
             }}
             onClick={() => handleSubmit(false)}
             color="primary"
+            variant="contained"
           >
             Keep Location
           </Button>
