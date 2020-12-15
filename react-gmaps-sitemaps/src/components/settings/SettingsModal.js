@@ -6,8 +6,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import IconButton from "@material-ui/core/IconButton";
 import { useGoogleMap } from "@react-google-maps/api";
-import React, { useContext, useEffect, useState } from "react";
-import { MapContext, useProfileContext, useTeamContext } from "../MapContext";
+import React, { useEffect, useState } from "react";
+import { useProfileContext, useTeamContext } from "../MapContext";
 import blackout from "../mapStyles/blackout";
 import bluegray from "../mapStyles/bluegray";
 import flatpale from "../mapStyles/flatpale";
@@ -184,67 +184,5 @@ const SettingsModal = ({
     </div>
   );
 };
-{
-  /* <DialogContent id="buttons">
-            <FormControl>
-              <Select
-                labelId="Map Style"
-                displayEmpty
-                id="mapstyle"
-                value={mapStyle}
-                onChange={(e) => changeOptions(e.target.value)}
-              >
-                <MenuItem value="">
-                  <em>Default</em>
-                </MenuItem>
-                <MenuItem value={"bluegray"}>BlueGray</MenuItem>
-                <MenuItem value={"greyscale"}>Greyscale</MenuItem>
-                <MenuItem value={"unsaturated"}>Unsaturated</MenuItem>
-                <MenuItem value={"paledawn"}>Paledawn</MenuItem>
-                <MenuItem value={"hopper"}>Hopper</MenuItem>
-                <MenuItem value={"vibrant"}>Vibrant</MenuItem>
-                <MenuItem value={"flatpale"}>FlatPale</MenuItem>
-                <MenuItem value={"night"}>Night</MenuItem>
-                <MenuItem value={"blackout"}>Blackout</MenuItem>
-              </Select>
-              <FormHelperText>Map Style</FormHelperText>
-            </FormControl>
-          </DialogContent>
-          <DialogContent>
-            <FormControl>
-              <Switch
-                checked={darkMode}
-                value={darkMode}
-                onClick={() => setDarkMode(!darkMode)}
-              />
-              <FormHelperText>Dark Mode</FormHelperText>
-            </FormControl>
-          </DialogContent>
-          <DialogContent>
-            <TeamLeave
-              teams={teams}
-              leaveTeamId={leaveTeamId}
-              setLeaveTeamId={setLeaveTeamId}
-              profileId={profileId}
-              updateNodes={updateNodes}
-            />
-          </DialogContent>
-          <DialogContent>
-            <TeamCreate
-              newTeam={newTeam}
-              setNewTeam={setNewTeam}
-              profileId={profileId}
-              updateNodes={updateNodes}
-            />
-          </DialogContent>
-          <DialogContent>
-            <TeamJoin
-              joinTeam={joinTeam}
-              setJoinTeam={setJoinTeam}
-              profileId={profileId}
-              updateNodes={updateNodes}
-            />
-          </DialogContent> */
-}
 
 export default SettingsModal;

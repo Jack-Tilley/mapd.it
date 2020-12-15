@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import FormSignup from "./FormSignup";
 import FormSuccess from "./FormSuccess";
 import axios from "axios";
+import Footer from "../pages/Footer/Footer";
 
 const RegisterForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -23,7 +24,7 @@ const RegisterForm = () => {
     <>
       <div className="form-container">
         <div className="form-content-left">
-          <img className="form-img" src="images/svg-2.svg" alt="spaceship" />
+          <img className="form-img" src="images/svg-2.svg" alt="sign-in" />
         </div>
         {!isSubmitted ? (
           <FormSignup submitForm={submitForm} />
@@ -31,6 +32,7 @@ const RegisterForm = () => {
           <FormSuccess place="/login" />
         )}
       </div>
+      <Footer />
     </>
   );
 };

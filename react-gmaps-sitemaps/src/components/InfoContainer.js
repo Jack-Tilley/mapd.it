@@ -46,7 +46,6 @@ const InfoContainer = () => {
     axios
       .get(`http://localhost:8000/api/allNodes/${selected.id}/images`)
       .then((res) => {
-        console.log(res.data);
         setImages(res.data);
       })
       .catch((err) => console.log(err));
@@ -79,7 +78,6 @@ const InfoContainer = () => {
       }}
     >
       <div>
-        {console.log("Infowindow updated")}
         <h4 style={{ color: "black" }}>{selected.label}</h4>
         <p style={{ color: "black" }}>{selected.description}</p>
         <IconButton onClick={handleEditClick}>

@@ -8,7 +8,7 @@ export default function PanTool({
 }) {
   return (
     <>
-      <div style={{ position: "absolute", left: "15em", top: "3em" }}>
+      <div style={{ position: "absolute", left: "14.5em", top: "3em" }}>
         <Paper>
           <IconButton
             onClick={() => setDistanceToolRendered(false)}

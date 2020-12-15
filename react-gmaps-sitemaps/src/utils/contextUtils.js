@@ -1,8 +1,12 @@
 import axios from "axios";
 
 export let addNode = {
-  value: "/+",
-  // label: "Add a new item",
+  value: "/0+",
+  label: (
+    <sup style={{ color: "blue" }}>
+      <small>ADD NEW</small>
+    </sup>
+  ),
   parent: null,
   apiPath: "HI/there",
   latLngArr: ["0", "0"],
@@ -61,8 +65,12 @@ export const changeNodeIcons = (node) => {
       newNode.children[i] = child;
     }
     newNode.children.unshift({
-      value: newNode.value + "/+",
-      // label: "Add a new item",
+      value: newNode.value + "/1+",
+      label: (
+        <sup style={{ color: "blue" }}>
+          <small>ADD NEW</small>
+        </sup>
+      ),
       latLngArr: ["0", "0"],
       nodeType: "ADD",
       icon: (
@@ -154,9 +162,12 @@ export const updateNodes = (profileId, setNodes, setTeams) => {
       for (let i = 0; i < newNodes.length; i++) {
         if (newNodes[i].isDir) {
           newNodes[i].children.unshift({
-            value: newNodes[i].value + "/+",
-            // label: "Add a new item",
-            apiPath: newNodes[i].value + "/+",
+            value: newNodes[i].value + "/1+",
+            label: (
+              <sup style={{ color: "blue" }}>
+                <small>ADD NEW</small>
+              </sup>
+            ),
             latLngArr: ["0", "0"],
             nodeType: "ADD",
             icon: (

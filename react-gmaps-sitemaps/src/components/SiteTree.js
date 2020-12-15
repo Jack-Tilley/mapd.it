@@ -9,25 +9,24 @@ import {
   useDrawContext,
   useNodeContext,
   useAddEditContext,
-  useMapContext,
   useTeamContext,
   useProfileContext,
 } from "./MapContext";
 import { findNode } from "../utils/contextUtils";
-import ModalDesignRework from "./ModalDesignRework";
+import { useGoogleMap } from "@react-google-maps/api";
+import AddNodeModal from "./AddNodeModal";
 
-const SiteTree = () => {
+const SiteTree = ({ setCenter }) => {
   const { checked, setChecked, shapes, setShapes } = useTreeContext();
   const { draw } = useDrawContext();
   const { nodes, setNodes, setActiveNode } = useNodeContext();
   const { setTeams } = useTeamContext();
   const { profileId } = useProfileContext();
   const { color, description, icon } = useAddEditContext();
-  const { setCenter } = useMapContext();
+  const map = useGoogleMap();
   useEffect(() => {
-    console.log("RESET TTREE");
     updateNodes(profileId, setNodes, setTeams);
-  }, [profileId]);
+  }, [profileId, setTeams]);
   // const {
   //   checked,
   //   setChecked,
@@ -45,6 +44,7 @@ const SiteTree = () => {
   const [label, setLabel] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [event, setEvent] = useState();
+  const [isParent, setIsParent] = useState(true);
 
   const onCheck = (checked, targetNode) => {
     // console.log("checkedlist", checked);
@@ -69,14 +69,19 @@ const SiteTree = () => {
 
     if (e.value.slice(-1) === "+" && !draw) {
       setEvent(e);
+      setIsParent(e.value.slice(-2) === "0+");
       setActiveNode(null);
       handleClickOpen();
     } else if (!draw) {
       let node = findNode(e.value, nodes);
-      setCenter({
+      map.panTo({
         lat: parseFloat(node.latLngArr[0]),
         lng: parseFloat(node.latLngArr[1]),
       });
+      // setCenter({
+      //   lat: parseFloat(node.latLngArr[0]),
+      //   lng: parseFloat(node.latLngArr[1]),
+      // });
     }
   };
 
@@ -115,7 +120,7 @@ const SiteTree = () => {
         onExpand={onExpand}
         onClick={onClick}
       ></CheckboxTree>
-      <ModalDesignRework
+      <AddNodeModal
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
         label={label}
@@ -123,6 +128,8 @@ const SiteTree = () => {
         addItem={addItem}
         event={event}
         setEvent={setEvent}
+        isParent={isParent}
+        setIsParent={setIsParent}
       />
     </Paper>
   );

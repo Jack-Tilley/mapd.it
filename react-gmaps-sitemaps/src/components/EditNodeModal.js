@@ -8,9 +8,10 @@ import Grid from "@material-ui/core/Grid";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import ColorContainer from "./ColorContainer";
 import IconContainer from "./IconContainer";
+import { Icon } from "@material-ui/core";
 // import ImageUpload from "./ImageUpload";
 import { replaceNode, editCleanup, removeNode } from "../utils/contextUtils";
 import {
@@ -22,28 +23,6 @@ import {
 } from "./MapContext";
 
 const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
-  // const {
-  //   setDraw,
-  //   setNodes,
-  //   icon,
-  //   setIcon,
-  //   shapes,
-  //   setShapes,
-  //   checked,
-  //   setChecked,
-  //   selected,
-  //   setSelected,
-  //   color,
-  //   setColor,
-  //   removeNode,
-  //   setNodeType,
-  //   setEditing,
-  //   setEditValue,
-  //   description,
-  //   setDescription,
-  //   nodes,
-  // } = useContext(MapContext);
-
   const {
     icon,
     setIcon,
@@ -62,6 +41,7 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
 
   const [validationMessage, setValidationMessage] = useState("");
   const [nameError, setNameError] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   const handleValidation = () => {
     if (label === "") {
@@ -131,6 +111,9 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
   };
 
   const handleClose = () => {
+    setConfirmDelete(false);
+    setValidationMessage("");
+    setNameError(false);
     editCleanup(
       null,
       checked,
@@ -138,7 +121,7 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
       selected,
       setChecked,
       setShapes,
-      setSelected,
+      () => {},
       setIcon,
       setNodeType,
       setColor,
@@ -155,7 +138,10 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
   const handleColorChange = (event) => {
     setColor(event.target.value);
   };
-
+  const handleDeleteClicked = (e) => {
+    e.preventDefault();
+    setConfirmDelete(true);
+  };
   const handleDelete = () => {
     // console.log("selected", selected);
     // warning confirmation then...
@@ -200,8 +186,16 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">
-          Edit Existing Node{" "}
-          <span style={{ color: "red" }}>{validationMessage}</span>
+          Edit Existing Item
+          {/* <span style={{ color: "red" }}>{validationMessage}</span> */}
+          <Button
+            style={{ position: "absolute", top: "1em", right: "1em" }}
+            onClick={handleClose}
+            color="default"
+            variant="contained"
+          >
+            Cancel
+          </Button>
         </DialogTitle>
         <DialogContent scroll="paper" dividers={true}>
           <Grid container spacing={1}>
@@ -274,24 +268,56 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
           </Grid>
         </DialogContent>
         <DialogActions>
+          {confirmDelete === false ? (
+            <Button
+              style={{
+                position: "absolute",
+                // bottom: "1.5em",
+                left: "1em",
+                marginRight: "20px",
+              }}
+              onClick={() => setConfirmDelete(true)}
+              variant="contained"
+              color="secondary"
+            >
+              DELETE
+            </Button>
+          ) : (
+            <Button
+              style={{
+                position: "absolute",
+                // bottom: "1.5em",
+                left: "1em",
+                marginRight: "20px",
+              }}
+              onClick={handleDelete}
+              variant="contained"
+              color="secondary"
+              endIcon={<i className="material-icons">{"delete"}</i>}
+            >
+              CONFIRM
+            </Button>
+          )}
           <Button
             style={{
-              position: "absolute",
-              // bottom: "1.5em",
-              left: "1em",
+              height: "50px",
+              width: "80px",
             }}
-            onClick={handleDelete}
-            color="secondary"
+            onClick={() => handleSubmit(true)}
+            color="primary"
+            variant="contained"
           >
-            DELETE
-          </Button>
-          <Button onClick={handleClose} color="default">
-            Cancel
-          </Button>
-          <Button onClick={() => handleSubmit(true)} color="primary">
             Update Location
           </Button>
-          <Button onClick={() => handleSubmit(false)} color="primary">
+          <Button
+            style={{
+              height: "50px",
+              width: "80px",
+            }}
+            onClick={() => handleSubmit(false)}
+            color="primary"
+            variant="contained"
+          >
             Keep Location
           </Button>
         </DialogActions>

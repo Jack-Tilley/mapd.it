@@ -113,8 +113,16 @@ function Navbar() {
         <nav className="navbar">
           <div className="navbar-container container">
             <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
+              {/* <img
+                className="navbar-icon"
+                src="/mapdit_logo_cropped.png"
+                height="100%"
+                alt="mapdit_logo"
+              /> */}
               <MdTonality className="navbar-icon" />
-              mapd.it
+              <b>
+                <i>mapd.it</i>
+              </b>
             </Link>
             <div className="menu-icon" onClick={handleClick}>
               {click ? <FaTimes /> : <FaBars />}
@@ -127,11 +135,11 @@ function Navbar() {
               </li>
               <li className="nav-item">
                 <Link
-                  to="/features"
+                  to="/about"
                   className="nav-links"
                   onClick={closeMobileMenu}
                 >
-                  Features
+                  About
                 </Link>
               </li>
               <li className="nav-item">

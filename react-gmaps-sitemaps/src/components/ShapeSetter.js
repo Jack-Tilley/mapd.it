@@ -1,7 +1,6 @@
 import { Marker, Polyline } from "@react-google-maps/api";
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import {
-  MapContext,
   useTreeContext,
   useNodeContext,
   useSelectedContext,
@@ -9,38 +8,10 @@ import {
 import { findNode } from "../utils/contextUtils";
 
 const ShapeSetter = () => {
-  // const [
-  //   myMap,
-  //   setMyMap,
-  //   center,
-  //   setCenter,
-  //   isLoaded,
-  //   draw,
-  //   setDraw,
-  //   nodes,
-  //   setNodes,
-  //   activeNode,
-  //   setActiveNode,
-  //   icon,
-  //   setIcon,
-  //   shapes,
-  //   setShapes,
-  //   checked,
-  //   setChecked,
-  //   selected,
-  //   setSelected,
-  //   color,
-  //   setColor,
-  //   findNode,
-  // ] = useContext(MapContext);
   // const { shapes, nodes, setSelected } = useContext(MapContext);
   const { shapes } = useTreeContext();
   const { nodes } = useNodeContext();
   const { setSelected } = useSelectedContext();
-
-  // useEffect(() => {
-  //   console.log("shapes", shapes);
-  // }, [shapes]);
 
   return (
     <>
@@ -55,6 +26,9 @@ const ShapeSetter = () => {
         // console.log(<i className="material-icons icon-grey">{"refresh"}</i>);
         // console.log(<AccessAlarmIcon />);
         if (node.nodeType === "marker") {
+          // let marker = new window.google.maps.Marker();
+          // marker.setIcon("/newIcons/" + node.iconValue + ".svg");
+          // console.log(marker);
           return (
             <Marker
               position={{
@@ -68,7 +42,11 @@ const ShapeSetter = () => {
                 scaledSize: new window.google.maps.Size(30, 30),
                 origin: new window.google.maps.Point(0, 0),
                 anchor: new window.google.maps.Point(15, 15),
+                strokeColor: "#AB47BC",
+                fillColor: "#BA68C8",
               }}
+              animation={window.google.maps.Animation.DROP}
+              // omMouseOut={() => handleMouseOut()}
               // onLoad={(marker) => {
               //   fetch("/newIcons/" + node.iconValue + ".svg")
               //     // Get SVG response as text

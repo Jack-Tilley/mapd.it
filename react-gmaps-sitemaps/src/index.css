@@ -71,3 +71,26 @@ div.react-checkbox-tree {
 span .rct-node-icon {
   display: inline-block;
 }
+
+.autocomplete {
+  top: 1em;
+  left: 16em;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  width: 250px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  font-size: 14px;
+  outline: none;
+  text-overflow: ellipses;
+  position: absolute;
+  margin: auto;
+}
+
+@media screen and (max-width: 550px) {
+  .autocomplete {
+    width: 145px;
+  }
+}

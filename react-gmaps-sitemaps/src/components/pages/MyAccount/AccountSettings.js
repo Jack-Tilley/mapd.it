@@ -24,7 +24,6 @@ const AccountSettings = ({ rendered, profileId }) => {
       .then((res) => {
         setEmail(res.data.user.email);
         setUsername(res.data.user.username);
-        console.log(res.data);
       })
       .catch((err) => console.log(err));
   }, [profileId]);

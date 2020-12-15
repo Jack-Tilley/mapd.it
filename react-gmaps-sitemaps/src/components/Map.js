@@ -1,43 +1,20 @@
 import { GoogleMap } from "@react-google-maps/api";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import AutocompleteBox from "./AutocompleteBox";
 import DrawingComponent from "./DrawingComponent";
 import HistoryDrawer from "./HistoryDrawer";
 import InfoContainer from "./InfoContainer";
-import { MapContext, useMapContext, useSelectedContext } from "./MapContext";
+import { useMapContext, useSelectedContext } from "./MapContext";
 import ToolContainer from "./mapTools/ToolContainer";
 import SettingsModal from "./settings/SettingsModal";
 import ShapeSetter from "./ShapeSetter";
 import SiteTree from "./SiteTree";
+import PersonalLocator from "./PersonalLocator";
+import { Helmet } from "react-helmet";
 
 const Map = ({ darkMode, setDarkMode }) => {
-  // const [
-  //   myMap,
-  //   setMyMap,
-  //   center,
-  //   setCenter,
-  //   isLoaded,
-  //   draw,
-  //   setDraw,
-  //   nodes,
-  //   setNodes,
-  //   activeNode,
-  //   setActiveNode,
-  //   icon,
-  //   setIcon,
-  //   shapes,
-  //   setShapes,
-  //   checked,
-  //   setChecked,
-  //   selected,
-  //   setSelected,
-  // ] = useContext(MapContext);
-  const { center, setCenter, setMyMap, isLoaded } = useMapContext();
-  const { selected, setSelected } = useSelectedContext();
-  // const [center, setCenter] = values.center;
-  // const [myMap, setMyMap] = values.myMap;
-  // const [selected, setSelected] = values.myMap;
-  // const [isLoaded] = values.isLoaded;
+  const { center, setMyMap, isLoaded } = useMapContext();
+  const { setSelected } = useSelectedContext();
 
   const [settingsOpen, setSettingsOpen] = useState(false);
 
@@ -48,8 +25,13 @@ const Map = ({ darkMode, setDarkMode }) => {
 
   const renderMap = () => (
     <>
-      {/* 80 px is our view height of the navbar */}
-      {console.log("Map updated")}
+      <Helmet>
+        <title>Map | mapd.it</title>
+        <meta
+          name="description"
+          content="Collaborate with your team no matter where you are. Use the map to plan and organize your jobs."
+        />
+      </Helmet>
       <GoogleMap
         mapContainerStyle={{
           // paddingTop: "80px",
@@ -71,9 +53,9 @@ const Map = ({ darkMode, setDarkMode }) => {
         onClick={() => setSelected(null)}
       >
         <div className="treeContainer">
-          <SiteTree className="treeContainer" />
+          <SiteTree />
         </div>
-        <AutocompleteBox center={center} setCenter={setCenter} />
+        <AutocompleteBox />
         <DrawingComponent />
         <ShapeSetter />
         {/* <Directions /> */}
@@ -86,6 +68,7 @@ const Map = ({ darkMode, setDarkMode }) => {
         />
         <HistoryDrawer />
         <ToolContainer />
+        <PersonalLocator />
       </GoogleMap>
     </>
   );

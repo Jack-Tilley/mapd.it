@@ -1,15 +1,7 @@
 import React from "react";
 import "./Footer.css";
-import { Button } from "../../Button";
 import { Link } from "react-router-dom";
-import {
-  FaFacebook,
-  FaInstagram,
-  FaYoutube,
-  FaTwitter,
-  FaLinkedin,
-  FaGithub,
-} from "react-icons/fa";
+import { FaYoutube, FaTwitter, FaLinkedin, FaGithub } from "react-icons/fa";
 import { MdTonality } from "react-icons/md";
 
 function Footer() {
@@ -38,7 +30,7 @@ function Footer() {
         <div className="footer-link-wrapper">
           <div className="footer-link-items">
             <h2>About Us</h2>
-            <Link to="/features">About</Link>
+            <Link to="/about">About</Link>
             <a
               target="_blank"
               rel="noreferrer"
@@ -46,12 +38,12 @@ function Footer() {
             >
               Creator
             </a>
-            <Link to="/features">How it works</Link>
-            <Link to="/">Contact</Link>
+            <Link to="/features">Features</Link>
+            <Link to="/contact">Contact</Link>
           </div>
           <div className="footer-link-items">
             <h2>Contact Us</h2>
-            <Link to="/">Contact</Link>
+            <Link to="/contact">Contact</Link>
             <Link to="/features">Features</Link>
             <a
               target="_blank"
@@ -60,7 +52,7 @@ function Footer() {
             >
               Creator
             </a>
-            <Link to="/">Email</Link>
+            <Link to="/">Other Contact</Link>
           </div>
         </div>
         <div className="footer-link-wrapper">

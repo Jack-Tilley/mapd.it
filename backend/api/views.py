@@ -149,6 +149,19 @@ class UserView(viewsets.ModelViewSet):
     http_method_names = ['get']
 
 
+class UserExists(APIView):
+    """
+    List all snippets, or create a new snippet.
+    """
+
+    def get(self, request, format=None, *args, **kwargs):
+        print(request)
+        if User.objects.filter(username=self.kwargs['username']).exists():
+            return Response({'exists': True})
+        # serializer = UserSerializer(user, many=True)
+        return Response({'exists': False})
+
+
 class HistoryView(viewsets.ModelViewSet):
     serializer_class = HistorySerializer
     queryset = Node.objects.all()

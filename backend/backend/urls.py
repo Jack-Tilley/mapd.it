@@ -38,6 +38,7 @@ router.register(r'users', views.UserView, 'users')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('api/user_exists/<username>/', views.UserExists.as_view()),
     path('api/register/', views.RegisterAPI.as_view(), name='register'),
     path('api/login/', views.LoginAPI.as_view(), name='login'),
     path('api/logout/', knox_views.LogoutView.as_view(), name='logout'),
