@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-computed-key */
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
@@ -6,37 +7,53 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
-import MailIcon from "@material-ui/icons/Mail";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import GroupIcon from "@material-ui/icons/Group";
+import MapIcon from "@material-ui/icons/Map";
+import BarChartIcon from "@material-ui/icons/BarChart";
 import { Helmet } from "react-helmet";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import {
-  MapContext,
   useTeamContext,
   useProfileContext,
   useNodeContext,
 } from "../../MapContext";
-import AccountPage from "../../settings/accountSettings/AccountPage";
+// import AccountPage from "../../settings/accountSettings/AccountPage";
 import TeamPage from "../../settings/teamSettings/TeamPage";
 import AccountSettings from "./AccountSettings";
+import ComingSoon from "./ComingSoon";
 import { updateNodes } from "../../../utils/contextUtils";
-
-const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
   drawer: {
-    width: drawerWidth,
+    width: 240,
+    ["@media (max-width:550px)"]: {
+      // eslint-disable-line no-useless-computed-key
+      width: "60px",
+    },
+    // width: drawerWidth,
     zIndex: 10,
     flexShrink: 0,
     // color: theme.palette.text,
   },
   drawerPaper: {
-    width: drawerWidth,
     color: "#f7f8fa",
     background: "#1c2237",
+    width: 240,
+    ["@media (max-width:550px)"]: {
+      // eslint-disable-line no-useless-computed-key
+      width: "60px",
+    },
     // color: theme.palette.text,
+  },
+  settings: {
+    ["@media (max-width:550px)"]: {
+      // eslint-disable-line no-useless-computed-key
+      display: "None",
+    },
   },
   drawerContainer: {
     overflow: "auto",
@@ -81,7 +98,10 @@ const MyAccount = () => {
             <List>
               <ListItem key={"initial"}></ListItem>
               <ListItem key={"SETTINGS"}>
-                <ListItemText primary={"SETTINGS"} />
+                <ListItemText
+                  className={classes.settings}
+                  primary={"SETTINGS"}
+                />
               </ListItem>
               <Divider light={true} />
               <ListItem
@@ -90,7 +110,7 @@ const MyAccount = () => {
                 onClick={() => handleTabChange("account")}
               >
                 <ListItemIcon>
-                  <MailIcon style={{ color: "#f7f8fa" }} />
+                  <AccountCircleIcon style={{ color: "#f7f8fa" }} />
                 </ListItemIcon>
                 <ListItemText primary={"Account"} />
               </ListItem>
@@ -101,7 +121,7 @@ const MyAccount = () => {
                 onClick={() => handleTabChange("teams")}
               >
                 <ListItemIcon>
-                  <MailIcon style={{ color: "#f7f8fa" }} />
+                  <GroupIcon style={{ color: "#f7f8fa" }} />
                 </ListItemIcon>
                 <ListItemText primary={"Teams"} />
               </ListItem>
@@ -112,7 +132,7 @@ const MyAccount = () => {
                 onClick={() => handleTabChange("map")}
               >
                 <ListItemIcon>
-                  <MailIcon style={{ color: "#f7f8fa" }} />
+                  <MapIcon style={{ color: "#f7f8fa" }} />
                 </ListItemIcon>
                 <ListItemText primary={"Map - Coming Soon"} />
               </ListItem>
@@ -122,7 +142,7 @@ const MyAccount = () => {
                 onClick={() => handleTabChange("insights")}
               >
                 <ListItemIcon>
-                  <MailIcon style={{ color: "#f7f8fa" }} />
+                  <BarChartIcon style={{ color: "#f7f8fa" }} />
                 </ListItemIcon>
                 <ListItemText primary={"Insights - Coming Soon"} />
               </ListItem>
@@ -153,6 +173,11 @@ const MyAccount = () => {
               updateNodes={updateNodes}
               setNodes={setNodes}
               setTeams={setTeams}
+            />
+            <ComingSoon rendered={picked === "map" ? true : false} page="map" />
+            <ComingSoon
+              rendered={picked === "insights" ? true : false}
+              page="insights"
             />
             {/* <MapPage rendered={true} teams={teams} profileId={profileId} updateNodes={updateNodes}/> */}
             {/* <Logout rendered={picked === "logout" ? true : false} /> */}
