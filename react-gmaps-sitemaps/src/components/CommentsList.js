@@ -25,13 +25,12 @@ const CommentsList = ({ comments, bottomRef, scrollToBottom }) => {
   return comments.length > 0 ? (
     <List className={classes.root}>
       {comments.map((comment) => (
-        <>
-          <ListItem alignItems="flex-start" key={comment.id + comment.created}>
-            <ListItemAvatar key={comment.created}>
+        <div key={comment.id}>
+          <ListItem alignItems="flex-start">
+            <ListItemAvatar>
               <Avatar>{comment.profile.user.username.charAt(0)} </Avatar>
             </ListItemAvatar>
             <ListItemText
-              key="1"
               primary={comment.content}
               secondary={
                 <>
@@ -40,7 +39,6 @@ const CommentsList = ({ comments, bottomRef, scrollToBottom }) => {
                     variant="body2"
                     className={classes.inline}
                     color="textPrimary"
-                    key="1"
                   >
                     {comment.profile.user.username}
                   </Typography>
@@ -49,8 +47,8 @@ const CommentsList = ({ comments, bottomRef, scrollToBottom }) => {
               }
             />
           </ListItem>
-          <Divider key={comment.created + "divider"} />
-        </>
+          <Divider />
+        </div>
       ))}
     </List>
   ) : (

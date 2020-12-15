@@ -1,4 +1,4 @@
-export default [
+export const hopper = [
   {
     featureType: "water",
     elementType: "geometry",

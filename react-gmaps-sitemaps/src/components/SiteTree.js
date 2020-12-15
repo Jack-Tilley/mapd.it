@@ -16,7 +16,7 @@ import { findNode } from "../utils/contextUtils";
 import { useGoogleMap } from "@react-google-maps/api";
 import AddNodeModal from "./AddNodeModal";
 
-const SiteTree = ({ setCenter }) => {
+const SiteTree = () => {
   const { checked, setChecked, shapes, setShapes } = useTreeContext();
   const { draw } = useDrawContext();
   const { nodes, setNodes, setActiveNode } = useNodeContext();
@@ -26,7 +26,7 @@ const SiteTree = ({ setCenter }) => {
   const map = useGoogleMap();
   useEffect(() => {
     updateNodes(profileId, setNodes, setTeams);
-  }, [profileId, setTeams]);
+  }, []);
   // const {
   //   checked,
   //   setChecked,

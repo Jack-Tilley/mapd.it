@@ -1,4 +1,4 @@
-export default [
+export const greyscale = [
   {
     featureType: "all",
     elementType: "all",

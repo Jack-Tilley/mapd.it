@@ -10,7 +10,6 @@ const CustomPolyline = ({ node, setSelected, path }) => {
 
   const handleMouseOver = (e) => {
     setOverlayPosition({ lat: e.latLng.lat(), lng: e.latLng.lng() });
-    console.log(e.latLng.lat());
     setShowTitle(true);
   };
   const handleMouseOut = (e) => {
