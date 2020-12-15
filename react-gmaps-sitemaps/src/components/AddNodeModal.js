@@ -7,14 +7,12 @@ import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import ColorContainer from "./ColorContainer";
 import IconContainer from "./IconContainer";
 import {
-  MapContext,
   useDrawContext,
   useAddEditContext,
-  useSelectedContext,
   useTeamContext,
 } from "./MapContext";
 import TeamContainer from "./TeamContainer";
@@ -41,18 +39,6 @@ const AddNodeModal = ({
     setDescription,
   } = useAddEditContext();
   const { teams, setSelectedTeams } = useTeamContext();
-  // const {
-  //   setDraw,
-  //   icon,
-  //   setIcon,
-  //   color,
-  //   setColor,
-  //   setNodeType,
-  //   description,
-  //   setDescription,
-  //   teams,
-  //   setSelectedTeams,
-  // } = useContext(MapContext);
 
   const [isDir, setIsDir] = useState(true);
   const [teamObjects, setTeamObjects] = useState([]);

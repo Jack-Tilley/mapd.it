@@ -1,15 +1,22 @@
 import { Paper } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
-import React, { useState } from "react";
+import React from "react";
+import { useGoogleMap } from "@react-google-maps/api";
 
-export default function PersonalLocator({ setCenter }) {
+export default function PersonalLocator() {
+  const map = useGoogleMap();
   const handleClick = (e) => {
     e.preventDefault();
-    navigator.geolocation.getCurrentPosition((position) =>
-      setCenter({
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      })
+    navigator.geolocation.getCurrentPosition(
+      (position) =>
+        map.panTo({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        })
+      //   setCenter({
+      //     lat: position.coords.latitude,
+      //     lng: position.coords.longitude,
+      //   })
     );
     //   setCenter()
   };

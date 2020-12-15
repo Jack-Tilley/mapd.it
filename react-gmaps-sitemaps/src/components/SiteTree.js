@@ -9,21 +9,21 @@ import {
   useDrawContext,
   useNodeContext,
   useAddEditContext,
-  useMapContext,
   useTeamContext,
   useProfileContext,
 } from "./MapContext";
 import { findNode } from "../utils/contextUtils";
+import { useGoogleMap } from "@react-google-maps/api";
 import AddNodeModal from "./AddNodeModal";
 
-const SiteTree = () => {
+const SiteTree = ({ setCenter }) => {
   const { checked, setChecked, shapes, setShapes } = useTreeContext();
   const { draw } = useDrawContext();
   const { nodes, setNodes, setActiveNode } = useNodeContext();
   const { setTeams } = useTeamContext();
   const { profileId } = useProfileContext();
   const { color, description, icon } = useAddEditContext();
-  const { setCenter } = useMapContext();
+  const map = useGoogleMap();
   useEffect(() => {
     updateNodes(profileId, setNodes, setTeams);
   }, [profileId, setTeams]);
@@ -74,10 +74,14 @@ const SiteTree = () => {
       handleClickOpen();
     } else if (!draw) {
       let node = findNode(e.value, nodes);
-      setCenter({
+      map.panTo({
         lat: parseFloat(node.latLngArr[0]),
         lng: parseFloat(node.latLngArr[1]),
       });
+      // setCenter({
+      //   lat: parseFloat(node.latLngArr[0]),
+      //   lng: parseFloat(node.latLngArr[1]),
+      // });
     }
   };
 

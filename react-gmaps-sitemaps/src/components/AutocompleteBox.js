@@ -1,23 +1,28 @@
 import { Paper } from "@material-ui/core";
-import { Autocomplete } from "@react-google-maps/api";
+import { Autocomplete, useGoogleMap } from "@react-google-maps/api";
 import React, { useState } from "react";
 
 // pac-container {
 //   background-color: blue !important;
 // }
 
-const AutocompleteBox = ({ center, setCenter }) => {
+const AutocompleteBox = () => {
   const [autocomplete, setAutocomplete] = useState(null);
+  const map = useGoogleMap();
 
   return (
     <Autocomplete
       onLoad={(autoc) => setAutocomplete(autoc)}
       onPlaceChanged={() => {
         if (autocomplete !== null) {
-          setCenter({
+          map.panTo({
             lat: autocomplete.getPlace().geometry.location.lat(),
             lng: autocomplete.getPlace().geometry.location.lng(),
           });
+          // setCenter({
+          //   lat: autocomplete.getPlace().geometry.location.lat(),
+          //   lng: autocomplete.getPlace().geometry.location.lng(),
+          // });
         }
       }}
     >

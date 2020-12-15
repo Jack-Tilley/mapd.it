@@ -1,10 +1,10 @@
 import { GoogleMap } from "@react-google-maps/api";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import AutocompleteBox from "./AutocompleteBox";
 import DrawingComponent from "./DrawingComponent";
 import HistoryDrawer from "./HistoryDrawer";
 import InfoContainer from "./InfoContainer";
-import { MapContext, useMapContext, useSelectedContext } from "./MapContext";
+import { useMapContext, useSelectedContext } from "./MapContext";
 import ToolContainer from "./mapTools/ToolContainer";
 import SettingsModal from "./settings/SettingsModal";
 import ShapeSetter from "./ShapeSetter";
@@ -13,7 +13,7 @@ import PersonalLocator from "./PersonalLocator";
 import { Helmet } from "react-helmet";
 
 const Map = ({ darkMode, setDarkMode }) => {
-  const { center, setCenter, setMyMap, isLoaded } = useMapContext();
+  const { center, setMyMap, isLoaded } = useMapContext();
   const { setSelected } = useSelectedContext();
 
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -53,9 +53,9 @@ const Map = ({ darkMode, setDarkMode }) => {
         onClick={() => setSelected(null)}
       >
         <div className="treeContainer">
-          <SiteTree className="treeContainer" />
+          <SiteTree />
         </div>
-        <AutocompleteBox center={center} setCenter={setCenter} />
+        <AutocompleteBox />
         <DrawingComponent />
         <ShapeSetter />
         {/* <Directions /> */}
@@ -68,7 +68,7 @@ const Map = ({ darkMode, setDarkMode }) => {
         />
         <HistoryDrawer />
         <ToolContainer />
-        <PersonalLocator setCenter={setCenter} />
+        <PersonalLocator />
       </GoogleMap>
     </>
   );

@@ -14,7 +14,7 @@ function About() {
           content="Collaborate with your team no matter where you are. Learn more about our real time communication, map updates, team planning, and much more."
         />
       </Helmet>
-      <HeroSection {...homeObjThree} />>
+      <HeroSection {...homeObjThree} />
       <Footer />
     </>
   );

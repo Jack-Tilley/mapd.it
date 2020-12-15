@@ -15,6 +15,7 @@ import {
 } from "../MapContext";
 import FormLogin from "./FormLogin";
 import FormSuccess from "./FormSuccess";
+import Footer from "../pages/Footer/Footer";
 
 const LoginForm = () => {
   // const { profileId, setProfileId } = useContext(MapContext);
@@ -59,6 +60,7 @@ const LoginForm = () => {
           <FormSuccess place="/map" />
         )}
       </div>
+      <Footer />
     </>
   );
 };
