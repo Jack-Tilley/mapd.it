@@ -112,6 +112,8 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
 
   const handleClose = () => {
     setConfirmDelete(false);
+    setValidationMessage("");
+    setNameError(false);
     editCleanup(
       null,
       checked,

@@ -116,6 +116,9 @@ const AddNodeModal = ({
   };
 
   const handleClose = () => {
+    setValidationMessage("");
+    setNameError(false);
+    setTeamError(false);
     setModalOpen(false);
   };
 
@@ -154,7 +157,7 @@ const AddNodeModal = ({
       scroll="paper"
     >
       <DialogTitle id="form-dialog-title">
-        Add New Item <span style={{ color: "red" }}>{validationMessage}</span>
+        Add New Item <small style={{ color: "red" }}>{validationMessage}</small>
       </DialogTitle>
       <DialogContent scroll="paper" dividers={true}>
         <Grid container spacing={1}>

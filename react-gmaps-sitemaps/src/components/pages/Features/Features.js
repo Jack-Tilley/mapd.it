@@ -8,10 +8,18 @@ import {
   homeObjFour,
   homeObjFive,
 } from "./Data";
+import { Helmet } from "react-helmet";
 
 function Features() {
   return (
     <>
+      <Helmet>
+        <title>Features | mapd.it</title>
+        <meta
+          name="description"
+          content="Collaborate with your team no matter where you are. Real time communication, Map updates, Team planning, and much more."
+        />
+      </Helmet>
       <HeroSection {...homeObjFive} />
       <HeroSection {...homeObjTwo} />
       <HeroSection {...homeObjFour} />

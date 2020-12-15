@@ -7,6 +7,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import MailIcon from "@material-ui/icons/Mail";
+import { Helmet } from "react-helmet";
 import React, { useContext, useState } from "react";
 import {
   MapContext,
@@ -61,6 +62,13 @@ const MyAccount = () => {
   return (
     <>
       <div className={classes.root}>
+        <Helmet>
+          <title>Account | mapd.it</title>
+          <meta
+            name="description"
+            content="Collaborate with your team no matter where you are on the map. See what your teams are up to anywhere on the map. View changes and statistics your team is making."
+          />
+        </Helmet>
         <Drawer
           className={classes.drawer}
           variant="permanent"
