@@ -25,7 +25,7 @@ const MapThemeSelector = ({ mapStyle, setMapStyle }) => {
         <MenuItem value={"unsaturated"}>Unsaturated</MenuItem>
         <MenuItem value={"paledawn"}>Paledawn</MenuItem>
         <MenuItem value={"hopper"}>Hopper</MenuItem>
-        <MenuItem value={"vibrant"}>Vibrant</MenuItem>
+        <MenuItem value={"familiar"}>Familiar</MenuItem>
         <MenuItem value={"flatpale"}>FlatPale</MenuItem>
         <MenuItem value={"night"}>Night</MenuItem>
         <MenuItem value={"blackout"}>Blackout</MenuItem>

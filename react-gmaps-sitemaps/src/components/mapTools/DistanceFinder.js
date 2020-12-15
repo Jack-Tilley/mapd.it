@@ -1,4 +1,4 @@
-import { Paper } from "@material-ui/core";
+import { Paper, Tooltip } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import {
   Marker,
@@ -102,9 +102,14 @@ export default function DistanceFinder({
     <>
       <div style={{ position: "absolute", left: "16.75em", top: "3em" }}>
         <Paper>
-          <IconButton onClick={() => handleDistanceButtonClick()} size="small">
-            <i className="material-icons icon-grey">{"straighten"}</i>
-          </IconButton>
+          <Tooltip title="Calculate Distance">
+            <IconButton
+              onClick={() => handleDistanceButtonClick()}
+              size="small"
+            >
+              <i className="material-icons icon-grey">{"straighten"}</i>
+            </IconButton>
+          </Tooltip>
         </Paper>
       </div>
       {distanceToolRendered ? (

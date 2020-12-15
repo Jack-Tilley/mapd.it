@@ -1,4 +1,4 @@
-import { Paper } from "@material-ui/core";
+import { Paper, Tooltip } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -16,7 +16,7 @@ import hopper from "../mapStyles/hopper";
 import night from "../mapStyles/night";
 import paledawn from "../mapStyles/paledawn";
 import unsaturated from "../mapStyles/unsaturated";
-import vibrant from "../mapStyles/vibrant";
+import familiar from "../mapStyles/familiar";
 import AccountPage from "./accountSettings/AccountPage";
 import MapPage from "./mapSettings/MapPage";
 import TeamPage from "./teamSettings/TeamPage";
@@ -60,8 +60,8 @@ const SettingsModal = ({
       map.setOptions({ styles: night });
     } else if (mapStyle === "paledawn") {
       map.setOptions({ styles: paledawn });
-    } else if (mapStyle === "vibrant") {
-      map.setOptions({ styles: vibrant });
+    } else if (mapStyle === "familiar") {
+      map.setOptions({ styles: familiar });
     } else if (mapStyle === "blackout") {
       map.setOptions({ styles: blackout });
     } else {
@@ -147,9 +147,11 @@ const SettingsModal = ({
           left: "1em",
         }}
       >
-        <IconButton onClick={() => setSettingsOpen(true)} size="small">
-          <i className="material-icons icon-grey">{"settings"}</i>
-        </IconButton>
+        <Tooltip title="Settings">
+          <IconButton onClick={() => setSettingsOpen(true)} size="small">
+            <i className="material-icons icon-grey">{"settings"}</i>
+          </IconButton>
+        </Tooltip>
       </Paper>
       <Dialog
         fullWidth={true}

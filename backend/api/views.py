@@ -155,7 +155,6 @@ class UserExists(APIView):
     """
 
     def get(self, request, format=None, *args, **kwargs):
-        print(request)
         if User.objects.filter(username=self.kwargs['username']).exists():
             return Response({'exists': True})
         # serializer = UserSerializer(user, many=True)

@@ -1,4 +1,4 @@
-import { Paper } from "@material-ui/core";
+import { Paper, Tooltip } from "@material-ui/core";
 import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
@@ -86,11 +86,13 @@ export default function HistoryDrawer() {
   );
 
   return (
-    <div style={{ position: "absolute", top: "3em", left: "21.25em" }}>
+    <div style={{ position: "absolute", bottom: "1.5em", right: "1em" }}>
       <Paper>
-        <IconButton onClick={toggleDrawer(true)} size="small">
-          <i className="material-icons icon-grey">{"event_note"}</i>
-        </IconButton>
+        <Tooltip title="Show history">
+          <IconButton onClick={toggleDrawer(true)} size="small">
+            <i className="material-icons icon-grey">{"event_note"}</i>
+          </IconButton>
+        </Tooltip>
       </Paper>
       <Drawer anchor={"right"} open={open} onClose={toggleDrawer(false)}>
         {list()}

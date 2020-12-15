@@ -1,4 +1,4 @@
-import { Paper } from "@material-ui/core";
+import { Paper, Tooltip } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import React from "react";
 import {
@@ -17,11 +17,13 @@ const RefreshButton = () => {
     updateNodes(profileId, setNodes, setTeams);
   };
   return (
-    <div style={{ position: "absolute", left: "19em", top: "3em" }}>
+    <div style={{ position: "absolute", top: "3em", left: "21.25em" }}>
       <Paper>
-        <IconButton onClick={() => handleRefresh()} size="small">
-          <i className="material-icons icon-grey">{"refresh"}</i>
-        </IconButton>
+        <Tooltip title="Refresh Map">
+          <IconButton onClick={() => handleRefresh()} size="small">
+            <i className="material-icons icon-grey">{"refresh"}</i>
+          </IconButton>
+        </Tooltip>
       </Paper>
     </div>
   );
