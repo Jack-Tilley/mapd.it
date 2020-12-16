@@ -1,4 +1,4 @@
-export default [
+export const flatpale = [
   {
     featureType: "administrative",
     elementType: "labels.text.fill",

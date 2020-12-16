@@ -1,16 +1,13 @@
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from "@material-ui/core/styles";
+import Tooltip from "@material-ui/core/Tooltip";
 import { InfoWindow } from "@react-google-maps/api";
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import CommentModal from "./CommentModal";
 import EditNodeModal from "./EditNodeModal";
 import ImageModal from "./ImageModal";
-import {
-  MapContext,
-  useAddEditContext,
-  useSelectedContext,
-} from "./MapContext";
+import { useAddEditContext, useSelectedContext } from "./MapContext";
 
 const useStyles = makeStyles({
   root: {
@@ -80,15 +77,22 @@ const InfoContainer = () => {
       <div>
         <h4 style={{ color: "black" }}>{selected.label}</h4>
         <p style={{ color: "black" }}>{selected.description}</p>
-        <IconButton onClick={handleEditClick}>
-          <i className="material-icons icon-black">edit</i>
-        </IconButton>
-        <IconButton onClick={handleCommentClick}>
-          <i className="material-icons icon-black">comment</i>
-        </IconButton>
-        <IconButton onClick={handleImageClick}>
-          <i className="material-icons icon-black">image</i>
-        </IconButton>
+
+        <Tooltip title="Edit">
+          <IconButton onClick={handleEditClick}>
+            <i className="material-icons icon-black">edit</i>
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Comments">
+          <IconButton onClick={handleCommentClick}>
+            <i className="material-icons icon-black">comment</i>
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Images">
+          <IconButton onClick={handleImageClick}>
+            <i className="material-icons icon-black">image</i>
+          </IconButton>
+        </Tooltip>
         <EditNodeModal
           editOpen={editOpen}
           setEditOpen={setEditOpen}

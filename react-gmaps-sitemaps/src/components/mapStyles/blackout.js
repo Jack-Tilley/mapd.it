@@ -1,4 +1,4 @@
-export default [
+export const blackout = [
   {
     featureType: "all",
     elementType: "labels",

@@ -1,0 +1,10 @@
+.drawer {
+  width: drawerWidth;
+  z-index: 10;
+  flex-shrink: 0;
+}
+.drawerPaper {
+  width: drawerWidth;
+  color: #f7f8fa;
+  background: 1c2237;
+}

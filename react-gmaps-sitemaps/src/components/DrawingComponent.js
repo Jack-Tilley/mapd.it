@@ -48,10 +48,10 @@ const DrawingComponent = () => {
       // strokeWeight: 0.01,
       // editable : true,
     },
-    markerOptions: {
-      title: "Hello",
-      label: "hi",
-    },
+    // markerOptions: {
+    //   title: "Hello",
+    //   label: "hi",
+    // },
     drawingControlOptions: {
       position: -1, // sets drawing manager not on page
       //   drawingModes: null,

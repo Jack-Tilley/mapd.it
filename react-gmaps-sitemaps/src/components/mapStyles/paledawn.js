@@ -1,4 +1,4 @@
-export default [
+export const paledawn = [
   {
     featureType: "administrative",
     elementType: "all",

@@ -1,4 +1,4 @@
-export default [
+export const familiar = [
   {
     featureType: "administrative.country",
     elementType: "geometry",

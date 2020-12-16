@@ -10,9 +10,9 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import { formatTime } from "../utils/utils";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import ImageUpload from "./ImageUpload";
-import { MapContext, useSelectedContext } from "./MapContext";
+import { useSelectedContext } from "./MapContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,59 +39,6 @@ const ImageModal = ({
   setImages,
   gatherImages,
 }) => {
-  // const [
-  //   myMap,
-  //   setMyMap,
-  //   center,
-  //   setCenter,
-  //   isLoaded,
-  //   draw,
-  //   setDraw,
-  //   nodes,
-  //   setNodes,
-  //   activeNode,
-  //   setActiveNode,
-  //   icon,
-  //   setIcon,
-  //   shapes,
-  //   setShapes,
-  //   checked,
-  //   setChecked,
-  //   selected,
-  //   setSelected,
-  //   color,
-  //   setColor,
-  //   findNode,
-  //   removeNode,
-  //   nodeType,
-  //   setNodeType,
-  //   disabled,
-  //   setDisabled,
-  //   editing,
-  //   setEditing,
-  //   editValue,
-  //   setEditValue,
-  //   replaceNode,
-  //   editCleanup,
-  //   changeIcons,
-  //   description,
-  //   setDescription,
-  //   comment,
-  //   setComment,
-  //   label,
-  //   setLabel,
-  //   auth,
-  //   setAuth,
-  //   profileId,
-  //   setProfileId,
-  //   teams,
-  //   setTeams,
-  //   selectedTeams,
-  //   setSelectedTeams,
-  //   updateNodes,
-  //   picture,
-  //   setPicture,
-  // ] = useContext(MapContext);
   const { selected } = useSelectedContext();
   const [picture, setPicture] = useState(null);
   const [title, setTitle] = useState("");
@@ -112,7 +59,7 @@ const ImageModal = ({
   };
   const handlePictureChange = (e) => {
     e.preventDefault();
-    console.log("picture", e.target.files[0]);
+    // console.log("picture", e.target.files[0]);
     setPicture(e.target.files[0]);
   };
   const handlePictureSubmit = (e) => {
@@ -121,7 +68,7 @@ const ImageModal = ({
     if (picture === null) {
       return;
     }
-    console.log("picFile", picture);
+    // console.log("picFile", picture);
     let data = new FormData(); // creates a new FormData object
     data.append("image", picture);
     data.append("title", title);
@@ -132,7 +79,7 @@ const ImageModal = ({
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         gatherImages();
         setPicture(null);
         setTitle("");
@@ -147,10 +94,10 @@ const ImageModal = ({
     e.target.reset();
   };
   const renderImages = () => {
-    console.log("images", images);
+    // console.log("images", images);
     return (
       <div className={classes.root}>
-        <GridList cellHeight={300} className={classes.gridList} cols={2.5}>
+        <GridList cellHeight={300} className={classes.gridList} cols={1.5}>
           {images.map((image) => (
             <GridListTile key={image.id}>
               <img src={urlbase + image.image} alt={image.title} />
