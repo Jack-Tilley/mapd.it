@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
-import { MdTonality } from "react-icons/md";
+import { MdMap } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 import "./Navbar.css";
@@ -119,7 +119,7 @@ function Navbar() {
                 height="100%"
                 alt="mapdit_logo"
               /> */}
-              <MdTonality className="navbar-icon" />
+              <MdMap className="navbar-icon" />
               <b>
                 <i>mapd.it</i>
               </b>

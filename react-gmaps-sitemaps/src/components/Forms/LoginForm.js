@@ -52,7 +52,7 @@ const LoginForm = () => {
     <>
       <div className="form-container">
         <div className="form-content-left">
-          <img className="form-img" src="images/svg-2.svg" alt="spaceship" />
+          <img className="form-img" src="images/login.svg" alt="spaceship" />
         </div>
         {!isSubmitted ? (
           <FormLogin submitForm={submitForm} />

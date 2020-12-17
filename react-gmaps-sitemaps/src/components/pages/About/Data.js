@@ -8,7 +8,7 @@ export const homeObjThree = {
     "Our mission is to keep teams connected and up-to-date by allowing them to plan, communicate, visualize, and execute ideas all inside one tidy application.",
   buttonLabel: "Start Now",
   imgStart: "start",
-  img: "images/light_map_stars.svg",
+  img: "images/connected_world.svg",
   alt: "map",
   buttonLink: "/sign-up",
 };

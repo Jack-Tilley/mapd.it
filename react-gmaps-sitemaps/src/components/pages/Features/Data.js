@@ -14,17 +14,17 @@ export const homeObjTwo = {
 };
 
 export const homeObjOne = {
-  lightBg: false,
-  lightText: true,
-  lightTextDesc: true,
+  lightBg: true,
+  lightText: false,
+  lightTextDesc: false,
   topLine: "DATA INSIGHTS",
   headline: "Get insights into the work your team puts in",
   description:
     "Never ever have to worry again about how your teams are performing. We'll handle that for you.",
   buttonLabel: "Sign Up Now",
-  imgStart: "start",
-  img: "images/svg-8.svg",
-  alt: "Vault",
+  imgStart: "",
+  img: "images/analytics.svg",
+  alt: "analytics",
   buttonLink: "/sign-up",
 };
 
@@ -35,10 +35,10 @@ export const homeObjThree = {
   topLine: "Communicate Quicker",
   headline: "Communicate any updates or issues instantly ",
   description:
-    "Chat about the updates or issues your team is currently facing in order to fix them as soon as possible.",
+    "Send and receive updates about the challenges your team is facing to fix them as soon as possible.",
   buttonLabel: "Try it now",
-  imgStart: "start",
-  img: "images/svg-7.svg",
+  imgStart: "",
+  img: "images/communicate.svg",
   alt: "Vault",
   buttonLink: "/sign-up",
 };
@@ -47,13 +47,13 @@ export const homeObjFour = {
   lightBg: false,
   lightText: true,
   lightTextDesc: true,
-  topLine: "Photo Evidence",
+  topLine: "Track Changes",
   headline: "See every piece of your jobsite from start to finish",
   description:
-    "Uploading photos of your jobsite lets your team see the progress you're making day by day",
+    "Tracking the changes made to your jobsite lets your team see the progress you're making day by day.",
   buttonLabel: "Try it Now",
   imgStart: "start",
-  img: "images/svg-8.svg",
+  img: "images/thought.svg",
   alt: "Vault",
   buttonLink: "/sign-up",
 };
@@ -62,12 +62,29 @@ export const homeObjFive = {
   lightText: true,
   lightTextDesc: true,
   topLine: "Be Everywhere",
-  headline: "Travel anywhere in the world whenever you feel like it",
+  headline: "Give your team a helping hand no matter where you are",
   description:
     "Be wherever your jobs are and see the progress your team is making in real time. ",
   buttonLabel: "Try it Now",
   imgStart: "start",
-  img: "images/svg-8.svg",
+  img: "images/around_the_world.svg",
+  alt: "Vault",
+  buttonLink: "/sign-up",
+};
+
+export const homeObjSix = {
+  lightBg: false,
+  lightText: true,
+  lightTextDesc: true,
+  topLine: "Be Everywhere",
+  headline: "Travel anywhere in the world whenever your team needs you",
+  description:
+    "Get access to a brand new way to manage your jobsites and get real time status updates on the progress of your teams.",
+  // description:
+  //   "Be wherever your jobs are and see the progress your team is making in real time. ",
+  buttonLabel: "Get Started",
+  imgStart: "start",
+  img: "images/computer_world.svg",
   alt: "Vault",
   buttonLink: "/sign-up",
 };

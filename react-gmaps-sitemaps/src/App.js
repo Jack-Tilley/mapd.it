@@ -16,6 +16,7 @@ import {
   TeamProvider,
 } from "./components/MapContext";
 import Navbar from "./components/Navbar";
+import ScrollToTop from "./components/ScrollToTop";
 import Features from "./components/pages/Features/Features";
 import Home from "./components/pages/HomePage/Home";
 import NotFound from "./components/pages/NotFound/NotFound";
@@ -50,6 +51,7 @@ function App() {
                     <ProfileProvider>
                       <TeamProvider>
                         <Router>
+                          <ScrollToTop />
                           <Navbar />
                           <Switch>
                             <PrivateRoute

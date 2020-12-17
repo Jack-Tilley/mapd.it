@@ -21,9 +21,8 @@ function Features() {
         />
       </Helmet>
       <HeroSection {...homeObjFive} />
-      <HeroSection {...homeObjTwo} />
-      <HeroSection {...homeObjFour} />
       <HeroSection {...homeObjThree} />
+      <HeroSection {...homeObjFour} />
       <HeroSection {...homeObjOne} />
 
       <Footer />
