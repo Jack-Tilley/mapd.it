@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { MapContext } from "../MapContext";
+// import { Link, useHistory } from "react-router-dom";
+// import { MapContext } from "../MapContext";
 
 const Login = () => {
   // const [
