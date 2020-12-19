@@ -2,7 +2,7 @@ import React from "react";
 import "./Footer.css";
 import { Link } from "react-router-dom";
 import { FaYoutube, FaTwitter, FaLinkedin, FaGithub } from "react-icons/fa";
-import { MdTonality } from "react-icons/md";
+import { MdMap } from "react-icons/md";
 
 function Footer() {
   return (
@@ -96,7 +96,7 @@ function Footer() {
         <div className="social-media-wrap">
           <div className="footer-logo">
             <Link to="/" className="social-logo">
-              <MdTonality className="navbar-icon" />
+              <MdMap className="navbar-icon" />
               mapd.it
             </Link>
           </div>
