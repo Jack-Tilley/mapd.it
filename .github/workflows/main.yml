@@ -5,6 +5,12 @@ on:
     branches:
       - master
 
+
+defaults:
+  run:
+    working-directory: react-gmaps-sitemaps
+
+
 jobs:
   build:
     runs-on: ubuntu-latest
