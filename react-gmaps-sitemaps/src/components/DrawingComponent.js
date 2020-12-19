@@ -2,11 +2,10 @@ import { Paper } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import { DrawingManager } from "@react-google-maps/api";
 import axios from "axios";
-import React, { useContext } from "react";
+import React from "react";
 // import { MapContext } from "./MapContext";
 import {
   useAddEditContext,
-  useMapContext,
   useNodeContext,
   useDrawContext,
   useProfileContext,
@@ -40,7 +39,7 @@ const DrawingComponent = () => {
   const { selected, setSelected } = useSelectedContext();
 
   const { nodes, setNodes, activeNode, setActiveNode } = useNodeContext();
-  const { profileId, setProfileId } = useProfileContext();
+  const { profileId } = useProfileContext();
 
   const options = {
     polylineOptions: {

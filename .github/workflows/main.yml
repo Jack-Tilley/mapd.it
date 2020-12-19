@@ -5,11 +5,11 @@ on:
     branches:
       - master
 
-
 defaults:
   run:
     working-directory: react-gmaps-sitemaps
-
+env:
+  CI: false
 
 jobs:
   build:

@@ -116,10 +116,10 @@ const AddNodeModal = ({
     setColor(e.target.value);
   };
 
-  const handleDirChange = (e) => {
-    // console.log("event", e.target.value);
-    setIsDir(e.target.value);
-  };
+  // const handleDirChange = (e) => {
+  //   // console.log("event", e.target.value);
+  //   setIsDir(e.target.value);
+  // };
 
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);

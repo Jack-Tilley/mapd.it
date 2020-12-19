@@ -11,7 +11,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import ColorContainer from "./ColorContainer";
 import IconContainer from "./IconContainer";
-import { Icon } from "@material-ui/core";
+// import { Icon } from "@material-ui/core";
 // import ImageUpload from "./ImageUpload";
 import { replaceNode, editCleanup, removeNode } from "../utils/contextUtils";
 import {
@@ -39,16 +39,16 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
   const { nodes, setNodes } = useNodeContext();
   const { setDraw } = useDrawContext();
 
-  const [validationMessage, setValidationMessage] = useState("");
+  // const [validationMessage, setValidationMessage] = useState("");
   const [nameError, setNameError] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
 
   const handleValidation = () => {
     if (label === "") {
-      setValidationMessage("- Please give this item a name!");
+      // setValidationMessage("- Please give this item a name!");
       setNameError(true);
     } else {
-      setValidationMessage("");
+      // setValidationMessage("");
       setNameError(false);
     }
   };
@@ -112,7 +112,7 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
 
   const handleClose = () => {
     setConfirmDelete(false);
-    setValidationMessage("");
+    // setValidationMessage("");
     setNameError(false);
     editCleanup(
       null,
@@ -138,10 +138,10 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
   const handleColorChange = (event) => {
     setColor(event.target.value);
   };
-  const handleDeleteClicked = (e) => {
-    e.preventDefault();
-    setConfirmDelete(true);
-  };
+  // const handleDeleteClicked = (e) => {
+  //   e.preventDefault();
+  //   setConfirmDelete(true);
+  // };
   const handleDelete = () => {
     // console.log("selected", selected);
     // warning confirmation then...

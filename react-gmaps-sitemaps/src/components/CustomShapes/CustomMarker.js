@@ -15,6 +15,7 @@ const CustomMarker = ({ node, setSelected }) => {
       // // Find path with id="myPath" and return the d attribute
       .then((data) => data.getElementsByTagName("path")[0].getAttribute("d"))
       .then((path) => setPath(path));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleMouseOver = (e) => {

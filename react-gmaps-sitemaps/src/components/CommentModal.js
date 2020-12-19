@@ -7,7 +7,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Icon from "@material-ui/core/Icon";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CommentsList from "./CommentsList";
 import { useSelectedContext, useProfileContext } from "./MapContext";
 import RefreshChatButton from "./RefreshChatButton";
