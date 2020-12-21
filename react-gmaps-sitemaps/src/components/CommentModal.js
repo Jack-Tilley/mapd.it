@@ -26,7 +26,9 @@ const CommentModal = ({ commentOpen, setCommentOpen }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/allNodes/${selected.id}/comments/`)
+      .get(
+        `https://backend-mapdit.herokuapp.com/api/allNodes/${selected.id}/comments/`
+      )
       .then((res) => {
         // console.log("comments", res.data);
         setComments(res.data);
@@ -37,7 +39,7 @@ const CommentModal = ({ commentOpen, setCommentOpen }) => {
   const handleSubmit = () => {
     // console.log("prof", profileId);
     axios
-      .post(`http://localhost:8000/api/basecomments/`, {
+      .post(`https://backend-mapdit.herokuapp.com/api/basecomments/`, {
         node: selected.id,
         content: value,
         profile: profileId,
@@ -46,7 +48,9 @@ const CommentModal = ({ commentOpen, setCommentOpen }) => {
         // console.log(res.data);
         setValue("");
         axios
-          .get(`http://localhost:8000/api/allNodes/${selected.id}/comments/`)
+          .get(
+            `https://backend-mapdit.herokuapp.com/api/allNodes/${selected.id}/comments/`
+          )
           .then((result) => {
             // console.log("comments", result.data);
             setComments(result.data);
@@ -59,7 +63,9 @@ const CommentModal = ({ commentOpen, setCommentOpen }) => {
   };
   const handleRefresh = () => {
     axios
-      .get(`http://localhost:8000/api/allNodes/${selected.id}/comments/`)
+      .get(
+        `https://backend-mapdit.herokuapp.com/api/allNodes/${selected.id}/comments/`
+      )
       .then((result) => {
         // console.log("comments", result.data);
         setComments(result.data);

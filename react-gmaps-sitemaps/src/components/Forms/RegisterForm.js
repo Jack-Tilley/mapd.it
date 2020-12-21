@@ -14,7 +14,7 @@ const RegisterForm = () => {
       email,
     };
     axios
-      .post("http://localhost:8000/api/register/", newUser)
+      .post("https://backend-mapdit.herokuapp.com/api/register/", newUser)
       .then((res) => {
         console.log(res.data);
       })

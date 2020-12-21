@@ -75,7 +75,7 @@ const ImageModal = ({
     data.append("description", desc);
     data.append("node", selected.id);
     axios
-      .post("http://localhost:8000/api/images/", data, {
+      .post("https://backend-mapdit.herokuapp.com/api/images/", data, {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then((res) => {

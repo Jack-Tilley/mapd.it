@@ -41,7 +41,9 @@ const InfoContainer = () => {
 
   const gatherImages = () => {
     axios
-      .get(`http://localhost:8000/api/allNodes/${selected.id}/images`)
+      .get(
+        `https://backend-mapdit.herokuapp.com/api/allNodes/${selected.id}/images`
+      )
       .then((res) => {
         setImages(res.data);
       })

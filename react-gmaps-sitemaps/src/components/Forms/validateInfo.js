@@ -6,7 +6,9 @@ export async function validateSignup(values) {
     errors.username = "Username required";
   }
   await axios
-    .get(`http://localhost:8000/api/user_exists/${values.username.trim()}/`)
+    .get(
+      `https://backend-mapdit.herokuapp.com/api/user_exists/${values.username.trim()}/`
+    )
     .then((res) => {
       // console.log(res.data);
       if (res.data.exists === true) {
@@ -47,7 +49,9 @@ export async function validateLogin(values) {
     errors.username = "Username required";
   }
   await axios
-    .get(`http://localhost:8000/api/user_exists/${values.username.trim()}/`)
+    .get(
+      `https://backend-mapdit.herokuapp.com/api/user_exists/${values.username.trim()}/`
+    )
     .then((res) => {
       // console.log(res.data);
       if (res.data.exists === false) {

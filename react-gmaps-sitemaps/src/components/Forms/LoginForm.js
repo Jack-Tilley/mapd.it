@@ -27,7 +27,7 @@ const LoginForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const submitForm = (username, password) => {
     axios
-      .post("http://localhost:8000/api/login/", {
+      .post("https://backend-mapdit.herokuapp.com/api/login/", {
         username: username,
         password: password,
       })
