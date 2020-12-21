@@ -117,7 +117,7 @@ const DrawingComponent = () => {
         setEditValue("UNNAMED" + nodeType);
       }
       axios
-        .put(`http://localhost:8000/api/allNodes/${selected.id}/`, {
+        .put(`https://backend-mapdit.herokuapp.com/api/allNodes/${selected.id}/`, {
           label: editValue,
           color: color,
           iconValue: icon,
@@ -135,7 +135,7 @@ const DrawingComponent = () => {
             setNodes(newNodes);
           } else {
             axios
-              .get(`http://localhost:8000/api/nodes/${res.data.parent}`)
+              .get(`https://backend-mapdit.herokuapp.com/api/nodes/${res.data.parent}`)
               .then((result) => {
                 let newNodes = replaceNode(res.data.parent, result.data, nodes);
                 setNodes(newNodes);
@@ -168,7 +168,7 @@ const DrawingComponent = () => {
       newActiveNode.nodeType = nodeType;
       newActiveNode.iconValue = icon;
       axios
-        .post("http://localhost:8000/api/nodes/", {
+        .post("https://backend-mapdit.herokuapp.com/api/nodes/", {
           label: newActiveNode.label,
           nodeType: newActiveNode.nodeType,
           value: newActiveNode.value,
@@ -185,7 +185,7 @@ const DrawingComponent = () => {
             for (let teamId of selectedTeams) {
               axios
                 .post(
-                  `http://localhost:8000/api/teams/${teamId}/update_nodes/`,
+                  `https://backend-mapdit.herokuapp.com/api/teams/${teamId}/update_nodes/`,
                   {
                     id: res.data.id,
                   }

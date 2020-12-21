@@ -65,12 +65,15 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
       setDraw(true);
     } else {
       axios
-        .put(`http://localhost:8000/api/allNodes/${selected.id}/`, {
-          label: label,
-          color: color,
-          iconValue: icon,
-          description: description,
-        })
+        .put(
+          `https://backend-mapdit.herokuapp.com/api/allNodes/${selected.id}/`,
+          {
+            label: label,
+            color: color,
+            iconValue: icon,
+            description: description,
+          }
+        )
         .then((res) => {
           if (res.data.parent === null) {
             // console.log("THIS IS A LONE NODE");
@@ -78,7 +81,9 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
             setNodes(newNodes);
           } else {
             axios
-              .get(`http://localhost:8000/api/nodes/${res.data.parent}`)
+              .get(
+                `https://backend-mapdit.herokuapp.com/api/nodes/${res.data.parent}`
+              )
               .then((result) => {
                 let newNodes = replaceNode(res.data.parent, result.data, nodes);
                 setNodes(newNodes);
@@ -146,7 +151,9 @@ const EditNodeModal = ({ editOpen, setEditOpen, label, setLabel }) => {
     // console.log("selected", selected);
     // warning confirmation then...
     axios
-      .delete(`http://localhost:8000/api/allNodes/${selected.id}`)
+      .delete(
+        `https://backend-mapdit.herokuapp.com/api/allNodes/${selected.id}`
+      )
       .then((res) => {
         setEditOpen(false);
         let newNodes = removeNode(selected.value, nodes);

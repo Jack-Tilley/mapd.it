@@ -295,7 +295,7 @@ export const TeamProvider = (children) => {
 
 //   useEffect(() => {
 //     axios
-//       .get(`http://localhost:8000/api/profiles/${profileId}`)
+//       .get(`https://backend-mapdit.herokuapp.com/api/profiles/${profileId}`)
 //       .then((res) => {
 //         let pteams = res.data.teams;
 //         let profileNodes = [];
