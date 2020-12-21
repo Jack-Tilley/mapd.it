@@ -147,7 +147,8 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
+    # 'http://localhost:3000',
+    'http://mapdit-frontend.s3-website.us-east-2.amazonaws.com'
 ]
 
 django_heroku.settings(locals())

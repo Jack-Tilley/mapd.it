@@ -6,7 +6,7 @@ const Logout = ({ rendered }) => {
   const [auth] = useContext(AuthContext);
   const handleLogout = () => {
     axios
-      .get("http://localhost/api/logout/", {
+      .get("https://backend-mapdit.herokuapp.com/api/logout/", {
         Authorization: auth.token,
       })
       .then((res) => console.log(res))
