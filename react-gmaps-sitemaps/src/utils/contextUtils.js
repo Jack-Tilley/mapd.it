@@ -136,7 +136,7 @@ export const editCleanup = (
 
 export const updateNodes = (profileId, setNodes, setTeams) => {
   axios
-    .get(`http://localhost:8000/api/profiles/${profileId}`)
+    .get(`https://backend-mapdit.herokuapp.com/api/profiles/${profileId}`)
     .then((res) => {
       let pteams = res.data.teams;
       let profileNodes = [];
