@@ -17,7 +17,7 @@ const TeamCreate = ({
     // console.log(newTeam);
     if (newTeam !== "") {
       axios
-        .post("http://localhost:8000/api/teams/", {
+        .post("https://backend-mapdit.herokuapp.com/api/teams/", {
           name: newTeam,
           description: "",
         })
@@ -26,7 +26,7 @@ const TeamCreate = ({
           if (res.data.name === newTeam) {
             axios
               .put(
-                `http://localhost:8000/api/profiles/${profileId}/join_team/`,
+                `https://backend-mapdit.herokuapp.com/api/profiles/${profileId}/join_team/`,
                 res.data
               )
               .then((result) => {

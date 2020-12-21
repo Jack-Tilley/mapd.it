@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'hu9v1bty9c$hs0gdmdec!gjjrkn_-nn9-&z^clt_vis4nzvb6p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['mapditbackend.herokuapp.com']
 

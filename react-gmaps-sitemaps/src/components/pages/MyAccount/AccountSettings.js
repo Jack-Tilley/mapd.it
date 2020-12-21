@@ -20,7 +20,7 @@ const AccountSettings = ({ rendered, profileId }) => {
   const [email, setEmail] = useState("");
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/profiles/${profileId}/`)
+      .get(`https://backend-mapdit.herokuapp.com/api/profiles/${profileId}/`)
       .then((res) => {
         setEmail(res.data.user.email);
         setUsername(res.data.user.username);
