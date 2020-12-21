@@ -91,11 +91,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'sitemaps',
-        'USER': 'tilley',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': 'mapditdb',
+        'USER': 'mapditdb',
+        'PASSWORD': 'JJTill&354',
+        'HOST': 'mapditdb.c2xekpkqjnyx.us-east-2.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
