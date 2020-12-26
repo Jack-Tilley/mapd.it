@@ -118,7 +118,7 @@ const MapStore = () => {
   const [myMap, setMyMap] = useState(null);
   const [center, setCenter] = useState({ lat: 39.9526, lng: -75.1652 });
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: "AIzaSyCNN9diqI4LwMH3adh6Bc7ckscNoYyKpjQ",
     libraries,
   });
   return {
