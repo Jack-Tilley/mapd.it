@@ -7,6 +7,10 @@ mapd.it was built to keep teams connected no matter how far apart work takes the
 # <a href="http://mapdit-frontend.s3-website.us-east-2.amazonaws.com/" target="_blank">Try Me</a>
 Test mapd.it out for yourself <a href="http://mapdit-frontend.s3-website.us-east-2.amazonaws.com/" target="_blank">Here</a>!
 
+# Demos
+
+## Map Demo
 ![demo_gif](./examples/mapditDemo.gif)
 
+## Home Page Demo
 ![homeScreen_gif](./examples/mapditHomeScreen.gif)
