@@ -80,7 +80,7 @@ const FormSignup = ({ submitForm }) => {
           Sign Up
         </button>
         <span className="form-input-login">
-          Already have an Account? Login <Link to="/login">here</Link>
+          Already have an Account? Login <Link to="/sign-in">here</Link>
         </span>
       </form>
     </div>

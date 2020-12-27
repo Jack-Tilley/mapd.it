@@ -44,7 +44,6 @@ function Footer() {
           <div className="footer-link-items">
             <h2>Contact Us</h2>
             <a
-              className="social-icon-link"
               target="_blank"
               rel="noreferrer"
               href="https://github.com/Jack-Tilley/"
