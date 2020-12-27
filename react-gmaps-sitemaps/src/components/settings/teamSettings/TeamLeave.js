@@ -40,9 +40,12 @@ const TeamLeave = ({
       leaveTeamId !== undefined
     ) {
       axios
-        .put(`http://localhost:8000/api/profiles/${profileId}/leave_team/`, {
-          id: leaveTeamId,
-        })
+        .put(
+          `https://backend-mapdit.herokuapp.com/api/profiles/${profileId}/leave_team/`,
+          {
+            id: leaveTeamId,
+          }
+        )
         .then((res) => {
           // console.log(res.data);
           updateNodes(profileId, setNodes, setTeams);

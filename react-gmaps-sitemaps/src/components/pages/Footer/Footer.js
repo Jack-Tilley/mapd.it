@@ -43,7 +43,13 @@ function Footer() {
           </div>
           <div className="footer-link-items">
             <h2>Contact Us</h2>
-            <Link to="/contact">Contact</Link>
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://github.com/Jack-Tilley/"
+            >
+              Contact
+            </a>
             <Link to="/features">Features</Link>
             <a
               target="_blank"

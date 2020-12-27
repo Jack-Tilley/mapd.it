@@ -29,7 +29,7 @@ const RegisterForm = () => {
         {!isSubmitted ? (
           <FormSignup submitForm={submitForm} />
         ) : (
-          <FormSuccess place="/login" />
+          <FormSuccess place="/sign-in" />
         )}
       </div>
       <Footer />

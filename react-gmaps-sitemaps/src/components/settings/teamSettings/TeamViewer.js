@@ -48,7 +48,9 @@ const TeamViewer = ({ profileId }) => {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/profiles/${profileId}/view_teams/`)
+      .get(
+        `https://backend-mapdit.herokuapp.com/api/profiles/${profileId}/view_teams/`
+      )
       .then((res) => {
         // console.log(res.data);
         setMyTeams(res.data);

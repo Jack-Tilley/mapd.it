@@ -29,7 +29,7 @@ const Register = () => {
 
       //   register(newUser);
     }
-    return <Redirect to="/login" />;
+    return <Redirect to="/sign-in" />;
   };
 
   return (
@@ -83,7 +83,7 @@ const Register = () => {
             </button>
           </div>
           <p>
-            Already have an account? <Link to="/login">Login</Link>
+            Already have an account? <Link to="/sign-in">Login</Link>
           </p>
         </form>
       </div>

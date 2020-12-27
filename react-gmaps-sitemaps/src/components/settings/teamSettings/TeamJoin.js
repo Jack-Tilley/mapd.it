@@ -19,9 +19,12 @@ const TeamJoin = ({
     const alreadyInTeam = teams.some((team) => team.unique_key === joinTeam);
     if (!alreadyInTeam && joinTeam !== "" && joinTeam.length === 5) {
       axios
-        .put(`http://localhost:8000/api/profiles/${profileId}/join_team/`, {
-          unique_key: joinTeam,
-        })
+        .put(
+          `https://backend-mapdit.herokuapp.com/api/profiles/${profileId}/join_team/`,
+          {
+            unique_key: joinTeam,
+          }
+        )
         .then((result) => {
           // console.log("PUT RESULT for JOIN", result.data);
           updateNodes(profileId, setNodes, setTeams);

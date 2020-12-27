@@ -20,7 +20,7 @@ import Footer from "../pages/Footer/Footer";
 const LoginForm = () => {
   // const { profileId, setProfileId } = useContext(MapContext);
   const { profileId, setProfileId } = useProfileContext();
-  console.log("VALUES", profileId);
+  // console.log("VALUES", profileId);
   // const [profileId, setProfileId] = values.profileId;
   const [auth, setAuth] = useContext(AuthContext);
 
